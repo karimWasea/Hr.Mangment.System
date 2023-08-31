@@ -15,7 +15,7 @@ namespace HR.Utailites
 
         IWebHostEnvironment webHostEnvironment;
 
-        public Imgoperation(IWebHostEnvironment webHostEnvironment)
+        public Imgoperation(IWebHostEnvironment     webHostEnvironment)
         {
             this.webHostEnvironment = webHostEnvironment;
         }
