@@ -33,6 +33,8 @@ builder.Services.AddRazorPages();
 //builder.Services.AddScoped<UnitOfWork>();
 builder.Services.AddTransient<Imgoperation>();
 builder.Services.AddTransient<UnitOfWork>();
+builder.Services.AddTransient<EmployeeServsss>();
+builder.Services.AddTransient<lookupServess>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

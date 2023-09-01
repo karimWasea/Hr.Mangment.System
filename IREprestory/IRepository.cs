@@ -15,7 +15,7 @@ namespace IREprestory
     }
     public interface IPaginationHelper<T>
     {
-        IPagedList<T> GetPagedData<T>(IQueryable<T> data);
+        IPagedList<T> GetPagedData<T>(IQueryable<T> data , int pagenumber );
     }
 
 }

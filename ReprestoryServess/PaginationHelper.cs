@@ -7,13 +7,12 @@ namespace ReprestoryServess
 
     public class PaginationHelper<T> : IPaginationHelper<T> where T : class
     {
-        public virtual IPagedList<T> GetPagedData<T>(IQueryable<T> data)
+        public IPagedList<T> GetPagedData<T>(IQueryable<T> data, int pageNumber)
         {
-            int pageNumber = 1;
-
             int pageSize = 10; // Set the page size to 10
             int totalItemCount = data.Count();
             int totalPages = (int)Math.Ceiling(totalItemCount / (double)pageSize);
+
             pageNumber = Math.Max(1, Math.Min(totalPages, pageNumber));
 
             int startIndex = (pageNumber - 1) * pageSize;

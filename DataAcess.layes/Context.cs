@@ -2,12 +2,17 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 using SystemEnums;
 
 namespace DataAcess.layes
 {  public class BaseEntity
     {
-        public Guid Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int  Id { get; set; }
     }
     public class Applicaionuser : IdentityUser
     {
@@ -18,13 +23,14 @@ namespace DataAcess.layes
 = string.Empty;
         public double? Salary { get; set; } 
         public Gender  Gender { get; set; }
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
+        public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
     }
 
     public class EmployeeHistory : BaseEntity
     {
-       public decimal ? TotalSalary { get; set; }
+
+        public decimal ? TotalSalary { get; set; }
        public  string?  MamthName { get; set; }
        public  Employee    Employee { get; set; }
        public  string  EmployeeId { get; set; }
@@ -46,8 +52,9 @@ namespace DataAcess.layes
     public class Employee : Applicaionuser
     {
         IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
-        public string? ManagerId { get; set; }
-        public Employee Manager { get; set; }
+       
+        public Department  Department { get; set; }
+        public int   DepartmentId { get; set; }
         public double ?Bouns { get; set; }
         public string ?JobTitle { get; set; }
         public string? ContructUrl  { get; set; }
@@ -111,7 +118,7 @@ namespace DataAcess.layes
         public string? EmployeeId { get; set; }
         public Employee Employee { get; set; }
 
-        public Guid DeviceId { get; set; }
+        public int DeviceId { get; set; }
         public Device Device { get; set; }
     }
 
@@ -130,11 +137,11 @@ namespace DataAcess.layes
     {
         IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
-        public Guid DepartmentId { get; set; }
         public string? DepartmentName { get; set; } = string.Empty;
         public string? ManagerId { get; set; }
-        public Employee Manager { get; set; }
+        //public Employee Manager { get; set; }
         // Navigation property
+        [NotMapped]
         public ICollection<Employee> Employees { get; set; }
     }
 
@@ -155,7 +162,7 @@ namespace DataAcess.layes
         public string ? EmployeeId { get; set; }
         public Employee Employee { get; set; }
 
-        public Guid TrainingId { get; set; }
+        public int TrainingId { get; set; }
         public Training Training { get; set; }
     }
 

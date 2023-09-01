@@ -1,35 +1,37 @@
-﻿//using DataAcess.layes;
+﻿using DataAcess.layes;
 
-//using HR.Utailites;
-//using HR.ViewModel;
+using HR.Utailites;
+using HR.ViewModel;
 
-//using IREprestory;
+using IREprestory;
 
-//using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace ReprestoryServess
-//{
-//    internal class EmployeeServsss : PaginationHelper<EmployeeVM>, Iemployee
-//    {
-//        Imgoperation _lookupServess;
-//        private readonly UserManager<ApplicationUser> _user;
+using SystemEnums;
 
+namespace ReprestoryServess
+{
+    public class EmployeeServsss : PaginationHelper<EmployeeVM>, Iemployee
+    {
+        Imgoperation _Imgoperation;
+        private ApplicationDBcontext _DBcontext;
+        private readonly UserManager<Applicaionuser> _user;
 
 
-//        private ApplicationDBcontext _db;
-//        public Doctorserves(ApplicationDBcontext db, UserManager<ApplicationUser> user, Imgoeration lookupServess)
-//        {
-//            _lookupServess = lookupServess;
-//            _user = user;
-//            _db = db;
-//        }
 
+        public EmployeeServsss(ApplicationDBcontext db, UserManager<Applicaionuser> user, Imgoperation lookupServess)
+        {
+            _Imgoperation = lookupServess;
+            _user = user;
+            _DBcontext = db;
+        }
 
 
 
@@ -45,243 +47,143 @@
 
 
 
+        //private bool SearchProperty(string propertyValue, string search, StringComparison comparison = StringComparison.OrdinalIgnoreCase)
+        //{
+            
+        //}
 
-//        public async Task Save(DoctorVm entity)
-//        {
-//            var model = DoctorVm.CanconvertViewmodel(entity);
+        public async Task Save(EmployeeVM entity)
+        {
+         entity.imgPath=  _Imgoperation.Uploadimg(entity.ImgUrl);
 
-//            if (entity.id != null)
-//            {
-//                // Update existing entity
-//                var existingUser = await _user.FindByIdAsync(entity.id);
+            var model = EmployeeVM.CanconvertViewmodel(entity);
 
-//                // Update properties of existingUser
-//                existingUser.Salary = entity.Salary;
-//                existingUser.Nationality = entity.Nationality;
-//                existingUser.spicialist = entity.spicialist;
-//                existingUser.Title = entity.Title; existingUser.WorkingDaysinWeek = entity.WorkingDaysinWeek;
-//                existingUser.Contracturl = entity.Contracturl;
-//                existingUser.HiringDate = entity.HiringDate;
-//                existingUser.Email = entity.Email;
-//                existingUser.Gender = entity.Gender;
-//                existingUser.RoleRegeseter = entity.RoleRegeseter;
-//                existingUser.HiringDate = entity.HiringDate;
-//                existingUser.imphgurl = entity.imphgurl;
-//                existingUser.PhoneNumber = entity.Phonenumber;
-//                existingUser.PostalCode = entity.PostalCode;
-//                existingUser.StreetAddress = entity.StreetAddress;
-//                existingUser.UserName = entity.username;
+            if (entity.Id != null)
+            {
+                //// Update existing entity
+                //var existingUser =  _DBcontext.Employees.Find(entity.Id);
 
-//                if (entity.imgurlupdated == null)
+                //// Update properties of existingUser
+                //existingUser.Salary = entity.Salary;
+                //existingUser.JobTitle = entity.Adress;
+                //existingUser.ContructUrl = entity.ContructUrl;
+                //existingUser.HirangDate = entity.HirangDate;
+                //existingUser.Email = entity.Email;
+                //existingUser.Gender = entity.Gender;
+                //existingUser.ImgUrl = entity.imgPath;
+                //existingUser.PhoneNumber = entity.PhoneNumber;
+                //existingUser.PasswordHash = entity.PasswordHash;
+                //existingUser.UserName = entity.UserName;
 
+               
 
-//                {
-//                    existingUser.imphgurl = _user.Users.Where(x => x.Id == entity.id).Select(e => e.imphgurl).FirstOrDefault();
-//                }
-//                else
-//                {
 
-//                    existingUser.imphgurl = _lookupServess.Uploadimg(entity.imgurlupdated);
-//                }
 
 
+                var updateResult =  _DBcontext.Employees.Update(model);
 
-//                existingUser.statusDoctorInSystem = entity.StatusDoctorInSystem;
+                await _DBcontext.SaveChangesAsync();
+            }
+            else
+            {
 
 
-//                var updateResult = await _user.UpdateAsync(existingUser);
 
-//                await _db.SaveChangesAsync();
-//            }
-//            else
-//            {
 
-//                var updateResult = await _user.CreateAsync(model);
+                var updateResult = _DBcontext.Employees.Add(model);
 
-//                await _db.SaveChangesAsync();
-//            }
-
-//        }
-
-
-
-//        public async Task<bool> Delete(string id)
-//        {
-//            try
-//            {
-//                var user = await _user.FindByIdAsync(id);
-//                if (user != null)
-//                {
-//                    var roles = await _user.GetRolesAsync(user);
-//                    foreach (var role in roles)
-//                    {
-//                        await _user.RemoveFromRoleAsync(user, role);
-//                    }
-
-//                    var result = await _user.DeleteAsync(user);
-
-//                    if (result.Succeeded)
-//                    {
-//                        await _db.SaveChangesAsync();
-//                        return true;
-//                    }
-//                    else
-//                    {
-//                        // Handle user deletion failure
-//                        foreach (var error in result.Errors)
-//                        {
-//                            // Log or handle each error message
-//                        }
-//                        return false;
-//                    }
-//                }
-//                else
-//                {
-//                    // Handle user not found
-//                    return false;
-//                }
-//            }
-//            catch (Exception ex)
-//            {
-//                // Handle exceptions
-//                // Log the exception details for troubleshooting
-//                return false;
-//            }
-//        }
-//        public async Task<IEnumerable<DoctorVm>> GetallconfirmedDoctor()
-//        {
-//            var _users = await _user.Users.Where(ApplicationUser => ApplicationUser.RoleRegeseter == RoleRegeseter.Doctor && ApplicationUser.statusDoctorInSystem == Cofimationdoctor.Confirmed).Select(ApplicationUser => new DoctorVm
-//            {
-//                id = ApplicationUser.Id,
-//                username = ApplicationUser.UserName,
-
-//                Email = ApplicationUser.Email,
-//                RoleRegeseter = ApplicationUser.RoleRegeseter,
-//                Gender = ApplicationUser.Gender,
-//                StreetAddress = ApplicationUser.StreetAddress,
-//                City = ApplicationUser.City,
-//                Dateofbarth = ApplicationUser.Dateofbarth,
-//                Phonenumber = ApplicationUser.PhoneNumber,
-//                Nationality = ApplicationUser.Nationality,
-//                imphgurl = ApplicationUser.imphgurl,
-//                PostalCode = ApplicationUser.PostalCode,
-//                Title = ApplicationUser.Title,
-//                HiringDate = ApplicationUser.HiringDate,
-//                Contracturl = ApplicationUser.Contracturl,
-//                StatusDoctorInSystem = ApplicationUser.statusDoctorInSystem,
-
-//                WorkingDaysinWeek = ApplicationUser.WorkingDaysinWeek,
-//                Salary = ApplicationUser.Salary,
-
-
-
-//            }).ToListAsync();
-
-//            return _users;
-//        }
-
-//        public async Task<DoctorVm> GetByIdasRegisterdoctor(string id)
-//        {
-//            var model = await
-//             _user.Users.Where(p => p.Id == id && p.statusDoctorInSystem == Cofimationdoctor.Regeseter).Select(ApplicationUser => new DoctorVm
-//             {
-//                 id = ApplicationUser.Id,
-//                 username = ApplicationUser.UserName,
-
-//                 Email = ApplicationUser.Email,
-//                 RoleRegeseter = ApplicationUser.RoleRegeseter,
-//                 Gender = ApplicationUser.Gender,
-//                 StreetAddress = ApplicationUser.StreetAddress,
-//                 City = ApplicationUser.City,
-//                 Dateofbarth = ApplicationUser.Dateofbarth,
-//                 Phonenumber = ApplicationUser.PhoneNumber,
-//                 Nationality = ApplicationUser.Nationality,
-//                 imphgurl = ApplicationUser.imphgurl,
-//                 PostalCode = ApplicationUser.PostalCode,
-//                 Title = ApplicationUser.Title,
-//                 HiringDate = ApplicationUser.HiringDate,
-//                 Contracturl = ApplicationUser.Contracturl,
-//                 StatusDoctorInSystem = ApplicationUser.statusDoctorInSystem,
-
-//                 WorkingDaysinWeek = ApplicationUser.WorkingDaysinWeek,
-//                 Salary = ApplicationUser.Salary,
-
-
-
-
-
-//             }).FirstOrDefaultAsync();
-//            return model;
-//        }
-
-
-
-//        public async Task<IEnumerable<DoctorVm>> GetAllDoctorRegester()
-//        {
-//            // && ApplicationUser.statusDoctorInSystem == Cofimationdoctor.Regeseter
-//            var _users = await _user.Users.Where(ApplicationUser => ApplicationUser.RoleRegeseter == RoleRegeseter.Doctor && ApplicationUser.statusDoctorInSystem == Cofimationdoctor.Regeseter).Select(ApplicationUser => new DoctorVm
-//            {
-
-
-//                id = ApplicationUser.Id,
-//                username = ApplicationUser.UserName,
-
-//                Email = ApplicationUser.Email,
-//                RoleRegeseter = ApplicationUser.RoleRegeseter,
-//                Gender = ApplicationUser.Gender,
-//                StreetAddress = ApplicationUser.StreetAddress,
-//                City = ApplicationUser.City,
-//                Dateofbarth = ApplicationUser.Dateofbarth,
-//                Phonenumber = ApplicationUser.PhoneNumber,
-//                Nationality = ApplicationUser.Nationality,
-//                imphgurl = ApplicationUser.imphgurl,
-//                PostalCode = ApplicationUser.PostalCode,
-//                StatusDoctorInSystem = ApplicationUser.statusDoctorInSystem,
-//                spicialist = ApplicationUser.spicialist,
-
-
-
-
-
-
-//            }).ToListAsync();
-//            return _users;
-//        }
-
-//        public async Task<DoctorVm> GetByIdasconfirmed(string id)
-//        {
-//            // && p.statusDoctorInSystem == Cofimationdoctor.Regeseter
-//            var model = await
-//             _user.Users.Where(p => p.Id == id).Select(ApplicationUser => new DoctorVm
-//             {
-//                 id = ApplicationUser.Id,
-//                 username = ApplicationUser.UserName,
-
-//                 Email = ApplicationUser.Email,
-//                 RoleRegeseter = ApplicationUser.RoleRegeseter,
-//                 Gender = ApplicationUser.Gender,
-//                 StreetAddress = ApplicationUser.StreetAddress,
-//                 City = ApplicationUser.City,
-//                 Dateofbarth = ApplicationUser.Dateofbarth,
-//                 Phonenumber = ApplicationUser.PhoneNumber,
-//                 Nationality = ApplicationUser.Nationality,
-//                 imphgurl = ApplicationUser.imphgurl,
-//                 PostalCode = ApplicationUser.PostalCode,
-//                 Title = ApplicationUser.Title,
-//                 HiringDate = ApplicationUser.HiringDate,
-//                 Contracturl = ApplicationUser.Contracturl,
-//                 StatusDoctorInSystem = ApplicationUser.statusDoctorInSystem,
-
-//                 WorkingDaysinWeek = ApplicationUser.WorkingDaysinWeek,
-//                 Salary = ApplicationUser.Salary,
-
-
-
-
-
-//             }).FirstOrDefaultAsync();
-//            return model;
-//        }
-
-//    }
-//}
+                await _DBcontext.SaveChangesAsync();
+            }
+
+        }
+
+
+
+        public async Task<bool> Delete(string id)
+        {
+           
+                var user = _DBcontext.Employees.Find(id);
+                if (user != null)
+                {
+                    var roles = await _user.GetRolesAsync(user);
+                    foreach (var role in roles)
+                    {
+                        await _user.RemoveFromRoleAsync(user, role);
+                    }
+                var deleeteduser = await GetById(id);
+                deleeteduser.iDeleted = IsDeleted.Deleted;
+                    Save(deleeteduser);
+
+
+                    _DBcontext.SaveChanges();
+
+                }
+            return true; 
+            
+            
+            }
+      
+       
+
+
+
+        public async Task<EmployeeVM> GetById(string id)
+        {
+            var model = await
+             _DBcontext.Employees.Where(p => p.Id == id && p.IsDeleted==IsDeleted.NotDeleted).Select(ApplicationUser => new EmployeeVM
+             {
+
+                 Id = ApplicationUser.Id,
+                 UserName = ApplicationUser.UserName,
+
+                 Email = ApplicationUser.Email,
+                 Gender = ApplicationUser.Gender,
+                 Adress = ApplicationUser.Adress,
+                 BirthDate = ApplicationUser.BirthDate,
+                 PhoneNumber = ApplicationUser.PhoneNumber,
+                 imgPath =ApplicationUser.ImgUrl,
+                 //Bouns = ApplicationUser.Bouns,
+                 JobTitle = ApplicationUser.JobTitle,
+                 HirangDate = ApplicationUser.HirangDate,
+                 ContructUrl = ApplicationUser.ContructUrl,
+                 Salary = ApplicationUser.Salary,
+                 IsDeleted = ApplicationUser.IsDeleted,
+
+             }).FirstOrDefaultAsync();
+            return model;
+        }
+
+       
+
+        public IEnumerable<EmployeeVM> GetAll()
+        {
+            var model =
+            _DBcontext.Employees. Where(p=>p.IsDeleted == IsDeleted.NotDeleted). Select(ApplicationUser => new EmployeeVM
+            {
+
+                Id = ApplicationUser.Id,
+                UserName = ApplicationUser.UserName,
+
+                Email = ApplicationUser.Email,
+                Gender = ApplicationUser.Gender,
+                Adress = ApplicationUser.Adress,
+                BirthDate = ApplicationUser.BirthDate,
+                PhoneNumber = ApplicationUser.PhoneNumber,
+                imgPath = ApplicationUser.ImgUrl,
+                //Bouns = ApplicationUser.Bouns,
+                JobTitle = ApplicationUser.JobTitle,
+                HirangDate = ApplicationUser.HirangDate,
+                ContructUrl = ApplicationUser.ContructUrl,
+                Salary = ApplicationUser.Salary,
+                IsDeleted = ApplicationUser.IsDeleted,
+            }).ToList();
+            return model;
+        }
+
+        bool Iemployee.SearchProperty(string propertyValue, string search, StringComparison comparison)
+        {
+            return !string.IsNullOrWhiteSpace(propertyValue) &&
+                               propertyValue.Contains(search, comparison);
+        }
+    }
+}

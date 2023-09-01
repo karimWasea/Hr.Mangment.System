@@ -57,6 +57,9 @@ namespace DataAcess.layes.Migrations
                     b.Property<string>("ImgUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -112,31 +115,30 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.Department", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DepartmentName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ManagerId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ManagerId");
 
                     b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("DataAcess.layes.Device", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DeviceName")
                         .HasColumnType("nvarchar(max)");
@@ -148,12 +150,14 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.EmployeeDevice", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("DeviceId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DeviceId")
+                        .HasColumnType("int");
 
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
@@ -169,9 +173,11 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.EmployeeHistory", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EmployeeId")
                         .IsRequired()
@@ -192,15 +198,17 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.EmployeeTraining", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("TrainingId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("TrainingId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -213,9 +221,11 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.SalaryTransaction", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal?>("Amount")
                         .HasColumnType("decimal(18,2)");
@@ -241,9 +251,11 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.TimeShift", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
@@ -272,9 +284,11 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.Training", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("TrainingName")
                         .HasColumnType("nvarchar(max)");
@@ -286,9 +300,11 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.Vacation", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EmployeeId")
                         .IsRequired()
@@ -309,9 +325,11 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.WorkScheduleCurentWeekDay", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
@@ -476,8 +494,8 @@ namespace DataAcess.layes.Migrations
                     b.Property<string>("ContructUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("HirangDate")
                         .HasColumnType("datetime2");
@@ -485,23 +503,9 @@ namespace DataAcess.layes.Migrations
                     b.Property<string>("JobTitle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ManagerId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasIndex("DepartmentId");
 
-                    b.HasIndex("ManagerId");
-
                     b.HasDiscriminator().HasValue("Employee");
-                });
-
-            modelBuilder.Entity("DataAcess.layes.Department", b =>
-                {
-                    b.HasOne("DataAcess.layes.Employee", "Manager")
-                        .WithMany()
-                        .HasForeignKey("ManagerId");
-
-                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("DataAcess.layes.EmployeeDevice", b =>
@@ -642,20 +646,13 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.Employee", b =>
                 {
-                    b.HasOne("DataAcess.layes.Department", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("DepartmentId");
-
-                    b.HasOne("DataAcess.layes.Employee", "Manager")
+                    b.HasOne("DataAcess.layes.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("ManagerId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Manager");
-                });
-
-            modelBuilder.Entity("DataAcess.layes.Department", b =>
-                {
-                    b.Navigation("Employees");
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("DataAcess.layes.Device", b =>

@@ -1,0 +1,98 @@
+﻿@model PagedList.IPagedList<HR.ViewModel.EmployeeVM>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "All Patients";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<!-- Add the search input form -->
+<form id="search-form" method="get" action="@Url.Action("Index")">
+    <input type="text" name="search" value="@ViewBag.Search" placeholder="Search..." id="search-input">
+</form>
+
+<a asp-controller="Employee" asp-action="Save" id="Add">
+    <i class="fas fa-plus-circle"></i> Add New Patient
+</a>
+<div id="search-results">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Adress</th>
+                <th>BirthDate</th>
+                <th>JobTitle</th>
+                <th>HirangDate</th>
+            </tr>
+        </thead>
+        <tbody id="patientTableBody">
+            *   @foreach (var patient in Model)
+            {
+                <tr>
+                    <td>@patient.UserName</td>
+                    <td>@patient.Email</td>
+                    <td>@patient.Adress</td>
+                    <td>@patient.Salary</td>
+                    <td>@patient.BirthDate</td>
+                    <td>@patient.JobTitle</td>
+                    <td>@patient.HirangDate</td>
+]                    <td>
+                        <a asp-controller="Employee" asp-action="Details" asp-route-id="@patient.Id">
+                            <i class="fas fa-info-circle" title="Details"></i>
+                        </a>
+                        <a asp-controller="Employee" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
+                            <i class="fas fa-edit" title="Edit"></i>
+                        </a>
+                        <a asp-controller="Employee" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
+                            <i class="fas fa-trash-alt" title="Delete"></i>
+                        </a>
+                    </td>
+                 
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<partial name="_PaginationPartial" model="Model" />
+
+
+<!-- Add the search input form --
+
+<!-- Display the search results -->
+!-<!-- JavaScript to handle search input -->
+<script>
+    // Get the search input element
+    const searchInput = document.getElementById('search-input');
+
+    // Get the patient elements
+    const patientElements = document.querySelectorAll('.patient');
+
+    // Function to update the search results
+    function updateSearchResults() {
+        const searchText = searchInput.value.toLowerCase();
+
+        patientElements.forEach(patient => {
+            const patientText = patient.textContent.toLowerCase();
+            if (patientText.includes(searchText)) {
+                patient.style.display = 'block';
+            } else {
+                patient.style.display = 'none';
+            }
+        });
+    }
+
+    // Add an event listener to the search input to listen for input changes
+    searchInput.addEventListener('input', function () {
+        updateSearchResults();
+    });
+
+    // Initial call to populate search results
+    updateSearchResults();
+</script>
+
+ 

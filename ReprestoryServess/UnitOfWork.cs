@@ -17,10 +17,11 @@ namespace ReprestoryServess
         public readonly ApplicationDBcontext  _context;
 
         public UnitOfWork(
-ApplicationDBcontext context
+ApplicationDBcontext context ,EmployeeServsss employeeServsss
             )
 
         {
+            Employee = employeeServsss;
             _context = context;
            
         }
@@ -28,7 +29,8 @@ ApplicationDBcontext context
         #region Implement the Dispose method to release resources
         private bool disposed = false;
 
-       
+       public Iemployee Employee { get; }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposed)

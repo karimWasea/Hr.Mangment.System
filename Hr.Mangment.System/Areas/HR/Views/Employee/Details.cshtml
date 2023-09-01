@@ -1,0 +1,90 @@
+﻿@model HR.ViewModel.EmployeeVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Cloudscribe.Web.Pagination
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Doctor Profile</h2>
+
+        <div class="card mt-4 mx-auto w-80">
+            <img class="card-img-top" src="@Model.imgPath" alt="Profile Image" width="300">
+            <div class="card-body">
+                <h5 class="card-title">Doctor Profile</h5>
+
+                <p class="card-text d-none" id="idField"><strong>ID:</strong> @Model.Id</p>
+                <p class="card-text"><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+                <p class="card-text"><strong>Title:</strong> @Model.JobTitle</p>
+                <p class="card-text"><strong>Gender:</strong> @Model.Gender</p>
+                <p class="card-text"><strong>Street Address:</strong> @Model.Adress</p>
+                <p class="card-text"><strong>City:</strong> @Model.Email</p>
+                <p class="card-text"><strong>Role:</strong> @Model.Gender</p>
+                <p class="card-text"><strong>Nationality:</strong> @Model.BirthDate</p>
+                <p class="card-text"><strong>Username:</strong> @Model.UserName</p>
+                <p class="card-text"><strong>Email:</strong> @Model.Email</p>
+                <p class="card-text"><strong>Postal Code:</strong> @Model.HirangDate?.ToShortDateString()</p>
+                <p class="card-text"><strong>Date of Birth:</strong> @Model.BirthDate?.ToShortDateString()</p>
+
+                <div class="text-center mt-4">
+                   @*  <a asp-controller="Employee" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary edit-profile">
+                        <i class="fas fa-plus-circle"></i> Edit Profile
+                    </a> *@
+                    <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary ml-2">
+                        <i class="fas fa-plus-circle"></i> Back to Index
+                    </a>
+
+
+
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        $(document).ready(function () {
+            var idField = $("#idField");
+            var editProfileBtn = $(".edit-profile");
+
+            idField.hide();
+
+            editProfileBtn.click(function () {
+                idField.toggle();
+            });
+
+            editProfileBtn.click(function (event) {
+                var confirmMsg = "Are you sure you want to edit the profile?";
+                if (!confirm(confirmMsg)) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

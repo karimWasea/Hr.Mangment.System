@@ -17,10 +17,10 @@ namespace IREprestory
         //Task<EmployeeVM> GetByIdasconfirmed(string id);
 
         //Task<IEnumerable<EmployeeVM>> GetallconfirmedDoctor();
-
+        bool SearchProperty(string propertyValue, string search, StringComparison comparison = StringComparison.OrdinalIgnoreCase);
 
         Task Save(EmployeeVM entity);
-        Task<IEnumerable<EmployeeVM>> GetAll();
+        IEnumerable<EmployeeVM> GetAll();
 
 
 

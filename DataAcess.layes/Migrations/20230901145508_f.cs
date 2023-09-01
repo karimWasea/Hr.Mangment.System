@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAcess.layes.Migrations
 {
     /// <inheritdoc />
-    public partial class gjg : Migration
+    public partial class f : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,36 +29,40 @@ namespace DataAcess.layes.Migrations
                 name: "Departments",
                 columns: table => new
                 {
-                    DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ManagerId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Departments", x => x.DepartmentId);
+                    table.PrimaryKey("PK_Departments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Devices",
                 columns: table => new
                 {
-                    DeviceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     DeviceName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Devices", x => x.DeviceId);
+                    table.PrimaryKey("PK_Devices", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Trainings",
                 columns: table => new
                 {
-                    TrainingId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TrainingName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Trainings", x => x.TrainingId);
+                    table.PrimaryKey("PK_Trainings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,12 +96,13 @@ namespace DataAcess.layes.Migrations
                     Adress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Salary = table.Column<double>(type: "float", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable:  false),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: true),
                     Bouns = table.Column<double>(type: "float", nullable: true),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContructUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HirangDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -120,7 +125,8 @@ namespace DataAcess.layes.Migrations
                         name: "FK_AspNetUsers_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
-                        principalColumn: "DepartmentId");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,13 +218,14 @@ namespace DataAcess.layes.Migrations
                 name: "EmployeeDevices",
                 columns: table => new
                 {
-                    EmployeeDeviceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    DeviceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    DeviceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeDevices", x => x.EmployeeDeviceId);
+                    table.PrimaryKey("PK_EmployeeDevices", x => x.Id);
                     table.ForeignKey(
                         name: "FK_EmployeeDevices_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
@@ -228,7 +235,7 @@ namespace DataAcess.layes.Migrations
                         name: "FK_EmployeeDevices_Devices_DeviceId",
                         column: x => x.DeviceId,
                         principalTable: "Devices",
-                        principalColumn: "DeviceId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -236,14 +243,15 @@ namespace DataAcess.layes.Migrations
                 name: "EmployeeHistory",
                 columns: table => new
                 {
-                    EmployeeHistoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TotalSalary = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     MamthName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeHistory", x => x.EmployeeHistoryId);
+                    table.PrimaryKey("PK_EmployeeHistory", x => x.Id);
                     table.ForeignKey(
                         name: "FK_EmployeeHistory_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
@@ -256,13 +264,14 @@ namespace DataAcess.layes.Migrations
                 name: "EmployeeTrainings",
                 columns: table => new
                 {
-                    EmployeeTrainingId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    TrainingId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    TrainingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeTrainings", x => x.EmployeeTrainingId);
+                    table.PrimaryKey("PK_EmployeeTrainings", x => x.Id);
                     table.ForeignKey(
                         name: "FK_EmployeeTrainings_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
@@ -272,7 +281,7 @@ namespace DataAcess.layes.Migrations
                         name: "FK_EmployeeTrainings_Trainings_TrainingId",
                         column: x => x.TrainingId,
                         principalTable: "Trainings",
-                        principalColumn: "TrainingId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -280,7 +289,8 @@ namespace DataAcess.layes.Migrations
                 name: "SalaryTransactions",
                 columns: table => new
                 {
-                    SalaryTransactionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -289,7 +299,7 @@ namespace DataAcess.layes.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SalaryTransactions", x => x.SalaryTransactionId);
+                    table.PrimaryKey("PK_SalaryTransactions", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SalaryTransactions_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
@@ -301,7 +311,8 @@ namespace DataAcess.layes.Migrations
                 name: "TimeShifts",
                 columns: table => new
                 {
-                    TimeShiftId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     HoursPershift = table.Column<int>(type: "int", nullable: true),
                     shiftStuTework = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
@@ -311,7 +322,7 @@ namespace DataAcess.layes.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TimeShifts", x => x.TimeShiftId);
+                    table.PrimaryKey("PK_TimeShifts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_TimeShifts_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
@@ -323,14 +334,15 @@ namespace DataAcess.layes.Migrations
                 name: "Vacations",
                 columns: table => new
                 {
-                    VacationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vacations", x => x.VacationId);
+                    table.PrimaryKey("PK_Vacations", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Vacations_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
@@ -343,7 +355,8 @@ namespace DataAcess.layes.Migrations
                 name: "workScheduleCurentWeeks",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     DayName = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     shiftStuTework = table.Column<int>(type: "int", nullable: false),

@@ -8,5 +8,6 @@ namespace IREprestory
 {
     public interface IUnitOfWork
     {
+        Iemployee Employee { get;  }
     }
 }
