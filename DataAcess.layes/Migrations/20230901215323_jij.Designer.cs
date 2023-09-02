@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAcess.layes.Migrations
 {
     [DbContext(typeof(ApplicationDBcontext))]
-    [Migration("20230901145508_f")]
-    partial class f
+    [Migration("20230901215323_jij")]
+    partial class jij
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,13 +39,18 @@ namespace DataAcess.layes.Migrations
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<double?>("Bouns")
+                        .HasColumnType("float");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
+                    b.Property<string>("ContructUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -57,11 +62,17 @@ namespace DataAcess.layes.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("HirangDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ImgUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IsDeleted")
                         .HasColumnType("int");
+
+                    b.Property<string>("JobTitle")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -101,6 +112,8 @@ namespace DataAcess.layes.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -110,10 +123,6 @@ namespace DataAcess.layes.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Applicaionuser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("DataAcess.layes.Department", b =>
@@ -487,28 +496,13 @@ namespace DataAcess.layes.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("DataAcess.layes.Employee", b =>
+            modelBuilder.Entity("DataAcess.layes.Applicaionuser", b =>
                 {
-                    b.HasBaseType("DataAcess.layes.Applicaionuser");
+                    b.HasOne("DataAcess.layes.Department", "Department")
+                        .WithMany("Employees")
+                        .HasForeignKey("DepartmentId");
 
-                    b.Property<double?>("Bouns")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ContructUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("HirangDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("JobTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasDiscriminator().HasValue("Employee");
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("DataAcess.layes.EmployeeDevice", b =>
@@ -519,7 +513,7 @@ namespace DataAcess.layes.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DataAcess.layes.Employee", "Employee")
+                    b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
                         .WithMany("EmployeeDevices")
                         .HasForeignKey("EmployeeId");
 
@@ -530,7 +524,7 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.EmployeeHistory", b =>
                 {
-                    b.HasOne("DataAcess.layes.Employee", "Employee")
+                    b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
                         .WithMany("EmployeeHistories")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -541,7 +535,7 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.EmployeeTraining", b =>
                 {
-                    b.HasOne("DataAcess.layes.Employee", "Employee")
+                    b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
                         .WithMany("EmployeeTrainings")
                         .HasForeignKey("EmployeeId");
 
@@ -558,7 +552,7 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.SalaryTransaction", b =>
                 {
-                    b.HasOne("DataAcess.layes.Employee", "Employee")
+                    b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
 
@@ -567,7 +561,7 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.TimeShift", b =>
                 {
-                    b.HasOne("DataAcess.layes.Employee", "Employee")
+                    b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
                         .WithMany("TimeShifts")
                         .HasForeignKey("EmployeeId");
 
@@ -576,7 +570,7 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.Vacation", b =>
                 {
-                    b.HasOne("DataAcess.layes.Employee", "Employee")
+                    b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
                         .WithMany("Vacations")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -587,7 +581,7 @@ namespace DataAcess.layes.Migrations
 
             modelBuilder.Entity("DataAcess.layes.WorkScheduleCurentWeekDay", b =>
                 {
-                    b.HasOne("DataAcess.layes.Employee", "Employee")
+                    b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
                         .WithMany("WorkScheduleCurentWeekDay")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -647,28 +641,7 @@ namespace DataAcess.layes.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DataAcess.layes.Employee", b =>
-                {
-                    b.HasOne("DataAcess.layes.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("DataAcess.layes.Device", b =>
-                {
-                    b.Navigation("EmployeeDevices");
-                });
-
-            modelBuilder.Entity("DataAcess.layes.Training", b =>
-                {
-                    b.Navigation("EmployeeTrainings");
-                });
-
-            modelBuilder.Entity("DataAcess.layes.Employee", b =>
+            modelBuilder.Entity("DataAcess.layes.Applicaionuser", b =>
                 {
                     b.Navigation("EmployeeDevices");
 
@@ -681,6 +654,21 @@ namespace DataAcess.layes.Migrations
                     b.Navigation("Vacations");
 
                     b.Navigation("WorkScheduleCurentWeekDay");
+                });
+
+            modelBuilder.Entity("DataAcess.layes.Department", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("DataAcess.layes.Device", b =>
+                {
+                    b.Navigation("EmployeeDevices");
+                });
+
+            modelBuilder.Entity("DataAcess.layes.Training", b =>
+                {
+                    b.Navigation("EmployeeTrainings");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
 ﻿@page
+@using SystemEnums
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -27,6 +28,90 @@
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+
+          
+
+
+
+
+
+
+
+
+            <!-- Additional Input Fields -->
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Impath" class="form-control" placeholder="Image URL" />
+                <label asp-for="Input.Impath">Image URL</label>
+                <span asp-validation-for="Input.Impath" class="text-danger"></span>
+            </div>
+             <div class="form-floating mb-3">
+                <input asp-for="Input.ContrutruelPath" class="form-control" placeholder="Image URL" />
+                <label asp-for="Input.ContrutruelPath">Image URL</label>
+                <span asp-validation-for="Input.ContrutruelPath" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.BirthDate" class="form-control" type="date" />
+                <label asp-for="Input.BirthDate">Birth Date</label>
+                <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+            </div>  
+            
+            <div class="form-floating mb-3">
+                <input asp-for="Input.HirangDate" class="form-control" type="date" />
+                <label asp-for="Input.HirangDate">Birth Date</label>
+                <span asp-validation-for="Input.HirangDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Adress" class="form-control" placeholder="Address" />
+                <label asp-for="Input.Adress">Address</label>
+                <span asp-validation-for="Input.Adress" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Salary" class="form-control" placeholder="Salary" />
+                <label asp-for="Input.Salary">Salary</label>
+                <span asp-validation-for="Input.Salary" class="text-danger"></span>
+            </div>
+                <div class="form-floating mb-3">
+                <input asp-for="Input.JobTitle" class="form-control" placeholder="JobTitle" />
+                <label asp-for="Input.JobTitle">JobTitle</label>
+                <span asp-validation-for="Input.JobTitle" class="text-danger"></span>
+            </div> 
+            <div class="form-floating mb-3">
+                <input asp-for="Input.USERname" class="form-control" placeholder="USERname" />
+                <label asp-for="Input.USERname">USERname</label>
+                <span asp-validation-for="Input.USERname" class="text-danger"></span>
+            </div>
+
+
+
+
+
+
+            <label asp-for="Input.Gender"></label>
+
+            <div class="form-floating mb-3">
+
+                <select asp-for="Input.Gender" asp-items="@Html.GetEnumSelectList<Gender>()"
+                        aria-required="true" class="form-control">
+                    <option value="" disabled>Choose gender</option>
+                </select>
+                <span asp-validation-for="Input.Gender" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Input.DepartmentId" class="control-label">Department</label>
+                <select asp-for="Input.DepartmentId" asp-items="@(ViewData["DepartmentOptions"] as List<SelectListItem>)" class="form-control">
+                    <option value="">-- Select Department --</option>
+                </select>
+                <span asp-validation-for="Input.DepartmentId" class="text-danger"></span>
+            </div>
+
+
+
+
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>

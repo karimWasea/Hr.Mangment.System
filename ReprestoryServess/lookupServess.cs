@@ -56,7 +56,7 @@ namespace ReprestoryServess
         public IQueryable<SelectListItem>EmployeeAll()
         {
 
-            IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Employees.Select(x => new SelectListItem { Value = x.Id, Text = x.UserName });
+            IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Users.Select(x => new SelectListItem { Value = x.Id, Text = x.UserName });
             return applicationuser;
         }
 

@@ -55,13 +55,14 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
 
         // GET: EmployeeController/Edit/5
-        public ActionResult Save(string id)
+        public async Task<IActionResult> Save(string id)
         {
             ViewBag.alldep = _lookupServess.DepartmitAll();
             ViewBag.GEnder = _lookupServess.GEnder();
             if (id != null)
             {
-                return View(_unitOfWork.Employee.GetById(id));
+                var model = await _unitOfWork.Employee.GetById(id);
+                return View(model);
             }
             else
             {
@@ -73,32 +74,29 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save( EmployeeVM emp1)
+        public async Task<IActionResult> Save( EmployeeVM emp1 )
         {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Employee.Save(emp1);
+            //if (ModelState.IsValid)
+            //{
+             await   _unitOfWork.Employee.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
-            }
-              return View(emp1); 
+            //}
+            //  return View(emp1); 
 
             
         }
 
         // GET: EmployeeController/Delete/5
-        public ActionResult Delete(int id, IFormFile collection)
-        {
-            return View();
-        }
+     
 
         // POST: EmployeeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
-            _unitOfWork.Employee.Delete(id);
+          await  _unitOfWork.Employee.Delete(id);
                 return RedirectToAction(nameof(Index));
             
         }

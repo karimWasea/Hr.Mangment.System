@@ -13,14 +13,19 @@ using System.Threading.Tasks;
 
 using DataAcess.layes;
 
+using HR.Utailites;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+
+using SystemEnums;
 
 namespace Hr.Mangment.System.Areas.Identity.Pages.Account
 {
@@ -32,13 +37,15 @@ namespace Hr.Mangment.System.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<Applicaionuser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDBcontext _ApplicationDBcontext;
+        private readonly Imgoperation _imgoperation;
 
         public RegisterModel(
             UserManager<Applicaionuser> userManager,
             IUserStore<Applicaionuser> userStore,
             SignInManager<Applicaionuser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender, ApplicationDBcontext ApplicationDBcontext, Imgoperation imgoperation)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -46,65 +53,98 @@ namespace Hr.Mangment.System.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _ApplicationDBcontext = ApplicationDBcontext;
+            _imgoperation = imgoperation;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public string ReturnUrl { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
-        }
+            public string ConfirmPassword { get; set; } = string.Empty;
 
+            [Display(Name = "Profile Image")]
+            public string? ImgUrl { get; set; } = string.Empty;
+
+            [Display(Name = "Profile Image")]
+            [DataType(DataType.Upload)]
+            public IFormFile Impath { get; set; }
+
+            [Display(Name = "Contract URL")]
+            [DataType(DataType.Upload)]
+            public IFormFile ContrutruelPath { get; set; }
+
+            [DataType(DataType.Date)]
+            [Display(Name = "Birth Date")]
+            public DateTime? BirthDate { get; set; }
+
+            [Display(Name = "Address")]
+            public string? Adress { get; set; } = string.Empty;
+
+            [Display(Name = "Salary")]
+            [Range(0, double.MaxValue, ErrorMessage = "Please enter a valid salary.")]
+            public double? Salary { get; set; }
+
+            [Display(Name = "Phone Number")]
+            [Phone(ErrorMessage = "Please enter a valid phone number.")]
+            public string pHoneNumber { get; set; }
+
+            [Required]
+            [Display(Name = "Username")]
+            public string USERname { get; set; }
+
+            [Required]
+            [Display(Name = "Gender")]
+            public Gender Gender { get; set; }
+
+            [Display(Name = "Is Deleted")]
+            public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
+
+            [Display(Name = "Department")]
+            public int? DepartmentId { get; set; }
+
+            [Display(Name = "Bonus")]
+            [Range(0, double.MaxValue, ErrorMessage = "Please enter a valid bonus.")]
+            public double? Bouns { get; set; }
+
+            [Display(Name = "Job Title")]
+            public string? JobTitle { get; set; }
+
+            [Display(Name = "Contract URL")]
+            public string? ContructUrl { get; set; }
+
+            [DataType(DataType.Date)]
+            [Display(Name = "Hiring Date")]
+            public DateTime? HirangDate { get; set; }
+        }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            // Fetch department options and store them in ViewData
+            var departmentOptions = _ApplicationDBcontext.Departments
+                .Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DepartmentName })
+                .ToList();
+
+            ViewData["DepartmentOptions"] = departmentOptions;
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -116,6 +156,16 @@ namespace Hr.Mangment.System.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.Adress = Input.Adress;
+                user.Email = Input.Email;
+                user.HirangDate = Input.HirangDate;
+                user.BirthDate = Input.BirthDate;
+                user.PhoneNumber = Input.pHoneNumber;
+                user.Salary = Input.Salary;
+                user.DepartmentId = Input.DepartmentId;
+                user.Gender = Input.Gender;
+                user.ContructUrl = _imgoperation.Uploadimg(Input.ContrutruelPath);
+                user.ImgUrl = _imgoperation.Uploadimg(Input.Impath);
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

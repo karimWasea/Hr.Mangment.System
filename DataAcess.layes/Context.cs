@@ -25,6 +25,20 @@ namespace DataAcess.layes
         public Gender  Gender { get; set; }
         public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
+        public Department Department { get; set; }
+        public int? DepartmentId { get; set; }
+        public double? Bouns { get; set; }
+        public string? JobTitle { get; set; }
+        public string? ContructUrl { get; set; }
+        public DateTime? HirangDate { get; set; }
+
+        public ICollection<TimeShift> TimeShifts { get; set; }
+        public ICollection<EmployeeHistory> EmployeeHistories { get; set; }
+        public ICollection<WorkScheduleCurentWeekDay> WorkScheduleCurentWeekDay { get; set; }
+        public ICollection<EmployeeDevice> EmployeeDevices { get; set; }
+        public ICollection<EmployeeTraining> EmployeeTrainings { get; set; }
+        public ICollection<Vacation> Vacations { get; set; }
+
     }
 
     public class EmployeeHistory : BaseEntity
@@ -32,7 +46,7 @@ namespace DataAcess.layes
 
         public decimal ? TotalSalary { get; set; }
        public  string?  MamthName { get; set; }
-       public  Employee    Employee { get; set; }
+       public Applicaionuser Employee { get; set; }
        public  string  EmployeeId { get; set; }
 
     }
@@ -46,26 +60,12 @@ namespace DataAcess.layes
         IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
         
         // Navigation property
-        public Employee Employee { get; set; }
+        public Applicaionuser Employee { get; set; }
     }
 
     public class Employee : Applicaionuser
     {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
        
-        public Department  Department { get; set; }
-        public int   DepartmentId { get; set; }
-        public double ?Bouns { get; set; }
-        public string ?JobTitle { get; set; }
-        public string? ContructUrl  { get; set; }
-        public DateTime? HirangDate { get; set; }
-
-        public ICollection<TimeShift>  TimeShifts { get; set; }
-        public ICollection<EmployeeHistory>  EmployeeHistories { get; set; }
-        public ICollection<WorkScheduleCurentWeekDay> WorkScheduleCurentWeekDay { get; set; }
-        public ICollection<EmployeeDevice> EmployeeDevices { get; set; }
-        public ICollection<EmployeeTraining> EmployeeTrainings { get; set; }
-        public ICollection<Vacation> Vacations { get; set; }
 
         // Other properties and methods
     }
@@ -80,7 +80,7 @@ namespace DataAcess.layes
         public TimeSpan ?StartingTime { get; set; }
         public TimeSpan? EndingTime { get; set; }
         public DateTime  ? dateTime { get; set; }
-        public Employee  Employee { get; set; }
+        public Applicaionuser Employee { get; set; }
 
         // Navigation property
     }
@@ -94,7 +94,7 @@ namespace DataAcess.layes
         public DateTime ? Date { get; set; }
           public  ShiftStuTework shiftStuTework { get; set; }
         public string EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public Applicaionuser Employee { get; set; }
 
         // Navigation property
     }
@@ -116,7 +116,7 @@ namespace DataAcess.layes
         IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
         public string? EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public Applicaionuser Employee { get; set; }
 
         public int DeviceId { get; set; }
         public Device Device { get; set; }
@@ -130,7 +130,7 @@ namespace DataAcess.layes
         public DateTime? EndDate { get; set; }
 
         public string EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public Applicaionuser Employee { get; set; }
     }
 
     public class Department : BaseEntity
@@ -141,8 +141,8 @@ namespace DataAcess.layes
         public string? ManagerId { get; set; }
         //public Employee Manager { get; set; }
         // Navigation property
-        [NotMapped]
-        public ICollection<Employee> Employees { get; set; }
+        //[NotMapped]
+        public ICollection<Applicaionuser> Employees { get; set; }
     }
 
     public class Training : BaseEntity
@@ -160,7 +160,7 @@ namespace DataAcess.layes
         IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
         public string ? EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public Applicaionuser Employee { get; set; }
 
         public int TrainingId { get; set; }
         public Training Training { get; set; }
@@ -172,7 +172,7 @@ namespace DataAcess.layes
             : base(options)
         { }
 
-        public DbSet<Employee> Employees { get; set; }
+        //public DbSet<Employee> Employees { get; set; }
         public DbSet<SalaryTransaction> SalaryTransactions { get; set; }
         public DbSet<TimeShift> TimeShifts { get; set; }
         public DbSet<WorkScheduleCurentWeekDay>  workScheduleCurentWeeks { get; set; }

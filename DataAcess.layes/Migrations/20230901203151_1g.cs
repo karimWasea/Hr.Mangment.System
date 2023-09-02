@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAcess.layes.Migrations
 {
     /// <inheritdoc />
-    public partial class f : Migration
+    public partial class _1g : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -97,8 +97,7 @@ namespace DataAcess.layes.Migrations
                     Salary = table.Column<double>(type: "float", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<int>(type: "int", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: true),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
                     Bouns = table.Column<double>(type: "float", nullable: true),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContructUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),

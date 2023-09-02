@@ -14,11 +14,11 @@
 
     public class EmployeeVM
     {
-        public static Employee CanconvertViewmodel(EmployeeVM ApplicationUser)
+        public static Applicaionuser CanconvertViewmodel(EmployeeVM ApplicationUser)
         {       
 
               
-            return new Employee
+            return new Applicaionuser
             {
                 Id = ApplicationUser.Id,
                 UserName = ApplicationUser.UserName,
@@ -32,7 +32,7 @@
                 //Bouns = ApplicationUser.Bouns,
                 JobTitle = ApplicationUser.JobTitle,
                 HirangDate = ApplicationUser.HirangDate,
-                ContructUrl = ApplicationUser.ContructUrl,
+                ContructUrl = ApplicationUser.ContructPath,
                 Salary = ApplicationUser.Salary,
                 DepartmentId = ApplicationUser.deptmentid,
                 IsDeleted= ApplicationUser.iDeleted,
@@ -48,7 +48,8 @@
         public double? Bouns { get; set; }
         public string? JobTitle { get; set; }
         public string? Adress { get; set; }
-        public string? ContructUrl { get; set; }
+        public IFormFile ContructUrl { get; set; }
+        public string ContructPath { get; set; }
         public string? ManagerId { get; set; }
         public DateTime? BirthDate { get; set; }
         public DateTime? HirangDate { get; set; }

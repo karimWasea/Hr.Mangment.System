@@ -1,103 +1,87 @@
 ﻿@{
-    ViewData["Title"] = "Save";
-}
-
-<h1>Save</h1>
-
-
-
-@{
-    ViewData["Title"] = "Edit Shift";
+    ViewData["Title"] = "Edit Employee";
     Layout = "_Layout";
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@addTagHelper *, Cloudscribe.Web.Pagination
 
 @model HR.ViewModel.EmployeeVM
 
-<h1>Edit Shift</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Edit Employee</h1>
 
-<form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
-    <input type="hidden" asp-for="Id" />
+            <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
 
-    <!-- Group related fields using div containers -->
-    <div class="form-group">
-        <label asp-for="UserName">Username:</label>
-        <input asp-for="UserName" class="form-control" />
+                <div class="form-group">
+                    <label asp-for="UserName">Username:</label>
+                    <input asp-for="UserName" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber">Phone Number:</label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ImgUrl">Update Image:</label>
+                    <input asp-for="ImgUrl" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ContructUrl">Contract URL:</label>
+                    <input asp-for="ContructUrl" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Adress">City:</label>
+                    <input asp-for="Adress" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="HirangDate">Hiring Date:</label>
+                    <input asp-for="HirangDate" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email">Email:</label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PasswordHash">Password Hash:</label>
+                    <input asp-for="PasswordHash" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="BirthDate">Birth Date:</label>
+                    <input asp-for="BirthDate" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Gender">Gender:</label>
+                    <select asp-for="Gender" class="form-control" asp-items="@ViewBag.GenderItems">
+                        <option value="">Select Gender</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="deptmentid">Department:</label>
+                    <select asp-for="deptmentid" class="form-control" asp-items="@ViewBag.DepartmentItems">
+                        <option value="">Select Department</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="savedata" class="btn btn-primary">Update</button>
+            </form>
+
+            <a asp-controller="HR" asp-action="Index" class="btn btn-secondary mt-2">
+                <i class="fas fa-chevron-circle-left"></i> Back to Index
+            </a>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for=" ImgUrl">updateimg:</label>
-        <input asp-for="ImgUrl" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for=" ContructUrl">ContructUrl:</label>
-        <input asp-for="ContructUrl" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Adress">City:</label>
-        <input asp-for="Adress" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for=" HirangDate">HirangDate:</label>
-        <input asp-for="HirangDate" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Email">Email:</label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-
-  
-
-    <div class="form-group">
-        <label asp-for="PasswordHash">PasswordHash:</label>
-        <input asp-for="PasswordHash" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for=" BirthDate">BirthDate:</label>
-        <input asp-for="BirthDate" class="form-control" />
-    </div>
-
-
-
-
-
-
-
-
-    <div class="form-group">
-        <label asp-for="Gender">Gender</label>
-        <select asp-for="Gender" class="form-control" asp-items="@ViewBag.GEnder ">
-            <option value="">Select Gender</option>
-            @foreach (var item in ViewBag.GEnder)
-            {
-                <option value="@item.Value">@item.Text</option>
-            }
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="deptmentid">RoleRegeseter</label>
-        <select asp-for="deptmentid" class="form-control" asp-items="@ViewBag.alldep">
-            <option value="">Select deptmentid</option>
-            @foreach (var item in ViewBag.alldep)
-            {
-                <option value="@item.Value">@item.Text</option>
-            }
-        </select> 
-     </div>
-
-
-
-    <button type="submit" id="savedata" class="btn btn-primary">Update</button>
-</form>
-
-<a asp-controller="HR" asp-action="Index" class="btn btn-secondary mt-2">
-    <i class="fas fa-chevron-circle-left"></i> Back to Index
-</a>
-
-
+</div>
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -111,7 +95,7 @@
 
                 Swal.fire({
                     title: "Are you sure?",
-                    text: "You are about to update the patient's information.",
+                    text: "You are about to update the employee's information.",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonText: "Yes, update it!",
@@ -125,4 +109,18 @@
             });
         });
     </script>
+    <style>
+        /* Custom CSS styles */
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .btn-secondary {
+            margin-top: 10px;
+        }
+    </style>
 }
