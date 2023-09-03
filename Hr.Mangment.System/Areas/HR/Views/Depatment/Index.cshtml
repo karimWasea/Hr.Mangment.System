@@ -1,0 +1,82 @@
+﻿@model PagedList.IPagedList<HR.ViewModel.Depatmentvm>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "All Patients";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<!-- Add the search input form -->
+<form id="search-form" method="get" action="@Url.Action("Index")">
+    <input type="text" name="search" value="@ViewBag.Search" placeholder="Search..." id="search-input">
+</form>
+<partial name="_AlertMessage" model="Model" />
+
+<a asp-controller="Depatment" asp-action="Save"  data-action="edit">
+    <i class="fas fa-edit" title="Edit"></i>ADDnew
+</a>
+<div id="search-results">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>DeparmrentName </th>
+                <th>MangerName</th>
+                
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody id="patientTableBody">
+            @foreach (var patient in Model)
+            {
+                <tr class="patient">
+                    <td>@patient.DepartmentName</td>
+                    <td>@patient.MangerName</td>
+                   
+                    <td>
+                        
+                        <a asp-controller="Depatment" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
+                            <i class="fas fa-edit" title="Edit"></i>Edit
+                        </a>
+                        <a asp-controller="Depatment" asp-action="Delete" asp-route-id="@patient.Id" >
+                            <i class="fas fa-trash-alt" title="Delete"></i>Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<partial name="_PaginationPartial" model="Model" />
+
+<!-- JavaScript to handle search input -->
+<script>
+    // Get the search input element
+    const searchInput = document.getElementById('search-input');
+
+    // Get the patient rows
+    const patientRows = document.querySelectorAll('.patient');
+
+    // Function to update the search results
+    function updateSearchResults() {
+        const searchText = searchInput.value.toLowerCase();
+
+        patientRows.forEach(patientRow => {
+            const patientText = patientRow.textContent.toLowerCase();
+            if (patientText.includes(searchText)) {
+                patientRow.style.display = 'table-row';
+            } else {
+                patientRow.style.display = 'none';
+            }
+        });
+    }
+
+    // Add an event listener to the search input to listen for input changes
+    searchInput.addEventListener('input', function () {
+        updateSearchResults();
+    });
+
+    // Initial call to populate search results
+    updateSearchResults();
+</script>

@@ -4,7 +4,7 @@ using SystemEnums;
 
 namespace DataAcess.layes
 {
-  /    public class Applicaionuser : IdentityUser
+     public class Applicaionuser : IdentityUser
     {
         public string? ImgUrl { get; set; } = string.Empty;
 

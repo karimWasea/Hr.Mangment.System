@@ -17,10 +17,11 @@ namespace ReprestoryServess
         public readonly ApplicationDBcontext  _context;
 
         public UnitOfWork(
-ApplicationDBcontext context ,EmployeeServsss employeeServsss
+ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess
             )
 
         {
+            Deparment = DepatmentServsess;
             Employee = employeeServsss;
             _context = context;
            
@@ -30,6 +31,7 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss
         private bool disposed = false;
 
        public Iemployee Employee { get; }
+        public IDeparment Deparment { get; }
 
         protected virtual void Dispose(bool disposing)
         {

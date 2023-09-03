@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IREprestory
 {
-    internal interface IDepartment : IRepository<Depatmentvm>
+    public interface IDeparment :IRepository<Depatmentvm> , IPaginationHelper<Depatmentvm>
     {
     }
 }

@@ -1,7 +1,13 @@
-﻿namespace HR.ViewModel
+﻿using SystemEnums;
+
+namespace HR.ViewModel
 {
     public class BaseViewModel
-    { public Guid Id { get; set; }
+    { 
+        
+        //public int Id { get; set; }
+        public IsDeleted isDeleted { get; set; }
+public string Name { get; set; }
 
     }
 }

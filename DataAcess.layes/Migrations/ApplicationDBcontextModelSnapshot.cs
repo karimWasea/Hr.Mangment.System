@@ -133,6 +133,9 @@ namespace DataAcess.layes.Migrations
                     b.Property<string>("DepartmentName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
                     b.Property<string>("ManagerId")
                         .HasColumnType("nvarchar(max)");
 

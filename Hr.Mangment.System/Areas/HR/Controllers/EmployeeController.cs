@@ -2,6 +2,8 @@
 
 using HR.ViewModel;
 
+using Intersoft.Crosslight;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,10 +32,9 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             {
                 // Apply search filtering here based on your model properties
                 model = model.Where(patient =>
-                  _unitOfWork.Employee.SearchProperty(patient.Adress, search) ||
-                     _unitOfWork.Employee.SearchProperty(patient.Email, search) ||
-                    _unitOfWork.Employee.SearchProperty(patient.UserName, search, StringComparison.OrdinalIgnoreCase) 
-                // Add more properties for search as needed
+                  _unitOfWork.Employee.SearchProperty(patient.Email, search) ||
+                     _unitOfWork.Employee.SearchProperty(patient.UserName, search) ||
+                     _unitOfWork.Employee.SearchProperty(patient.Adress, search)                 // Add more properties for search as needed
                 );
             }
 
@@ -55,13 +56,12 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
 
         // GET: EmployeeController/Edit/5
-        public async Task<IActionResult> Save(string id)
+        public async Task<IActionResult> Save(int id)
         {
-            ViewBag.alldep = _lookupServess.DepartmitAll();
-            ViewBag.GEnder = _lookupServess.GEnder();
-            if (id != null)
+           
+            if (id >0)
             {
-                var model = await _unitOfWork.Employee.GetById(id);
+                var model =  _unitOfWork.Deparment.GetById(id);
                 return View(model);
             }
             else
@@ -78,7 +78,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         {
             //if (ModelState.IsValid)
             //{
-             await   _unitOfWork.Employee.Save(emp1);
+               _unitOfWork.Employee.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
@@ -96,7 +96,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)
         {
-          await  _unitOfWork.Employee.Delete(id);
+          _unitOfWork.Employee.Delete(id);
                 return RedirectToAction(nameof(Index));
             
         }

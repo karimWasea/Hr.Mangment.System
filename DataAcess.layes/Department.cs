@@ -5,7 +5,7 @@ namespace DataAcess.layes
 
     public class Department : BaseEntity
     {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
+       public  IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
         public string? DepartmentName { get; set; } = string.Empty;
         public string? ManagerId { get; set; }

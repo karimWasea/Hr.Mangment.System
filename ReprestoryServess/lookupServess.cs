@@ -3,6 +3,7 @@ using IREprestory;
 using Microsoft.AspNetCore.Identity;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 using SystemEnums;
 
@@ -56,13 +57,13 @@ namespace ReprestoryServess
         public IQueryable<SelectListItem>EmployeeAll()
         {
 
-            IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Users.Select(x => new SelectListItem { Value = x.Id, Text = x.UserName });
+            IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Users.Select(x => new SelectListItem { Value = x.Id, Text = x.UserName }).OrderBy(c => c.Text).AsNoTracking();
             return applicationuser;
         }
-
+       
         public IQueryable<SelectListItem> DepartmitAll()
         {
-            IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Departments.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DepartmentName });
+            IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Departments.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DepartmentName }).OrderBy(c => c.Text).AsNoTracking();
             return applicationuser;
         }
     }

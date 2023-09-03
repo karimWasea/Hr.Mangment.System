@@ -6,10 +6,9 @@ namespace IREprestory
     {
         T GetById(int id);
         IEnumerable<T> GetAll();
-        IEnumerable<T> Search(T entity);
-        void Add(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        bool SearchProperty(string propertyValue, string search, StringComparison comparison);
+        void Save(T entity);
+        void Delete(int id );
      
         
     }
