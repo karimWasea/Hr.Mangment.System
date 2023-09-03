@@ -5,6 +5,7 @@ using Intersoft.Crosslight.Mobile;
 
 using IREprestory;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using System;
@@ -17,9 +18,13 @@ namespace ReprestoryServess
 {
     public class DepatmentServsess : PaginationHelper<Depatmentvm>,IDeparment
     {
+        private readonly UserManager<Applicaionuser> _user;
+
         private ApplicationDBcontext _Context;
-        public DepatmentServsess(ApplicationDBcontext db)
-        {
+        public DepatmentServsess(ApplicationDBcontext db, UserManager<Applicaionuser> user)
+        {  
+
+            _user = user;
             _Context = db;
         }
         public void Save(Depatmentvm entity)
@@ -72,8 +77,7 @@ namespace ReprestoryServess
                 Id = p.Id,
                 DepartmentName = p.DepartmentName,
                 ManagerId = p.ManagerId,
-                MangerName = p.Employees.Where(m => m.Id == p.ManagerId).Select(p => p.UserName).FirstOrDefault(),
-
+                MangerName = _user.Users.Where(m => m.Id == p.ManagerId).Select(p => p.UserName).FirstOrDefault(),
 
             }).ToList();
 
@@ -88,7 +92,7 @@ namespace ReprestoryServess
  Id = p.Id,
   DepartmentName    = p.DepartmentName,
   ManagerId=p.ManagerId,
-  MangerName=p.Employees.Where(m=>m.Id==p.ManagerId).Select(p=>p.UserName).FirstOrDefault(),
+  MangerName =_user.Users.Where(m=>m.Id==p.ManagerId).Select(p=>p.UserName).FirstOrDefault(),
 
              
             }).FirstOrDefault();

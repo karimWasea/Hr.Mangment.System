@@ -39,7 +39,7 @@
                         <a asp-controller="Depatment" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
                             <i class="fas fa-edit" title="Edit"></i>Edit
                         </a>
-                        <a asp-controller="Depatment" asp-action="Delete" asp-route-id="@patient.Id" >
+                        <a  asp-area="HR" asp-controller="Depatment" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
                             <i class="fas fa-trash-alt" title="Delete"></i>Delete
                         </a>
                     </td>

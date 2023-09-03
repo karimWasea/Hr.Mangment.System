@@ -53,15 +53,18 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         public async Task<IActionResult> Save(int id)
         {
             
-            if (id != null)
+
+            if (id >0)
             {
-                var model =  _unitOfWork.Deparment.GetById(id);
+                Depatmentvm? model = _unitOfWork.Deparment.GetById(id);
                 model.Mangers = _lookupServess.EmployeeAll();
                 return View(model);
             }
             else
             {
-                return View();
+                var vewodel = new Depatmentvm();
+                vewodel.Mangers= _lookupServess.EmployeeAll();
+                return View(vewodel);
             }
            
         }
@@ -89,7 +92,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         // POST: EmployeeController/Delete/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int  id)
+        public IActionResult Delete(int  id)
         {
           _unitOfWork.Deparment.Delete(id);
                 return RedirectToAction(nameof(Index));
