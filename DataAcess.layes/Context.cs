@@ -12,159 +12,20 @@ namespace DataAcess.layes
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int  Id { get; set; }
-    }
-    public class Applicaionuser : IdentityUser
-    {
-        public string ? ImgUrl { get; set; } = string.Empty;
+        public int  Id { get; set; }  }
 
-        public DateTime? BirthDate { get; set; }
-        public string ?Adress { get; set; }
-= string.Empty;
-        public double? Salary { get; set; } 
-        public Gender  Gender { get; set; }
-        public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
-        public Department Department { get; set; }
-        public int? DepartmentId { get; set; }
-        public double? Bouns { get; set; }
-        public string? JobTitle { get; set; }
-        public string? ContructUrl { get; set; }
-        public DateTime? HirangDate { get; set; }
 
-        public ICollection<TimeShift> TimeShifts { get; set; }
-        public ICollection<EmployeeHistory> EmployeeHistories { get; set; }
-        public ICollection<WorkScheduleCurentWeekDay> WorkScheduleCurentWeekDay { get; set; }
-        public ICollection<EmployeeDevice> EmployeeDevices { get; set; }
-        public ICollection<EmployeeTraining> EmployeeTrainings { get; set; }
-        public ICollection<Vacation> Vacations { get; set; }
 
-    }
 
-    public class EmployeeHistory : BaseEntity
-    {
 
-        public decimal ? TotalSalary { get; set; }
-       public  string?  MamthName { get; set; }
-       public Applicaionuser Employee { get; set; }
-       public  string  EmployeeId { get; set; }
-
-    }
-        public class SalaryTransaction : BaseEntity
-    {
-        public  string? EmployeeId { get; set; }
-        public DateTime? TransactionDate { get; set; }
-        public string? Reason { get; set; }
-        public decimal? Amount { get; set; }
-        public TransactionSalaryType transactionTyp { get; set; }
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
-        
-        // Navigation property
-        public Applicaionuser Employee { get; set; }
-    }
-
-    public class Employee : Applicaionuser
-    {
-       
-
-        // Other properties and methods
-    }
-
-    public class TimeShift : BaseEntity
-    {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
-        public int? HoursPershift { get; set; }
-        public ShiftStuTework shiftStuTework { get; set; }
-
-        public string ?EmployeeId { get; set; }
-        public TimeSpan ?StartingTime { get; set; }
-        public TimeSpan? EndingTime { get; set; }
-        public DateTime  ? dateTime { get; set; }
-        public Applicaionuser Employee { get; set; }
-
-        // Navigation property
-    }
-
-    public class WorkScheduleCurentWeekDay : BaseEntity
-    {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
-
-        public  DayOfWeek DayName { get; set; }
-
-        public DateTime ? Date { get; set; }
-          public  ShiftStuTework shiftStuTework { get; set; }
-        public string EmployeeId { get; set; }
-        public Applicaionuser Employee { get; set; }
-
-        // Navigation property
-    }
 
     
 
-    public class Device : BaseEntity
-    {
-        public string? DeviceName { get; set; }
 
-        // Navigation property
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
-        public ICollection<EmployeeDevice> EmployeeDevices { get; set; }
-    }
 
-    public class EmployeeDevice : BaseEntity
-    {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
-        public string? EmployeeId { get; set; }
-        public Applicaionuser Employee { get; set; }
-
-        public int DeviceId { get; set; }
-        public Device Device { get; set; }
-    }
-
-    public class Vacation : BaseEntity
-    {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
-
-        public DateTime ? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-
-        public string EmployeeId { get; set; }
-        public Applicaionuser Employee { get; set; }
-    }
-
-    public class Department : BaseEntity
-    {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
-
-        public string? DepartmentName { get; set; } = string.Empty;
-        public string? ManagerId { get; set; }
-        //public Employee Manager { get; set; }
-        // Navigation property
-        //[NotMapped]
-        public ICollection<Applicaionuser> Employees { get; set; }
-    }
-
-    public class Training : BaseEntity
-    {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
-
-        public string? TrainingName { get; set; }
-
-        // Navigation property
-        public ICollection<EmployeeTraining> EmployeeTrainings { get; set; }
-    }
-
-    public class EmployeeTraining : BaseEntity
-    {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
-
-        public string ? EmployeeId { get; set; }
-        public Applicaionuser Employee { get; set; }
-
-        public int TrainingId { get; set; }
-        public Training Training { get; set; }
-    }
 
     public class ApplicationDBcontext : IdentityDbContext<Applicaionuser>
     {
