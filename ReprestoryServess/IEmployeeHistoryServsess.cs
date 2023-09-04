@@ -136,7 +136,9 @@ namespace ReprestoryServess
             DateTime curentMonth = DateTime.Now.Date.AddDays(1 - DateTime.Now.Day);
 
             EmployeeHistory histoty = new EmployeeHistory();  
-            var totalsalary = _user.Users.Where(p => p.Id == employeeid).Select(p => p.Salary).FirstOrDefault();
+            var totalsalary = _user.Users.Where(p => p.Id == employeeid)
+                
+                .Select(p => p.Salary).FirstOrDefault();
             histoty.EmployeeId = employeeid;
             histoty.Month = curentMonth;
             histoty.TotalSalary = (decimal?)totalsalary;
