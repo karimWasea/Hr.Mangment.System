@@ -8,6 +8,8 @@ namespace HR.ViewModel
 {
     public class SalaryTransactionVM : BaseViewModel
     {
+        public int Id { get; set; }
+        public IsDeleted isDeleted { get; set; }
         public string? EmployeeId { get; set; }
         public DateTime? TransactionDate { get; set; }
         public string Reason { get; set; }

@@ -9,7 +9,7 @@ namespace DataAcess.layes
         public string? DeviceName { get; set; }
 
         // Navigation property
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
+        public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
         public ICollection<EmployeeDevice> EmployeeDevices { get; set; }
     }
