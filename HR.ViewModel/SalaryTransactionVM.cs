@@ -12,7 +12,7 @@ namespace HR.ViewModel
         public DateTime? TransactionDate { get; set; }
         public string Reason { get; set; }
         public string EmployeeName { get; set; }
-        public decimal? Amount { get; set; }
+        public double? Amount { get; set; }
         public TransactionSalaryType transactionTyp { get; set; }
 
         public IEnumerable<SelectListItem> EmployeeAll { get; set; } = Enumerable.Empty<SelectListItem>();

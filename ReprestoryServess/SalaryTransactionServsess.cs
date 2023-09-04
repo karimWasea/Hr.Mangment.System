@@ -85,7 +85,7 @@ namespace ReprestoryServess
             var model= _Context.SalaryTransactions.Include(p => p.Employee).Where(p=> p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new SalaryTransactionVM
             {
                 EmployeeName = _user.Users.Where(m => m.Id == p.EmployeeId).Select(p => p.UserName).FirstOrDefault(),
-                Amount = p.Amount,
+                //Amount = p.Amount,
                 isDeleted = p.IsDeleted,
                 EmployeeId = p.EmployeeId,
                 TransactionDate = p.TransactionDate,

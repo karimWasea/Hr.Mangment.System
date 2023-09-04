@@ -34,6 +34,7 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
        public Iemployee Employee { get; }
         public IDeparment Deparment { get; }
         public ISalaryTransaction SalaryTransaction { get; }
+        public IEmployeeHistory EmployeeHistory { get; }
 
         protected virtual void Dispose(bool disposing)
         {
