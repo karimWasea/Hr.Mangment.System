@@ -115,7 +115,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
     
         // POST: EmployeeController/Delete/5
-        [HttpPost]
+        //[HttpPost]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Remove(int  id)
         {

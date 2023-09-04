@@ -1,11 +1,13 @@
-﻿using SystemEnums;
+﻿using Microsoft.Identity.Client;
+
+using SystemEnums;
 
 namespace DataAcess.layes
 {
 
     public class TimeShift : BaseEntity
     {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
+        public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
         public int? HoursPershift { get; set; }
         public ShiftStuTework shiftStuTework { get; set; }
 

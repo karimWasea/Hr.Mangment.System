@@ -13,5 +13,6 @@ namespace IREprestory
         ISalaryTransaction SalaryTransaction { get; }   
         IDeparment Deparment {  get; }    
         Iemployee Employee { get;  }
+        ITimeShift timeShift { get; }
     }
 }

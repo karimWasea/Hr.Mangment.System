@@ -1,5 +1,7 @@
 ﻿using DataAcess.layes;
 
+using HR.ViewModel;
+
 using IREprestory;
 
 using System;
@@ -17,11 +19,12 @@ namespace ReprestoryServess
         public readonly ApplicationDBcontext  _context;
 
         public UnitOfWork(
-ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess
-            )
+ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsess shiftServsess
+        )
 
         {
-            SalaryTransaction=salaryTransactionServsess;
+            timeShift = shiftServsess;
+            SalaryTransaction =salaryTransactionServsess;
             Deparment = DepatmentServsess;
             Employee = employeeServsss;
             _context = context;
@@ -35,6 +38,7 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
         public IDeparment Deparment { get; }
         public ISalaryTransaction SalaryTransaction { get; }
         public IEmployeeHistory EmployeeHistory { get; }
+        public ITimeShift timeShift { get; }
 
         protected virtual void Dispose(bool disposing)
         {
