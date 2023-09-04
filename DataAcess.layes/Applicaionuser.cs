@@ -11,7 +11,7 @@ namespace DataAcess.layes
         public DateTime? BirthDate { get; set; }
         public string? Adress { get; set; }
 = string.Empty;
-        public double? Salary { get; set; }
+        public double? Salary { get; set; } = 1000.0f;
         public Gender Gender { get; set; }
         public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 

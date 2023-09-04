@@ -21,9 +21,9 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             _lookupServess = lookupServess;
         }
 
-        public  IActionResult Index(int? page, string search)
+        public IActionResult Index(int? page, string search)
         {
-            var model =  _unitOfWork.SalaryTransaction.GetAll();
+            var model = _unitOfWork.SalaryTransaction.GetAll();
             int pageNumber = page ?? 1;
 
             //if (!string.IsNullOrWhiteSpace(search))
@@ -37,14 +37,14 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             //    );
             //}
 
-            var pagedPatients = _unitOfWork.Deparment.GetPagedData(model.AsQueryable() ,pageNumber);
+            var pagedPatients = _unitOfWork.Deparment.GetPagedData(model.AsQueryable(), pageNumber);
 
             ViewBag.Search = search;
 
             return View(pagedPatients);
         }
 
-        public IActionResult GEtAllemplyStranstion(int? page, string search ,string Employeeid)
+        public IActionResult GEtAllemplyStranstion(int? page, string search, string Employeeid)
         {
             var model = _unitOfWork.SalaryTransaction.GetByEmployeeId(Employeeid);
             int pageNumber = page ?? 1;
@@ -73,50 +73,51 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         // GET: EmployeeController/Edit/5
         public async Task<IActionResult> Save(int id)
         {
-            
 
-            if (id >0)
+
+            if (id > 0)
             {
-                var  model = _unitOfWork.SalaryTransaction.GetById(id);
-                model.EmployeeAll = _lookupServess.EmployeeAll();   
+                var model = _unitOfWork.SalaryTransaction.GetById(id);
+                model.EmployeeAll = _lookupServess.EmployeeAll();
                 model.ALLtransactionTyps = _lookupServess.GetAlltransaction();
                 return View(model);
             }
             else
             {
                 var vewodel = new SalaryTransactionVM();
-                vewodel.EmployeeAll= _lookupServess.EmployeeAll();
+                vewodel.EmployeeAll = _lookupServess.EmployeeAll();
                 vewodel.ALLtransactionTyps = _lookupServess.GetAlltransaction();
 
                 return View(vewodel);
             }
-           
+
         }
 
         // POST: EmployeeController/Edit/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(SalaryTransactionVM emp1 )
+        public async Task<IActionResult> Save(SalaryTransactionVM emp1)
         {
             //if (ModelState.IsValid)
             //{
-                _unitOfWork.SalaryTransaction.Save(emp1);
-                TempData["Message"] = $" successfully!";
-                TempData["MessageType"] = "Save";
-                return RedirectToAction(nameof(Index));
+            _unitOfWork.SalaryTransaction.Save(emp1);
+            TempData["Message"] = $" successfully!";
+            TempData["MessageType"] = "Save";
+            return RedirectToAction(nameof(Index));
             //}
             //  return View(emp1); 
 
-            
+
         }
 
         // GET: EmployeeController/Delete/5
-     
 
+
+    
         // POST: EmployeeController/Delete/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult Delete(int  id)
+        public async Task<IActionResult> Remove(int  id)
         {
           _unitOfWork.SalaryTransaction.Delete(id);
             

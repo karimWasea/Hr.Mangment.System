@@ -24,10 +24,10 @@ namespace HR.ViewModel
         {
             var dept = new SalaryTransaction() {
              
-             Amount = entity.Amount,
+             Amount = (double)entity.Amount,
                  IsDeleted=entity.isDeleted,
                   EmployeeId = entity.EmployeeId,   
-                  TransactionDate = entity.TransactionDate, 
+                  TransactionDate = (DateTime)entity.TransactionDate, 
                   Reason = entity.Reason,   
                       Id    =   entity.Id,
                       transactionTyp = entity.transactionTyp,

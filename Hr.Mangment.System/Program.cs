@@ -37,6 +37,7 @@ builder.Services.AddTransient<EmployeeServsss>();
 builder.Services.AddTransient<DepatmentServsess>();
 builder.Services.AddTransient<SalaryTransactionServsess>();
 builder.Services.AddTransient<lookupServess>();
+builder.Services.AddTransient<SalaryclackServesses>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

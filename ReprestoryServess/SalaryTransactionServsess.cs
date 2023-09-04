@@ -7,12 +7,15 @@ using IREprestory;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using SystemEnums;
 
 namespace ReprestoryServess
 {
@@ -21,9 +24,10 @@ namespace ReprestoryServess
         private readonly UserManager<Applicaionuser> _user;
 
         private ApplicationDBcontext _Context;
-        public SalaryTransactionServsess(ApplicationDBcontext db, UserManager<Applicaionuser> user)
+        private SalaryclackServesses _SalaryclackServesses;
+        public SalaryTransactionServsess(ApplicationDBcontext db, UserManager<Applicaionuser> user,          SalaryclackServesses SalaryclackServesses)
         {  
-
+             _SalaryclackServesses = SalaryclackServesses;
             _user = user;
             _Context = db;
         }
@@ -43,11 +47,10 @@ namespace ReprestoryServess
 
             if (entity.Id > 0)
             {
-                _Context.SalaryTransactions.Update(model);
-                var month = _Context.EmployeeHistories.Select(e => e.Month).FirstOrDefault();                  
-              
+                EntityEntry<SalaryTransaction>? entityadd = _Context.SalaryTransactions.Update(model);
 
                 _Context.SaveChanges();
+                _SalaryclackServesses.CalculateSalary(entityadd.Entity.EmployeeId, (decimal)entityadd.Entity.Amount, entityadd.Entity.TransactionDate);
 
 
             }
@@ -55,15 +58,17 @@ namespace ReprestoryServess
             {
 
 
-                _Context.SalaryTransactions.Add(model);
+               EntityEntry<SalaryTransaction>? entityadd =  _Context.SalaryTransactions.Add(model);
 
                 _Context.SaveChanges();
-
+                _SalaryclackServesses.CalculateSalary(entityadd.Entity.EmployeeId, (decimal)entityadd.Entity.Amount, entityadd.Entity.TransactionDate);
 
             }
         }
 
 
+
+       
 
 
 
@@ -73,8 +78,10 @@ namespace ReprestoryServess
             
 
          var deletedmodel=   GetById(id);
+
             deletedmodel.isDeleted = SystemEnums.IsDeleted.Deleted;
             Save(deletedmodel);
+            _SalaryclackServesses.CalculateSalary(deletedmodel.EmployeeId, (decimal)deletedmodel.Amount, (DateTime)deletedmodel.TransactionDate);
 
 
 
@@ -92,6 +99,7 @@ namespace ReprestoryServess
                 Reason = p.Reason,
                 Id = p.Id,
                 transactionTyp = p.transactionTyp,
+                Amount = p.Amount,
 
             }).ToList();
 
@@ -113,7 +121,7 @@ namespace ReprestoryServess
                 Id = p.Id,
                 transactionTyp = p.transactionTyp,
 
-            }).FirstOrDefault();
+                }).FirstOrDefault();
 
             return model;
         }

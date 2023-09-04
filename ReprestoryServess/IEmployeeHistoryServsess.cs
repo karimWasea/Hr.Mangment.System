@@ -130,53 +130,97 @@ namespace ReprestoryServess
 
 
 
-        public double calcaksalary(string employeeid   ,DateTime Trantationdatime)
+        public void CalcakSalary(string employeeid , decimal amount  ,DateTime Trantationdatime)
 
         {
-            DateTime curentMonth = DateTime.Now.Date.AddDays(1 - DateTime.Now.Day);
+            var histotyemployee = _Context.SalaryTransactions.Where(p =>
+
+p.EmployeeId == employeeid).FirstOrDefault();
+            var curntenmonthinhestorytable = _Context.EmployeeHistories.FirstOrDefault(i => i.EmployeeId == employeeid).Month;
+            var updetedhistory = _Context.EmployeeHistories.Where(p => p.EmployeeId == employeeid && p.Month == curntenmonthinhestorytable).FirstOrDefault();
+
+            Trantationdatime = DateTime.Now.Date.AddDays(1 - DateTime.Now.Day);
 
             EmployeeHistory histoty = new EmployeeHistory();  
             var totalsalary = _user.Users.Where(p => p.Id == employeeid)
                 
                 .Select(p => p.Salary).FirstOrDefault();
-            histoty.EmployeeId = employeeid;
-            histoty.Month = curentMonth;
-            histoty.TotalSalary = (decimal?)totalsalary;
-_Context.EmployeeHistories.Add(histoty);
 
-        DateTime today = DateTime.Today;
-            DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
-            DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
-            var histotyemployee= _Context.SalaryTransactions.Where(p => p.EmployeeId == employeeid).FirstOrDefault();
          
+
+              
+            
+            if(curntenmonthinhestorytable!= Trantationdatime)
+            {
+
+                histoty.EmployeeId = employeeid;
+                histoty.Month = Trantationdatime;
+                if(histotyemployee.EmployeeId == employeeid && histotyemployee.transactionTyp != TransactionSalaryType.Bonus )
+                {
+                    histoty.TotalSalary = (decimal?)totalsalary - amount;
+
+                }
+                else
+                {
+                    histoty.TotalSalary = (decimal?)totalsalary + amount;
+
+                }
+                _Context.EmployeeHistories.Add(histoty);
+                _Context.SaveChanges();
+            }
+
+            else
+            {
+                DateTime today = DateTime.Today;
+                DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
+                DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+
+
+
+
+               
+
+
                 if (histotyemployee.EmployeeId == employeeid && histotyemployee.transactionTyp == TransactionSalaryType.Bonus && Trantationdatime >= firstDayOfMonth &&
            Trantationdatime <= lastDayOfMonth)
                 {
 
+                    updetedhistory.EmployeeId = employeeid;
+                    updetedhistory.Month = Trantationdatime;
+                    updetedhistory.TotalSalary -= (decimal?)totalsalary;
+                    _Context.EmployeeHistories.Update(updetedhistory);
 
-                    return (double)(totalsalary += histotyemployee.Amount);
 
 
                 }
-                else if(histotyemployee.EmployeeId == employeeid && histotyemployee.transactionTyp == TransactionSalaryType.debt || histotyemployee.transactionTyp == TransactionSalaryType.Deduction && histotyemployee.TransactionDate >= firstDayOfMonth &&
+                else if (histotyemployee.EmployeeId == employeeid && histotyemployee.transactionTyp == TransactionSalaryType.debt || histotyemployee.transactionTyp == TransactionSalaryType.Deduction && histotyemployee.TransactionDate >= firstDayOfMonth &&
             histotyemployee.TransactionDate <= lastDayOfMonth)
                 {
-                    return (double)(totalsalary -= histotyemployee.Amount);
+                    updetedhistory.EmployeeId = employeeid;
+                    updetedhistory.Month = Trantationdatime;
+                    updetedhistory.TotalSalary -= (decimal?)totalsalary;
+                    _Context.EmployeeHistories.Update(updetedhistory);
                 }
 
 
 
 
-                    
+
+
+            }
 
 
 
 
 
 
-            
-            
-                return (double)totalsalary;
+
+
+
+
+
+
 
 
           
