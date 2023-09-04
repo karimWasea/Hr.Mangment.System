@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 namespace IREprestory
 {
     public interface IUnitOfWork
-    { IDeparment Deparment {  get; }    
+
+    {
+        ISalaryTransaction SalaryTransaction { get; }   
+        IDeparment Deparment {  get; }    
         Iemployee Employee { get;  }
     }
 }

@@ -36,6 +36,19 @@ namespace ReprestoryServess
 
             return weekdays;
         }
+          public List<SelectListItem> GetAlltransaction()
+        {
+            var weekdays = Enum.GetValues(typeof(TransactionSalaryType))
+                               .Cast<TransactionSalaryType>()
+                               .Select(d => new SelectListItem
+                               {
+                                   Value = ((int)d).ToString(),
+                                   Text = d.ToString()
+                               })
+                               .ToList();
+
+            return weekdays;
+        }
 
 
         public List<SelectListItem> GEnder()

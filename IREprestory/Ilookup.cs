@@ -7,6 +7,7 @@ namespace IREprestory
         IQueryable<SelectListItem> EmployeeAll();
         IQueryable<SelectListItem> DepartmitAll();
         public List<SelectListItem> GEnder();
+        public List<SelectListItem> GetAlltransaction();
 
 
     }

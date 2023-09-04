@@ -9,7 +9,7 @@ namespace DataAcess.layes
         public string? Reason { get; set; }
         public decimal? Amount { get; set; }
         public TransactionSalaryType transactionTyp { get; set; }
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
+        public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
         // Navigation property
         public Applicaionuser Employee { get; set; }

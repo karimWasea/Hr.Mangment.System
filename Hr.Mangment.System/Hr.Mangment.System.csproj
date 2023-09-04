@@ -7,8 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\HR\Data\" />
-    <Folder Include="Areas\HR\Models\" />
+    <Compile Remove="Areas\HR\Data\**" />
+    <Compile Remove="Areas\HR\Models\**" />
+    <Content Remove="Areas\HR\Data\**" />
+    <Content Remove="Areas\HR\Models\**" />
+    <EmbeddedResource Remove="Areas\HR\Data\**" />
+    <EmbeddedResource Remove="Areas\HR\Models\**" />
+    <None Remove="Areas\HR\Data\**" />
+    <None Remove="Areas\HR\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

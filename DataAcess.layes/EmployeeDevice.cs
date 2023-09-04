@@ -5,7 +5,7 @@ namespace DataAcess.layes
 
     public class EmployeeDevice : BaseEntity
     {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
+        public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
         public string? EmployeeId { get; set; }
         public Applicaionuser Employee { get; set; }
