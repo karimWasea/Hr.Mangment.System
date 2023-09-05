@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
+using System.ComponentModel;
+
 using SystemEnums;
 
 namespace ReprestoryServess
 {
-    public class lookupServess :Ilookup
+    public class lookupServess : Ilookup
     {
         private readonly ApplicationDBcontext _applicationDBcontext;
         private readonly UserManager<Applicaionuser> _user;
@@ -36,7 +38,7 @@ namespace ReprestoryServess
 
             return weekdays;
         }
-          public List<SelectListItem> GetAlltransaction()
+        public List<SelectListItem> GetAlltransaction()
         {
             var weekdays = Enum.GetValues(typeof(TransactionSalaryType))
                                .Cast<TransactionSalaryType>()
@@ -64,7 +66,26 @@ namespace ReprestoryServess
 
             return weekdays;
         }
+        public List<SelectListItem> GetallShifts()
+        {
+            var shiftList = Enum.GetValues(typeof(ShiftStuTework))
+                .Cast<ShiftStuTework>()
+                .Select(shift =>
+                {
+                    var description = shift.GetDescription(); // Get the description from the enum
+                    return new SelectListItem
+                    {
+                        Value = ((int)shift).ToString(),
+                        Text = description
+                    };
+                })
+                .ToList();
 
+            return shiftList;
+        }
+
+
+      
 
 
         public IQueryable<SelectListItem>EmployeeAll()
@@ -80,4 +101,19 @@ namespace ReprestoryServess
             return applicationuser;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
 }

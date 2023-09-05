@@ -12,9 +12,9 @@ namespace DataAcess.layes
         public ShiftStuTework shiftStuTework { get; set; }
 
         public string? EmployeeId { get; set; }
-        public TimeSpan? StartingTime { get; set; }
-        public TimeSpan? EndingTime { get; set; }
-        public DateTime? dateTime { get; set; }
+        public DateTime? StartingTime { get; set; }
+        public DateTime? EndingTime { get; set; }
+    
         public Applicaionuser Employee { get; set; }
 
     }

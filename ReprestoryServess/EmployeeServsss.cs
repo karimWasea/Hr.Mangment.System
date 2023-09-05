@@ -135,7 +135,7 @@ namespace ReprestoryServess
                     Save(deleeteduser);
 
 
-                    _DBcontext.SaveChanges();
+                    //_DBcontext.SaveChanges();
 
                 }
             return true; 
@@ -178,7 +178,7 @@ namespace ReprestoryServess
         public IEnumerable<EmployeeVM> GetAll()
         {
             var model =
-              _user.Users. Where(p=>p.IsDeleted == IsDeleted.NotDeleted). Select(ApplicationUser => new EmployeeVM
+              _user.Users. Where(p=>p.IsDeleted != IsDeleted.Deleted). Select(ApplicationUser => new EmployeeVM
             {
 
                 Id = ApplicationUser.Id,

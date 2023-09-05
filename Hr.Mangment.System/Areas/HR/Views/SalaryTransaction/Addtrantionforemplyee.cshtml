@@ -1,13 +1,11 @@
-﻿ 
-
-@{
+﻿@{
     ViewData["Title"] = "Edit SalaryTransaction";
     Layout = "_Layout";
 }
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@model HR.ViewModel.TimeShiftVM
+@model HR.ViewModel.SalaryTransactionVM
 <partial name="_AlertMessage" model="Model" />
 <style>
     /* Custom CSS styles */
@@ -33,49 +31,55 @@
                 <input type="hidden" asp-for="Id" />
 
                 <div class="form-group">
-                    <label asp-for="StartingTime">Starting Time:</label>
-                    <input asp-for="StartingTime" class="form-control" />
-                    <span asp-validation-for="StartingTime" class="text-danger"></span>
+                    <label asp-for="Amount">Amount:</label>
+                    <input asp-for="Amount" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input asp-for="EmployeeId" class="form-control" type="hidden" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Amount">Amount:</label>
+                    <input asp-for="EmployeeName" class="form-control" readonly />
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="EndingTime">Ending Time:</label>
-                    <input asp-for="EndingTime" class="form-control" />
-                    <span asp-validation-for="EndingTime" class="text-danger"></span>
+                    <label asp-for="Reason">Reason:</label>
+                    <input asp-for="Reason" class="form-control" />
                 </div>
-               
-               
 
                 <div class="form-group">
-                    <label asp-for="EmployeeId " class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="EmployeeId" asp-items="Model.Employes"
-                            data-placeholder="Select employee">
+                    <label asp-for="TransactionDate">TransactionDate:</label>
+                    <input asp-for="TransactionDate" class="form-control" />
+                </div>
+
+                @*   <div class="form-group">
+                <label asp-for="EmployeeId" class="form-label mt-4"></label>
+                <select class="form-select" asp-for="EmployeeId" asp-items="Model.EmployeeAll"
+                data-placeholder="Select employee">
+                <option value=""></option>
+                </select>
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div> *@
+
+                <div class="form-group">
+                    <label asp-for="transactionTyp" class="form-label mt-4"></label>
+                    <select class="form-select" asp-for="transactionTyp" asp-items="Model.ALLtransactionTyps"
+                            data-placeholder="Select transaction type">
                         <option value=""></option>
                     </select>
-                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
-                </div>    
-                
-                <div class="form-group">
-                    <label asp-for="shiftStuTework " class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="shiftStuTework" asp-items="Model.Shifts"
-                            data-placeholder="Select employee">
-                        <option value=""></option>
-                    </select>
-                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                    <span asp-validation-for="transactionTyp" class="text-danger"></span>
                 </div>
 
-               
                 <button type="submit" id="savedata" class="btn btn-primary">Update</button>
             </form>
 
-            <a asp-controller="TimeShift" asp-action="Index" class="btn btn-secondary mt-2">
+            <a asp-controller="SalaryTransaction" asp-action="Index" class="btn btn-secondary mt-2">
                 <i class="fas fa-chevron-circle-left"></i> Back to Index
             </a>
         </div>
     </div>
 </div>
 
-@* 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -100,4 +104,3 @@
         });
     });
 </script>
- *@

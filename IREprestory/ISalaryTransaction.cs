@@ -10,6 +10,9 @@ namespace IREprestory
 {
     public interface ISalaryTransaction : IRepository<SalaryTransactionVM>, IPaginationHelper<SalaryTransactionVM>
     {
-        IEnumerable<SalaryTransactionVM> GetByEmployeeId(string id);
-    }  }
+        IEnumerable<SalaryTransactionVM> GetByEmployeeIdALLtrantionforemployee(string id);
+        public SalaryTransactionVM GEtByemployeeId(string id);
+
+    }
+}
 

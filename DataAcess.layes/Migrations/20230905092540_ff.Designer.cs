@@ -4,6 +4,7 @@ using DataAcess.layes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAcess.layes.Migrations
 {
     [DbContext(typeof(ApplicationDBcontext))]
-    partial class ApplicationDBcontextModelSnapshot : ModelSnapshot
+    [Migration("20230905092540_ff")]
+    partial class ff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,8 +288,8 @@ namespace DataAcess.layes.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime?>("EndingTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan?>("EndingTime")
+                        .HasColumnType("time");
 
                     b.Property<int?>("HoursPershift")
                         .HasColumnType("int");
@@ -294,7 +297,10 @@ namespace DataAcess.layes.Migrations
                     b.Property<int>("IsDeleted")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("StartingTime")
+                    b.Property<TimeSpan?>("StartingTime")
+                        .HasColumnType("time");
+
+                    b.Property<DateTime?>("dateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("shiftStuTework")

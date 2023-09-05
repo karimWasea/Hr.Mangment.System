@@ -133,6 +133,8 @@
                 <th>JobTitle</th>
                 <th>HirangDate</th>
                 <th>phonenumber </th>
+                <td>Action</td> 
+                
                 <td>Action</td>
             </tr>
         </thead>
@@ -155,9 +157,23 @@
                         <a asp-controller="Employee" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
                             <i class="fas fa-edit" title="Edit"></i>Edit
                         </a>
+                      
+
                         <a asp-controller="Employee" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
                             <i class="fas fa-trash-alt" title="Delete"></i>Delete
                         </a>
+                    </td>
+                    <td>
+                        <a asp-area="HR" asp-controller="SalaryTransaction" asp-action="EditGetbyemployeeonetrataction" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                            <i class="fas fa-edit" title="Edit"></i>EditGetbyemployeeonetrataction
+                        </a>
+                        <a asp-area="HR" asp-controller="SalaryTransaction" asp-action="Addtrantionforemplyee" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                            <i class="fas fa-edit" title="Edit"></i>Addtrantionforemplyee
+                        </a>
+                        <a asp-area="HR" asp-controller="SalaryTransaction" asp-action="GEtAllemplyStranstion" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                            <i class="fas fa-edit" title="Edit"></i>GEtAllemplyStranstion
+                        </a>
+
                     </td>
                 </tr>
             }

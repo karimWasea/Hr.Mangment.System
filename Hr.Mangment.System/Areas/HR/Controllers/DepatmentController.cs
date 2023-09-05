@@ -90,11 +90,11 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
      
 
         // POST: EmployeeController/Delete/5
-        [HttpPost]
+        //[HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult Delete(int  id)
+        public IActionResult Delete(string  id)
         {
-          _unitOfWork.Deparment.Delete(id);
+          _unitOfWork.Employee.Delete(id);
                 return RedirectToAction(nameof(Index));
             
         }

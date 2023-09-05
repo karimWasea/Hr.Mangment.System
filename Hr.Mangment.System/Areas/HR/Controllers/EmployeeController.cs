@@ -48,20 +48,21 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
     
 
         // GET: EmployeeController/Details/5
-        public ActionResult Details(string id)
+        public async Task<IActionResult> Details(string Id)
         {
-            return View(_unitOfWork.Employee.GetById(id));
+            var model = await _unitOfWork.Employee.GetById(Id);
+            return View(model);
         }
 
 
 
         // GET: EmployeeController/Edit/5
-        public async Task<IActionResult> Save(int id)
+        public async Task<IActionResult> Save(string id)
         {
            
-            if (id >0)
+            if (id !=null)
             {
-                var model =  _unitOfWork.Deparment.GetById(id);
+                var model = await _unitOfWork.Employee.GetById(id);
                 return View(model);
             }
             else
@@ -72,7 +73,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         }
 
         // POST: EmployeeController/Edit/5
-        [HttpPost]
+        //[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save( EmployeeVM emp1 )
         {
@@ -92,8 +93,8 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
      
 
         // POST: EmployeeController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)
         {
           _unitOfWork.Employee.Delete(id);

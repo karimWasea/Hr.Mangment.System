@@ -2,7 +2,10 @@
 
 using HR.ViewModel;
 
+using Intersoft.Crosslight;
+
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 using ReprestoryServess;
@@ -15,8 +18,11 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
     {
         UnitOfWork _unitOfWork;
         lookupServess _lookupServess;
-        public SalaryTransactionController(UnitOfWork unitOfWork, lookupServess lookupServess)
+        UserManager<Applicaionuser> _userManager;
+        public SalaryTransactionController(UnitOfWork unitOfWork, lookupServess lookupServess, UserManager<Applicaionuser> userManager
+)
         {
+            _userManager = userManager;
             _unitOfWork = unitOfWork;
             _lookupServess = lookupServess;
         }
@@ -46,7 +52,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
         public IActionResult GEtAllemplyStranstion(int? page, string search, string Employeeid)
         {
-            var model = _unitOfWork.SalaryTransaction.GetByEmployeeId(Employeeid);
+            var model = _unitOfWork.SalaryTransaction.GetByEmployeeIdALLtrantionforemployee(Employeeid);
             int pageNumber = page ?? 1;
 
             //if (!string.IsNullOrWhiteSpace(search))
@@ -92,6 +98,34 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             }
 
         }
+        //Edite
+        public async Task<IActionResult> EditGetbyemployeeonetrataction(string id, string EmplyeeName)
+        {
+
+
+            var model = _unitOfWork.SalaryTransaction.GEtByemployeeId(id);
+            model.EmployeeName = EmplyeeName;
+            model.EmployeeId = id;
+            //model.EmployeeAll = _lookupServess.EmployeeAll();
+            model.ALLtransactionTyps = _lookupServess.GetAlltransaction();
+            return View(model);
+        }
+
+
+    
+        public IActionResult Addtrantionforemplyee(string id, string EmplyeeName) { 
+           
+                var vewodel = new SalaryTransactionVM();
+                // Assuming vewodel is an instance of your view model
+                vewodel.EmployeeName = EmplyeeName;
+                vewodel.EmployeeId=id;
+                //vewodel.EmployeeAll = _lookupServess.EmployeeAll();
+                vewodel.ALLtransactionTyps = _lookupServess.GetAlltransaction();
+
+            return View(vewodel);
+        }
+
+
 
         // POST: EmployeeController/Edit/5
         [HttpPost]

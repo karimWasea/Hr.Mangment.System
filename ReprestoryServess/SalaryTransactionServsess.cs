@@ -125,9 +125,28 @@ namespace ReprestoryServess
 
             return model;
         }
+        public SalaryTransactionVM GEtByemployeeId(string id)
+        {
+            var model =
+                _Context.SalaryTransactions.Where(p => p.IsDeleted == IsDeleted.NotDeleted).Include(p => p.Employee).Select(p => new SalaryTransactionVM
+                {
+                    EmployeeName = _user.Users.Where(m => m.Id == id).Select(p => p.UserName).FirstOrDefault(),
+
+                    Amount = p.Amount,
+                    isDeleted = p.IsDeleted,
+                    EmployeeId = p.EmployeeId,
+                    TransactionDate = p.TransactionDate,
+                    Reason = p.Reason,
+                    Id = p.Id,
+                    transactionTyp = p.transactionTyp,
+
+                }).FirstOrDefault();
+
+            return model;
+        }
 
 
-        public IEnumerable< SalaryTransactionVM >GetByEmployeeId(string id)
+        public IEnumerable< SalaryTransactionVM > GetByEmployeeIdALLtrantionforemployee(string id)
         {
             var model =
                 _Context.SalaryTransactions.Where(p => p.EmployeeId == id).Include(p => p.Employee).Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new SalaryTransactionVM

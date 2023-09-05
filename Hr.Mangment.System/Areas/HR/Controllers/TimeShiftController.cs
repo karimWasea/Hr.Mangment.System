@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using ReprestoryServess;
 
+using System.Globalization;
+
 namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
@@ -26,16 +28,15 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             var model =  _unitOfWork.timeShift.GetAll();
             int pageNumber = page ?? 1;
 
-            //if (!string.IsNullOrWhiteSpace(search))
-            //{
-            //    // Apply search filtering here based on your model properties
-            //    model = model.Where(patient =>
-            //      _unitOfWork.Employee.SearchProperty(patient.ti, search) ||
-            //         _unitOfWork.Employee.SearchProperty(patient.MangerName, search) 
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                // Apply search filtering here based on your model properties
+                model = model.Where(patient =>
+                     _unitOfWork.Employee.SearchProperty(patient.EmployeeName, search)
 
-            //    // Add more properties for search as needed
-            //    );
-            //}
+                // Add more properties for search as needed
+                );
+            }
 
             var pagedPatients = _unitOfWork.timeShift.GetPagedData(model.AsQueryable() ,pageNumber);
 
@@ -52,18 +53,22 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         // GET: EmployeeController/Edit/5
         public async Task<IActionResult> Save(int id)
         {
-            
+         
 
             if (id >0)
             {
                 var  model = _unitOfWork. timeShift.GetById(id);
-                model.Mangers = _lookupServess.EmployeeAll();
+                model.Employes = _lookupServess.EmployeeAll();
+                model.Shifts = _lookupServess.GetallShifts();
+             
                 return View(model);
             }
             else
             {
-                var vewodel = new Depatmentvm();
-                vewodel.Mangers= _lookupServess.EmployeeAll();
+                var vewodel = new TimeShiftVM();
+                vewodel.Employes= _lookupServess.EmployeeAll();
+                vewodel.Shifts = _lookupServess.GetallShifts();
+        
                 return View(vewodel);
             }
            
@@ -90,7 +95,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
      
 
         // POST: EmployeeController/Delete/5
-        [HttpPost]
+        //[HttpPost]
         //[ValidateAntiForgeryToken]
         public IActionResult Delete(int  id)
         {

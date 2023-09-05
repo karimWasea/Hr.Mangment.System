@@ -75,13 +75,12 @@ namespace ReprestoryServess
             var model= _Context.TimeShifts.Include(p => p.Employee).Where(p=> p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new TimeShiftVM
             {
                 Id = p.Id,
-                dateTime = p.dateTime,
                 EmployeeId = p.EmployeeId,
                 EndingTime = p.EndingTime,
                 shiftStuTework = p.shiftStuTework,
                 StartingTime = p.StartingTime,
                 IsDeleted = p.IsDeleted,
-
+ EmployeeName=_user.Users.Select(u=>u.UserName).FirstOrDefault()
             }).ToList();
 
             return model;
@@ -93,14 +92,15 @@ namespace ReprestoryServess
                 _Context.TimeShifts.Include(p => p.Employee).Where( p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted &&p.Id==id).Select(p => new TimeShiftVM
             {
                 Id = p.Id,
-                dateTime = p.dateTime,
                 EmployeeId = p.EmployeeId,
                 EndingTime = p.EndingTime,
                 shiftStuTework = p.shiftStuTework,
                 StartingTime = p.StartingTime,
                 IsDeleted = p.IsDeleted,
+                    EmployeeName = _user.Users.Select(u => u.UserName).FirstOrDefault()
 
-            }).FirstOrDefault();
+
+                }).FirstOrDefault();
         }
 
 
