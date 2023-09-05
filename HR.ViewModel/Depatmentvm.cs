@@ -11,8 +11,8 @@ namespace HR.ViewModel
         public int Id { get; set; }
 
         public string? DepartmentName { get; set; } 
-        public string? MangerName { get; set; } 
-        public string? ManagerId { get; set; }
+        public string? MangerName { get; set; }
+        public string? ManagerId { get; set; } = default!;
         public IEnumerable<SelectListItem> Mangers { get; set; } = Enumerable.Empty<SelectListItem>();
 
         public static Department CanconvertViewmodel(Depatmentvm entity)

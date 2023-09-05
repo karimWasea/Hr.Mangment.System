@@ -7,6 +7,7 @@
 
 @model HR.ViewModel.Depatmentvm
 <partial name="_AlertMessage" model="Model" />
+<link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -27,6 +28,14 @@
                     <label asp-for="ManagerId" class="form-label mt-4"></label>
                     <select class="form-select" asp-for="ManagerId" asp-items="Model.Mangers"
                             data-placeholder="Select devices">
+                            
+                            @* 
+                             this make Noseach   
+                            data-minimum-results-for-search="Infinity">
+
+                      //  this is make it multiuble select
+
+                        *@@* multiple="multiple" *@>
                         <option value=""></option>
                     </select>
                     <span asp-validation-for="ManagerId" class="text-danger"></span>
@@ -41,12 +50,14 @@
         </div>
     </div>
 </div>
-
-@* @section Scripts {
-    <script src="d:\hr_system\hr.mangment.system\hr.mangment.system\wwwroot\js\site.js"></script>
+@section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/lib/select2/js/select2.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            // Initialize Select2 on all select elements
+            $('select').select2();
+
             var saveForm = document.getElementById("saveform");
             var saveButton = document.getElementById("savedata");
 
@@ -68,7 +79,9 @@
                 });
             });
         });
-    </script> *@
+    </script>
+
+
     <style>
         /* Custom CSS styles */
         .container {
