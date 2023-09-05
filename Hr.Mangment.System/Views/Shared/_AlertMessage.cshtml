@@ -1,4 +1,4 @@
-﻿@if (TempData.ContainsKey("Message"))
+﻿@* @if (TempData.ContainsKey("Message"))
 {
     @if (TempData.ContainsKey("MessageType") && TempData["MessageType"].ToString() == "Save")
     {
@@ -23,5 +23,40 @@
             @TempData["Message"]
             <strong></strong> <a href="#" class="alert-link"></a>
         </div>
+    }
+} *@
+@if (TempData.ContainsKey("Message"))
+{
+    @if (TempData.ContainsKey("MessageType"))
+    {
+        @Html.Raw(BuildAlertDiv(TempData["MessageType"].ToString(), TempData["Message"].ToString()))
+    }
+}
+
+@functions {
+    string BuildAlertDiv(string messageType, string message)
+    {
+        string alertClass = GetAlertClass(messageType);
+        return $@"
+            <div class='position-absolute top-0 end-0 m-3 alert alert-dismissible {alertClass}' style='height:60px; max-width:400px;'>
+                <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
+            {message}
+                <strong></strong> <a href='#' class='alert-link'></a>
+            </div>";
+    }
+
+    string GetAlertClass(string messageType)
+    {
+        switch (messageType)
+        {
+            case "Save":
+                return "alert-success";
+            case "Edit":
+                return "alert-info";
+            case "Delete":
+                return "alert-danger";
+            default:
+                return "alert-secondary"; // Default to a neutral alert style
+        }
     }
 }
