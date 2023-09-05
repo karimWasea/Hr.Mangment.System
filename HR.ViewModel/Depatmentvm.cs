@@ -2,6 +2,8 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+using System.ComponentModel.DataAnnotations;
+
 using SystemEnums;
 
 namespace HR.ViewModel
@@ -9,9 +11,11 @@ namespace HR.ViewModel
     public class Depatmentvm :BaseViewModel
     {
         public int Id { get; set; }
+        [Required]
+        public string DepartmentName { get; set; } 
+        public string MangerName { get; set; }
+        [Required]
 
-        public string? DepartmentName { get; set; } 
-        public string? MangerName { get; set; }
         public string? ManagerId { get; set; } = default!;
         public IEnumerable<SelectListItem> Mangers { get; set; } = Enumerable.Empty<SelectListItem>();
 
