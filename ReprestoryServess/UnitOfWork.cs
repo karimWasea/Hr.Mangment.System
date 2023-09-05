@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static System.Collections.Specialized.BitVector32;
+
 namespace ReprestoryServess
 {
     public class UnitOfWork : IUnitOfWork
@@ -19,10 +21,11 @@ namespace ReprestoryServess
         public readonly ApplicationDBcontext  _context;
 
         public UnitOfWork(
-ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsess shiftServsess
+ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsss shiftServsess , VactionServsess vactionServsess
         )
 
         {
+            Vaction = vactionServsess;
             timeShift = shiftServsess;
             SalaryTransaction =salaryTransactionServsess;
             Deparment = DepatmentServsess;
@@ -39,6 +42,7 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
         public ISalaryTransaction SalaryTransaction { get; }
         public IEmployeeHistory EmployeeHistory { get; }
         public ITimeShift timeShift { get; }
+        public IVaction Vaction { get; }
 
         protected virtual void Dispose(bool disposing)
         {

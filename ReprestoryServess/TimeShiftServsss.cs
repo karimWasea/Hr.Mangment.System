@@ -16,12 +16,12 @@ using System.Threading.Tasks;
 
 namespace ReprestoryServess
 {
-    public class TimeShiftServsess : PaginationHelper<TimeShiftVM>, ITimeShift
+    public class TimeShiftServsss : PaginationHelper<TimeShiftVM>, ITimeShift
     {
         private readonly UserManager<Applicaionuser> _user;
 
         private ApplicationDBcontext _Context;
-        public TimeShiftServsess(ApplicationDBcontext db, UserManager<Applicaionuser> user)
+        public TimeShiftServsss(ApplicationDBcontext db, UserManager<Applicaionuser> user)
         {  
 
             _user = user;

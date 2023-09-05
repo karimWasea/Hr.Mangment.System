@@ -9,6 +9,7 @@ namespace IREprestory
     public interface IUnitOfWork
 
     {
+        IVaction Vaction { get; }
         IEmployeeHistory EmployeeHistory { get; }
         ISalaryTransaction SalaryTransaction { get; }   
         IDeparment Deparment {  get; }    

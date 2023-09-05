@@ -128,13 +128,14 @@
                 <th>UserName</th>
                 <th>Email</th>
                 <th>Adress</th>
-                <th>Salary</th>
-                <th>BirthDate</th>
+             
+             
                 <th>JobTitle</th>
                 <th>HirangDate</th>
-                <th>phonenumber </th>
+             
                 <td>Action</td> 
                 
+                <td>Action</td>  
                 <td>Action</td>
             </tr>
         </thead>
@@ -145,11 +146,11 @@
                     <td>@patient.UserName</td>
                     <td>@patient.Email</td>
                     <td>@patient.Adress</td>
-                    <td>@patient.Salary</td>
-                    <td>@patient.BirthDate</td>
+           
+               
                     <td>@patient.JobTitle</td>
                     <td>@patient.HirangDate</td>
-                    <td>@patient.PhoneNumber</td>
+            
                     <td>
                         <a asp-controller="Employee" asp-action="Details" asp-route-id="@patient.Id">
                             <i class="fas fa-info-circle" title="Details"></i>Details
@@ -174,6 +175,16 @@
                             <i class="fas fa-edit" title="Edit"></i>GEtAllemplyStranstion
                         </a>
 
+                    </td>
+                    <td>
+                        <a asp-area="HR" asp-controller="Vaction" asp-action="addvaction" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                            <i class="fas fa-edit" title="Edit"></i>addvaction
+                        </a>
+                        <a asp-area="HR" asp-controller="Vaction" asp-action="Editebyempid" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                            <i class="fas fa-edit" title="Edit"></i>Editebyempid
+                        </a>
+
+                   
                     </td>
                 </tr>
             }
