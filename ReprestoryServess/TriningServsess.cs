@@ -16,26 +16,26 @@ using System.Threading.Tasks;
 
 namespace ReprestoryServess
 {
-    public class DepatmentServsess : PaginationHelper<Depatmentvm>,IDeparment
+    public class TriningServsess : PaginationHelper<Trainingvm>,ITrining
     {
         private readonly UserManager<Applicaionuser> _user;
 
         private ApplicationDBcontext _Context;
-        public DepatmentServsess(ApplicationDBcontext db, UserManager<Applicaionuser> user)
+        public TriningServsess(ApplicationDBcontext db, UserManager<Applicaionuser> user)
         {  
 
             _user = user;
             _Context = db;
         }
-        public void Save(Depatmentvm entity)
+        public void Save(Trainingvm entity)
         {
 
 
-            var model = Depatmentvm.CanconvertViewmodel(entity);
+            var model = Trainingvm.CanconvertViewmodel(entity);
 
             if (entity.Id > 0)
             {
-                _Context.Departments.Update(model);
+                _Context.Trainings.Update(model);
 
                 _Context.SaveChanges();
 
@@ -45,7 +45,7 @@ namespace ReprestoryServess
             {
 
 
-                _Context.Departments.Add(model);
+                _Context.Trainings.Add(model);
 
                 _Context.SaveChanges();
 
@@ -70,32 +70,32 @@ namespace ReprestoryServess
 
         }
 
-        public IEnumerable<Depatmentvm> GetAll()
+        public IEnumerable<Trainingvm> GetAll()
         {
-            var model= _Context.Departments.Include(p => p.Employees).Where(p=> p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new Depatmentvm
+            var model= _Context.Trainings.Where(p=> p.IsDeleted != SystemEnums.IsDeleted.Deleted).Select(p => new Trainingvm
             {
                 Id = p.Id,
-                DepartmentName = p.DepartmentName,
-                ManagerId = p.ManagerId,
-                MangerName = _user.Users.Where(m => m.Id == p.ManagerId).Select(p => p.UserName).FirstOrDefault(),
+              isDeleted=p.IsDeleted,
+               TrainingName = p.TrainingName,
+                
 
             }).ToList();
 
             return model;
         }
 
-        public Depatmentvm GetById(int id)
+        public Trainingvm GetById(int id)
         {
-            return _Context.Departments.Include(p=>p.Employees).Where(p => p.Id == id &&p.IsDeleted==SystemEnums.IsDeleted.NotDeleted).Select(p => new Depatmentvm
+            var model = _Context.Trainings.Where(p => p.IsDeleted != SystemEnums.IsDeleted.Deleted && p.Id== id).Select(p => new Trainingvm
             {
-                isDeleted = p.IsDeleted, 
- Id = p.Id,
-  DepartmentName    = p.DepartmentName,
-  ManagerId=p.ManagerId,
-  MangerName =_user.Users.Where(m=>m.Id==p.ManagerId).Select(p=>p.UserName).FirstOrDefault(),
+                Id = p.Id,
+                isDeleted = p.IsDeleted,
+                TrainingName = p.TrainingName,
 
-             
+
             }).FirstOrDefault();
+
+            return model;
         }
 
 

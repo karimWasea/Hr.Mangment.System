@@ -5,7 +5,7 @@ namespace DataAcess.layes
 
     public class WorkScheduleCurentWeekDay : BaseEntity
     {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
+        public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
         public DayOfWeek DayName { get; set; }
 

@@ -21,10 +21,12 @@ namespace ReprestoryServess
         public readonly ApplicationDBcontext  _context;
 
         public UnitOfWork(
-ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsss shiftServsess , VactionServsess vactionServsess
+ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsss shiftServsess , VactionServsess vactionServsess , TriningServsess triningServsess , DeviceServsess deviceServsess
         )
 
-        {
+        { Trining = triningServsess
+                ;
+            Device = deviceServsess;
             Vaction = vactionServsess;
             timeShift = shiftServsess;
             SalaryTransaction =salaryTransactionServsess;
@@ -43,6 +45,8 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
         public IEmployeeHistory EmployeeHistory { get; }
         public ITimeShift timeShift { get; }
         public IVaction Vaction { get; }
+        public ITrining Trining { get; }
+        public IDevice Device { get; }
 
         protected virtual void Dispose(bool disposing)
         {

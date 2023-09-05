@@ -15,5 +15,7 @@ namespace IREprestory
         IDeparment Deparment {  get; }    
         Iemployee Employee { get;  }
         ITimeShift timeShift { get; }
+         ITrining Trining { get; }
+         IDevice Device { get; }
     }
 }

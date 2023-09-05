@@ -40,6 +40,8 @@ builder.Services.AddTransient<lookupServess>();
 builder.Services.AddTransient<SalaryclackServesses>();
 builder.Services.AddTransient<TimeShiftServsss>();
 builder.Services.AddTransient<VactionServsess>();
+builder.Services.AddTransient<TriningServsess>();
+builder.Services.AddTransient<DeviceServsess>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

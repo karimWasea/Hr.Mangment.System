@@ -6,7 +6,7 @@ namespace DataAcess.layes
 
     public class Training : BaseEntity
     {
-        IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
+        public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
         public string? TrainingName { get; set; }
 

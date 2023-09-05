@@ -16,26 +16,26 @@ using System.Threading.Tasks;
 
 namespace ReprestoryServess
 {
-    public class DepatmentServsess : PaginationHelper<Depatmentvm>,IDeparment
+    public class DeviceServsess : PaginationHelper<Devicetvm>,IDevice
     {
         private readonly UserManager<Applicaionuser> _user;
 
         private ApplicationDBcontext _Context;
-        public DepatmentServsess(ApplicationDBcontext db, UserManager<Applicaionuser> user)
+        public DeviceServsess(ApplicationDBcontext db, UserManager<Applicaionuser> user)
         {  
 
             _user = user;
             _Context = db;
         }
-        public void Save(Depatmentvm entity)
+        public void Save(Devicetvm entity)
         {
 
 
-            var model = Depatmentvm.CanconvertViewmodel(entity);
+            var model = Devicetvm.CanconvertViewmodel(entity);
 
             if (entity.Id > 0)
             {
-                _Context.Departments.Update(model);
+                _Context.Devices.Update(model);
 
                 _Context.SaveChanges();
 
@@ -45,7 +45,7 @@ namespace ReprestoryServess
             {
 
 
-                _Context.Departments.Add(model);
+                _Context.Devices.Add(model);
 
                 _Context.SaveChanges();
 
@@ -70,30 +70,27 @@ namespace ReprestoryServess
 
         }
 
-        public IEnumerable<Depatmentvm> GetAll()
+        public IEnumerable<Devicetvm> GetAll()
         {
-            var model= _Context.Departments.Include(p => p.Employees).Where(p=> p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new Depatmentvm
+            return _Context.Devices.Where( p=> p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new Devicetvm
             {
+                isDeleted = p.IsDeleted,
                 Id = p.Id,
-                DepartmentName = p.DepartmentName,
-                ManagerId = p.ManagerId,
-                MangerName = _user.Users.Where(m => m.Id == p.ManagerId).Select(p => p.UserName).FirstOrDefault(),
+                DeviceName = p.DeviceName,
 
-            }).ToList();
 
-            return model;
+            }).ToList();    
+
         }
 
-        public Depatmentvm GetById(int id)
+        public Devicetvm GetById(int id)
         {
-            return _Context.Departments.Include(p=>p.Employees).Where(p => p.Id == id &&p.IsDeleted==SystemEnums.IsDeleted.NotDeleted).Select(p => new Depatmentvm
+            return _Context.Devices.Where(p => p.Id == id &&p.IsDeleted==SystemEnums.IsDeleted.NotDeleted).Select(p => new Devicetvm
             {
                 isDeleted = p.IsDeleted, 
  Id = p.Id,
-  DepartmentName    = p.DepartmentName,
-  ManagerId=p.ManagerId,
-  MangerName =_user.Users.Where(m=>m.Id==p.ManagerId).Select(p=>p.UserName).FirstOrDefault(),
-
+ DeviceName =p.DeviceName,
+  
              
             }).FirstOrDefault();
         }
