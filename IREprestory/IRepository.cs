@@ -6,11 +6,10 @@ namespace IREprestory
     {
         T GetById(int id);
         IEnumerable<T> GetAll();
-        bool SearchProperty(string propertyValue, string search, StringComparison comparison);
         void Save(T entity);
         void Delete(int id );
-     
-        
+
+        bool SearchProperty(string propertyValue, string search, StringComparison comparison = StringComparison.OrdinalIgnoreCase);
     }
     public interface IPaginationHelper<T>
     {

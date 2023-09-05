@@ -120,7 +120,7 @@ namespace ReprestoryServess
 
 
 
-       public  bool SearchProperty(string propertyValue, string search, StringComparison comparison)
+        public bool SearchProperty(string propertyValue, string search, StringComparison comparison)
         {
             return !string.IsNullOrWhiteSpace(propertyValue) &&
                                propertyValue.Contains(search, comparison);

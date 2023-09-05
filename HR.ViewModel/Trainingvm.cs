@@ -8,7 +8,7 @@ namespace HR.ViewModel
 {
     public class Trainingvm : BaseViewModel
     {
-        public string? TrainingName { get; set; }
+        public string TrainingName { get; set; }
 
         public IEnumerable<SelectListItem> Mangers { get; set; } = Enumerable.Empty<SelectListItem>();
 

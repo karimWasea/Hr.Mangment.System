@@ -11,11 +11,11 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
 
-    public class DepatmentController : Controller
+    public class TringingController : Controller
     {
         UnitOfWork _unitOfWork;
         lookupServess _lookupServess;
-        public DepatmentController(UnitOfWork unitOfWork, lookupServess lookupServess)
+        public TringingController(UnitOfWork unitOfWork, lookupServess lookupServess)
         {
             _unitOfWork = unitOfWork;
             _lookupServess = lookupServess;
@@ -23,14 +23,14 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
         public  IActionResult Index(int? page, string search)
         {
-            var model =  _unitOfWork.Deparment.GetAll();
+            var model =  _unitOfWork.Trining.GetAll();
             int pageNumber = page ?? 1;
 
             if (!string.IsNullOrWhiteSpace(search))
             {
                 // Apply search filtering here based on your model properties
                 model = model.Where(patient =>
-                  _unitOfWork.Deparment.SearchProperty(patient.DepartmentName, search) 
+                  _unitOfWork.Trining.SearchProperty(patient.TrainingName, search) 
 
                 // Add more properties for search as needed
                 );
@@ -55,15 +55,14 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
             if (id >0)
             {
-                Depatmentvm? model = _unitOfWork.Deparment.GetById(id);
+              var model = _unitOfWork.Trining.GetById(id);
                 model.Mangers = _lookupServess.EmployeeAll();
                 return View(model);
             }
             else
             {
-                var vewodel = new Depatmentvm();
-                vewodel.Mangers= _lookupServess.EmployeeAll();
-                return View(vewodel);
+               
+                return View();
             }
            
         }
@@ -71,11 +70,11 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save( Depatmentvm emp1 )
+        public async Task<IActionResult> Save( Trainingvm emp1 )
         {
             //if (ModelState.IsValid)
             //{
-                _unitOfWork.Deparment.Save(emp1);
+                _unitOfWork.Trining.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
@@ -91,9 +90,9 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         // POST: EmployeeController/Delete/5
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult Delete(int   id)
+        public IActionResult Delete(int  id)
         {
-          _unitOfWork.Deparment.Delete(id);
+          _unitOfWork.Trining.Delete(id);
                 return RedirectToAction(nameof(Index));
             
         }

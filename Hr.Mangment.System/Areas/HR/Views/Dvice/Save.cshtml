@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Edit Employee";
+    Layout = "_Layout";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model HR.ViewModel.Devicetvm
+<partial name="_AlertMessage" model="Model" />
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Edit Employee</h1>
+
+            <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="DeviceName">DeviceName:</label>
+                    <input asp-for="DeviceName" class="form-control" />
+                </div>
+
+
+
+               
+                <button type="submit" id="savedata" class="btn btn-primary">Update</button>
+            </form>
+
+            <a asp-controller="Dvice" asp-action="Index" class="btn btn-secondary mt-2">
+                <i class="fas fa-chevron-circle-left"></i> Back to Index
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="d:\hr_system\hr.mangment.system\hr.mangment.system\wwwroot\js\site.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var saveForm = document.getElementById("saveform");
+            var saveButton = document.getElementById("savedata");
+
+            saveForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You are about to update the employee's information.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, update it!",
+                    cancelButtonText: "No, cancel",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // You can also add additional form validation here
+                        saveForm.submit();
+                    }
+                });
+            });
+        });
+    </script>
+<style>
+    /* Custom CSS styles */
+    .container {
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .btn-secondary {
+        margin-top: 10px;
+    }
+</style>
+}
+
+
+
+
+
+
+
+
+
+
