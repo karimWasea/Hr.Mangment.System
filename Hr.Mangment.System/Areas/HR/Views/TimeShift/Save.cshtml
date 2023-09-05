@@ -24,6 +24,12 @@
     }
 </style>
 
+
+<link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+
+
+
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -58,13 +64,16 @@
                 <div class="form-group">
                     <label asp-for="shiftStuTework " class="form-label mt-4"></label>
                     <select class="form-select" asp-for="shiftStuTework" asp-items="Model.Shifts"
-                            data-placeholder="Select employee">
+                            data-placeholder="Select shiftStuTework">
                         <option value=""></option>
                     </select>
                     <span asp-validation-for="EmployeeId" class="text-danger"></span>
                 </div>
 
+                <!-- Add 'multiple' attribute to the select elements to enable multiple selection -->
                
+          
+
                 <button type="submit" id="savedata" class="btn btn-primary">Update</button>
             </form>
 
@@ -74,7 +83,19 @@
         </div>
     </div>
 </div>
+<script src="~/lib/select2/js/select2.min.js"></script>
+ 
 
+
+<script>
+
+
+
+      $(document).ready(function () {
+       $('select').select2();
+    });
+
+</script> 
 @* 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
