@@ -42,6 +42,7 @@ namespace DataAcess.layes
         public DbSet<Vacation> Vacations { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Training> Trainings { get; set; }
+        public DbSet<EmployeeWorkScheduleCurentWeekDay> EmployeeWorkScheduleCurentWeekDay { get; set; }
         public DbSet<EmployeeTraining> EmployeeTrainings { get; set; }
         public DbSet<EmployeeHistory>  EmployeeHistories { get; set; }
 

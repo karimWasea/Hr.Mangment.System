@@ -4,6 +4,7 @@ using DataAcess.layes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAcess.layes.Migrations
 {
     [DbContext(typeof(ApplicationDBcontext))]
-    partial class ApplicationDBcontextModelSnapshot : ModelSnapshot
+    [Migration("20230906173020_changfl")]
+    partial class changfl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -401,6 +404,9 @@ namespace DataAcess.layes.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("Endshifts")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("IsDeleted")
                         .HasColumnType("int");
 
@@ -408,10 +414,7 @@ namespace DataAcess.layes.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("TimeEndshifts")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimestartShift")
+                    b.Property<DateTime?>("TimestartDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

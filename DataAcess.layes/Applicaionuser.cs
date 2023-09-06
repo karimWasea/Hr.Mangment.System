@@ -24,7 +24,7 @@ namespace DataAcess.layes
 
         public ICollection<TimeShift> TimeShifts { get; set; }
         public ICollection<EmployeeHistory> EmployeeHistories { get; set; }
-        public ICollection<WorkScheduleCurentWeekDay> WorkScheduleCurentWeekDay { get; set; }
+        public ICollection<EmployeeWorkScheduleCurentWeekDay> EmployeeWorkScheduleCurentWeekDay { get; set; }
         public ICollection<EmployeeDevice> EmployeeDevices { get; set; }
         public ICollection<EmployeeTraining> EmployeeTrainings { get; set; }
         public ICollection<Vacation> Vacations { get; set; }
