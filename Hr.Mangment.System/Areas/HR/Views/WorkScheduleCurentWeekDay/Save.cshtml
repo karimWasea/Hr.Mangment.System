@@ -1,11 +1,10 @@
-﻿
-@{
-    ViewData["Title"] = "Add/EditDepatment";
+﻿@{
+    ViewData["Title"] = "Edit Employee";
     Layout = "_Layout";
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@model HR.ViewModel.Depatmentvm
+@model HR.ViewModel.WorkScheduleCurentWeekDayVm
 <partial name="_AlertMessage" model="Model" />
 <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
 
@@ -18,33 +17,40 @@
                 <input type="hidden" asp-for="Id" />
 
                 <div class="form-group">
-                    <label asp-for="DepartmentName">DepartmentName:</label>
-                    <input asp-for="DepartmentName" class="form-control" />
+                    <label asp-for="ShiftName">ShiftName:</label>
+                    <input asp-for="ShiftName" class="form-control" />
+                </div> <div class="form-group">
+                    <label asp-for="TimeEndshifts">TimeEndshifts:</label>
+                    <input asp-for="TimeEndshifts" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="TimeEndshifts">TimeEndshifts:</label>
+                    <input asp-for="TimeEndshifts" class="form-control" />
                 </div>
 
-               
+
 
                 <div class="form-group">
-                    <label asp-for="ManagerId" class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="ManagerId" asp-items="Model.Mangers"
+                    <label asp-for="DayName" class="form-label mt-4"></label>
+                    <select class="form-select" asp-for="DisplayShift" asp-items="Model.DayNameslist"
                             data-placeholder="Select devices">
-                            
-                            @* 
-                             this make Noseach   
-                            data-minimum-results-for-search="Infinity">
 
-                      //  this is make it multiuble select
+                        @*
+                        this make Noseach
+                        data-minimum-results-for-search="Infinity">
+
+                        //  this is make it multiuble select
 
                         *@@* multiple="multiple" *@>
                         <option value=""></option>
                     </select>
-                    <span asp-validation-for="ManagerId" class="text-danger"></span>
+                    <span asp-validation-for="DayName" class="text-danger"></span>
                 </div>
 
                 <button type="submit" id="savedata" class="btn btn-primary">Update</button>
             </form>
 
-            <a asp-controller="Depatment" asp-action="Index" class="btn btn-secondary mt-2">
+            <a  asp-action="Index" class="btn btn-secondary mt-2">
                 <i class="fas fa-chevron-circle-left"></i> Back to Index
             </a>
         </div>
@@ -56,7 +62,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Initialize Select2 on all select elements
-            $('select').select2();
+            // $('select').select2();
 
             var saveForm = document.getElementById("saveform");
             var saveButton = document.getElementById("savedata");

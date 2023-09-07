@@ -21,7 +21,7 @@ namespace ReprestoryServess
         public readonly ApplicationDBcontext  _context;
 
         public UnitOfWork(
-ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsss shiftServsess , VactionServsess vactionServsess , TriningServsess triningServsess , DeviceServsess deviceServsess
+ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsss shiftServsess , VactionServsess vactionServsess , TriningServsess triningServsess , DeviceServsess deviceServsess , WorkScheduleCurentWeekDayServsess workScheduleCurentWeekDayServsess
         )
 
         { Trining = triningServsess
@@ -33,6 +33,7 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
             Deparment = DepatmentServsess;
             Employee = employeeServsss;
             _context = context;
+                 workScheduleCurentWeekDay = workScheduleCurentWeekDayServsess;
            
         }
 
@@ -47,6 +48,7 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
         public IVaction Vaction { get; }
         public ITrining Trining { get; }
         public IDevice Device { get; }
+        public IWorkScheduleCurentWeekDay workScheduleCurentWeekDay { get; }
 
         protected virtual void Dispose(bool disposing)
         {

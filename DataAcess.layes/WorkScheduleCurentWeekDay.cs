@@ -11,7 +11,6 @@ namespace DataAcess.layes
 
         public DayOfWeek DayName { get; set; }
         public string ShiftName { get; set; }
-        public string EmployeeId { get; set; }
         public DateTime? TimestartShift { get; set; }
         public DateTime?  TimeEndshifts { get; set; }
         [NotMapped]
