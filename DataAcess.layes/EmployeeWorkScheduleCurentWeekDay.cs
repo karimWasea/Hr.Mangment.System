@@ -10,6 +10,6 @@ namespace DataAcess.layes
         public Applicaionuser Employee { get; set; }
 
         public int TimeShiftId { get; set; }
-        public WorkScheduleCurentWeekDay Training { get; set; }
+        public WorkScheduleCurentWeekDay WorkScheduleCurentWeekDay { get; set; }
     }
 }

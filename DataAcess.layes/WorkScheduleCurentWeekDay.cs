@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 using SystemEnums;
 
@@ -10,9 +11,11 @@ namespace DataAcess.layes
         public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 
         public DayOfWeek DayName { get; set; }
+        [Required(ErrorMessage = "ShiftName is required")]
+
         public string ShiftName { get; set; }
-        public DateTime? TimestartShift { get; set; }
-        public DateTime?  TimeEndshifts { get; set; }
+        public DateTime TimestartShift { get; set; }
+        public DateTime TimeEndshifts { get; set; }
         [NotMapped]
         public string DisplayShift
         {

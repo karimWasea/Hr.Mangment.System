@@ -77,10 +77,10 @@ namespace ReprestoryServess
             return _Context.  workScheduleCurentWeeks.Where( p=> p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new WorkScheduleCurentWeekDayVm
             {
                 Id = p.Id,
-                 TimestartShift = p.TimestartShift,
+                 TimestartShift = (DateTime)p.TimestartShift,
                   ShiftName = p.ShiftName,
                    DayName = p.DayName,
-                    TimeEndshifts = p.TimeEndshifts
+                    TimeEndshifts = (DateTime)p.TimeEndshifts
                     
                       
 
@@ -94,10 +94,10 @@ namespace ReprestoryServess
             return _Context.workScheduleCurentWeeks.Where(p => p.Id == id &&p.IsDeleted==IsDeleted.NotDeleted).Select(p => new WorkScheduleCurentWeekDayVm
             {
                 Id = p.Id,
-                TimestartShift = p.TimestartShift,
+                TimestartShift = (DateTime)p.TimestartShift,
                 ShiftName = p.ShiftName,
                 DayName = p.DayName,
-                TimeEndshifts = p.TimeEndshifts
+                TimeEndshifts = (DateTime)p.TimeEndshifts
 
             }).FirstOrDefault();
         }

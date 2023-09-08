@@ -19,30 +19,25 @@
                 <div class="form-group">
                     <label asp-for="ShiftName">ShiftName:</label>
                     <input asp-for="ShiftName" class="form-control" />
-                </div> <div class="form-group">
-                    <label asp-for="TimeEndshifts">TimeEndshifts:</label>
-                    <input asp-for="TimeEndshifts" class="form-control" />
+                    <span asp-validation-for="ShiftName" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <label asp-for="TimeEndshifts">TimeEndshifts:</label>
                     <input asp-for="TimeEndshifts" class="form-control" />
+                    <span asp-validation-for="TimeEndshifts" class="text-danger"></span>
                 </div>
 
-
+                <div class="form-group">
+                    <label asp-for="TimestartShift">TimestartShift:</label>
+                    <input asp-for="TimestartShift" class="form-control" />
+                    <span asp-validation-for="TimestartShift" class="text-danger"></span>
+                </div>
 
                 <div class="form-group">
                     <label asp-for="DayName" class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="DisplayShift" asp-items="Model.DayNameslist"
-                            data-placeholder="Select devices">
-
-                        @*
-                        this make Noseach
-                        data-minimum-results-for-search="Infinity">
-
-                        //  this is make it multiuble select
-
-                        *@@* multiple="multiple" *@>
-                        <option value=""></option>
+                    <select class="form-select" asp-for="DayName" asp-items="Model.DayNameslist" data-placeholder="Select devices">
+                        <option value="" selected></option>
                     </select>
                     <span asp-validation-for="DayName" class="text-danger"></span>
                 </div>
@@ -50,20 +45,18 @@
                 <button type="submit" id="savedata" class="btn btn-primary">Update</button>
             </form>
 
-            <a  asp-action="Index" class="btn btn-secondary mt-2">
+            <a asp-action="Index" class="btn btn-secondary mt-2">
                 <i class="fas fa-chevron-circle-left"></i> Back to Index
             </a>
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/lib/select2/js/select2.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Initialize Select2 on all select elements
-            // $('select').select2();
-
             var saveForm = document.getElementById("saveform");
             var saveButton = document.getElementById("savedata");
 
@@ -87,7 +80,6 @@
         });
     </script>
 
-
     <style>
         /* Custom CSS styles */
         .container {
@@ -103,13 +95,3 @@
         }
     </style>
 }
-
-
-
-
-
-
-
-
-
-

@@ -73,16 +73,16 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(WorkScheduleCurentWeekDayVm emp1 )
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 _unitOfWork.workScheduleCurentWeekDay.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
-            //}
-            //  return View(emp1); 
+            }
+            return View(emp1);
 
-            
+
         }
 
         // GET: EmployeeController/Delete/5

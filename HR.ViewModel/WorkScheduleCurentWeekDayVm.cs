@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 using SystemEnums;
@@ -10,13 +11,24 @@ namespace HR.ViewModel
 {
     public class WorkScheduleCurentWeekDayVm : BaseViewModel
     {
-        public IsDeleted IsDeleted { get; set; } 
+        public IsDeleted IsDeleted { get; set; }
 
+
+        [Required(ErrorMessage = "DayName is required")]
         public DayOfWeek DayName { get; set; }
+
+        [Required(ErrorMessage = "ShiftName is required")]
         public string ShiftName { get; set; }
-        public string EmployeeId { get; set; }
-        public DateTime? TimestartShift { get; set; }
-        public DateTime? TimeEndshifts { get; set; }
+
+        //[Required(ErrorMessage = "EmployeeId is required")]
+        //public string EmployeeId { get; set; }
+
+        [Required(ErrorMessage = "TimestartShift is required")]
+        public DateTime TimestartShift { get; set; }
+
+        [Required(ErrorMessage = "TimeEndshifts is required")]
+        public DateTime TimeEndshifts { get; set; }
+
         [NotMapped]
         public string DisplayShift
         {
