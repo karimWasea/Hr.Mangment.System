@@ -1,4 +1,4 @@
-﻿@* @model PagedList.IPagedList<HR.ViewModel.EmployeeVM>
+﻿@* @* @model PagedList.IPagedList<HR.ViewModel.EmployeeVM>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
@@ -100,7 +100,7 @@
 
   *@
 
-
+@* 
 
 @model PagedList.IPagedList<HR.ViewModel.EmployeeVM>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -164,32 +164,32 @@
                     </td>
                     <td>
                         <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="EditGetbyemployeeonetrataction" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
-                          EditGetbyemployeeonetrataction
+                          EditsalaryTraraction
                         </a>
                         <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="Addtrantionforemplyee" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
-                          Addtrantionforemplyee
+                           AddsalaryTraraction
                         </a>
                         <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="GEtAllemplyStranstion" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
-                          GEtAllemplyStranstion
+                          GEttranstion
                         </a>
 
                     </td>
                     <td>
                         <a asp-area="HR" asp-controller="Vaction" asp-action="addvaction" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
-@*                           
- *@                            addvaction
+@*
+                                                 NewVaction
                         </a>
-                        <a asp-area="HR" class="btn btn-danger" asp-controller="Vaction" asp-action="Editebyempid" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
-@*                           
- *@                            Vactiongert
+                        <a asp-area="HR" class="btn btn-primary" asp-controller="Vaction" asp-action="Editebyempid" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+@*
+                                                  EditeVaction
                         </a>
 
 
 
-                        <a asp-area="HR" class="btn btn-danger" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-EmplyeeName="@patient.UserName" asp-route-employeeid="@patient.Id" data-action="edit">
+                        <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-EmplyeeName="@patient.UserName" asp-route-employeeid="@patient.Id" data-action="edit">
                            ADDShifts
                         </a>
-                        <a asp-area="HR" class="btn btn-danger" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Gtbyemployeeid" asp-route-employeeid="@patient.Id" data-action="edit">
+                        <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Gtbyemployeeid" asp-route-employeeid="@patient.Id" data-action="edit">
                        ShowAllshifts
                         </a>
 
@@ -230,5 +230,253 @@
     });
 
     // Initial call to populate search results
+@*  @*    updateSearchResults();
+</script>  *@
+
+
+
+
+
+
+
+
+@model PagedList.IPagedList<HR.ViewModel.EmployeeVM>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "All Patients";
+}
+
+<h2>@ViewData["Title"]</h2>
+<partial name="_AlertMessage" model="Model" />
+
+<!-- Add the search input form -->
+<form id="search-form" method="get" action="@Url.Action("Index")">
+    <input type="text" name="search" value="@ViewBag.Search" placeholder="Search..." id="search-input">
+</form>
+
+<li class="nav-item">
+    <a class="nav-link text-dark accordion-button" id="register" asp-area="Identity" asp-page="/Account/Register">New Employee</a>
+</li>
+
+<div class="card">
+    <div class="card-body">
+        <div id="search-results">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>UserName</th>
+                        <th>Email</th>
+                        <th>JobTitle</th>
+                        <td>Action</td>
+                        <td>Action</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody id="patientTableBody">
+                    @foreach (var patient in Model)
+                    {
+                        <tr class="patient">
+                            <td>@patient.UserName</td>
+                            <td>@patient.Email</td>
+                            <td>@patient.Adress</td>
+                            <td>@patient.JobTitle</td>
+                            <td>@patient.HirangDate</td>
+                            <td>
+                                <a asp-controller="Employee" class="btn btn-danger" asp-action="Details" asp-route-id="@patient.Id">
+                                    Details
+                                </a>
+                                <a asp-controller="Employee" class="btn btn-danger" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
+                                    Edit
+                                </a>
+                                <a asp-controller="Employee" class="btn btn-danger" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
+                                    Delete
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="EditGetbyemployeeonetrataction" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                                    EditsalaryTraraction
+                                </a>
+                                <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="Addtrantionforemplyee" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                                    AddsalaryTraraction
+                                </a>
+                                <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="GEtAllemplyStranstion" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                                    GEttranstion
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-area="HR" asp-controller="Vaction" asp-action="addvaction" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                                    New Vaction
+                                </a>
+                                <a asp-area="HR" class="btn btn-primary" asp-controller="Vaction" asp-action="Editebyempid" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                                    Edite Vaction
+                                </a>
+                                <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-EmplyeeName="@patient.UserName" asp-route-employeeid="@patient.Id" data-action="edit">
+                                    ADD Shifts
+                                </a>
+                                <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Gtbyemployeeid" asp-route-employeeid="@patient.Id" data-action="edit">
+                                    Show All Shifts
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<partial name="_PaginationPartial" model="Model" />
+
+<!-- JavaScript to handle search input -->
+<script>
+    // Get the search input element
+    const searchInput = document.getElementById('search-input');
+
+    // Get the patient rows
+    const patientRows = document.querySelectorAll('.patient');
+
+    // Function to update the search results
+    function updateSearchResults() {
+        const searchText = searchInput.value.toLowerCase();
+
+        patientRows.forEach(patientRow => {
+            const patientText = patientRow.textContent.toLowerCase();
+            if (patientText.includes(searchText)) {
+                patientRow.style.display = 'table-row';
+            } else {
+                patientRow.style.display = 'none';
+            }
+        });
+    }
+
+    // Add an event listener to the search input to listen for input changes
+    searchInput.addEventListener('input', function () {
+        updateSearchResults();
+    });
+
+    // Initial call to populate search results
+    updateSearchResults();
+@* </script>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @model PagedList.IPagedList<HR.ViewModel.EmployeeVM>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "All Employees";
+}
+
+<h2>@ViewData["Title"]</h2>
+<partial name="_AlertMessage" model="Model" />
+
+<!-- Add the search input form -->
+<form id="search-form" method="get" action="@Url.Action("Index")">
+    <input type="text" name="search" value="@ViewBag.Search" placeholder="Search..." id="search-input">
+</form>
+
+<li class="nav-item">
+    <a class="btn btn-primary" id="register" asp-area="Identity" asp-page="/Account/Register">New Employee</a>
+</li>
+
+<div class="row">
+    @foreach (var employee in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">@employee.UserName</h5>
+                    <p class="card-text">Email: @employee.Email</p>
+                    <p class="card-text">Job Title: @employee.JobTitle</p>
+                </div>
+                <div class="card-footer">
+                    <a asp-area="HR" asp-controller="Vaction" asp-action="addvaction" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">
+                        New Vaction
+                    </a>
+                    <a asp-area="HR" class="btn btn-primary" asp-controller="Vaction" asp-action="Editebyempid" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">
+                        Edite Vaction
+                    </a>
+                    <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-EmplyeeName="@employee.UserName" asp-route-employeeid="@employee.Id" data-action="edit">
+                        ADD Shifts
+                    </a>
+                    <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Gtbyemployeeid" asp-route-employeeid="@employee.Id" data-action="edit">
+                        Show All Shifts
+                    </a>
+                    <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="EditGetbyemployeeonetrataction" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">
+                        EditsalaryTraraction
+                    </a>
+                    <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="Addtrantionforemplyee" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">
+                        AddsalaryTraraction
+                    </a>
+                    <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="GEtAllemplyStranstion" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">
+                        GEttranstion
+                    </a>
+                    <a asp-controller="Employee" class="btn btn-danger" asp-action="Details" asp-route-id="@employee.Id">
+                        Details
+                    </a>
+                    <a asp-controller="Employee" class="btn btn-danger" asp-action="Save" asp-route-id="@employee.Id" data-action="edit">
+                        Edit
+                    </a>
+                    <a asp-controller="Employee" class="btn btn-danger" asp-action="Delete" asp-route-id="@employee.Id" data-action="delete">
+                        Delete
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    }
+</div>
+
+<partial name="_PaginationPartial" model="Model" />
+
+<!-- JavaScript to handle search input -->
+<script>
+    // Get the search input element
+    const searchInput = document.getElementById('search-input');
+
+    // Get the employee cards
+    const employeeCards = document.querySelectorAll('.card');
+
+    // Function to update the search results
+    function updateSearchResults() {
+        const searchText = searchInput.value.toLowerCase();
+
+        employeeCards.forEach(employeeCard => {
+            const employeeText = employeeCard.textContent.toLowerCase();
+            if (employeeText.includes(searchText)) {
+                employeeCard.style.display = 'block';
+            } else {
+                employeeCard.style.display = 'none';
+            }
+        });
+    }
+
+    // Add an event listener to the search input to listen for input changes
+    searchInput.addEventListener('input', function () {
+        updateSearchResults();
+    });
+
+    // Initial call to populate search results
     updateSearchResults();
 </script>
+ *@
