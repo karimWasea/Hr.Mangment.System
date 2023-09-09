@@ -166,22 +166,22 @@ namespace ReprestoryServess
               _user.Users. Where(p=>p.IsDeleted != IsDeleted.Deleted). Select(ApplicationUser => new EmployeeVM
             {
 
-                Id = ApplicationUser.Id,
+                //Id = ApplicationUser.Id,
                 UserName = ApplicationUser.UserName,
 
-                Email = ApplicationUser.Email,
-                Gender = ApplicationUser.Gender,
-                Adress = ApplicationUser.Adress,
-                BirthDate = ApplicationUser.BirthDate,
-                PhoneNumber = ApplicationUser.PhoneNumber,
-                imgPath = ApplicationUser.ImgUrl,
-                //Bouns = ApplicationUser.Bouns,
-                JobTitle = ApplicationUser.JobTitle,
-                HirangDate = ApplicationUser.HirangDate,
-                ContructPath = ApplicationUser.ContructUrl,
-                Salary = ApplicationUser.Salary,
-                IsDeleted = ApplicationUser.IsDeleted,
-            }).ToList();
+                  Email = ApplicationUser.Email,
+                  //Gender = ApplicationUser.Gender,
+                  //Adress = ApplicationUser.Adress,
+                  //BirthDate = ApplicationUser.BirthDate,
+                  //PhoneNumber = ApplicationUser.PhoneNumber,
+                  //imgPath = ApplicationUser.ImgUrl,
+                  //Bouns = ApplicationUser.Bouns,
+                  //JobTitle = ApplicationUser.JobTitle,
+                  //HirangDate = ApplicationUser.HirangDate,
+                  //ContructPath = ApplicationUser.ContructUrl,
+                  //Salary = ApplicationUser.Salary,
+                  //IsDeleted = ApplicationUser.IsDeleted,
+              }).ToList();
             return model;
         }
 

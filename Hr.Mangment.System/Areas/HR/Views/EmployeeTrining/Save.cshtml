@@ -131,8 +131,8 @@
 
 
                 <div class="form-group">
-                    <label asp-for="Triningid" class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="Triningid" asp-items="Model.DisplayTrining"
+                    <label asp-for="selectTriningids" class="form-label mt-4"></label>
+                    <select class="form-select" asp-for="selectTriningids" asp-items="Model.DisplayTrining"
                             data-placeholder="Select Shifts" multiple="multiple">
 
                         @*
@@ -144,7 +144,7 @@
                         *@@* multiple="multiple" *@>
                         <option value=""></option>
                     </select>
-                    <span asp-validation-for="Triningid" class="text-danger"></span>
+                    <span asp-validation-for="selectTriningids" class="text-danger"></span>
                 </div>
 
                 <button type="submit" id="savedata" class="btn btn-primary">Update</button>

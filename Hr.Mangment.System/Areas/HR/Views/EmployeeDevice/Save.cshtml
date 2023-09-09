@@ -131,8 +131,8 @@
 
 
                 <div class="form-group">
-                    <label asp-for="Deviceid" class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="Deviceid" asp-items="Model.DisplayDeviceid"
+                    <label asp-for="selectDeviceids" class="form-label mt-4"></label>
+                    <select class="form-select" asp-for="selectDeviceids" asp-items="Model.DisplayDeviceid"
                             data-placeholder="Select Shifts" multiple="multiple">
 
                         @*
@@ -144,7 +144,8 @@
                         *@@* multiple="multiple" *@>
                         <option value=""></option>
                     </select>
-                    <span asp-validation-for="Deviceid" class="text-danger"></span>
+                    <span asp-validation-for="selectDeviceids
+" class="text-danger"></span>
                 </div>
 
                 <button type="submit" id="savedata" class="btn btn-primary">Update</button>
