@@ -257,17 +257,14 @@ namespace DataAcess.layes.Migrations
                     b.Property<int>("IsDeleted")
                         .HasColumnType("int");
 
-                    b.Property<int>("TimeShiftId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkScheduleCurentWeekDayId")
+                    b.Property<int?>("TimeShiftId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("WorkScheduleCurentWeekDayId");
+                    b.HasIndex("TimeShiftId");
 
                     b.ToTable("EmployeeWorkScheduleCurentWeekDay");
                 });
@@ -610,9 +607,7 @@ namespace DataAcess.layes.Migrations
 
                     b.HasOne("DataAcess.layes.WorkScheduleCurentWeekDay", "WorkScheduleCurentWeekDay")
                         .WithMany("EmployeeWorkScheduleCurentWeekDay")
-                        .HasForeignKey("WorkScheduleCurentWeekDayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TimeShiftId");
 
                     b.Navigation("Employee");
 

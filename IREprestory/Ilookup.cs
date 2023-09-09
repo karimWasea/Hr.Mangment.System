@@ -4,6 +4,8 @@ namespace IREprestory
 {
     public interface Ilookup
     {
+        IQueryable<SelectListItem> Selectallshiofts();
+
         IQueryable<SelectListItem> EmployeeAll();
         IQueryable<SelectListItem> DepartmitAll();
         public List<SelectListItem> GEnder();

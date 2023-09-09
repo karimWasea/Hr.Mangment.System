@@ -94,7 +94,12 @@ namespace ReprestoryServess
             IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Users.Select(x => new SelectListItem { Value = x.Id, Text = x.UserName }).OrderBy(c => c.Text).AsNoTracking();
             return applicationuser;
         }
-       
+        public IQueryable<SelectListItem> Selectallshiofts()
+        {
+
+            IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.workScheduleCurentWeeks.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DisplayShift });
+            return applicationuser;
+        }
         public IQueryable<SelectListItem> DepartmitAll()
         {
             IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Departments.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DepartmentName }).OrderBy(c => c.Text).AsNoTracking();

@@ -21,7 +21,8 @@ namespace ReprestoryServess
         public readonly ApplicationDBcontext  _context;
 
         public UnitOfWork(
-ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsss shiftServsess , VactionServsess vactionServsess , TriningServsess triningServsess , DeviceServsess deviceServsess , WorkScheduleCurentWeekDayServsess workScheduleCurentWeekDayServsess
+ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsss shiftServsess , VactionServsess vactionServsess , TriningServsess triningServsess , DeviceServsess deviceServsess , WorkScheduleCurentWeekDayServsess workScheduleCurentWeekDayServsess , EmployeeWorkScheduleCurentWeekDayServsess  employeeWorkScheduleCurentWeekDayServsess
+
         )
 
         { Trining = triningServsess
@@ -34,7 +35,9 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
             Employee = employeeServsss;
             _context = context;
                  workScheduleCurentWeekDay = workScheduleCurentWeekDayServsess;
-           
+            employeeWorkScheduleCurentWeek = employeeWorkScheduleCurentWeekDayServsess;
+
+
         }
 
         #region Implement the Dispose method to release resources
@@ -49,6 +52,7 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
         public ITrining Trining { get; }
         public IDevice Device { get; }
         public IWorkScheduleCurentWeekDay workScheduleCurentWeekDay { get; }
+        public IEmployeeWorkScheduleCurentWeekDay employeeWorkScheduleCurentWeek { get; }
 
         protected virtual void Dispose(bool disposing)
         {

@@ -14,11 +14,15 @@ namespace HR.ViewModel
         public IsDeleted IsDeleted { get; set; }
 
 
+         
+         public EmployeeWorkScheduleCurentWeekDay EmployeeWorkScheduleCurentWeekDay { get; set; }   
+
 
 
         [Required(ErrorMessage = "EmployeeId is required")]
         public string EmployeeId { get; set; }
         public int  Shiftid { get; set; }
+        public List<int> selectShiftids { get; set; }
         public string EmployeeName { get; set; }
 
 
@@ -37,12 +41,12 @@ namespace HR.ViewModel
         {
             var dept = new EmployeeWorkScheduleCurentWeekDay{
   EmployeeId    = entity.EmployeeId,
-    TimeShiftId = entity.Shiftid,
         Id = entity.Id,
-IsDeleted= entity.isDeleted,                
-            
-            
-            
+IsDeleted= entity.isDeleted,
+
+                TimeShiftId =
+                entity.Shiftid,
+
             };
 
 

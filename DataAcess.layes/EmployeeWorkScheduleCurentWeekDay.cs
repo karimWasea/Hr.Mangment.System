@@ -1,4 +1,6 @@
-﻿using SystemEnums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+using SystemEnums;
 
 namespace DataAcess.layes
 {
@@ -9,7 +11,10 @@ namespace DataAcess.layes
         public string? EmployeeId { get; set; }
         public Applicaionuser Employee { get; set; }
 
-        public int TimeShiftId { get; set; }
+        [ForeignKey("WorkScheduleCurentWeekDay")]
+        public int? TimeShiftId { get; set; }
         public WorkScheduleCurentWeekDay WorkScheduleCurentWeekDay { get; set; }
+
+
     }
 }

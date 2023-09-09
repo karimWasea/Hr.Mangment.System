@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAcess.layes.Migrations
 {
     [DbContext(typeof(ApplicationDBcontext))]
-    [Migration("20230904132525_kdddjk")]
-    partial class kdddjk
+    [Migration("20230909131042_fg")]
+    partial class fg
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,6 +158,9 @@ namespace DataAcess.layes.Migrations
                     b.Property<string>("DeviceName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Devices");
@@ -228,6 +231,9 @@ namespace DataAcess.layes.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
@@ -240,6 +246,32 @@ namespace DataAcess.layes.Migrations
                     b.ToTable("EmployeeTrainings");
                 });
 
+            modelBuilder.Entity("DataAcess.layes.EmployeeWorkScheduleCurentWeekDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("EmployeeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TimeShiftId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("TimeShiftId");
+
+                    b.ToTable("EmployeeWorkScheduleCurentWeekDay");
+                });
+
             modelBuilder.Entity("DataAcess.layes.SalaryTransaction", b =>
                 {
                     b.Property<int>("Id")
@@ -248,10 +280,11 @@ namespace DataAcess.layes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double?>("Amount")
+                    b.Property<double>("Amount")
                         .HasColumnType("float");
 
                     b.Property<string>("EmployeeId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("IsDeleted")
@@ -260,7 +293,7 @@ namespace DataAcess.layes.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("TransactionDate")
+                    b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("transactionTyp")
@@ -284,16 +317,16 @@ namespace DataAcess.layes.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<TimeSpan?>("EndingTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime?>("EndingTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("HoursPershift")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan?>("StartingTime")
-                        .HasColumnType("time");
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("dateTime")
+                    b.Property<DateTime?>("StartingTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("shiftStuTework")
@@ -313,6 +346,9 @@ namespace DataAcess.layes.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
 
                     b.Property<string>("TrainingName")
                         .HasColumnType("nvarchar(max)");
@@ -337,6 +373,9 @@ namespace DataAcess.layes.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -355,22 +394,23 @@ namespace DataAcess.layes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("DayName")
                         .HasColumnType("int");
 
-                    b.Property<string>("EmployeeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("shiftStuTework")
+                    b.Property<int>("IsDeleted")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<string>("ShiftName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("EmployeeId");
+                    b.Property<DateTime>("TimeEndshifts")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TimestartShift")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
 
                     b.ToTable("workScheduleCurentWeeks");
                 });
@@ -562,11 +602,28 @@ namespace DataAcess.layes.Migrations
                     b.Navigation("Training");
                 });
 
+            modelBuilder.Entity("DataAcess.layes.EmployeeWorkScheduleCurentWeekDay", b =>
+                {
+                    b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
+                        .WithMany("EmployeeWorkScheduleCurentWeekDay")
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("DataAcess.layes.WorkScheduleCurentWeekDay", "WorkScheduleCurentWeekDay")
+                        .WithMany("EmployeeWorkScheduleCurentWeekDay")
+                        .HasForeignKey("TimeShiftId");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("WorkScheduleCurentWeekDay");
+                });
+
             modelBuilder.Entity("DataAcess.layes.SalaryTransaction", b =>
                 {
                     b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Employee");
                 });
@@ -584,17 +641,6 @@ namespace DataAcess.layes.Migrations
                 {
                     b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
                         .WithMany("Vacations")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("DataAcess.layes.WorkScheduleCurentWeekDay", b =>
-                {
-                    b.HasOne("DataAcess.layes.Applicaionuser", "Employee")
-                        .WithMany("WorkScheduleCurentWeekDay")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -661,11 +707,11 @@ namespace DataAcess.layes.Migrations
 
                     b.Navigation("EmployeeTrainings");
 
+                    b.Navigation("EmployeeWorkScheduleCurentWeekDay");
+
                     b.Navigation("TimeShifts");
 
                     b.Navigation("Vacations");
-
-                    b.Navigation("WorkScheduleCurentWeekDay");
                 });
 
             modelBuilder.Entity("DataAcess.layes.Department", b =>
@@ -681,6 +727,11 @@ namespace DataAcess.layes.Migrations
             modelBuilder.Entity("DataAcess.layes.Training", b =>
                 {
                     b.Navigation("EmployeeTrainings");
+                });
+
+            modelBuilder.Entity("DataAcess.layes.WorkScheduleCurentWeekDay", b =>
+                {
+                    b.Navigation("EmployeeWorkScheduleCurentWeekDay");
                 });
 #pragma warning restore 612, 618
         }

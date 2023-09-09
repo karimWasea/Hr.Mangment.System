@@ -43,6 +43,7 @@ builder.Services.AddTransient<VactionServsess>();
 builder.Services.AddTransient<TriningServsess>();
 builder.Services.AddTransient<DeviceServsess>();
 builder.Services.AddTransient<WorkScheduleCurentWeekDayServsess>();
+builder.Services.AddTransient<EmployeeWorkScheduleCurentWeekDayServsess>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

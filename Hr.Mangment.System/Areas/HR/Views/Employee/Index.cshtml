@@ -127,11 +127,9 @@
             <tr>
                 <th>UserName</th>
                 <th>Email</th>
-                <th>Adress</th>
              
              
                 <th>JobTitle</th>
-                <th>HirangDate</th>
              
                 <td>Action</td> 
                 
@@ -152,36 +150,47 @@
                     <td>@patient.HirangDate</td>
             
                     <td>
-                        <a asp-controller="Employee" asp-action="Details" asp-route-id="@patient.Id">
-                            <i class="fas fa-info-circle" title="Details"></i>Details
+                        <a asp-controller="Employee" class="btn btn-danger" asp-action="Details" asp-route-id="@patient.Id">
+                            Details
                         </a>
-                        <a asp-controller="Employee" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
-                            <i class="fas fa-edit" title="Edit"></i>Edit
+                        <a asp-controller="Employee" class="btn btn-danger" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
+                           Edit
                         </a>
-                      
 
-                        <a asp-controller="Employee" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
-                            <i class="fas fa-trash-alt" title="Delete"></i>Delete
+
+                        <a asp-controller="Employee" class="btn btn-danger" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
+                          Delete
                         </a>
                     </td>
                     <td>
-                        <a asp-area="HR" asp-controller="SalaryTransaction" asp-action="EditGetbyemployeeonetrataction" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
-                            <i class="fas fa-edit" title="Edit"></i>EditGetbyemployeeonetrataction
+                        <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="EditGetbyemployeeonetrataction" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                          EditGetbyemployeeonetrataction
                         </a>
-                        <a asp-area="HR" asp-controller="SalaryTransaction" asp-action="Addtrantionforemplyee" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
-                            <i class="fas fa-edit" title="Edit"></i>Addtrantionforemplyee
+                        <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="Addtrantionforemplyee" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                          Addtrantionforemplyee
                         </a>
-                        <a asp-area="HR" asp-controller="SalaryTransaction" asp-action="GEtAllemplyStranstion" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
-                            <i class="fas fa-edit" title="Edit"></i>GEtAllemplyStranstion
+                        <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="GEtAllemplyStranstion" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+                          GEtAllemplyStranstion
                         </a>
 
                     </td>
                     <td>
                         <a asp-area="HR" asp-controller="Vaction" asp-action="addvaction" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
-                            <i class="fas fa-edit" title="Edit"></i>addvaction
+@*                           
+ *@                            addvaction
                         </a>
-                        <a asp-area="HR" asp-controller="Vaction" asp-action="Editebyempid" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
-                            <i class="fas fa-edit" title="Edit"></i>Editebyempid
+                        <a asp-area="HR" class="btn btn-danger" asp-controller="Vaction" asp-action="Editebyempid" asp-route-EmplyeeName="@patient.UserName" asp-route-id="@patient.Id" data-action="edit">
+@*                           
+ *@                            Vactiongert
+                        </a>
+
+
+
+                        <a asp-area="HR" class="btn btn-danger" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-EmplyeeName="@patient.UserName" asp-route-employeeid="@patient.Id" data-action="edit">
+                           ADDShifts
+                        </a>
+                        <a asp-area="HR" class="btn btn-danger" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Gtbyemployeeid" asp-route-employeeid="@patient.Id" data-action="edit">
+                       ShowAllshifts
                         </a>
 
                    

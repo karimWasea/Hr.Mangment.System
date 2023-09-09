@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAcess.layes.Migrations
 {
     /// <inheritdoc />
-    public partial class _1g : Migration
+    public partial class fg : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,6 +31,7 @@ namespace DataAcess.layes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false),
                     DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ManagerId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -45,7 +46,8 @@ namespace DataAcess.layes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DeviceName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    DeviceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,11 +60,29 @@ namespace DataAcess.layes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false),
                     TrainingName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Trainings", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "workScheduleCurentWeeks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false),
+                    DayName = table.Column<int>(type: "int", nullable: false),
+                    ShiftName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TimestartShift = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimeEndshifts = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_workScheduleCurentWeeks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,7 +117,7 @@ namespace DataAcess.layes.Migrations
                     Salary = table.Column<double>(type: "float", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: true),
                     Bouns = table.Column<double>(type: "float", nullable: true),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContructUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -124,8 +144,7 @@ namespace DataAcess.layes.Migrations
                         name: "FK_AspNetUsers_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -219,6 +238,7 @@ namespace DataAcess.layes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DeviceId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -239,20 +259,21 @@ namespace DataAcess.layes.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeeHistory",
+                name: "EmployeeHistories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TotalSalary = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    MamthName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Month = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeHistory", x => x.Id);
+                    table.PrimaryKey("PK_EmployeeHistories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeHistory_AspNetUsers_EmployeeId",
+                        name: "FK_EmployeeHistories_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -265,6 +286,7 @@ namespace DataAcess.layes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     TrainingId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -285,16 +307,42 @@ namespace DataAcess.layes.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmployeeWorkScheduleCurentWeekDay",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    TimeShiftId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeeWorkScheduleCurentWeekDay", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EmployeeWorkScheduleCurentWeekDay_AspNetUsers_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_EmployeeWorkScheduleCurentWeekDay_workScheduleCurentWeeks_TimeShiftId",
+                        column: x => x.TimeShiftId,
+                        principalTable: "workScheduleCurentWeeks",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SalaryTransactions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    transactionTyp = table.Column<int>(type: "int", nullable: false)
+                    Amount = table.Column<double>(type: "float", nullable: false),
+                    transactionTyp = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -303,7 +351,8 @@ namespace DataAcess.layes.Migrations
                         name: "FK_SalaryTransactions_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -312,12 +361,12 @@ namespace DataAcess.layes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false),
                     HoursPershift = table.Column<int>(type: "int", nullable: true),
                     shiftStuTework = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    StartingTime = table.Column<TimeSpan>(type: "time", nullable: true),
-                    EndingTime = table.Column<TimeSpan>(type: "time", nullable: true),
-                    dateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    StartingTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EndingTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -335,6 +384,7 @@ namespace DataAcess.layes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false)
@@ -344,28 +394,6 @@ namespace DataAcess.layes.Migrations
                     table.PrimaryKey("PK_Vacations", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Vacations_AspNetUsers_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "workScheduleCurentWeeks",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DayName = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    shiftStuTework = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_workScheduleCurentWeeks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_workScheduleCurentWeeks_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -427,8 +455,8 @@ namespace DataAcess.layes.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeHistory_EmployeeId",
-                table: "EmployeeHistory",
+                name: "IX_EmployeeHistories_EmployeeId",
+                table: "EmployeeHistories",
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
@@ -440,6 +468,16 @@ namespace DataAcess.layes.Migrations
                 name: "IX_EmployeeTrainings_TrainingId",
                 table: "EmployeeTrainings",
                 column: "TrainingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeWorkScheduleCurentWeekDay_EmployeeId",
+                table: "EmployeeWorkScheduleCurentWeekDay",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeWorkScheduleCurentWeekDay_TimeShiftId",
+                table: "EmployeeWorkScheduleCurentWeekDay",
+                column: "TimeShiftId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalaryTransactions_EmployeeId",
@@ -454,11 +492,6 @@ namespace DataAcess.layes.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Vacations_EmployeeId",
                 table: "Vacations",
-                column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_workScheduleCurentWeeks_EmployeeId",
-                table: "workScheduleCurentWeeks",
                 column: "EmployeeId");
         }
 
@@ -484,10 +517,13 @@ namespace DataAcess.layes.Migrations
                 name: "EmployeeDevices");
 
             migrationBuilder.DropTable(
-                name: "EmployeeHistory");
+                name: "EmployeeHistories");
 
             migrationBuilder.DropTable(
                 name: "EmployeeTrainings");
+
+            migrationBuilder.DropTable(
+                name: "EmployeeWorkScheduleCurentWeekDay");
 
             migrationBuilder.DropTable(
                 name: "SalaryTransactions");
@@ -499,9 +535,6 @@ namespace DataAcess.layes.Migrations
                 name: "Vacations");
 
             migrationBuilder.DropTable(
-                name: "workScheduleCurentWeeks");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -509,6 +542,9 @@ namespace DataAcess.layes.Migrations
 
             migrationBuilder.DropTable(
                 name: "Trainings");
+
+            migrationBuilder.DropTable(
+                name: "workScheduleCurentWeeks");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
