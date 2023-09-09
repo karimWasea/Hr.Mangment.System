@@ -1,21 +1,5 @@
-﻿using DataAcess.layes;
-using HR.ViewModel;
+﻿
 
-using Intersoft.Crosslight.Mobile;
-
-using IREprestory;
-
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using SystemEnums;
 
 namespace ReprestoryServess
 {

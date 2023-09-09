@@ -17,6 +17,8 @@ namespace IREprestory
         ITimeShift timeShift { get; }
          ITrining Trining { get; }
          IDevice Device { get; }
+         IEmployeeDevice employeeDevice { get; }
+         IEmployeetrining employeetrining { get; }
         IEmployeeWorkScheduleCurentWeekDay  employeeWorkScheduleCurentWeek { get; }
     }
 

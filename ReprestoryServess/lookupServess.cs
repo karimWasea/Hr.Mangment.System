@@ -1,13 +1,4 @@
-﻿using DataAcess.layes;
-using IREprestory;
-using Microsoft.AspNetCore.Identity;
-
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-
-using System.ComponentModel;
-
-using SystemEnums;
+﻿
 
 namespace ReprestoryServess
 {
@@ -103,6 +94,17 @@ namespace ReprestoryServess
         public IQueryable<SelectListItem> DepartmitAll()
         {
             IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Departments.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DepartmentName }).OrderBy(c => c.Text).AsNoTracking();
+            return applicationuser;
+        }  
+        
+        
+        public IQueryable<SelectListItem> AllTrinng() 
+        {
+            IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Trainings.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.TrainingName }).OrderBy(c => c.Text).AsNoTracking();
+            return applicationuser;
+        }   public IQueryable<SelectListItem> AllDevicess()
+        {
+            IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Devices.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DeviceName }).OrderBy(c => c.Text).AsNoTracking();
             return applicationuser;
         }
     }

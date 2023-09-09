@@ -1,17 +1,4 @@
-﻿using DataAcess.layes;
-
-using HR.ViewModel;
-
-using IREprestory;
-
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using static System.Collections.Specialized.BitVector32;
+﻿
 
 namespace ReprestoryServess
 {
@@ -22,6 +9,7 @@ namespace ReprestoryServess
 
         public UnitOfWork(
 ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsss shiftServsess , VactionServsess vactionServsess , TriningServsess triningServsess , DeviceServsess deviceServsess , WorkScheduleCurentWeekDayServsess workScheduleCurentWeekDayServsess , EmployeeWorkScheduleCurentWeekDayServsess  employeeWorkScheduleCurentWeekDayServsess
+            , EmployeeDeviceServsess employeeDeviceServsess , EmployeeTriningServsess employeeTriningServsess
 
         )
 
@@ -36,6 +24,9 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
             _context = context;
                  workScheduleCurentWeekDay = workScheduleCurentWeekDayServsess;
             employeeWorkScheduleCurentWeek = employeeWorkScheduleCurentWeekDayServsess;
+            employeetrining = employeeTriningServsess;
+            employeeDevice = employeeDeviceServsess;
+
 
 
         }
@@ -53,6 +44,8 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
         public IDevice Device { get; }
         public IWorkScheduleCurentWeekDay workScheduleCurentWeekDay { get; }
         public IEmployeeWorkScheduleCurentWeekDay employeeWorkScheduleCurentWeek { get; }
+        public IEmployeeDevice employeeDevice { get; }
+        public IEmployeetrining employeetrining { get; }
 
         protected virtual void Dispose(bool disposing)
         {

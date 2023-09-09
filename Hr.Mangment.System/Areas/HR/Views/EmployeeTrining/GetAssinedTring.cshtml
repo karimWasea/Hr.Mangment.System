@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<HR.ViewModel.EmployeeWorkScheduleCurentWeekDayVm>
+﻿@model PagedList.IPagedList<HR.ViewModel.EmployeeTrininTVm>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
@@ -34,10 +34,10 @@
 
                     <td>
 
-                        <a asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
+                        <a asp-controller="EmployeeTrining" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
                             <i class="fas fa-edit" title="Edit"></i>Edit
                         </a>
-                        <a asp-area="HR" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
+                        <a asp-area="HR" asp-controller="EmployeeTrining" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
                             <i class="fas fa-trash-alt" title="Delete"></i>Delete
                         </a>
                     </td>
@@ -50,7 +50,7 @@
     </a>
 </div>
 
-          
+
 <partial name="_PaginationPartial" model="Model" />
 
 <!-- JavaScript to handle search input -->

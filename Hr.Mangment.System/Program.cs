@@ -44,6 +44,8 @@ builder.Services.AddTransient<TriningServsess>();
 builder.Services.AddTransient<DeviceServsess>();
 builder.Services.AddTransient<WorkScheduleCurentWeekDayServsess>();
 builder.Services.AddTransient<EmployeeWorkScheduleCurentWeekDayServsess>();
+builder.Services.AddTransient<EmployeeTriningServsess>();
+builder.Services.AddTransient<EmployeeDeviceServsess>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -100,10 +102,13 @@ app.MapControllerRoute(
       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 
-
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+       name: "patient",
+       pattern: "{area=HR}/{controller=Employee}/{action=Index}/{id?}");
+
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
 
