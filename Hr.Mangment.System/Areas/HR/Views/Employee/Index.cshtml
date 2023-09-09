@@ -230,7 +230,7 @@
                 });
 
                 // Initial call to populate search results
-                @*  @*    updateSearchResults();
+               @*    updateSearchResults();
                 </script>  *@
 
 
@@ -238,8 +238,8 @@
 
 
 
+@*
 
-                
                 @model PagedList.IPagedList<HR.ViewModel.EmployeeVM>
                 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -380,7 +380,9 @@
  
 
 
-    @*             
+    @*
+ *@
+
                 @model PagedList.IPagedList<HR.ViewModel.EmployeeVM>
                 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -407,8 +409,8 @@
                 <div class="row">
                 @foreach (var employee in Model)
                 {
-                <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="col-md-12">
+                <div class="card mb-12">
                 <div class="card-body">
                 <h5 class="card-title">@employee.UserName</h5>
                 <h6 class="card-subtitle mb-2 text-muted">@employee.Email</h6>
@@ -451,19 +453,19 @@
                 <br>
 
                 <div class="btn-group" role="group">
-                <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeDevice" asp-action="GetAllAssinedDevice" asp-route-employeeid="@employee.Id" data-action="edit">
+                        <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeDevice" asp-action="GetAllAssinedDevice" asp-route-EmplyeeName="@employee.UserName" asp-route-employeeid="@employee.Id" data-action="edit">
                 Show All Devicess
-                </a>         
+                </a>
 
-                <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeDevice" asp-action="Save" asp-route-employeeid="@employee.Id" data-action="edit">
+                        <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeDevice" asp-action="Save" asp-route-EmplyeeName="@employee.UserName" asp-route-employeeid="@employee.Id" data-action="edit">
                 ASSIndevices
                 </a>
-                <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeTrining" asp-action="GetAssinedTring" asp-route-employeeid="@employee.Id" data-action="edit">
+                        <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeTrining" asp-action="GetAssinedTring" asp-route-EmplyeeName="@employee.UserName" asp-route-employeeid="@employee.Id" data-action="edit">
                 Show All trining
                                
                   
                 </a>
-                <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeTrining" asp-action="Save" asp-route-employeeid="@employee.Id" data-action="edit">
+                        <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeTrining" asp-action="Save" asp-route-EmplyeeName="@employee.UserName" asp-route-employeeid="@employee.Id" data-action="edit">
                 ASSInd trining
                 </a>
                 </div>
@@ -504,8 +506,6 @@
                 // Initial call to populate search results
                 updateSearchResults();
                 </script>
-
- *@
 
 
 
