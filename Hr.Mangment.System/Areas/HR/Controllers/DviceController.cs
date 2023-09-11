@@ -69,7 +69,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
         // POST: EmployeeController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Save( Devicetvm emp1 )
         {
             if (ModelState.IsValid)

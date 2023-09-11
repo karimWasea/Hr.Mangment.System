@@ -11,13 +11,13 @@ namespace HR.ViewModel
     public class Devicetvm : BaseViewModel                                          
     {
         [Required]
-        public string? DeviceName { get; set; }
+        public string DeviceName { get; set; }
 
         public IEnumerable<SelectListItem> Mangers { get; set; } = Enumerable.Empty<SelectListItem>();
 
         public static Device CanconvertViewmodel(Devicetvm entity)
         {
-            var dept = new Device() {
+            var dept = new Device {
             DeviceName = entity.DeviceName,
              
 Id= entity.Id,                
