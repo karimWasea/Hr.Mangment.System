@@ -2,12 +2,15 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+using System.ComponentModel.DataAnnotations;
+
 using SystemEnums;
 
 namespace HR.ViewModel
 {
-    public class Devicetvm : BaseViewModel
+    public class Devicetvm : BaseViewModel                                          
     {
+        [Required]
         public string? DeviceName { get; set; }
 
         public IEnumerable<SelectListItem> Mangers { get; set; } = Enumerable.Empty<SelectListItem>();

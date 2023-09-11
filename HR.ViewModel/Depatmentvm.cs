@@ -21,7 +21,7 @@ namespace HR.ViewModel
 
         public static Department CanconvertViewmodel(Depatmentvm entity)
         {
-            var dept = new Department() {
+            var dept = new Department {
              DepartmentName = entity.DepartmentName,
              ManagerId = entity.ManagerId,
 Id= entity.Id,                

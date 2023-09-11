@@ -6,36 +6,29 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @model HR.ViewModel.Depatmentvm
+
+
 <partial name="_AlertMessage" model="Model" />
 <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1>Edit Employee</h1>
+            <h1>Edit Department</h1>
 
             <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
 
                 <div class="form-group">
-                    <label asp-for="DepartmentName">DepartmentName:</label>
+                    <label asp-for="DepartmentName">Department Name:</label>
                     <input asp-for="DepartmentName" class="form-control" />
+                    <span asp-validation-for="DepartmentName" class="text-danger"></span>
                 </div>
 
-               
-
                 <div class="form-group">
-                    <label asp-for="ManagerId" class="form-label mt-4"></label>
+                    <label asp-for="ManagerId" class="form-label mt-4">Manager:</label>
                     <select class="form-select" asp-for="ManagerId" asp-items="Model.Mangers"
-                            data-placeholder="Select devices">
-                            
-                            @* 
-                             this make Noseach   
-                            data-minimum-results-for-search="Infinity">
-
-                      //  this is make it multiuble select
-
-                        *@@* multiple="multiple" *@>
+                            data-placeholder="Select manager">
                         <option value=""></option>
                     </select>
                     <span asp-validation-for="ManagerId" class="text-danger"></span>
@@ -44,12 +37,13 @@
                 <button type="submit" id="savedata" class="btn btn-primary">Update</button>
             </form>
 
-            <a asp-controller="Depatment" asp-action="Index" class="btn btn-secondary mt-2">
+            <a asp-controller="Department" asp-action="Index" class="btn btn-secondary mt-2">
                 <i class="fas fa-chevron-circle-left"></i> Back to Index
             </a>
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/lib/select2/js/select2.min.js"></script>
@@ -66,14 +60,14 @@
 
                 Swal.fire({
                     title: "Are you sure?",
-                    text: "You are about to update the employee's information.",
+                    text: "You are about to update the department's information.",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonText: "Yes, update it!",
                     cancelButtonText: "No, cancel",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // You can also add additional form validation here
+                        // Submit the form if SweetAlert confirmation is accepted
                         saveForm.submit();
                     }
                 });
@@ -81,29 +75,6 @@
         });
     </script>
 
-
-    <style>
-        /* Custom CSS styles */
-        .container {
-            text-align: center;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        .btn-secondary {
-            margin-top: 10px;
-        }
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 }
-
-
-
-
-
-
-
-
-
-
