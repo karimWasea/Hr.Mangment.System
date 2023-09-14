@@ -26,7 +26,7 @@ namespace HR_Api.Controllers
         {
 
             // Assuming you have an IQueryable source of products (e.g., _unitOfWork.Product.GetAllAsQueryable())
-            IEnumerable<DepartmintDTO>? products = _unitofwork.Deparment.GetAll();
+            IEnumerable<DepartmintDTO>? products = _unitofwork.Deparment.Search(  );
 
             // Use the PaginationHelper to get paginated data
             var pagedProducts = _unitofwork.Deparment.GetPagedData(products, pageNumber);
@@ -88,11 +88,7 @@ namespace HR_Api.Controllers
         [HttpGet("search")]
         public IActionResult Search([FromQuery] string searchTerm)
         {
-            if (string.IsNullOrWhiteSpace(searchTerm))
-            {
-                return BadRequest("Search term cannot be empty.");
-            }
-
+          
          var departments=  _unitofwork.Deparment.Search(searchTerm);
 
             return Ok(departments);

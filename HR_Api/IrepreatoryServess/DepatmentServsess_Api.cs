@@ -6,6 +6,8 @@ using HR_Api.Irepreatory;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+using System.Runtime.InteropServices;
+
 namespace HR_Api.IrepreatoryServess
 {
     public class DepatmentServsess_Api : PaginationHelper<DepartmintDTO>, IDeparment_Api
@@ -66,19 +68,19 @@ namespace HR_Api.IrepreatoryServess
 
         }
 
-        public IEnumerable<DepartmintDTO> GetAll()
-        {
-            var model = _Context.Departments.Include(p => p.Employees).Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new DepartmintDTO
-            {
-                Id = p.Id,
-                Name = p.DepartmentName,
-                ManagerId = p.ManagerId,
-                mangerName = _user.Users.Where(m => m.Id == p.ManagerId).Select(p => p.UserName).FirstOrDefault(),
+        //public IEnumerable<DepartmintDTO> GetAll()
+        //{
+        //    var model = _Context.Departments.Include(p => p.Employees).Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new DepartmintDTO
+        //    {
+        //        Id = p.Id,
+        //        Name = p.DepartmentName,
+        //        ManagerId = p.ManagerId,
+        //        mangerName = _user.Users.Where(m => m.Id == p.ManagerId).Select(p => p.UserName).FirstOrDefault(),
 
-            }).ToList();
+        //    }).ToList();
 
-            return model;
-        }
+        //    return model;
+        //}
 
         public DepartmintDTO GetById(int id)
         {
@@ -93,10 +95,9 @@ namespace HR_Api.IrepreatoryServess
             }).FirstOrDefault();
         }
 
-        public IEnumerable<DepartmintDTO> Search(string searchTerm)
+        public IEnumerable<DepartmintDTO> Search(string searchTerm=default)
         {
-            if (string.IsNullOrWhiteSpace(searchTerm))
-            {
+            
                 return _Context.Departments
                 .Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted &&
                             (string.IsNullOrWhiteSpace(searchTerm) ||
@@ -113,8 +114,7 @@ namespace HR_Api.IrepreatoryServess
                         .FirstOrDefault(),
                 })
                 .ToList();
-            }
-            return null;
+      
         }
 
 
