@@ -8,7 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
+    <PackageReference Include="PagedList" Version="1.17.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataAcess.layes\DataAcess.layes.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Atrubutis\" />
+    <Folder Include="Sating\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿
+using System.ComponentModel;
 
-namespace SystemEnums
+namespace HR_Api.Utellites
 {
     public enum Gender
     {
@@ -27,7 +28,7 @@ namespace SystemEnums
         [Description("Deleted")]
 
         Deleted,
-
+      
     }
 
     public enum TransactionSalaryType
