@@ -99,14 +99,17 @@ namespace HR_Api.IrepreatoryServess
         {
             searchTerm = searchTerm?.Trim().ToLower(); // Convert searchTerm to lowercase
 
-            return _Context.Devices
+            return _Context.Vacations
                 .Where(p =>
                     string.IsNullOrWhiteSpace(searchTerm) || // Return all items if searchTerm is empty
-                    p.DeviceName.ToLower().Contains(searchTerm))
+                    p.Employee.UserName.ToLower().Contains(searchTerm))
                 .Select(p => new VacarionDTO
                 {
                     Id = p.Id,
-                    Name = p.DeviceName,
+                 EmployeeId= p.EmployeeId,
+                     EndDate= p.EndDate,
+                        StartDate = p.StartDate,    
+                            
                 })
                 .ToList();
         }
