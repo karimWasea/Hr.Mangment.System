@@ -102,14 +102,15 @@ namespace HR_Api.IrepreatoryServess
             return _Context.Vacations
                 .Where(p =>
                     string.IsNullOrWhiteSpace(searchTerm) || // Return all items if searchTerm is empty
-                    p.Employee.UserName.ToLower().Contains(searchTerm))
+                    p.EmployeeId.ToLower().Contains(searchTerm) || // Search by EmployeeId
+                    (p.StartDate != null && p.StartDate.ToString().ToLower().Contains(searchTerm)) || // Search by StartDate
+                    (p.EndDate != null && p.EndDate.ToString().ToLower().Contains(searchTerm))) // Search by EndDate
                 .Select(p => new VacarionDTO
                 {
                     Id = p.Id,
-                 EmployeeId= p.EmployeeId,
-                     EndDate= p.EndDate,
-                        StartDate = p.StartDate,    
-                            
+                    EmployeeId = p.EmployeeId,
+                    StartDate = p.StartDate,
+                    EndDate = p.EndDate
                 })
                 .ToList();
         }

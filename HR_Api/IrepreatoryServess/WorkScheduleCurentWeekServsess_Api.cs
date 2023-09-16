@@ -2,6 +2,7 @@
 
 using HR_Api.Dtos;
 using HR_Api.Irepreatory;
+using HR_Api.Utellites;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace HR_Api.IrepreatoryServess
 {
-    public class WorkScheduleCurentWeekServsess_Api: PaginationHelper<WorkScheduleCurentWeekDayDTO>, IDevice_Api
+    public class WorkScheduleCurentWeekServsess_Api: PaginationHelper<WorkScheduleCurentWeekDayDTO> , IWorkScheduleCurentWeekDay_Api
     {
         private readonly UserManager<Applicaionuser> _user;
 
@@ -21,16 +22,16 @@ namespace HR_Api.IrepreatoryServess
             _user = user;
             _Context = db;
         }
-        public DevicDTO Save(DevicDTO entity)
+        public WorkScheduleCurentWeekDayDTO Save(WorkScheduleCurentWeekDayDTO entity)
         {
 
 
-            var model = DevicDTO.ConvertTODTOToObj(entity);
+            var model = WorkScheduleCurentWeekDayDTO.ConvertTODTOToObj(entity);
 
             if (entity.Id > 0)
             { 
                  
-                _Context.Devices.Update(model);
+                _Context.workScheduleCurentWeeks.Update(model);
 
                 _Context.SaveChanges();
  return entity;
@@ -41,7 +42,7 @@ namespace HR_Api.IrepreatoryServess
             {
 
 
-                _Context.Devices.Add(model);
+                _Context.workScheduleCurentWeeks.Add(model);
 
                 _Context.SaveChanges();
                 return entity;
@@ -82,32 +83,40 @@ namespace HR_Api.IrepreatoryServess
         //    return model;
         //}
 
-        public DevicDTO GetById(int id)
+        public WorkScheduleCurentWeekDayDTO GetById(int id)
         {
-            return _Context.Devices.Include(p => p.EmployeeDevices).Where(p => p.Id == id && p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new DevicDTO
+            return _Context.workScheduleCurentWeeks.Include(p => p.EmployeeWorkScheduleCurentWeekDay).Where(p => p.Id == id && p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new  WorkScheduleCurentWeekDayDTO
             {
                 Id = p.Id,
-                Name = p.DeviceName,
+                DayNames = p.DayName,
+                  ShiftName = p.ShiftName,
+                    TimeEndshifts = p.TimeEndshifts,    
+                     TimestartShift = p.TimestartShift
 
 
             }).FirstOrDefault();
         }
 
-        public IEnumerable<DevicDTO> Search(string searchTerm = default)
+        public IEnumerable<WorkScheduleCurentWeekDayDTO> Search(string searchTerm = default)
         {
             searchTerm = searchTerm?.Trim().ToLower(); // Convert searchTerm to lowercase
 
-            return _Context.Devices
+            return _Context.workScheduleCurentWeeks
                 .Where(p =>
                     string.IsNullOrWhiteSpace(searchTerm) || // Return all items if searchTerm is empty
-                    p.DeviceName.ToLower().Contains(searchTerm))
-                .Select(p => new DevicDTO
+                    p.DayName.ToString().ToLower().Contains(searchTerm) || // Search by DayName
+                    p.ShiftName.ToLower().Contains(searchTerm)) // Search by ShiftName
+                .Select(p => new WorkScheduleCurentWeekDayDTO
                 {
                     Id = p.Id,
-                    Name = p.DeviceName,
+                    DayNames = p.DayName,
+                    ShiftName = p.ShiftName,
+                    TimestartShift = p.TimestartShift,
+                    TimeEndshifts = p.TimeEndshifts
                 })
                 .ToList();
         }
+
 
 
 

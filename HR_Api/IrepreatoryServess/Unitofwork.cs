@@ -11,11 +11,17 @@ namespace HR_Api.IrepreatoryServess
 
         public IDeparment_Api Deparment { get; }
         public IDevice_Api Device { get; }
+        public IWorkScheduleCurentWeekDay_Api WorkScheduleCurentWeekDay { get; }
+        public IVaction_Api Vaction { get; }
+        public ITrining_Api trining { get; }
 
-        public Unitofwork(DepatmentServsess_Api deparment , ApplicationDBcontext applicationDBcontext   , DeviceServsess_Api deviceServsess_Api ) {
+        public Unitofwork(DepatmentServsess_Api deparment , ApplicationDBcontext applicationDBcontext   , DeviceServsess_Api deviceServsess_Api  , VacationServsess_Api vacationServsess_Api , WorkScheduleCurentWeekServsess_Api workScheduleCurentWeekServsess_Api ,  trrningServsess_Api  trrningServsess_Api) {
             Device = deviceServsess_Api;
              _context = applicationDBcontext;
-            Deparment = deparment;  
+            Deparment = deparment; 
+             Vaction = vacationServsess_Api;
+             WorkScheduleCurentWeekDay = workScheduleCurentWeekServsess_Api;    
+             trining = trrningServsess_Api;
         }
         protected virtual void Dispose(bool disposing)
         {
