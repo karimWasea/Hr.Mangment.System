@@ -30,6 +30,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<Unitofwork>();
 builder.Services.AddScoped<DepatmentServsess_Api>();
+builder.Services.AddScoped<DeviceServsess_Api>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

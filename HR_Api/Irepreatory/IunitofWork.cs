@@ -4,5 +4,6 @@ namespace HR_Api.Irepreatory
 {
     public interface IunitofWork : IDisposable
     { IDeparment_Api Deparment { get; }
+         IDevice_Api Device { get; }    
     }
 }

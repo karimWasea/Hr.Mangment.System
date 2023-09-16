@@ -10,8 +10,10 @@ namespace HR_Api.IrepreatoryServess
         private bool disposed = false;
 
         public IDeparment_Api Deparment { get; }
+        public IDevice_Api Device { get; }
 
-        public Unitofwork(DepatmentServsess_Api deparment , ApplicationDBcontext applicationDBcontext   ) {
+        public Unitofwork(DepatmentServsess_Api deparment , ApplicationDBcontext applicationDBcontext   , DeviceServsess_Api deviceServsess_Api ) {
+            Device = deviceServsess_Api;
              _context = applicationDBcontext;
             Deparment = deparment;  
         }
