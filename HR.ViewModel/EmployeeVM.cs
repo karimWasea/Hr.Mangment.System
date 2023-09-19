@@ -48,7 +48,8 @@
         public double? Bouns { get; set; }
         public string? JobTitle { get; set; }
         public string? Adress { get; set; }
-        public IFormFile ContructUrl { get; set; }
+        public IFormFile ContructUrl { get; set; }         public IFormFile ImgUrl { get; set; }
+
         public string ContructPath { get; set; }
         public string? ManagerId { get; set; }
         public DateTime? BirthDate { get; set; }
