@@ -3,12 +3,12 @@ using System.ComponentModel;
 
 namespace HR_Api.Utellites
 {
-    public enum Gender
-    {
-        Male,
-        Female,
-        Other
-    }
+    //public enum Gender
+    //{
+    //    Male,
+    //    Female,
+    //    Other
+    //}
 
     public enum ShiftStuTework
     {

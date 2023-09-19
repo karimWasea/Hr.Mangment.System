@@ -5,6 +5,7 @@ using HR_Api.Utellites;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -36,8 +37,9 @@ builder.Services.AddScoped<VacationServsess_Api>();
 builder.Services.AddScoped<trrningServsess_Api>();
 builder.Services.AddTransient< HR_Api.Utellites
 .Imgoperation >();
-builder.Services.AddTransient<EmployeeServess>();
-builder.Services.AddSingleton(env => env.GetRequiredService<IWebHostEnvironment>());
+ builder.Services.AddScoped<EmployeeServess>();
+//builder.Services.AddSingleton(env => env.GetRequiredService<IWebHostEnvironment>());
+builder.Services.AddScoped<HostingEnvironment>();
 
 
 builder.Services.AddScoped<WorkScheduleCurentWeekServsess_Api>();
@@ -59,5 +61,15 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+try
+{
+    app.Run();
 
-app.Run();
+}
+catch ( Exception ex)
+{
+     Console.WriteLine(ex.ToString() );
+    app.Run();
+
+}
+
