@@ -1,6 +1,7 @@
 using DataAcess.layes;
 
 using HR_Api.IrepreatoryServess;
+using HR_Api.Utellites;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,12 @@ builder.Services.AddScoped<DepatmentServsess_Api>();
 builder.Services.AddScoped<DeviceServsess_Api>();
 builder.Services.AddScoped<VacationServsess_Api>();
 builder.Services.AddScoped<trrningServsess_Api>();
+builder.Services.AddTransient< HR_Api.Utellites
+.Imgoperation >();
+builder.Services.AddTransient<EmployeeServess>();
+builder.Services.AddSingleton(env => env.GetRequiredService<IWebHostEnvironment>());
+
+
 builder.Services.AddScoped<WorkScheduleCurentWeekServsess_Api>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

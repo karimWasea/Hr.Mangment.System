@@ -8,6 +8,7 @@ namespace HR_Api.Irepreatory
          IWorkScheduleCurentWeekDay_Api WorkScheduleCurentWeekDay { get; }
          IVaction_Api Vaction { get; }
          ITrining_Api trining { get; }
+         Iemployee_Api  Employee { get; }
           
     }
 }

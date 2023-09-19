@@ -14,14 +14,16 @@ namespace HR_Api.IrepreatoryServess
         public IWorkScheduleCurentWeekDay_Api WorkScheduleCurentWeekDay { get; }
         public IVaction_Api Vaction { get; }
         public ITrining_Api trining { get; }
+        public Iemployee_Api Employee { get; }
 
-        public Unitofwork(DepatmentServsess_Api deparment , ApplicationDBcontext applicationDBcontext   , DeviceServsess_Api deviceServsess_Api  , VacationServsess_Api vacationServsess_Api , WorkScheduleCurentWeekServsess_Api workScheduleCurentWeekServsess_Api ,  trrningServsess_Api  trrningServsess_Api) {
+        public Unitofwork(DepatmentServsess_Api deparment , ApplicationDBcontext applicationDBcontext   , DeviceServsess_Api deviceServsess_Api  , VacationServsess_Api vacationServsess_Api , WorkScheduleCurentWeekServsess_Api workScheduleCurentWeekServsess_Api ,  trrningServsess_Api  trrningServsess_Api , EmployeeServess employeeServess) {
             Device = deviceServsess_Api;
              _context = applicationDBcontext;
             Deparment = deparment; 
              Vaction = vacationServsess_Api;
              WorkScheduleCurentWeekDay = workScheduleCurentWeekServsess_Api;    
              trining = trrningServsess_Api;
+             Employee = employeeServess;
         }
         protected virtual void Dispose(bool disposing)
         {

@@ -1,10 +1,11 @@
 ﻿using DataAcess.layes;
-using HR.Utailites;
-
-using HR_Api.Dtos;
+using HR_Api.Utellites
+;
+    using HR_Api.Dtos;
 using HR_Api.Irepreatory;
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace HR_Api.IrepreatoryServess
 {
@@ -44,8 +45,8 @@ namespace HR_Api.IrepreatoryServess
 
         public async Task Save(EmployeeDTO entity)
         {
-            entity.imgPath = _Imgoperation.Uploadimg(entity.ImgUrl);
-            entity.ContructPath = _Imgoperation.Uploadimg(entity.ContructUrl);
+            entity.imgurl = _Imgoperation.Uploadimg(entity.imgurlform);
+            entity.contracturl = _Imgoperation.Uploadimg(entity.contractUrlform);
 
             //var model = EmployeeVM.CanconvertViewmodel(entity);
 
@@ -57,15 +58,20 @@ namespace HR_Api.IrepreatoryServess
                 if (existingUser != null)
                 {
                     // Update properties of existingUser
-                    existingUser.Salary = entity.Salary;
-                    existingUser.JobTitle = entity.Adress;
-                    existingUser.ContructUrl = entity.ContructPath;
+                     existingUser.Id = entity.Id;
+                     
+                    existingUser.Salary = (double?)entity.Salary;
+                    existingUser.JobTitle = entity.JobTitle;
+                    existingUser.ContructUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
                     existingUser.HirangDate = entity.HirangDate;
                     existingUser.Email = entity.Email;
-                    existingUser.Gender = entity.Gender;
-                    existingUser.ImgUrl = entity.imgPath;
+                    existingUser.Gender = (SystemEnums.Gender)entity.Gender;
+                    existingUser.ImgUrl = _Imgoperation.Uploadimg(entity.imgurlform);
                     existingUser.PhoneNumber = entity.PhoneNumber;
                     existingUser.PasswordHash = entity.PasswordHash;
+                    existingUser.HirangDate = entity.HirangDate;
+                    existingUser.Bouns = (double?)entity.Bouns;
+                    existingUser.BirthDate = entity.BirthDate;
                     existingUser.UserName = entity.UserName;
 
                     if (!string.IsNullOrEmpty(entity.PasswordHash)) // Check if the password is provided
@@ -82,25 +88,31 @@ namespace HR_Api.IrepreatoryServess
             }
             else
             {
-                var newUser = new Applicaionuser();
+                var existingUser = new Applicaionuser();
 
-                newUser.Salary = entity.Salary;
-                newUser.JobTitle = entity.Adress;
-                newUser.ContructUrl = entity.ContructPath;
-                newUser.HirangDate = entity.HirangDate;
-                newUser.Email = entity.Email;
-                newUser.Gender = entity.Gender;
-                newUser.ImgUrl = entity.imgPath;
-                newUser.PhoneNumber = entity.PhoneNumber;
+                existingUser.Id = entity.Id;
 
+                existingUser.Salary = (double?)entity.Salary;
+                existingUser.JobTitle = entity.JobTitle;
+                existingUser.ContructUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
+                existingUser.HirangDate = entity.HirangDate;
+                existingUser.Email = entity.Email;
+                existingUser.Gender = (SystemEnums.Gender)entity.Gender;
+                existingUser.ImgUrl = _Imgoperation.Uploadimg(entity.imgurlform);
+                existingUser.PhoneNumber = entity.PhoneNumber;
+                existingUser.PasswordHash = entity.PasswordHash;
+                existingUser.HirangDate = entity.HirangDate;
+                existingUser.Bouns = (double?)entity.Bouns;
+                existingUser.BirthDate = entity.BirthDate;
+                existingUser.UserName = entity.UserName;
                 if (!string.IsNullOrEmpty(entity.PasswordHash)) // Check if the password is provided
                 {
                     // Hash and set the password
                     var passwordHasher = new PasswordHasher<Applicaionuser>();
-                    newUser.PasswordHash = passwordHasher.HashPassword(newUser, entity.PasswordHash);
+                    existingUser.PasswordHash = passwordHasher.HashPassword(existingUser, entity.PasswordHash);
                 }
 
-                var createResult = await _user.CreateAsync(newUser, newUser.PasswordHash); // Use newUser.PasswordHash instead
+                var createResult = await _user.CreateAsync(existingUser, existingUser.PasswordHash); // Use newUser.PasswordHash instead
 
                 await _DBcontext.SaveChangesAsync();
             }
@@ -139,24 +151,23 @@ namespace HR_Api.IrepreatoryServess
         public async Task<EmployeeDTO> GetById(string id)
         {
             var model = await
-            _user.Users.Where(p => p.Id == id && p.IsDeleted == IsDeleted.NotDeleted).Select(ApplicationUser => new EmployeeVM
+            _user.Users.Where(p => p.Id == id ).Select(ApplicationUser => new EmployeeDTO
             {
 
                 Id = ApplicationUser.Id,
                 UserName = ApplicationUser.UserName,
 
                 Email = ApplicationUser.Email,
-                Gender = ApplicationUser.Gender,
-                Adress = ApplicationUser.Adress,
+                Gender = (Utellites.Gender)ApplicationUser.Gender,
+                Address = ApplicationUser.Adress,
                 BirthDate = ApplicationUser.BirthDate,
                 PhoneNumber = ApplicationUser.PhoneNumber,
-                imgPath = ApplicationUser.ImgUrl,
+                imgurl = ApplicationUser.ImgUrl,
                 //Bouns = ApplicationUser.Bouns,
                 JobTitle = ApplicationUser.JobTitle,
                 HirangDate = ApplicationUser.HirangDate,
-                ContructPath = ApplicationUser.ContructUrl,
-                Salary = ApplicationUser.Salary,
-                IsDeleted = ApplicationUser.IsDeleted,
+                contracturl = ApplicationUser.ContructUrl,
+                Salary = (decimal)ApplicationUser.Salary,
 
             }).FirstOrDefaultAsync();
             return model;
@@ -167,7 +178,7 @@ namespace HR_Api.IrepreatoryServess
         public IEnumerable<EmployeeDTO> GetAll()
         {
             var model =
-              _user.Users.Where(p => p.IsDeleted != IsDeleted.Deleted).Select(ApplicationUser => new EmployeeDTO
+              _user.Users.Select(ApplicationUser => new EmployeeDTO
               {
 
                   //Id = ApplicationUser.Id,
@@ -188,10 +199,21 @@ namespace HR_Api.IrepreatoryServess
               }).ToList();
             return model;
         }
-
-        public Task<IEnumerable<EmployeeDTO>> Search(string str = null)
+        public   async Task<IEnumerable<EmployeeDTO>> Search(string str = null)
         {
-            throw new NotImplementedException();
+            str = str?.Trim().ToLower(); // Convert searchTerm to lowercase
+
+            return await _user.Users
+                .Where(p =>
+                    string.IsNullOrWhiteSpace(str) || // Return all items if searchTerm is empty
+                    p.UserName.ToLower().Contains(str))
+                .Select(p => new EmployeeDTO
+                {
+                    Id = p.Id,
+                     UserName = p.UserName,
+                })
+                .ToListAsync();
         }
+      
     }
 }
