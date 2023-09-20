@@ -9,6 +9,7 @@ namespace HR_Api.Irepreatory
          IVaction_Api Vaction { get; }
          ITrining_Api trining { get; }
          Iemployee_Api  Employee { get; }
-          
+        IDeviceEmpoyee_Api deviceEmpoyee { get; }
+
     }
 }

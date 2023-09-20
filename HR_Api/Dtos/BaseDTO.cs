@@ -2,7 +2,8 @@
 namespace HR_Api.Dtos
 {
     public class BaseDTO
-    {  public int Id { get; set; }  
+    {
+        public int Id { get; set; }  
         public string Name { get; set; }
        //public   IsDeleted  isDeleted { get; set; }
     }
