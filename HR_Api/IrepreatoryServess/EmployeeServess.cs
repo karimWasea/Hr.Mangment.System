@@ -144,11 +144,11 @@ namespace HR_Api.IrepreatoryServess
                 BirthDate = ApplicationUser.BirthDate,
                 PhoneNumber = ApplicationUser.PhoneNumber,
                 ImgUrl = ApplicationUser.ImgUrl,
-                contractUrl = ApplicationUser.ImgUrl,
+                //contractUrl = ApplicationUser.ImgUrl,
                 Bouns = (decimal)ApplicationUser.Bouns,
                 JobTitle = ApplicationUser.JobTitle,
                 HirangDate = ApplicationUser.HirangDate,
-                contracturl = ApplicationUser.ContructUrl,
+                //contracturl = ApplicationUser.ContructUrl,
                 Salary = (decimal)ApplicationUser.Salary,
 
             }).FirstOrDefaultAsync();

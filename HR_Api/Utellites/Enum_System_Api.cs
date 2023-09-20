@@ -67,14 +67,14 @@ namespace HR_Api.Utellites
 
 
 
-    public enum TransactionSalaryType
-    {
-        None,      // Explicitly define a default value
-        Bonus,
-        Deduction,
-        debt,
-        Other
-    }
+    //public enum TransactionSalaryType
+    //{
+    //    None,      // Explicitly define a default value
+    //    Bonus,
+    //    Deduction,
+    //    debt,
+    //    Other
+    //}
 
     public static class EnumExtensions
     {

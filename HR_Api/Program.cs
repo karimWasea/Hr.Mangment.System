@@ -36,11 +36,13 @@ builder.Services.AddScoped <DeviceEmployyServsess_Api>();
 builder.Services.AddScoped<DeviceServsess_Api>();
 builder.Services.AddScoped<VacationServsess_Api>();
 builder.Services.AddScoped<trrningServsess_Api>();
+builder.Services.AddScoped<TransactionsalaryServess_Api>();
 builder.Services.AddTransient< HR_Api.Utellites
 .Imgoperation >();
  builder.Services.AddScoped<EmployeeServess>();
 //builder.Services.AddSingleton(env => env.GetRequiredService<IWebHostEnvironment>());
 builder.Services.AddScoped<HostingEnvironment>();
+builder.Services.AddScoped<SalaryclackServesses>();
 
 
 builder.Services.AddScoped<WorkScheduleCurentWeekServsess_Api>();

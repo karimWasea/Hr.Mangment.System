@@ -16,8 +16,9 @@ namespace HR_Api.IrepreatoryServess
         public ITrining_Api trining { get; }
         public Iemployee_Api Employee { get; }
         public IDeviceEmpoyee_Api deviceEmpoyee { get; }
+        public ISalarytransaction_Api salarytransaction_Api { get; }
 
-        public Unitofwork(DepatmentServsess_Api deparment , ApplicationDBcontext applicationDBcontext   , DeviceServsess_Api deviceServsess_Api  , VacationServsess_Api vacationServsess_Api , WorkScheduleCurentWeekServsess_Api workScheduleCurentWeekServsess_Api ,  trrningServsess_Api  trrningServsess_Api , EmployeeServess employeeServess , DeviceEmployyServsess_Api  deviceEmployyServsess_Api) {
+        public Unitofwork(DepatmentServsess_Api deparment , ApplicationDBcontext applicationDBcontext   , DeviceServsess_Api deviceServsess_Api  , VacationServsess_Api vacationServsess_Api , WorkScheduleCurentWeekServsess_Api workScheduleCurentWeekServsess_Api ,  trrningServsess_Api  trrningServsess_Api , EmployeeServess employeeServess , DeviceEmployyServsess_Api  deviceEmployyServsess_Api , TransactionsalaryServess_Api salaryclackServesses) {
             Device = deviceServsess_Api;
              _context = applicationDBcontext;
             Deparment = deparment; 
@@ -25,7 +26,8 @@ namespace HR_Api.IrepreatoryServess
              WorkScheduleCurentWeekDay = workScheduleCurentWeekServsess_Api;    
              trining = trrningServsess_Api;
              Employee = employeeServess;
-            deviceEmpoyee = deviceEmployyServsess_Api;  
+            deviceEmpoyee = deviceEmployyServsess_Api;
+            salarytransaction_Api = salaryclackServesses;
         }
         protected virtual void Dispose(bool disposing)
         {

@@ -10,6 +10,8 @@ namespace HR_Api.Irepreatory
          ITrining_Api trining { get; }
          Iemployee_Api  Employee { get; }
         IDeviceEmpoyee_Api deviceEmpoyee { get; }
+         ISalarytransaction_Api salarytransaction_Api { get; }
+
 
     }
 }
