@@ -61,28 +61,28 @@ namespace HR_Api.IrepreatoryServess
                     // Update properties of existingUser
                      existingUser.Id = entity.Id;
                      
-                    existingUser.Salary = (double?)entity.Salary;
-                    existingUser.JobTitle = entity.JobTitle;
-                    existingUser.ContructUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
-                    existingUser.HirangDate = entity.HirangDate;
+                    //existingUser.Salary = (double?)entity.Salary;
+                    //existingUser.JobTitle = entity.JobTitle;
+                    //existingUser.ContructUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
+                    //existingUser.HirangDate = entity.HirangDate;
                     existingUser.Email = entity.Email;
                     existingUser.Gender = 0;
 
-                    //existingUser.Gender = (SystemEnums.Gender)entity.Gender;
-                    existingUser.ImgUrl = _Imgoperation.Uploadimg(entity.imgurlform);
-                    existingUser.PhoneNumber = entity.PhoneNumber;
-                    existingUser.PasswordHash = entity.PasswordHash;
-                    existingUser.HirangDate = entity.HirangDate;
-                    existingUser.Bouns = (double?)entity.Bouns;
-                    existingUser.BirthDate = entity.BirthDate;
-                    existingUser.UserName = entity.UserName;
+                    ////existingUser.Gender = (SystemEnums.Gender)entity.Gender;
+                    //existingUser.ImgUrl = _Imgoperation.Uploadimg(entity.imgurlform);
+                    //existingUser.PhoneNumber = entity.PhoneNumber;
+                    //existingUser.PasswordHash = entity.PasswordHash;
+                    //existingUser.HirangDate = entity.HirangDate;
+                    //existingUser.Bouns = (double?)entity.Bouns;
+                    //existingUser.BirthDate = entity.BirthDate;
+                    //existingUser.UserName = entity.UserName;
 
-                    if (!string.IsNullOrEmpty(entity.PasswordHash)) // Check if the password is provided
-                    {
-                        // Hash and update the password
-                        var passwordHasher = new PasswordHasher<Applicaionuser>();
-                        existingUser.PasswordHash = passwordHasher.HashPassword(existingUser, entity.PasswordHash);
-                    }
+                    //if (!string.IsNullOrEmpty(entity.PasswordHash)) // Check if the password is provided
+                    //{
+                    //    // Hash and update the password
+                    //    var passwordHasher = new PasswordHasher<Applicaionuser>();
+                    //    existingUser.PasswordHash = passwordHasher.HashPassword(existingUser);
+                    //}
 
                     var updateResult = await _user.UpdateAsync(existingUser);
 
@@ -100,21 +100,23 @@ namespace HR_Api.IrepreatoryServess
                     PhoneNumberConfirmed = true
                 };
 
-                // Set other properties
-                newUser.Salary = (double?)entity.Salary;
-                newUser.JobTitle = entity.JobTitle;
-                newUser.ContructUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
-                newUser.HirangDate = entity.HirangDate;
-                newUser.Gender = 0;
-                newUser.Bouns = (double?)entity.Bouns;
-                newUser.BirthDate = entity.BirthDate;
+                //// Set other properties
+                //newUser.Salary = (double?)entity.Salary;
+                //newUser.JobTitle = entity.JobTitle;
+                //newUser.ContructUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
+                //newUser.HirangDate = entity.HirangDate;
+                //newUser.Gender = 0;
+                //newUser.Bouns = (double?)entity.Bouns;
+                //newUser.BirthDate = entity.BirthDate;
+                //_DBcontext.Add(newUser);
+                //_DBcontext.SaveChangesAsync();
 
-                var createResult = await _user.CreateAsync(newUser, entity.PasswordHash);
+                var createResult = await _user.CreateAsync(newUser);
 
-                if (createResult.Succeeded)
-                {
-                    // Optionally, add the user to roles or perform other actions here.
-                }
+                //              if (createResult.Succeeded)
+                //{
+                //    // Optionally, add the user to roles or perform other actions here.
+                //}
 
             }
         }
@@ -160,15 +162,15 @@ namespace HR_Api.IrepreatoryServess
 
                 Email = ApplicationUser.Email,
                 //Gender = ApplicationUser.Gender,
-                Address = ApplicationUser.Adress,
-                BirthDate = ApplicationUser.BirthDate,
-                PhoneNumber = ApplicationUser.PhoneNumber,
-                ImgUrl = ApplicationUser.ImgUrl,
-                Bouns = (decimal)ApplicationUser.Bouns,
-                JobTitle = ApplicationUser.JobTitle,
-                HirangDate = ApplicationUser.HirangDate,
-                contracturl = ApplicationUser.ContructUrl,
-                Salary = (decimal)ApplicationUser.Salary,
+                //Address = ApplicationUser.Adress,
+                //BirthDate = ApplicationUser.BirthDate,
+                //PhoneNumber = ApplicationUser.PhoneNumber,
+                //ImgUrl = ApplicationUser.ImgUrl,
+                //Bouns = (decimal)ApplicationUser.Bouns,
+                //JobTitle = ApplicationUser.JobTitle,
+                //HirangDate = ApplicationUser.HirangDate,
+                //contracturl = ApplicationUser.ContructUrl,
+                //Salary = (decimal)ApplicationUser.Salary,
 
             }).FirstOrDefaultAsync();
             return model;
