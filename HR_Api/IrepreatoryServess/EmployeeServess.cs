@@ -44,81 +44,59 @@ namespace HR_Api.IrepreatoryServess
 
         //}
 
-        public  async  Task Save(AplicatiouserDto entity)
-        {
-            //entity.ImgUrl = _Imgoperation.Uploadimg(entity.imgurlform);
-            //entity.contracturl = _Imgoperation.Uploadimg(entity.contractUrlform);
 
-            //var model = EmployeeVM.CanconvertViewmodel(entity);
+        public async Task Save(AplicatiouserDto entity)
+        {
+            var model = AplicatiouserDto.CanconvertViewmodel(entity);
 
             if (entity.Id != null)
             {
                 // Update existing entity
-                var existingUser =  await  _user.FindByIdAsync(entity.Id);
+                var existingUser = await _user.FindByIdAsync(entity.Id);
 
-                if (existingUser != null)
-                {
-                    // Update properties of existingUser
-                     existingUser.Id = entity.Id;
-                     
-                    //existingUser.Salary = (double?)entity.Salary;
-                    //existingUser.JobTitle = entity.JobTitle;
-                    //existingUser.ContructUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
-                    //existingUser.HirangDate = entity.HirangDate;
-                    existingUser.Email = entity.Email;
-                    existingUser.Gender = 0;
+                // Update properties of existingUser
+                existingUser.Salary = (double?)entity.Salary;
+                existingUser.JobTitle = entity.JobTitle; 
+                existingUser.HirangDate = entity.HirangDate;
+                existingUser.Email = entity.Email;
+                //existingUser.Gender = entity.Gender;
+                //existingUser.RoleRegeseter = entity.RoleRegeseter;
+     
 
-                    ////existingUser.Gender = (SystemEnums.Gender)entity.Gender;
-                    //existingUser.ImgUrl = _Imgoperation.Uploadimg(entity.imgurlform);
-                    //existingUser.PhoneNumber = entity.PhoneNumber;
-                    //existingUser.PasswordHash = entity.PasswordHash;
-                    //existingUser.HirangDate = entity.HirangDate;
-                    //existingUser.Bouns = (double?)entity.Bouns;
-                    //existingUser.BirthDate = entity.BirthDate;
-                    //existingUser.UserName = entity.UserName;
+                existingUser.PhoneNumber = entity.PhoneNumber;
 
-                    //if (!string.IsNullOrEmpty(entity.PasswordHash)) // Check if the password is provided
-                    //{
-                    //    // Hash and update the password
-                    //    var passwordHasher = new PasswordHasher<Applicaionuser>();
-                    //    existingUser.PasswordHash = passwordHasher.HashPassword(existingUser);
-                    //}
+                existingUser.Adress = entity.Address;
+                existingUser.UserName = entity.UserName;
 
-                    var updateResult = await _user.UpdateAsync(existingUser);
+                //if (entity.imgurlupdated == null)
 
-                    await _DBcontext.SaveChangesAsync();
-                }
+
+                //{
+                //    existingUser.imphgurl = _user.Users.Where(x => x.Id == entity.id).Select(e => e.imphgurl).FirstOrDefault();
+                //}
+                //else
+                //{
+
+                //    existingUser.imphgurl = _lookupServess.Uploadimg(entity.imgurlupdated);
+                //}
+
+
+
+                //existingUser.statusDoctorInSystem = entity.StatusDoctorInSystem;
+
+
+                var updateResult = await _user.UpdateAsync(existingUser);
+
+                await _DBcontext.SaveChangesAsync();
             }
             else
             {
-                var newUser = new Applicaionuser
-                {
-                    UserName = entity.UserName,
-                    Email = entity.Email,
-                    PhoneNumber = entity.PhoneNumber,
-                    EmailConfirmed = true, // You can set these to true if needed
-                    PhoneNumberConfirmed = true
-                };
 
-                //// Set other properties
-                //newUser.Salary = (double?)entity.Salary;
-                //newUser.JobTitle = entity.JobTitle;
-                //newUser.ContructUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
-                //newUser.HirangDate = entity.HirangDate;
-                //newUser.Gender = 0;
-                //newUser.Bouns = (double?)entity.Bouns;
-                //newUser.BirthDate = entity.BirthDate;
-                //_DBcontext.Add(newUser);
-                //_DBcontext.SaveChangesAsync();
+                var updateResult = await _user.CreateAsync(model);
 
-                var createResult = await _user.CreateAsync(newUser);
-
-                //              if (createResult.Succeeded)
-                //{
-                //    // Optionally, add the user to roles or perform other actions here.
-                //}
-
+                await _DBcontext.SaveChangesAsync();
             }
+
         }
 
 
@@ -127,21 +105,21 @@ namespace HR_Api.IrepreatoryServess
         public async Task<bool> Delete(string id)
         {
 
-            var user = await  _user.FindByIdAsync(id);
-            if (user != null)
-            {
-                var roles =  await _user.GetRolesAsync(user);
-                foreach (var role in roles)
-                {
-                      _user.RemoveFromRoleAsync(user, role);
-                }
-                var deleeteduser =   GetById(id);
-              
+            var user =    _user.Users.Where(i=>i.Id==id).FirstOrDefault();
+            //if (user != null)
+            //{
+            //    var roles =  await _user.GetRolesAsync(user);
+            //    foreach (var role in roles)
+            //    {
+            //          _user.RemoveFromRoleAsync(user, role);
+            //    }
+            //    var deleeteduser =   GetById(id);
 
+                _user.DeleteAsync(user);
 
-                //_DBcontext.SaveChanges();
+                _DBcontext.SaveChanges();
 
-            }
+            //}
             return true;
 
 

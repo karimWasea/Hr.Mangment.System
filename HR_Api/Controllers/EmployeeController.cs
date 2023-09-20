@@ -79,7 +79,7 @@ namespace HR_Api.Controllers
             return Ok(existingProduct);
         }
 
-        [HttpDelete("{id :alpha}")]
+        [HttpDelete("{id }")]
 
         public IActionResult DeleteEmployee(string id)
         {

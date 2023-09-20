@@ -23,16 +23,16 @@ namespace ReprestoryServess
 
         
 
-            if (entity.Id > 0)
-            {
+                if (entity.Id > 0)
+                {
                 _Context.EmployeeDevices.Update(model);
 
                 _Context.SaveChanges();
 
 
-            }
-            else
-            {
+                  }
+                else
+                 {
 
 
                 _Context.EmployeeDevices.Add(model);
@@ -40,7 +40,7 @@ namespace ReprestoryServess
                 _Context.SaveChanges();
 
 
-            }
+                  }
             }
         }
 

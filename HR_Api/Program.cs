@@ -32,6 +32,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<Unitofwork>();
 builder.Services.AddScoped<DepatmentServsess_Api>();
+builder.Services.AddScoped <DeviceEmployyServsess_Api>();
 builder.Services.AddScoped<DeviceServsess_Api>();
 builder.Services.AddScoped<VacationServsess_Api>();
 builder.Services.AddScoped<trrningServsess_Api>();
