@@ -14,7 +14,7 @@ namespace HR_Api.IrepreatoryServess
     {
         Imgoperation _Imgoperation;
         private ApplicationDBcontext _DBcontext;
-        private readonly UserManager<Applicaionuser> _user;
+        private   UserManager<Applicaionuser> _user;
 
 
 
@@ -91,33 +91,31 @@ namespace HR_Api.IrepreatoryServess
             }
             else
             {
-                var existingUser = new Applicaionuser();
-
-                existingUser.Id = entity.Id;
-
-                existingUser.Salary = (double?)entity.Salary;
-                existingUser.JobTitle = entity.JobTitle;
-                existingUser.ContructUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
-                existingUser.HirangDate = entity.HirangDate;
-                existingUser.Email = entity.Email;
-                existingUser.Gender = 0;
-                existingUser.ImgUrl = _Imgoperation.Uploadimg(entity.imgurlform);
-                existingUser.PhoneNumber = entity.PhoneNumber;
-                existingUser.PasswordHash = entity.PasswordHash;
-                existingUser.HirangDate = entity.HirangDate;
-                existingUser.Bouns = (double?)entity.Bouns;
-                existingUser.BirthDate = entity.BirthDate;
-                existingUser.UserName = entity.UserName;
-                if (!string.IsNullOrEmpty(entity.PasswordHash)) // Check if the password is provided
+                var newUser = new Applicaionuser
                 {
-                    // Hash and set the password
-                    var passwordHasher = new PasswordHasher<Applicaionuser>();
-                    existingUser.PasswordHash = passwordHasher.HashPassword(existingUser, entity.PasswordHash);
+                    UserName = entity.UserName,
+                    Email = entity.Email,
+                    PhoneNumber = entity.PhoneNumber,
+                    EmailConfirmed = true, // You can set these to true if needed
+                    PhoneNumberConfirmed = true
+                };
+
+                // Set other properties
+                newUser.Salary = (double?)entity.Salary;
+                newUser.JobTitle = entity.JobTitle;
+                newUser.ContructUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
+                newUser.HirangDate = entity.HirangDate;
+                newUser.Gender = 0;
+                newUser.Bouns = (double?)entity.Bouns;
+                newUser.BirthDate = entity.BirthDate;
+
+                var createResult = await _user.CreateAsync(newUser, entity.PasswordHash);
+
+                if (createResult.Succeeded)
+                {
+                    // Optionally, add the user to roles or perform other actions here.
                 }
 
-                var createResult = await _user.CreateAsync(existingUser, existingUser.PasswordHash); // Use newUser.PasswordHash instead
-
-                await _DBcontext.SaveChangesAsync();
             }
         }
 
@@ -166,7 +164,6 @@ namespace HR_Api.IrepreatoryServess
                 BirthDate = ApplicationUser.BirthDate,
                 PhoneNumber = ApplicationUser.PhoneNumber,
                 ImgUrl = ApplicationUser.ImgUrl,
-                contractUrl = ApplicationUser.ImgUrl,
                 Bouns = (decimal)ApplicationUser.Bouns,
                 JobTitle = ApplicationUser.JobTitle,
                 HirangDate = ApplicationUser.HirangDate,

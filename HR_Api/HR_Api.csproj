@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="Atrubutis\" />
     <Folder Include="Sating\" />
+    <Folder Include="WWWroot\Images\" />
   </ItemGroup>
 
 </Project>
