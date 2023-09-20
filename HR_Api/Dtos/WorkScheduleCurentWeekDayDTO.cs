@@ -15,12 +15,13 @@ namespace HR_Api.Dtos
         [JsonIgnore]
         public DayOfWeek DayNames { get; set; }
 
-      
+        public string Name { get; set; }
 
 
 
 
-    public string ShiftName { get; set; }
+
+        public string ShiftName { get; set; }
         public DateTime TimestartShift { get; set; }
         public DateTime TimeEndshifts { get; set; }
         public static WorkScheduleCurentWeekDay ConvertTODTOToObj(WorkScheduleCurentWeekDayDTO departmintDTO)

@@ -4,8 +4,10 @@ using System.Text.Json.Serialization;
 
 namespace HR_Api.Dtos
 {
-    public class EmployeedeviceDTO  
+    public class EmployeedeviceDTO
     {
+        public string Name { get; set; }
+
         public int Id { get; set; }
 
 

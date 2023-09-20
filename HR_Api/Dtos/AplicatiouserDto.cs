@@ -9,6 +9,7 @@ namespace HR_Api.Dtos;
 public class AplicatiouserDto
 {
     public string? Id { get; set; }
+    public string Name { get; set; }
 
     public DateTime? BirthDate { get; set; } = DateTime.Now;
     public string Address { get; set; }

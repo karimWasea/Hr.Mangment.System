@@ -50,7 +50,7 @@ namespace HR_Api.Controllers
 
             return Ok(product);
         }
-        [HttpGet("Getsalarytransactionemployee/{id}")]
+        [HttpGet("Getsalarytransactionemployee")]
         public ActionResult<SalaryTransactionTO> Getsalarytransactionemployee(string employeeid)
         {
 
@@ -100,14 +100,14 @@ namespace HR_Api.Controllers
         }
 
 
-        [HttpGet("search")]
-        public IActionResult Search([FromQuery] string searchTerm)
-        {
+        //[HttpGet("search")]
+        //public IActionResult Search([FromQuery] string searchTerm)
+        //{
           
-         var departments=  _unitofwork.salarytransaction_Api.Search(searchTerm);
+        // var departments=  _unitofwork.salarytransaction_Api.Search(searchTerm);
 
-            return Ok(departments);
-        }
+        //    return Ok(departments);
+        //}
     }
 
 

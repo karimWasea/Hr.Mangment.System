@@ -5,6 +5,8 @@ namespace HR_Api.Dtos
 {
     public class DepartmintDTO :BaseDTO
     {
+        public string Name { get; set; }
+
         public string?  ManagerId { get; set; }
         public string? mangerName { get; set; }
             public static  Department ConvertTODTOToObj(DepartmintDTO departmintDTO)

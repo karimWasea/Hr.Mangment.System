@@ -87,7 +87,7 @@ namespace HR_Api.IrepreatoryServess
             return _Context.Trainings.Where(p => p.Id == id && p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new TrainingDTO
             {
                 Id = p.Id,
-                Name = p.TrainingName,
+                TrainingName = p.TrainingName,
 
 
             }).FirstOrDefault();
@@ -104,7 +104,7 @@ namespace HR_Api.IrepreatoryServess
                 .Select(p => new TrainingDTO
                 {
                     Id = p.Id,
-                    Name = p.TrainingName,
+                    TrainingName = p.TrainingName,
                 })
                 .ToList();
         }

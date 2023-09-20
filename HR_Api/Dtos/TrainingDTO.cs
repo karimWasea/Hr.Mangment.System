@@ -5,6 +5,8 @@ namespace HR_Api.Dtos
 {
     public class TrainingDTO : BaseDTO
     {
+        public string Name { get; set; }
+
         public string? TrainingName { get; set; }
         public static Training ConvertTODTOToObj(TrainingDTO departmintDTO)
         {
@@ -12,7 +14,7 @@ namespace HR_Api.Dtos
             return  new Training
             {
 
-                TrainingName = departmintDTO.Name,
+                TrainingName = departmintDTO.TrainingName,
                Id = departmintDTO.Id
                  ,
 
