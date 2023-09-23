@@ -5,17 +5,17 @@ namespace HR_Api.Dtos
 {
     public class DevicDTO : BaseDTO
     {
-        public string Name { get; set; }
+        public   string Name { get; set; }
 
         public static Device ConvertTODTOToObj(DevicDTO departmintDTO)
         {
 
             return  new Device
-            { 
-            
-             DeviceName = departmintDTO.Name,
-             
-               Id = departmintDTO.Id
+            {
+
+                DeviceName = departmintDTO.Name,
+
+                Id = departmintDTO.Id
                  ,
 
             };   

@@ -11,6 +11,7 @@ namespace HR_Api.Irepreatory
          Iemployee_Api  Employee { get; }
         IDeviceEmpoyee_Api deviceEmpoyee { get; }
          ISalarytransaction_Api salarytransaction_Api { get; }
+        ITriningEmpoyee_Api TriningEmpoyee { get; }
 
 
     }

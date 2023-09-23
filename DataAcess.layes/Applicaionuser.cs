@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using apistudy.Models.Entityies;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 using System.ComponentModel.DataAnnotations.Schema;
@@ -40,6 +42,7 @@ namespace DataAcess.layes
         public ICollection<EmployeeTraining> EmployeeTrainings { get; set; }
         [JsonIgnore]
         public ICollection<Vacation> Vacations { get; set; }
+        public ICollection<RefreshToken> RefreshToken { get; set; }
 
     }
 }

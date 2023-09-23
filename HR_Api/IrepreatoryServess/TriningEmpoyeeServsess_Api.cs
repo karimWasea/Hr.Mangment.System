@@ -10,33 +10,33 @@ using System.Runtime.InteropServices;
 
 namespace HR_Api.IrepreatoryServess
 {
-    public class DeviceEmployyServsess_Api : PaginationHelper<EmployeedeviceDTO>, IDeviceEmpoyee_Api
+    public class TriningEmpoyeeServsess_Api : PaginationHelper<EmployeeTriningDTO>, ITriningEmpoyee_Api
     {
         private readonly UserManager<Applicaionuser> _user;
 
         private ApplicationDBcontext _Context;
-        public DeviceEmployyServsess_Api(ApplicationDBcontext db, UserManager<Applicaionuser> user)
+        public TriningEmpoyeeServsess_Api(ApplicationDBcontext db, UserManager<Applicaionuser> user)
         {
 
             _user = user;
             _Context = db;
         }
-        public EmployeedeviceDTO Save(EmployeedeviceDTO entity)
+        public EmployeeTriningDTO Save(EmployeeTriningDTO entity)
         {
 
 
 
-            foreach (var selectedid in entity.devicids)
+            foreach (var selectedid in entity.TrainiIngIds)
             {
-                entity.devicid = selectedid;
-                var model = EmployeedeviceDTO.CanconvertViewmodel(entity);
+                entity.TrainingId = selectedid;
+                var model = EmployeeTriningDTO.ConvertTODTOToObj(entity);
 
 
 
 
                 if (entity.Id > 0)
                 {
-                    _Context.EmployeeDevices.Update(model);
+                    _Context.EmployeeTrainings.Update(model);
 
    
              
@@ -46,7 +46,7 @@ namespace HR_Api.IrepreatoryServess
                 {
 
 
-                    _Context.EmployeeDevices.Add(model);
+                    _Context.EmployeeTrainings.Add(model);
 
          
              
@@ -70,71 +70,74 @@ namespace HR_Api.IrepreatoryServess
 
              
 
-            var deletedmodel = _Context.EmployeeDevices.Find(id);
-            _Context.EmployeeDevices.Remove(deletedmodel);
+            var deletedmodel = _Context.EmployeeTrainings.Find(id);
+            _Context.EmployeeTrainings.Remove(deletedmodel);
             _Context.SaveChanges();
             return true;
 
 
         }
 
-        public IEnumerable<EmployeedeviceDTO> GetAll()
+        public IEnumerable<EmployeeTriningDTO> GetAll()
         {
-            return _Context.EmployeeDevices.Include(p => p.Device).Include(p => p.Employee)
-                .Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted)
-                .Select(p => new EmployeedeviceDTO
+            return _Context. EmployeeTrainings.Include(p => p.Training).Include(p => p.Employee)
+                .Where(p=> p.IsDeleted == SystemEnums.IsDeleted.NotDeleted)
+                .Select(p => new EmployeeTriningDTO
                 {
                     Id = p.Id,
-                    Employeeid = p.EmployeeId,
-                    devicid = p.DeviceId,
-                    /* _Context.Devices.Where(i => i.Id == p.DeviceId).Select(i => i.Id).ToList()*/
+                    EmployeeId = p.EmployeeId,
+                     TrainingId =  p.TrainingId
+                    //_Context.Trainings.Where(i => i.Id == p.TrainingId).Select(i => i.Id).ToList()
                 })
                .ToList();
            
         }
 
-        public EmployeedeviceDTO GetById(int id)
+        public EmployeeTriningDTO GetById(int id)
         {
-            return _Context.EmployeeDevices.Include(p=>p.Device).Include(p=>p.Employee)
+            return _Context.EmployeeTrainings.Include(p=>p.Training).Include(p=>p.Employee)
                 .Where(p => p.Id == id )
-                .Select(p => new EmployeedeviceDTO
+                .Select(p => new EmployeeTriningDTO
                 {
                     Id = p.Id,
-                    Employeeid = p.EmployeeId,
-                    devicid = p.DeviceId,
+                    EmployeeId = p.EmployeeId,
+                    TrainingId = p.TrainingId
+                    //TrainiIngIds = _Context.Trainings.Where(i => i.Id == p.TrainingId).Select(i => i.Id).ToList()
                 })
                 .FirstOrDefault();
         }
 
 
-        public IEnumerable<EmployeedeviceDTO> Search(string searchTerm = default)
+        public IEnumerable< EmployeeTriningDTO> Search(string searchTerm = default)
         {
             searchTerm = searchTerm?.Trim().ToLower(); // Convert searchTerm to lowercase
 
-            return _Context.EmployeeDevices
+            return _Context.EmployeeTrainings
                 .Where(p =>
                     string.IsNullOrWhiteSpace(searchTerm) || // Return all items if searchTerm is empty
                     p.EmployeeId.ToLower().Contains(searchTerm))
-                .Select(p => new EmployeedeviceDTO
+                .Select(p => new EmployeeTriningDTO
                 {
                     Id = p.Id,
                 })
                 .ToList();
         }
-
-        public IEnumerable<EmployeedeviceDTO> Employeedevicess(string str = null)
+      
+        public IEnumerable<EmployeeTriningDTO> EmployeeTRining(string str = null)
         {
-            return _Context.EmployeeDevices.Include(p => p.Device).Include(p => p.Employee)
+            return _Context.EmployeeTrainings.Include(p => p.Training).Include(p => p.Employee)
                     .Where(p =>p.EmployeeId== str)
-                    .Select(p => new EmployeedeviceDTO
+                    .Select(p => new EmployeeTriningDTO
                     {
                         Id = p.Id,
-                        Employeeid = p.EmployeeId,
-                        devicid = p.DeviceId,
-
+                        EmployeeId = p.EmployeeId,
+                         TrainingId = p.TrainingId
+                        //TrainiIngIds = _Context.Trainings.Where(i => i.Id == p.TrainingId).Select(i => i.Id).ToList()
                     })
                    .ToList();
         }
+
+        
 
 
 

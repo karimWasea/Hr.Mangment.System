@@ -43,6 +43,7 @@ builder.Services.AddTransient< HR_Api.Utellites
 //builder.Services.AddSingleton(env => env.GetRequiredService<IWebHostEnvironment>());
 builder.Services.AddScoped<HostingEnvironment>();
 builder.Services.AddScoped<SalaryclackServesses>();
+builder.Services.AddScoped<TriningEmpoyeeServsess_Api>();
 
 
 builder.Services.AddScoped<WorkScheduleCurentWeekServsess_Api>();

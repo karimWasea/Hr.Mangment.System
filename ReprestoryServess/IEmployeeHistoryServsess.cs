@@ -114,50 +114,50 @@ namespace ReprestoryServess
 
 
 
-        public void CalcakSalary(string employeeid , decimal amount  ,DateTime Trantationdatime)
+//        public void CalcakSalary(string employeeid , decimal amount  ,DateTime Trantationdatime)
 
-        {
-            var histotyemployee = _Context.SalaryTransactions.Where(p =>
+//        {
+//            var histotyemployee = _Context.SalaryTransactions.Where(p =>
 
-p.EmployeeId == employeeid).FirstOrDefault();
-            var curntenmonthinhestorytable = _Context.EmployeeHistories.FirstOrDefault(i => i.EmployeeId == employeeid).Month;
-            var updetedhistory = _Context.EmployeeHistories.Where(p => p.EmployeeId == employeeid && p.Month == curntenmonthinhestorytable).FirstOrDefault();
+//p.EmployeeId == employeeid).FirstOrDefault();
+//            var curntenmonthinhestorytable = _Context.EmployeeHistories.FirstOrDefault(i => i.EmployeeId == employeeid).Month;
+//            var updetedhistory = _Context.EmployeeHistories.Where(p => p.EmployeeId == employeeid && p.Month == curntenmonthinhestorytable).FirstOrDefault();
 
-            Trantationdatime = DateTime.Now.Date.AddDays(1 - DateTime.Now.Day);
+//            Trantationdatime = DateTime.Now.Date.AddDays(1 - DateTime.Now.Day);
 
-            EmployeeHistory histoty = new EmployeeHistory();  
-            var totalsalary = _user.Users.Where(p => p.Id == employeeid)
+//            EmployeeHistory histoty = new EmployeeHistory();  
+//            var totalsalary = _user.Users.Where(p => p.Id == employeeid)
                 
-                .Select(p => p.Salary).FirstOrDefault();
+//                .Select(p => p.Salary).FirstOrDefault();
 
          
 
               
             
-            if(curntenmonthinhestorytable!= Trantationdatime)
-            {
+//            if(curntenmonthinhestorytable!= Trantationdatime)
+//            {
 
-                histoty.EmployeeId = employeeid;
-                histoty.Month = Trantationdatime;
-                if(histotyemployee.EmployeeId == employeeid && histotyemployee.transactionTyp != TransactionSalaryType.Bonus )
-                {
-                    histoty.TotalSalary = (decimal?)totalsalary - amount;
+//                histoty.EmployeeId = employeeid;
+//                histoty.Month = Trantationdatime;
+//                if(histotyemployee.EmployeeId == employeeid && histotyemployee.transactionTyp != TransactionSalaryType.Bonus )
+//                {
+//                    histoty.TotalSalary = (decimal?)totalsalary - amount;
 
-                }
-                else
-                {
-                    histoty.TotalSalary = (decimal?)totalsalary + amount;
+//                }
+//                else
+//                {
+//                    histoty.TotalSalary = (decimal?)totalsalary + amount;
 
-                }
-                _Context.EmployeeHistories.Add(histoty);
-                _Context.SaveChanges();
-            }
+//                }
+//                _Context.EmployeeHistories.Add(histoty);
+//                _Context.SaveChanges();
+//            }
 
-            else
-            {
-                DateTime today = DateTime.Today;
-                DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
-                DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+//            else
+//            {
+//                DateTime today = DateTime.Today;
+//                DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
+//                DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
 
 
 
@@ -166,33 +166,33 @@ p.EmployeeId == employeeid).FirstOrDefault();
                
 
 
-                if (histotyemployee.EmployeeId == employeeid && histotyemployee.transactionTyp == TransactionSalaryType.Bonus && Trantationdatime >= firstDayOfMonth &&
-           Trantationdatime <= lastDayOfMonth)
-                {
+//                if (histotyemployee.EmployeeId == employeeid && histotyemployee.transactionTyp == TransactionSalaryType.Bonus && Trantationdatime >= firstDayOfMonth &&
+//           Trantationdatime <= lastDayOfMonth)
+//                {
 
-                    updetedhistory.EmployeeId = employeeid;
-                    updetedhistory.Month = Trantationdatime;
-                    updetedhistory.TotalSalary -= (decimal?)totalsalary;
-                    _Context.EmployeeHistories.Update(updetedhistory);
-
-
-
-                }
-                else if (histotyemployee.EmployeeId == employeeid && histotyemployee.transactionTyp == TransactionSalaryType.debt || histotyemployee.transactionTyp == TransactionSalaryType.Deduction && histotyemployee.TransactionDate >= firstDayOfMonth &&
-            histotyemployee.TransactionDate <= lastDayOfMonth)
-                {
-                    updetedhistory.EmployeeId = employeeid;
-                    updetedhistory.Month = Trantationdatime;
-                    updetedhistory.TotalSalary -= (decimal?)totalsalary;
-                    _Context.EmployeeHistories.Update(updetedhistory);
-                }
+//                    updetedhistory.EmployeeId = employeeid;
+//                    updetedhistory.Month = Trantationdatime;
+//                    updetedhistory.TotalSalary -= (decimal?)totalsalary;
+//                    _Context.EmployeeHistories.Update(updetedhistory);
 
 
+
+//                }
+//                else if (histotyemployee.EmployeeId == employeeid && histotyemployee.transactionTyp == TransactionSalaryType.debt || histotyemployee.transactionTyp == TransactionSalaryType.Deduction && histotyemployee.TransactionDate >= firstDayOfMonth &&
+//            histotyemployee.TransactionDate <= lastDayOfMonth)
+//                {
+//                    updetedhistory.EmployeeId = employeeid;
+//                    updetedhistory.Month = Trantationdatime;
+//                    updetedhistory.TotalSalary -= (decimal?)totalsalary;
+//                    _Context.EmployeeHistories.Update(updetedhistory);
+//                }
 
 
 
 
-            }
+
+
+//            }
 
 
 
@@ -217,7 +217,7 @@ p.EmployeeId == employeeid).FirstOrDefault();
 
 
 
-        }
+        //}
 
 
 

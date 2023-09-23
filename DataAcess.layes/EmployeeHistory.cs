@@ -2,6 +2,8 @@
 
 namespace DataAcess.layes
 {
+
+    
     public class EmployeeHistory : BaseEntity
     {
 
