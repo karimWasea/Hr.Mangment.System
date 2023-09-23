@@ -4,12 +4,7 @@ namespace apistudy.Models.Entityies
 {
     public class RegisterModel
     {
-        [StringLength(100)]
-        public string FirstName { get; set; }
-
-        [StringLength(100)]
-        public string LastName { get; set; }
-
+       
         [StringLength(50)]
         public string Username { get; set; }
 
