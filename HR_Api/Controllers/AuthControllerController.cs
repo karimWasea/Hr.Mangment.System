@@ -39,7 +39,7 @@ namespace HR_Api.Controllers
         }
         #endregion
         #region
-        [HttpPost("token")]
+        [HttpPost("Token-Logen")]
         public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequestModel model)
         {
             var result = await _authService.GetTokenAsync(model);

@@ -1,4 +1,6 @@
-﻿using HR_Api.Dtos;
+﻿using apistudy.Models.Entityies;
+
+using HR_Api.Dtos;
 
 namespace HR_Api.Irepreatory
 {
@@ -13,7 +15,8 @@ namespace HR_Api.Irepreatory
         //Task<IEnumerable<EmployeeVM>> GetallconfirmedDoctor();
         Task<IEnumerable<AplicatiouserDto>> Search(string str = default);
 
-        Task Save(AplicatiouserDto entity);
+        Task<AuthModel> Creat(AplicatiouserDtoCreat entity);
+        Task<AuthModel> Update(AplicatiouserDto entity);
 
 
 
