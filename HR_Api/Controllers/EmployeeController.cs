@@ -24,7 +24,7 @@ namespace HR_Api.Controllers
             _unitofwork = unitofwork;
         }
         [HttpGet]
-        public async Task<ActionResult<IPagedList<AplicatiouserDto>>> GetPaginatedEmployee(int pageNumber = 1)
+        public async Task<ActionResult<IPagedList<AplicatiouserDtoUpdate>>> GetPaginatedEmployee(int pageNumber = 1)
         {
 
             // Assuming you have an IQueryable source of products (e.g., _unitOfWork.Product.GetAllAsQueryable())
@@ -37,7 +37,7 @@ namespace HR_Api.Controllers
         }
 
         [HttpGet("{id :alpha}")]
-        public async Task<ActionResult<AplicatiouserDto>> GetEmployeee(string id)
+        public async Task<ActionResult<AplicatiouserDtoUpdate>> GetEmployeee(string id)
         {
 
             var product = await _unitofwork.Employee.GetById(id);
@@ -53,8 +53,8 @@ namespace HR_Api.Controllers
             return Ok(product);
         }
 
-        [HttpPost ("CreateEmployee")]
-        public async Task<IActionResult> CreateEmployee([ FromBody] AplicatiouserDtoCreat productCreateDto )
+        [HttpPost]
+        public async Task<IActionResult> CreateEmployee([ FromForm] AplicatiouserCreatDto productCreateDto )
         {
 
 
@@ -71,7 +71,7 @@ namespace HR_Api.Controllers
 
         [HttpPut("CreateEmployee")]
 
-        public async Task<IActionResult> UpdateGetEmployee([FromBody] AplicatiouserDto updatedProductDto)
+        public async Task<IActionResult> UpdateGetEmployee([FromForm] AplicatiouserDtoUpdate updatedProductDto)
         {
 
 

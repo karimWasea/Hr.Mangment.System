@@ -67,14 +67,7 @@ namespace HR_Api.Controllers
             return Ok(model);
         }
 
-        [HttpGet("GetAllusers")]
-        public async Task<IActionResult> GetAllusers()
-        {
-            var users = _authService.GetAllusers();
-
-            return Ok(users);
-
-        }
+   
         [HttpGet("refreshToken")]
         public async Task<IActionResult> RefreshToken()
         {

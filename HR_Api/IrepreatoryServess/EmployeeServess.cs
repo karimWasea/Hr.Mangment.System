@@ -12,7 +12,7 @@ using System.Text;
 
 namespace HR_Api.IrepreatoryServess
 {
-    public class EmployeeServess : PaginationHelper<AplicatiouserDto>, Iemployee_Api
+    public class EmployeeServess : PaginationHelper<AplicatiouserDtoUpdate>, Iemployee_Api
     {
         Imgoperation _Imgoperation;
         private ApplicationDBcontext _DBcontext;
@@ -48,11 +48,11 @@ namespace HR_Api.IrepreatoryServess
 
 
 
-        public   Task<AplicatiouserDto> GetById(string id)
+        public   Task<AplicatiouserDtoUpdate> GetById(string id)
         {
             var model =
-          _userManager.Users.Where(p => p.Id == id ).Select(ApplicationUser => new AplicatiouserDto
-            {
+          _userManager.Users.Where(p => p.Id == id ).Select(ApplicationUser => new AplicatiouserDtoUpdate
+          {
               Id = ApplicationUser.Id,
               UserName = ApplicationUser.UserName,
 
@@ -75,11 +75,11 @@ namespace HR_Api.IrepreatoryServess
 
 
 
-        public IEnumerable<AplicatiouserDto> GetAll()
+        public IEnumerable<AplicatiouserDtoUpdate> GetAll()
         {
             var model =
-           _userManager.Users.Select(ApplicationUser => new AplicatiouserDto
-              {
+           _userManager.Users.Select(ApplicationUser => new AplicatiouserDtoUpdate
+           {
 
                   Id = ApplicationUser.Id,
                   UserName = ApplicationUser.UserName,
@@ -99,7 +99,7 @@ namespace HR_Api.IrepreatoryServess
            }).ToList();
             return model;
         }
-        public async Task<IEnumerable<AplicatiouserDto>> Search(string str = null)
+        public async Task<IEnumerable<AplicatiouserDtoUpdate>> Search(string str = null)
         {
             str = str?.Trim().ToLower(); // Convert searchTerm to lowercase
 
@@ -107,7 +107,7 @@ namespace HR_Api.IrepreatoryServess
                 .Where(p =>
                     string.IsNullOrWhiteSpace(str) || // Return all items if searchTerm is empty
                     p.UserName.ToLower().Contains(str))
-                .Select(p => new AplicatiouserDto
+                .Select(p => new AplicatiouserDtoUpdate
                 {
 
                     Id = p.Id,
@@ -150,10 +150,11 @@ namespace HR_Api.IrepreatoryServess
 
 
         }
-
-        public async Task<AuthModel> Creat(AplicatiouserDtoCreat entity)
+        public async Task<AuthModel> Creat(AplicatiouserCreatDto entity)
         {
-            var user = AplicatiouserDtoCreat.CanconvertViewmodel(entity);
+            entity.ImgUrl = _Imgoperation.Uploadimg(entity.imgurlform);
+            entity.contractUrl = _Imgoperation.Uploadimg(entity.contractUrlform);
+            var user = AplicatiouserCreatDto.CanconvertViewmodel(entity);
            
             var result = await _userManager.CreateAsync(user, entity.PasswordHash);
 
@@ -176,9 +177,10 @@ namespace HR_Api.IrepreatoryServess
             return new AuthModel { Message = "Addnew employee" };
         }
 
-                public async Task<AuthModel> Update(AplicatiouserDto aplicatiouserDto)
+                public async Task<AuthModel> Update(AplicatiouserDtoUpdate aplicatiouserDto)
         {
-
+            aplicatiouserDto.ImgUrl = _Imgoperation.Uploadimg(aplicatiouserDto.imgurlform);
+            aplicatiouserDto.contractUrl = _Imgoperation.Uploadimg(aplicatiouserDto.contractUrlform);
 
             var applicationUser =  await _userManager.FindByIdAsync(aplicatiouserDto.Id);
 
