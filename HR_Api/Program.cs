@@ -40,6 +40,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 
 builder.Services.AddScoped<Unitofwork>();
+builder.Services.AddScoped<IRoleServess>();
 builder.Services.AddScoped<DepatmentServsess_Api>();
 builder.Services.AddScoped <DeviceEmployyServsess_Api>();
 builder.Services.AddScoped<DeviceServsess_Api>();

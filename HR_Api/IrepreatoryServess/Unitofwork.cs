@@ -18,8 +18,9 @@ namespace HR_Api.IrepreatoryServess
         public IDeviceEmpoyee_Api deviceEmpoyee { get; }
         public ISalarytransaction_Api salarytransaction_Api { get; }
         public ITriningEmpoyee_Api TriningEmpoyee { get; }
+        public ISystemRole_Api systemRole_Api { get; }
 
-        public Unitofwork(DepatmentServsess_Api deparment , ApplicationDBcontext applicationDBcontext   , DeviceServsess_Api deviceServsess_Api  , VacationServsess_Api vacationServsess_Api , WorkScheduleCurentWeekServsess_Api workScheduleCurentWeekServsess_Api ,  trrningServsess_Api  trrningServsess_Api , EmployeeServess employeeServess , DeviceEmployyServsess_Api  deviceEmployyServsess_Api , TransactionsalaryServess_Api salaryclackServesses, TriningEmpoyeeServsess_Api triningEmpoyeeServsess_Api
+        public Unitofwork(DepatmentServsess_Api deparment , ApplicationDBcontext applicationDBcontext   , DeviceServsess_Api deviceServsess_Api  , VacationServsess_Api vacationServsess_Api , WorkScheduleCurentWeekServsess_Api workScheduleCurentWeekServsess_Api ,  trrningServsess_Api  trrningServsess_Api , EmployeeServess employeeServess , DeviceEmployyServsess_Api  deviceEmployyServsess_Api , TransactionsalaryServess_Api salaryclackServesses, TriningEmpoyeeServsess_Api triningEmpoyeeServsess_Api , IRoleServess roleServessy
    ) {
             Device = deviceServsess_Api;
              _context=  applicationDBcontext;
@@ -31,6 +32,7 @@ namespace HR_Api.IrepreatoryServess
             deviceEmpoyee = deviceEmployyServsess_Api;
             salarytransaction_Api = salaryclackServesses;
             TriningEmpoyee = triningEmpoyeeServsess_Api;
+            systemRole_Api = roleServessy;
         }
         protected virtual void Dispose(bool disposing)
         {

@@ -13,6 +13,6 @@ namespace HR_Api.Irepreatory
          ISalarytransaction_Api salarytransaction_Api { get; }
         ITriningEmpoyee_Api TriningEmpoyee { get; }
 
-
+        ISystemRole_Api systemRole_Api { get; }
     }
 }

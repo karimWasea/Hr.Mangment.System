@@ -87,13 +87,13 @@ namespace HR_Api.IrepreatoryServess
                   Email = ApplicationUser.Email,
                Gender = ApplicationUser.Gender,
                Address = ApplicationUser.Adress,
-               //BirthDate = ApplicationUser.BirthDate,
+               BirthDate = ApplicationUser.BirthDate,
                PhoneNumber = ApplicationUser.PhoneNumber,
-               //imgPath = ApplicationUser.ImgUrl,
+               ImgUrl = ApplicationUser.ImgUrl,
                //Bouns = ApplicationUser.Bouns,
                JobTitle = ApplicationUser.JobTitle,
                HirangDate = ApplicationUser.HirangDate,
-               //ContructPath = ApplicationUser.ContructUrl,
+               contractUrl = ApplicationUser.ContructUrl,
                Salary = (decimal)ApplicationUser.Salary,
                //IsDeleted = ApplicationUser.IsDeleted,
            }).ToList();
@@ -107,23 +107,23 @@ namespace HR_Api.IrepreatoryServess
                 .Where(p =>
                     string.IsNullOrWhiteSpace(str) || // Return all items if searchTerm is empty
                     p.UserName.ToLower().Contains(str))
-                .Select(p => new AplicatiouserDtoUpdate
+                .Select(ApplicationUser => new AplicatiouserDtoUpdate
                 {
 
-                    Id = p.Id,
-                    UserName = p.UserName,
+                    Id = ApplicationUser.Id,
+                    UserName = ApplicationUser.UserName,
 
-                    Email = p.Email,
-                    //Gender = ApplicationUser.Gender,
-                    Address = p.Adress,
-                    //BirthDate = ApplicationUser.BirthDate,
-                    PhoneNumber = p.PhoneNumber,
-                    //imgPath = ApplicationUser.ImgUrl,
+                    Email = ApplicationUser.Email,
+                    Gender = ApplicationUser.Gender,
+                    Address = ApplicationUser.Adress,
+                    BirthDate = ApplicationUser.BirthDate,
+                    PhoneNumber = ApplicationUser.PhoneNumber,
+                    ImgUrl = ApplicationUser.ImgUrl,
                     //Bouns = ApplicationUser.Bouns,
-                    JobTitle = p.JobTitle,
-                    HirangDate = p.HirangDate,
-                    //ContructPath = ApplicationUser.ContructUrl,
-                    Salary = (decimal)p.Salary,
+                    JobTitle = ApplicationUser.JobTitle,
+                    HirangDate = ApplicationUser.HirangDate,
+                    contractUrl = ApplicationUser.ContructUrl,
+                    Salary = (decimal)ApplicationUser.Salary,
                     //IsDeleted = ApplicationUser.IsDeleted,
                 })
                 .ToList();
