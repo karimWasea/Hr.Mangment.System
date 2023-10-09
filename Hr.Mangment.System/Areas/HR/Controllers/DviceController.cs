@@ -1,4 +1,6 @@
-﻿using DataAcess.layes;
+﻿  
+
+using DataAcess.layes;
 
 using HR.ViewModel;
 
@@ -11,14 +13,13 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
 
-    public class DviceController : Controller
+    public class DviceController : BaseController
     {
-        UnitOfWork _unitOfWork;
-        lookupServess _lookupServess;
-        public DviceController(UnitOfWork unitOfWork, lookupServess lookupServess)
+        
+
+        public DviceController(UnitOfWork unitOfWork, lookupServess lookupServess) : base(unitOfWork, lookupServess)    
         {
-            _unitOfWork = unitOfWork;
-            _lookupServess = lookupServess;
+           
         }
 
         public  IActionResult Index(int? page, string search)

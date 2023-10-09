@@ -63,14 +63,14 @@
 
                 <div class="form-group">
                     <label asp-for="Gender">Gender:</label>
-                    <select asp-for="Gender" class="form-control" asp-items="@ViewBag.GenderItems">
+                    <select asp-for="Gender" class="form-control" asp-items="@Model.listGender">
                         <option value="">Select Gender</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="deptmentid">Department:</label>
-                    <select asp-for="deptmentid" class="form-control" asp-items="@ViewBag.DepartmentItems">
+                    <select asp-for="deptmentid" class="form-control" asp-items="@Model.alldept">
                         <option value="">Select Department</option>
                     </select>
                 </div>

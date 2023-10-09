@@ -15,10 +15,10 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
     public class EmployeeController : BaseController
     {
-
+        EmployeeVM modelemp;
         public EmployeeController(UnitOfWork unitOfWork, lookupServess lookupServess) : base(unitOfWork, lookupServess)
         {
-
+            modelemp=new EmployeeVM();
         }
 
         public  IActionResult Index(int? page, string search)
@@ -61,11 +61,15 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             if (id !=null)
             {
                 var model = await _unitOfWork.Employee.GetById(id);
+                model.listGender = _lookupServess.GEnder();
+                model.alldept = _lookupServess.DepartmitAll();
                 return View(model);
             }
             else
             {
-                return View();
+                modelemp.listGender = _lookupServess.GEnder();
+                modelemp.alldept = _lookupServess.DepartmitAll();
+                return View(modelemp);
             }
            
         }

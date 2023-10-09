@@ -14,16 +14,16 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
 
-    public class VactionController : Controller
+    public class VactionController : BaseController
     {
-        UnitOfWork _unitOfWork;
-        lookupServess _lookupServess;
         UserManager<Applicaionuser> _userManager;
-        public VactionController(UnitOfWork unitOfWork, lookupServess lookupServess, UserManager<Applicaionuser> userManager )
+        public VactionController(UnitOfWork unitOfWork, lookupServess lookupServess, UserManager<Applicaionuser> userManager
+) : base(unitOfWork, lookupServess)
         {
             _userManager = userManager;
-            _unitOfWork = unitOfWork;
-            _lookupServess = lookupServess;
+
+
+
         }
 
         public  IActionResult Index(int? page, string search)

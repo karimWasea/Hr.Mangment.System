@@ -11,17 +11,17 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
 
-    public class TringingController : Controller
+    public class TringingController : BaseController
     {
-        UnitOfWork _unitOfWork;
-        lookupServess _lookupServess;
-        public TringingController(UnitOfWork unitOfWork, lookupServess lookupServess)
+        
+
+          public TringingController(UnitOfWork unitOfWork, lookupServess lookupServess) : base(unitOfWork, lookupServess)
         {
-            _unitOfWork = unitOfWork;
-            _lookupServess = lookupServess;
+
         }
 
-        public  IActionResult Index(int? page, string search)
+
+        public IActionResult Index(int? page, string search)
         {
             var model =  _unitOfWork.Trining.GetAll();
             int pageNumber = page ?? 1;

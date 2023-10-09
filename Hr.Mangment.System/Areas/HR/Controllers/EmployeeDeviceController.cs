@@ -18,10 +18,13 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
     {
         UnitOfWork _unitOfWork;
         lookupServess _lookupServess;
-        public EmployeeDeviceController(UnitOfWork unitOfWork, lookupServess lookupServess)
+        EmployeeDeviceVm vewodel;
+
+        public EmployeeDeviceController(UnitOfWork unitOfWork, lookupServess lookupServess, EmployeeDeviceVm vewodel)
         {
             _unitOfWork = unitOfWork;
             _lookupServess = lookupServess;
+            this.vewodel = vewodel;
         }
 
         public IActionResult Index(int? page, string search)
@@ -102,7 +105,6 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             }
             else
             {
-                var vewodel = new  EmployeeDeviceVm();
                 vewodel.DisplayDeviceid = _lookupServess.AllDevicess();
 
                 vewodel.EmployeeName = EmplyeeName;

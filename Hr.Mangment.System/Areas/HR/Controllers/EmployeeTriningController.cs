@@ -14,14 +14,11 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
 
-    public class EmployeeTriningController : Controller
+    public class EmployeeTriningController : BaseController
     {
-        UnitOfWork _unitOfWork;
-        lookupServess _lookupServess;
-        public EmployeeTriningController(UnitOfWork unitOfWork, lookupServess lookupServess)
+        public EmployeeTriningController(UnitOfWork unitOfWork, lookupServess lookupServess) : base(unitOfWork, lookupServess)
         {
-            _unitOfWork = unitOfWork;
-            _lookupServess = lookupServess;
+
         }
 
         public IActionResult Index(int? page, string search)

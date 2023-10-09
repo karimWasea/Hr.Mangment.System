@@ -13,17 +13,16 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
 
-    public class TimeShiftController : Controller
+    public class TimeShiftController : BaseController
     {
-        UnitOfWork _unitOfWork;
-        lookupServess _lookupServess;
-        public TimeShiftController(UnitOfWork unitOfWork, lookupServess lookupServess)
+       
+
+        public TimeShiftController(UnitOfWork unitOfWork, lookupServess lookupServess) : base(unitOfWork, lookupServess)
         {
-            _unitOfWork = unitOfWork;
-            _lookupServess = lookupServess;
+
         }
 
-        public  IActionResult Index(int? page, string search)
+        public IActionResult Index(int? page, string search)
         {
             var model =  _unitOfWork.timeShift.GetAll();
             int pageNumber = page ?? 1;

@@ -10,7 +10,12 @@ using SystemEnums;
 
 namespace DataAcess.layes
 {
-     public class Applicaionuser : IdentityUser
+    public class ApplicationRole : IdentityRole
+    {
+        public bool Rols { get; set; }
+        // other properties and methods
+    }
+    public class Applicaionuser : IdentityUser
     {
         public string? ImgUrl { get; set; }
     

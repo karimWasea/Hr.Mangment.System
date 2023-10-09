@@ -1,6 +1,7 @@
 using DataAcess.layes;
 
 using HR.Utailites;
+using HR.ViewModel;
 
 using IREprestory;
 
@@ -31,6 +32,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IEmailSender, Emailsender>();
 builder.Services.AddRazorPages();
 //builder.Services.AddScoped<UnitOfWork>();
+builder.Services.AddTransient<EmployeeDeviceVm>();
+builder.Services.AddTransient<RoleService>();
 builder.Services.AddTransient<Imgoperation>();
 builder.Services.AddTransient<UnitOfWork>();
 builder.Services.AddTransient<EmployeeServsss>();

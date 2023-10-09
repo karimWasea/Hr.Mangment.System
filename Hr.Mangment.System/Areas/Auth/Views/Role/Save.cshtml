@@ -1,0 +1,260 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Add/Editeols Rols";
+}
+
+
+@*
+@model hospitalVm.RoleVM
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2>Create Role</h2>
+*<form id="saveform"  >
+    <div class="form-group">
+        <label asp-for="Name"  class="control-label"></label>
+        <input asp-for="Name" id="name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="Id" class="form-control" id="Roleid"  />
+
+    <button type="button" onclick="SaveStudent()" id="savedata" class="btn btn-primary">Save</button>
+
+
+
+
+
+
+
+
+</form>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var saveForm = document.getElementById("saveform");
+        var saveButton = document.getElementById("savedata");
+
+        saveButton.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You are about to update the patient's information.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, update it!",
+                cancelButtonText: "No, cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // You can also add additional form validation here
+                    saveForm.submit();
+                }
+            });
+        });
+
+        // After form submission, show a success message if desired
+        var urlParams = new URLSearchParams(window.location.search);
+        var successParam = urlParams.get("success");
+        if (successParam === "true") {
+            Swal.fire({
+                title: "Success!",
+                text: "Patient's information has been updated.",
+                icon: "success"
+            });
+        }
+    });
+
+    function SaveStudent() {
+        var name = document.getElementById("name").value;
+        var roleid = document.getElementById("Roleid").value;
+
+        var data = {
+            Name: name,
+            Id: roleid
+        };
+
+        fetch('/Admin/Role/Save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.text())
+            .then(response => {
+                alert(` this ${name} is added`);
+            })
+            .catch(error => {
+                alert("An error occurred while sending data.");
+            });
+    }</script>*@
+ @*   
+@model hospitalVm.RoleVM
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Add/Edit Roles";
+}
+
+<form id="saveform">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" id="name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <input asp-for="Id" class="form-control" id="Roleid" />
+
+    <button type="button" onclick="SaveStudent()" id="savedata" class="btn btn-primary">Save</button>
+</form>
+
+<!-- Include SweetAlert2 library -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    var saveForm = document.getElementById("saveform");
+
+    saveForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You are about to update the patient's information.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, update it!",
+            cancelButtonText: "No, cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // You can also add additional form validation here
+                saveForm.submit();
+            }
+        });
+    });
+    function SaveStudent() {
+        var name = document.getElementById("name").value;
+        var roleid = document.getElementById("Roleid").value;
+
+        var data = {
+            Name: name,
+            Id: roleid
+        };
+
+        fetch('/Admin/Role/Save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.text())
+            .then(response => {
+                Swal.fire({
+                    title: "Success!",
+                    //text: response,
+                    icon: "success"
+                });
+                document.getElementById("saveform").reset(); // Reset the form after successful submission
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: "Error!",
+                    text: "An error occurred while sending data.",
+                    icon: "error"
+                });
+            });
+    }
+</script>
+*@
+@model hospitalVm.RoleVM
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Add/Edit Roles";
+}
+
+<form id="saveform">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"> Inter Role :</label>
+        <input asp-for="Name" id="name" class="form-control"style=" width:300px" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <input asp-for="Id" class="form-control" id="Roleid" type="hidden" />
+    <br/>
+    <div>
+        <button type="button" id="savedata" class="btn btn-primary">Save</button>
+
+        <a asp-controller="Role" asp-action="Index" class="btn btn-primary">
+            Back
+        </a>
+    </div>
+</form>
+
+
+
+
+<!-- Include SweetAlert2 library -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var saveButton = document.getElementById("savedata");
+
+        saveButton.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: "Are you sure?",
+                text:  "e are about to update the patient's information.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, update it!",
+                cancelButtonText: "No, cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Proceed with the AJAX submission
+                    SaveStudent();
+                }
+            });
+        });
+    });
+
+    function SaveStudent() {
+        var name = document.getElementById("name").value;
+        var roleid = document.getElementById("Roleid").value;
+
+        var data = {
+            Name: name,
+            Id: roleid
+        };
+
+        fetch('/Admin/Role/Save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.text())
+            .then(response => {
+                Swal.fire({
+                    title: "Success!",
+                    text: name,
+                    icon: "success"
+                });
+                document.getElementById("saveform").reset(); // Reset the form after successful submission
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: "Error!",
+                    text: "An error occurred while sending data.",
+                    icon: "error"
+                });
+            });
+    }
+</script>

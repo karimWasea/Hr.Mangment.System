@@ -5,6 +5,7 @@
     using Intersoft.Crosslight.Mobile;
 
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.Identity.Client;
 
     using System;
@@ -15,7 +16,7 @@
     public class EmployeeVM
     {
         public static Applicaionuser CanconvertViewmodel(EmployeeVM ApplicationUser)
-        {       
+        {
 
               
             return new Applicaionuser
@@ -40,6 +41,8 @@
         }
 
         public IsDeleted iDeleted { get; set; }
+        public IEnumerable<SelectListItem> listGender { get; set; } = Enumerable.Empty<SelectListItem>();
+        public IEnumerable<SelectListItem> alldept { get; set; } = Enumerable.Empty<SelectListItem>();
 
         public string Id { get; set; }
         public int deptmentid { get; set; }

@@ -10,6 +10,7 @@ namespace IREprestory
 
     { IWorkScheduleCurentWeekDay workScheduleCurentWeekDay {  get; }
         IVaction Vaction { get; }
+        IRoleS roleS { get; }
         IEmployeeHistory EmployeeHistory { get; }
         ISalaryTransaction SalaryTransaction { get; }   
         IDeparment Deparment {  get; }    

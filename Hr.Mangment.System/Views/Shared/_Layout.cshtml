@@ -55,7 +55,18 @@
                             </div>
                         </li>
 
- 
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Auth
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="doctorDropdown">
+                                <a class="dropdown-item" asp-area="Auth" asp-controller="Role" asp-action="Index">Role</a>
+                                <a class="dropdown-item" asp-area="Auth" asp-controller="Roles" asp-action="Index">RoleEmployee</a>
+                              
+
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

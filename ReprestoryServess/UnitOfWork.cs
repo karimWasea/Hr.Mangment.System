@@ -9,11 +9,15 @@ namespace ReprestoryServess
 
         public UnitOfWork(
 ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServsess DepatmentServsess, SalaryTransactionServsess salaryTransactionServsess , TimeShiftServsss shiftServsess , VactionServsess vactionServsess , TriningServsess triningServsess , DeviceServsess deviceServsess , WorkScheduleCurentWeekDayServsess workScheduleCurentWeekDayServsess , EmployeeWorkScheduleCurentWeekDayServsess  employeeWorkScheduleCurentWeekDayServsess
-            , EmployeeDeviceServsess employeeDeviceServsess , EmployeeTriningServsess employeeTriningServsess
+            , EmployeeDeviceServsess employeeDeviceServsess , EmployeeTriningServsess employeeTriningServsess , RoleService roleService
 
         )
 
-        { Trining = triningServsess
+        {
+            roleS = roleService;
+
+
+            Trining = triningServsess
                 ;
             Device = deviceServsess;
             Vaction = vactionServsess;
@@ -46,6 +50,7 @@ ApplicationDBcontext context ,EmployeeServsss employeeServsss , DepatmentServses
         public IEmployeeWorkScheduleCurentWeekDay employeeWorkScheduleCurentWeek { get; }
         public IEmployeeDevice employeeDevice { get; }
         public IEmployeetrining employeetrining { get; }
+        public IRoleS roleS { get; }
 
         protected virtual void Dispose(bool disposing)
         {

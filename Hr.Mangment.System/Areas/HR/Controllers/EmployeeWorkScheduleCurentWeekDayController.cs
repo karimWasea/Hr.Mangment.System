@@ -14,14 +14,11 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
 
-    public class EmployeeWorkScheduleCurentWeekDayController : Controller
+    public class EmployeeWorkScheduleCurentWeekDayController : BaseController
     {
-        UnitOfWork _unitOfWork;
-        lookupServess _lookupServess;
-        public EmployeeWorkScheduleCurentWeekDayController(UnitOfWork unitOfWork, lookupServess lookupServess)
+        public EmployeeWorkScheduleCurentWeekDayController(UnitOfWork unitOfWork, lookupServess lookupServess) : base(unitOfWork, lookupServess)
         {
-            _unitOfWork = unitOfWork;
-            _lookupServess = lookupServess;
+
         }
 
         public IActionResult Index(int? page, string search)

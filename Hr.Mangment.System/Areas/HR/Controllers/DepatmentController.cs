@@ -11,14 +11,11 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
 
-    public class DepatmentController : Controller
+    public class DepatmentController : BaseController
     {
-        UnitOfWork _unitOfWork;
-        lookupServess _lookupServess;
-        public DepatmentController(UnitOfWork unitOfWork, lookupServess lookupServess)
+        public DepatmentController(UnitOfWork unitOfWork, lookupServess lookupServess) : base(unitOfWork, lookupServess)
         {
-            _unitOfWork = unitOfWork;
-            _lookupServess = lookupServess;
+
         }
 
         public  IActionResult Index(int? page, string search)

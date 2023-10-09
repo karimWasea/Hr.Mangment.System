@@ -1,0 +1,111 @@
+﻿@model PagedList.IPagedList<hospitalVm.RoleVM>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "All Rols";
+}
+
+<form id="search-form" method="get" asp-action="Index">
+    <input type="text" name="search" value="@ViewBag.Search" placeholder="Search..." id="search-input">
+</form>
+
+<a asp-controller="Role" asp-action="Save" id="Add">
+    <i class="fas fa-plus-circle"></i> Add New Patient
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>name</th>
+         
+        </tr>
+    </thead>
+    <tbody id="patientTableBody">
+        @foreach (var patient in Model)
+        {
+
+            <tr >
+                <td>@patient.Id</td>
+                <td class="visit-status-cell">@patient.Name</td>
+                
+                <td>
+                    <a asp-controller="Role" asp-action="Details" asp-route-id="@patient.Id">
+                        <i class="fas fa-info-circle" title="Details"></i>
+                    </a>
+                    <a asp-controller="Role" asp-action="Save" asp-route-Id="@patient.Id" data-action="edit">
+                        <i class="fas fa-edit" title="Edit"> </i>
+                    </a>
+                    <a asp-controller="Role" asp-action="Delete" asp-route-Id="@patient.Id" data-action="delete">
+                        <i class="fas fa-trash-alt" title="Delete"></i>
+                    </a>
+                </td>
+                
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+<partial name="_PaginationPartial" />
+
+<script>
+    function addstyle(button) {
+        const row = button.closest(".row-style");
+        const isArriveButton = button.classList.contains("arrive-button");
+        const bgColorClass = isArriveButton ? "green-bg" : "red-bg";
+
+        row.classList.toggle(bgColorClass, true);
+        row.querySelector(".visit-status-cell").classList.toggle(bgColorClass, true);
+
+        const oppositeButton = row.querySelector(isArriveButton ? ".cancel-button" : ".arrive-button");
+        const currentButton = row.querySelector(isArriveButton ? ".arrive-button" : ".cancel-button");
+
+        currentButton.style.display = "none";
+        oppositeButton.style.display = "block";
+
+        const bgColor = isArriveButton ? "aquamarine" : "red";
+        localStorage.setItem(`background_color_${row.id}`, bgColor);
+    }
+
+    // On page load
+    document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll(".row-style");
+        rows.forEach(row => {
+            const storedColor = localStorage.getItem(`background_color_${row.id}`);
+            if (storedColor) {
+                row.style.backgroundColor = storedColor;
+                row.querySelector(".visit-status-cell").style.backgroundColor = storedColor;
+            }
+
+            const arriveButton = row.querySelector(".arrive-button");
+            const cancelButton = row.querySelector(".cancel-button");
+
+            if (arriveButton.style.display === "none") {
+                cancelButton.style.display = "none";
+            } else if (cancelButton.style.display === "none") {
+                arriveButton.style.display = "none";
+            }
+        });
+    });
+
+    // Update table visibility based on search input
+    function updateTableVisibility(searchTerm) {
+        const rows = document.querySelectorAll(".row-style");
+        rows.forEach(row => {
+            const doctorNameCell = row.querySelector("td:nth-child(2)"); // Adjust this selector as needed
+            if (doctorNameCell.textContent.toLowerCase().includes(searchTerm.toLowerCase()) || doctorNameCell.textContent.toUpperCase().includes(searchTerm.toUpperCase())) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
+    const searchInput = document.getElementById("search-input");
+    searchInput.addEventListener("input", function () {
+        updateTableVisibility(this.value);
+    });
+</script>

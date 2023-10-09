@@ -14,19 +14,18 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
 
-    public class SalaryTransactionController : Controller
+    public class SalaryTransactionController : BaseController
     {
-        UnitOfWork _unitOfWork;
-        lookupServess _lookupServess;
+       
         UserManager<Applicaionuser> _userManager;
         public SalaryTransactionController(UnitOfWork unitOfWork, lookupServess lookupServess, UserManager<Applicaionuser> userManager
-)
+) :base(unitOfWork, lookupServess)
         {
-            _userManager = userManager;
-            _unitOfWork = unitOfWork;
-            _lookupServess = lookupServess;
-        }
+            _userManager=userManager;
+        
 
+        
+        }
         public IActionResult Index(int? page, string search)
         {
             var model = _unitOfWork.SalaryTransaction.GetAll();
