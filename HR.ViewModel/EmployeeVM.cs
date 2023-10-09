@@ -48,7 +48,8 @@
         public double? Bouns { get; set; }
         public string? JobTitle { get; set; }
         public string? Adress { get; set; }
-        public IFormFile ContructUrl { get; set; }         public IFormFile ImgUrl { get; set; }
+        public IFormFile ContructUrl { get; set; }      
+        public IFormFile ImgUrl { get; set; }
 
         public string ContructPath { get; set; }
         public string? ManagerId { get; set; }
@@ -65,7 +66,7 @@
         public string? SecurityStamp { get; set; }
         public string? ConcurrencyStamp { get; set; }
         public string? PhoneNumber { get; set; }
-        public IFormFile ImgUrls { get; set; }
+        //public IFormFile ImgUrls { get; set; }
         public string imgPath { get; set; }
         public Gender Gender { get; set; }
         public IsDeleted IsDeleted { get; set; }

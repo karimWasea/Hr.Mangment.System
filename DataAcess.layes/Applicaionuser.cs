@@ -12,7 +12,7 @@ namespace DataAcess.layes
 {
      public class Applicaionuser : IdentityUser
     {
-        public string? ImgUrl { get; set; } = string.Empty;
+        public string? ImgUrl { get; set; }
     
         public DateTime? BirthDate { get; set; }
         public string? Adress { get; set; }

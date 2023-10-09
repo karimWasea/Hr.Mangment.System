@@ -1,11 +1,14 @@
 ﻿using DataAcess.layes;
 
 using HR_Api.Utellites;
+
+using System.ComponentModel.DataAnnotations;
+
 namespace HR_Api.Dtos
 {
     public class TrainingDTO : BaseDTO
     {
-        public string Name { get; set; }
+        [Required]
 
         public string? TrainingName { get; set; }
         public static Training ConvertTODTOToObj(TrainingDTO departmintDTO)

@@ -11,26 +11,38 @@ namespace HR_Api.Dtos;
 
 public class AplicatiouserCreatDto
 {
-  
 
+    [Required]
     public DateTime? BirthDate { get; set; } = DateTime.Now;
+    [Required]
     public string? Address { get; set; }
+    [Required]
     public decimal Salary { get; set; }
+    [Required]
     public Gender Gender { get; set; }
+    [Required]
 
     public int DepartmentId { get; set; }
+    [Required]
     public string? JobTitle { get; set; }
+    [Required]
     public string? PhoneNumber { get; set; }
+    [Required]
     public DateTime? HirangDate { get; set; } = DateTime.Now;
+    [Required]
     public IFormFile imgurlform { get; set; }
+    [Required]
     public IFormFile contractUrlform { get; set; }
+    [Required]
     public string UserName { get; set; }
-
+    [Required]
     public string Email { get; set; }
+    [Required]
 
     public string PasswordHash { get; set; }
-
+    [Required]
     public string? contractUrl { get; set; }
+    [Required]
     public string? ImgUrl { get; set; }
 
     public static Applicaionuser CanconvertViewmodel(AplicatiouserCreatDto aplicatiouserDto)

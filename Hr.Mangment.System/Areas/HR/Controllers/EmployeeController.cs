@@ -13,14 +13,12 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
 
-    public class EmployeeController : Controller
+    public class EmployeeController : BaseController
     {
-        UnitOfWork _unitOfWork;
-        lookupServess _lookupServess;
-        public EmployeeController(UnitOfWork unitOfWork, lookupServess lookupServess)
+
+        public EmployeeController(UnitOfWork unitOfWork, lookupServess lookupServess) : base(unitOfWork, lookupServess)
         {
-            _unitOfWork = unitOfWork;
-            _lookupServess = lookupServess;
+
         }
 
         public  IActionResult Index(int? page, string search)
@@ -73,8 +71,8 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         }
 
         // POST: EmployeeController/Edit/5
-        //[HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Save( EmployeeVM emp1 )
         {
             //if (ModelState.IsValid)

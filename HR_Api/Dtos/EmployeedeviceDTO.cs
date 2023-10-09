@@ -1,19 +1,21 @@
 ﻿using DataAcess.layes;
 
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace HR_Api.Dtos
 {
     public class EmployeedeviceDTO
     {
+        [Required]
         public string Name { get; set; }
-
+        [Required]
         public int Id { get; set; }
 
-
+        [Required]
         public string Employeeid  { get; set; }
-        
-        
+
+        [Required]
         public  List<int> devicids  { get; set; } 
         [JsonIgnore]
         public  int devicid  { get; set; }

@@ -32,29 +32,28 @@ namespace ReprestoryServess
 
 
 
-        //private bool SearchProperty(string propertyValue, string search, StringComparison comparison = StringComparison.OrdinalIgnoreCase)
-        //{
+       
 
-        //}
 
-        public async Task Save(EmployeeVM entity)
+        public   Task Save(EmployeeVM entity)
         {
-            entity.imgPath = _Imgoperation.Uploadimg(entity.ImgUrl);
-            entity.ContructPath = _Imgoperation.Uploadimg(entity.ContructUrl);
+            //entity.imgPath = _Imgoperation.Uploadimg(entity.ImgUrl);
+            //entity.ContructPath = _Imgoperation.Uploadimg(entity.ContructUrl);
 
-            //var model = EmployeeVM.CanconvertViewmodel(entity);
+
 
             if (entity.Id != null)
             {
-                // Update existing entity
-                var existingUser = await _user.FindByIdAsync(entity.Id);
 
-                if (existingUser != null)
-                {
-                    // Update properties of existingUser
+                //var existingUser = await _user.FindByIdAsync(entity.Id);
+                var existingUser =   _user.Users.Where(i=>i.Id==entity.Id).Select(i=>i).FirstOrDefault();
+
+                //if (existingUser != null)
+                //{
+
                     existingUser.Salary = entity.Salary;
                     existingUser.JobTitle = entity.Adress;
-                    existingUser.ContructUrl = entity.ContructPath;
+                    existingUser.ContructUrl = _Imgoperation.Uploadimg(entity.ContructUrl);
                     existingUser.HirangDate = entity.HirangDate;
                     existingUser.Email = entity.Email;
                     existingUser.Gender = entity.Gender;
@@ -62,18 +61,26 @@ namespace ReprestoryServess
                     existingUser.PhoneNumber = entity.PhoneNumber;
                     existingUser.PasswordHash = entity.PasswordHash;
                     existingUser.UserName = entity.UserName;
+                    existingUser.PasswordHash = "Karim566@gmail.comm";
+                    existingUser.BirthDate = DateTime.Now;
 
-                    if (!string.IsNullOrEmpty(entity.PasswordHash)) // Check if the password is provided
-                    {
-                        // Hash and update the password
-                        var passwordHasher = new PasswordHasher<Applicaionuser>();
-                        existingUser.PasswordHash = passwordHasher.HashPassword(existingUser, entity.PasswordHash);
-                    }
+                //if (entity.imgPath == null)
 
-                    var updateResult = await _user.UpdateAsync(existingUser);
 
-                    await _DBcontext.SaveChangesAsync();
-                }
+                //{
+                //    existingUser.ImgUrl = _user.Users.Where(x => x.Id == entity.Id).Select(e => e.ImgUrl).FirstOrDefault();
+                //}
+                //else
+                //{
+
+                    existingUser.ImgUrl = _Imgoperation.Uploadimg(entity.ImgUrl);
+
+
+                    var updateResult = _user.UpdateAsync(existingUser);
+                    _DBcontext.SaveChangesAsync();
+                //}
+                 return Task.CompletedTask; 
+                //}
             }
             else
             {
@@ -88,16 +95,14 @@ namespace ReprestoryServess
                 newUser.ImgUrl = entity.imgPath;
                 newUser.PhoneNumber = entity.PhoneNumber;
 
-                if (!string.IsNullOrEmpty(entity.PasswordHash)) // Check if the password is provided
-                {
-                    // Hash and set the password
-                    var passwordHasher = new PasswordHasher<Applicaionuser>();
-                    newUser.PasswordHash = passwordHasher.HashPassword(newUser, entity.PasswordHash);
-                }
+           
 
-                var createResult = await _user.CreateAsync(newUser, newUser.PasswordHash); // Use newUser.PasswordHash instead
 
-                await _DBcontext.SaveChangesAsync();
+                var createResult =   _user.CreateAsync(newUser, newUser.PasswordHash); // Use newUser.PasswordHash instead
+
+                  _DBcontext.SaveChangesAsync();
+                return Task.CompletedTask;
+
             }
         }
 
@@ -166,7 +171,7 @@ namespace ReprestoryServess
               _user.Users. Where(p=>p.IsDeleted != IsDeleted.Deleted). Select(ApplicationUser => new EmployeeVM
             {
 
-                //Id = ApplicationUser.Id,
+                Id = ApplicationUser.Id,
                 UserName = ApplicationUser.UserName,
 
                   Email = ApplicationUser.Email,
@@ -174,7 +179,7 @@ namespace ReprestoryServess
                   //Adress = ApplicationUser.Adress,
                   //BirthDate = ApplicationUser.BirthDate,
                   //PhoneNumber = ApplicationUser.PhoneNumber,
-                  //imgPath = ApplicationUser.ImgUrl,
+                  imgPath = ApplicationUser.ImgUrl,
                   //Bouns = ApplicationUser.Bouns,
                   //JobTitle = ApplicationUser.JobTitle,
                   //HirangDate = ApplicationUser.HirangDate,

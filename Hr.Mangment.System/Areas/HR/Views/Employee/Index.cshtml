@@ -413,6 +413,7 @@
             <div class="col-md-6">
                 <div class="card mb-6">
                     <div class="card-body">
+                        <img class="card-img-top" src="/Images/2257667a-6e20-4b6a-a2d8-a827450286fd-1696664472867.jpeg"  width="100" height="100" >
                         <h5 class="card-title">Name: @employee.UserName</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Email: @employee.Email</h6>
                         <p class="card-text">@employee.JobTitle</p>
@@ -422,9 +423,9 @@
                             <div class="col-7">
                                 <div class="btn-group" role="group">
                                     <!-- Action buttons for each employee -->
-                                    <a asp-controller="Employee" class="btn btn-danger" asp-action="Details" asp-route-id="@employee.Id">Details of Employee</a>
-                                    <a asp-controller="Employee" class="btn btn-warning" asp-action="Save" asp-route-id="@employee.Id">Edit Employee</a>
-                                    <a asp-controller="Employee" class="btn btn-danger" asp-action="Delete" asp-route-id="@employee.Id">Delete Employee</a>
+                                    <a asp-area="HR"  asp-controller="Employee" class="btn btn-primary" asp-action="Details" asp-route-id="@employee.Id">Details of Employee</a>
+                                    <a asp-area="HR" asp-controller="Employee" class="btn btn-primary" asp-action="Save" asp-route-id="@employee.Id">Edit Employee</a>
+                                    <a asp-area="HR" asp-controller="Employee" class="btn btn-primary" asp-action="Delete" asp-route-id="@employee.Id">Delete Employee</a>
                                 </div>
                             </div>
                         </div>
