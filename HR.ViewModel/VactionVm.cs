@@ -2,6 +2,8 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+using System.ComponentModel.DataAnnotations;
+
 using SystemEnums;
 
 namespace HR.ViewModel
@@ -9,8 +11,16 @@ namespace HR.ViewModel
     public class VactionVm : BaseViewModel
     {
         //public int Id { get; set; }
+        [Required(ErrorMessage = "  is required")]
+
         public DateTime? StartDate { get; set; }
+        [Required(ErrorMessage = "  is required")]
+
         public DateTime? EndDate { get; set; }
+
+
+        [Required(ErrorMessage = "  is required")]
+
 
         public string EmployeeId { get; set; }
 

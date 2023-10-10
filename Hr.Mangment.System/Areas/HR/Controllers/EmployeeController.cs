@@ -58,19 +58,19 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         public async Task<IActionResult> Save(string id)
         {
            
-            if (id !=null)
-            {
+            //if (id !=null)
+            //{
                 var model = await _unitOfWork.Employee.GetById(id);
                 model.listGender = _lookupServess.GEnder();
                 model.alldept = _lookupServess.DepartmitAll();
                 return View(model);
-            }
-            else
-            {
-                modelemp.listGender = _lookupServess.GEnder();
-                modelemp.alldept = _lookupServess.DepartmitAll();
-                return View(modelemp);
-            }
+            //}
+            //else
+            //{
+            //    modelemp.listGender = _lookupServess.GEnder();
+            //    modelemp.alldept = _lookupServess.DepartmitAll();
+            //    return View(modelemp);
+            //}
            
         }
 
@@ -79,16 +79,16 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Save( EmployeeVM emp1 )
         {
-            //if (ModelState.IsValid)
-            //{
-               _unitOfWork.Employee.Save(emp1);
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Employee.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
-            //}
-            //  return View(emp1); 
+            }
+            return View(emp1);
 
-            
+
         }
 
         // GET: EmployeeController/Delete/5

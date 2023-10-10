@@ -105,7 +105,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             var model = _unitOfWork.SalaryTransaction.GEtByemployeeId(id);
             model.EmployeeName = EmplyeeName;
             model.EmployeeId = id;
-            //model.EmployeeAll = _lookupServess.EmployeeAll();
+            model.EmployeeAll = _lookupServess.EmployeeAll();
             model.ALLtransactionTyps = _lookupServess.GetAlltransaction();
             return View(model);
         }
@@ -118,7 +118,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
                 // Assuming vewodel is an instance of your view model
                 vewodel.EmployeeName = EmplyeeName;
                 vewodel.EmployeeId=id;
-                //vewodel.EmployeeAll = _lookupServess.EmployeeAll();
+                vewodel.EmployeeAll = _lookupServess.EmployeeAll();
                 vewodel.ALLtransactionTyps = _lookupServess.GetAlltransaction();
 
             return View(vewodel);
@@ -131,14 +131,17 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(SalaryTransactionVM emp1)
         {
-            //if (ModelState.IsValid)
-            //{
-            _unitOfWork.SalaryTransaction.Save(emp1);
+            emp1.ALLtransactionTyps = _lookupServess.GetAlltransaction();
+            emp1.EmployeeAll = _lookupServess.EmployeeAll();
+
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.SalaryTransaction.Save(emp1);
             TempData["Message"] = $" successfully!";
             TempData["MessageType"] = "Save";
             return RedirectToAction(nameof(Index));
-            //}
-            //  return View(emp1); 
+            }
+            return View(emp1);
 
 
         }

@@ -2,6 +2,8 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+using System.ComponentModel.DataAnnotations;
+
 using SystemEnums;
 
 namespace HR.ViewModel
@@ -10,11 +12,21 @@ namespace HR.ViewModel
     {
         public int Id { get; set; }
         public IsDeleted isDeleted { get; set; }
+        [Required(ErrorMessage = "  is required")]
+
         public string? EmployeeId { get; set; }
+        [Required(ErrorMessage = "  is required")]
+
         public DateTime? TransactionDate { get; set; }
+        [Required(ErrorMessage = "  is required")]
+
         public string Reason { get; set; }
         public string EmployeeName { get; set; }
+        [Required(ErrorMessage = "  is required")]
+
         public double? Amount { get; set; }
+        [Required(ErrorMessage = "  is required")]
+
         public TransactionSalaryType transactionTyp { get; set; }
 
         public IEnumerable<SelectListItem> EmployeeAll { get; set; } = Enumerable.Empty<SelectListItem>();

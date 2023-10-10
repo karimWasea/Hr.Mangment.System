@@ -52,12 +52,14 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         // GET: EmployeeController/Edit/5
         public async Task<IActionResult> Save(int id)
         {
-            
+           
 
             if (id >0)
             {
-                var  model = _unitOfWork.workScheduleCurentWeekDay.GetById(id);
+                var model = _unitOfWork.workScheduleCurentWeekDay.GetById(id);
                 model.DayNameslist = _lookupServess.GetWeekdaySelectList();
+                //var  model = _unitOfWork.workScheduleCurentWeekDay.GetById(id);
+                //model.DayNameslist = _lookupServess.GetWeekdaySelectList();
                 return View(model);
             }
             else
@@ -71,17 +73,19 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
         // POST: EmployeeController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(WorkScheduleCurentWeekDayVm emp1 )
         {
-        //    if (ModelState.IsValid)
-        //    {
+            emp1.DayNameslist = _lookupServess.GetWeekdaySelectList();
+
+            if (ModelState.IsValid)
+            {
                 _unitOfWork.workScheduleCurentWeekDay.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
-            //}
-            //return View(emp1);
+            }
+            return View(emp1);
 
 
         }
