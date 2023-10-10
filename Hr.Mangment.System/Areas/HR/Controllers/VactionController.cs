@@ -14,7 +14,7 @@ using System.Globalization;
 namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
-    [Authorize]
+    //[Authorize]
 
     public class VactionController : BaseController
     {
