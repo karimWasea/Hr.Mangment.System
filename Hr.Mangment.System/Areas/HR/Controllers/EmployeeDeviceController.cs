@@ -2,6 +2,7 @@
 
 using HR.ViewModel;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,6 +14,7 @@ using System.Collections.Generic;
 namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
+    [Authorize]
 
     public class EmployeeDeviceController : Controller
     {

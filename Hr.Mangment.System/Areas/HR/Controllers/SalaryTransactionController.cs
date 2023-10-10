@@ -4,6 +4,7 @@ using HR.ViewModel;
 
 using Intersoft.Crosslight;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using ReprestoryServess;
 namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
+    [Authorize]
 
     public class SalaryTransactionController : BaseController
     {

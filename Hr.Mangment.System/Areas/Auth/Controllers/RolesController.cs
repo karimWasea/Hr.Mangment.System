@@ -8,6 +8,7 @@ using hospitalVm;
 
 using Hr.Mangment.System.Areas.HR.Controllers;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,8 @@ namespace Hospital.Areas.Admin.Controllers
     [Area("Auth")]
     //[Authorize("Admin")]
     // [Authorize(Roles = clsRoles.roleAdmin)]
+    [Authorize]
+
     public class RolesController : BaseController
     {
         UserManager<Applicaionuser> _user;

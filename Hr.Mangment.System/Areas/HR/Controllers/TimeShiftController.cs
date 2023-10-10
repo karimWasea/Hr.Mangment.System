@@ -2,6 +2,7 @@
 
 using HR.ViewModel;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,8 @@ using System.Globalization;
 namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
+    [Authorize]
+
 
     public class TimeShiftController : BaseController
     {

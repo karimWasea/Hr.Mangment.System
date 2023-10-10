@@ -49,41 +49,16 @@ builder.Services.AddTransient<WorkScheduleCurentWeekDayServsess>();
 builder.Services.AddTransient<EmployeeWorkScheduleCurentWeekDayServsess>();
 builder.Services.AddTransient<EmployeeTriningServsess>();
 builder.Services.AddTransient<EmployeeDeviceServsess>();
-
-builder.Services.ConfigureApplicationCookie(options =>
+builder.Services.ConfigureApplicationCookie(option =>
 {
-    // Set the path for the login page.
-    //options.LoginPath = "/Identity/Account/Login";
+    option.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+    option.LogoutPath = $"/Identity/Account/Logout";
+    option.LoginPath = $"/Identity/Account/Login";
 
-    // Set the path for the access denied page.
-    //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-
-    //    // Set the path for the logout page.
-        //options.LogoutPath = "/Identity/Account/Logout";
-
-    //// Set the cookie expiration time (in this example, it's set to 7 days).
-    //options.ExpireTimeSpan = TimeSpan.FromDays(7);
-
-    //    Set whether the cookie is essential for authentication.If set to true,
-    //    authentication will fail if the cookie is not present.
-    /// options.Cookie.IsEssential = true;
-
-    //    Set the cookie name.
-        //options.Cookie.Name = "authratization";
-
-    //    Set the domain for the cookie. If not set, the cookie will be valid for the current domain only.
-     //options.Cookie.Domain = ".HR"
-
-    //    Set whether the cookie should only be transmitted over HTTPS.
-      // options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
-
-    //    Set the cookie path.
-       //options.Cookie.Path = "/";
-
-    //    Set whether the cookie should be accessible by JavaScript in the browser.
-    ///   options.Cookie.Domain = true;
 });
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -98,6 +73,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 app.MapRazorPages();
 
 app.MapControllerRoute(
@@ -106,12 +82,12 @@ app.MapControllerRoute(
     );
 
 app.MapControllerRoute(
-       name: "patient",
+       name: "HR",
        pattern: "{area=HR}/{controller=Employee}/{action=Index}/{id?}");
 
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
 

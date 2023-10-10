@@ -7,12 +7,13 @@ using Microsoft.CodeAnalysis.Differencing;
 using System.Drawing.Printing;
 using Hr.Mangment.System.Areas.HR.Controllers;
 using hospitalVm;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hospital.Areas.Admin.Controllers
 {
     [Area(areaName: "Auth")]
-  //<partial name = "_AlertMessage" />
-
+    //<partial name = "_AlertMessage" />
+    [Authorize]
     public class RoleController : BaseController
     {
 
