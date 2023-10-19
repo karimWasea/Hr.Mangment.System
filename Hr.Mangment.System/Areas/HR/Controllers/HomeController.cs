@@ -8,7 +8,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View();   
         }
     }
 }

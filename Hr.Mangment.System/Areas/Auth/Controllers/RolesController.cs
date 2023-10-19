@@ -24,7 +24,7 @@ namespace Hospital.Areas.Admin.Controllers
     [Area("Auth")]
     //[Authorize("Admin")]
     // [Authorize(Roles = clsRoles.roleAdmin)]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
 
     public class RolesController : BaseController
     {

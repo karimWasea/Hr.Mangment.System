@@ -2,135 +2,148 @@
 @using SystemEnums
 @model RegisterModel
 @{
-    ViewData["Title"] = "NEW Employee";
+    ViewData["Title"] = "Register";
 }
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h1 class="text-center">@ViewData["Title"]</h1>
-            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <div class="mb-3">
-                    <h2>NEW Employee</h2>
-                    <hr />
-                </div>
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+<h1>@ViewData["Title"]</h1>
 
-                <div class="mb-3">
-                    <!-- Email -->
-                    <div class="form-floating">
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                        <label asp-for="Input.Email">Email</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <!-- Password -->
-                    <div class="form-floating">
-                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.Password">Password</label>
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <!-- Confirm Password -->
-                    <div class="form-floating">
-                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                    </div>
-                </div>
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
 
-                <!-- Additional Input Fields -->
-                <div class="mb-3">
-                    <!-- Image URL -->
-                    <div class="form-floating">
-                        <input asp-for="Input.Impath" class="form-control" placeholder="Image URL" />
-                        <label asp-for="Input.Impath">Image URL</label>
-                        <span asp-validation-for="Input.Impath" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <!-- Another Image URL -->
-                    <div class="form-floating">
-                        <input asp-for="Input.ContrutruelPath" class="form-control" placeholder="Image URL" />
-                        <label asp-for="Input.ContrutruelPath">Image URL</label>
-                        <span asp-validation-for="Input.ContrutruelPath" class="text-danger"></span>
-                    </div>
-                </div>
+          
 
-                <div class="mb-3">
-                    <!-- Birth Date -->
-                    <div class="form-floating">
-                        <input asp-for="Input.BirthDate" class="form-control" type="date" />
-                        <label asp-for="Input.BirthDate">Birth Date</label>
-                        <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+
+
+
+
+
+
+
+            <!-- Additional Input Fields -->
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Impath" class="form-control" placeholder="Image URL" />
+                <label asp-for="Input.Impath">Image URL</label>
+                <span asp-validation-for="Input.Impath" class="text-danger"></span>
+            </div>
+             <div class="form-floating mb-3">
+                <input asp-for="Input.ContrutruelPath" class="form-control" placeholder="Image URL" />
+                <label asp-for="Input.ContrutruelPath">Image URL</label>
+                <span asp-validation-for="Input.ContrutruelPath" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.BirthDate" class="form-control" type="date" />
+                <label asp-for="Input.BirthDate">Birth Date</label>
+                <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+            </div>  
+            
+            <div class="form-floating mb-3">
+                <input asp-for="Input.HirangDate" class="form-control" type="date" />
+                <label asp-for="Input.HirangDate">Birth Date</label>
+                <span asp-validation-for="Input.HirangDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Adress" class="form-control" placeholder="Address" />
+                <label asp-for="Input.Adress">Address</label>
+                <span asp-validation-for="Input.Adress" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Salary" class="form-control" placeholder="Salary" />
+                <label asp-for="Input.Salary">Salary</label>
+                <span asp-validation-for="Input.Salary" class="text-danger"></span>
+            </div>
+                <div class="form-floating mb-3">
+                <input asp-for="Input.JobTitle" class="form-control" placeholder="JobTitle" />
+                <label asp-for="Input.JobTitle">JobTitle</label>
+                <span asp-validation-for="Input.JobTitle" class="text-danger"></span>
+            </div> 
+            <div class="form-floating mb-3">
+                <input asp-for="Input.USERname" class="form-control" placeholder="USERname" />
+                <label asp-for="Input.USERname">USERname</label>
+                <span asp-validation-for="Input.USERname" class="text-danger"></span>
+            </div>
+
+
+
+
+
+
+            <label asp-for="Input.Gender"></label>
+
+            <div class="form-floating mb-3">
+
+                <select asp-for="Input.Gender" asp-items="@Html.GetEnumSelectList<Gender>()"
+                        aria-required="true" class="form-control">
+                    <option value="" disabled>Choose gender</option>
+                </select>
+                <span asp-validation-for="Input.Gender" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Input.DepartmentId" class="control-label">Department</label>
+                <select asp-for="Input.DepartmentId" asp-items="@(ViewData["DepartmentOptions"] as List<SelectListItem>)" class="form-control">
+                    <option value="">-- Select Department --</option>
+                </select>
+                <span asp-validation-for="Input.DepartmentId" class="text-danger"></span>
+            </div>
+
+
+
+
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <!-- Hire Date -->
-                    <div class="form-floating">
-                        <input asp-for="Input.HirangDate" class="form-control" type="date" />
-                        <label asp-for="Input.HirangDate">Hire Date</label>
-                        <span asp-validation-for="Input.HirangDate" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <!-- Address -->
-                    <div class="form-floating">
-                        <input asp-for="Input.Adress" class="form-control" placeholder="Address" />
-                        <label asp-for="Input.Adress">Address</label>
-                        <span asp-validation-for="Input.Adress" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <!-- Salary -->
-                    <div class="form-floating">
-                        <input asp-for="Input.Salary" class="form-control" placeholder="Salary" />
-                        <label asp-for="Input.Salary">Salary</label>
-                        <span asp-validation-for="Input.Salary" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <!-- Job Title -->
-                    <div class="form-floating">
-                        <input asp-for="Input.JobTitle" class="form-control" placeholder="Job Title" />
-                        <label asp-for="Input.JobTitle">Job Title</label>
-                        <span asp-validation-for="Input.JobTitle" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <!-- Username -->
-                    <div class="form-floating">
-                        <input asp-for="Input.USERname" class="form-control" placeholder="Username" />
-                        <label asp-for="Input.USERname">Username</label>
-                        <span asp-validation-for="Input.USERname" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Input.Gender"></label>
-                    <select asp-for="Input.Gender" asp-items="@Html.GetEnumSelectList<Gender>()" aria-required="true" class="form-control">
-                        <option value="" disabled>Choose gender</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Input.DepartmentId" class="control-label">Department</label>
-                    <select asp-for="Input.DepartmentId" asp-items="@(ViewData["DepartmentOptions"] as List<SelectListItem>)" class="form-control">
-                        <option value="">-- Select Department --</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <button id="registerSubmit" type="submit" class="btn btn-primary btn-block">Register</button>
-                </div>
-            </form>
-        </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
     </div>
 </div>
 

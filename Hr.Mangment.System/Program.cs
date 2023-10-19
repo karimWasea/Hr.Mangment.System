@@ -8,6 +8,7 @@ using IREprestory;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 using ReprestoryServess;
 
@@ -49,8 +50,10 @@ builder.Services.AddTransient<WorkScheduleCurentWeekDayServsess>();
 builder.Services.AddTransient<EmployeeWorkScheduleCurentWeekDayServsess>();
 builder.Services.AddTransient<EmployeeTriningServsess>();
 builder.Services.AddTransient<EmployeeDeviceServsess>();
+
 builder.Services.ConfigureApplicationCookie(option =>
 {
+
     option.AccessDeniedPath = $"/Identity/Account/AccessDenied";
     option.LogoutPath = $"/Identity/Account/Logout";
     option.LoginPath = $"/Identity/Account/Login";
@@ -72,9 +75,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapRazorPages();
+builder.Services.AddDistributedMemoryCache();
+
 
 app.MapControllerRoute(
       name: "areas",
@@ -87,7 +93,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=HR}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
 

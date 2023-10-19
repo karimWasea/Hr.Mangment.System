@@ -14,7 +14,8 @@ using System.Collections.Generic;
 namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
+
 
     public class EmployeeTriningController : BaseController
     {

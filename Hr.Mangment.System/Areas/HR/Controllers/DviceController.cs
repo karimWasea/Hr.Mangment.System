@@ -13,7 +13,9 @@ using ReprestoryServess;
 namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
-    [Authorize]
+                         
+    [Authorize(Roles = "SuperAdmin")]
+
 
     public class DviceController : BaseController
     {

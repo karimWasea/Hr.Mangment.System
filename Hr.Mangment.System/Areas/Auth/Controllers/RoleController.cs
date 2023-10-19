@@ -13,7 +13,8 @@ namespace Hospital.Areas.Admin.Controllers
 {
     [Area(areaName: "Auth")]
     //<partial name = "_AlertMessage" />
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
+
     public class RoleController : BaseController
     {
 

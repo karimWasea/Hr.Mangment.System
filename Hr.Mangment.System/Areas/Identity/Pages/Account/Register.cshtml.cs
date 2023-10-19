@@ -177,7 +177,7 @@ namespace Hr.Mangment.System.Areas.Identity.Pages.Account
 
                     
 
-                            await _userManager.AddToRoleAsync(user, "superadmin");
+                            await _userManager.AddToRoleAsync(user, "SuperAdmin");
                     await _userManager.GetUserIdAsync(user);
 
                     var userId = await _userManager.GetUserIdAsync(user);
