@@ -75,7 +75,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
         // POST: EmployeeController/Edit/5
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(WorkScheduleCurentWeekDayVm emp1 )
         {
             emp1.DayNameslist = _lookupServess.GetWeekdaySelectList();
