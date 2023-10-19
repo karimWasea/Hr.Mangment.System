@@ -11,7 +11,7 @@ using ReprestoryServess;
 namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
-    //[Authorize]
+    [Authorize]
 
     public class WorkScheduleCurentWeekDayController : BaseController
     {

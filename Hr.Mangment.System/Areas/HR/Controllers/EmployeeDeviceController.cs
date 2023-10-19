@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
-    //[Authorize]
+    [Authorize]
 
     public class EmployeeDeviceController : Controller
     {
