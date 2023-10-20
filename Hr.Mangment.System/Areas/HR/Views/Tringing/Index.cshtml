@@ -7,24 +7,22 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-
 <!-- Add the search input form -->
 <form id="search-form" method="get" action="@Url.Action("Index")">
     <input type="text" name="search" value="@ViewBag.Search" placeholder="Search..." id="search-input">
 </form>
 <partial name="_AlertMessage" model="Model" />
 
-<a asp-controller="Tringing" asp-action="Save" data-action="edit">
-    <i class="fas fa-edit" title="Edit"></i>ADDnew
+<a asp-controller="Tringing" asp-action="Save" data-action="edit" class="btn btn-primary">
+    <i class="fas fa-edit" title="Edit"></i> ADDnew
 </a>
 <div id="search-results">
-    <table class="table">
+    <table class="table bg-primary table-hover">
         <thead>
             <tr>
-                <th>Number </th>
+                <th>Number</th>
                 <th>TrainingName</th>
-
-                <td>Action</td>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="patientTableBody">
@@ -33,14 +31,12 @@
                 <tr class="patient">
                     <td>@patient.Id</td>
                     <td>@patient.TrainingName</td>
-
                     <td>
-
-                        <a asp-controller="Tringing" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
-                            <i class="fas fa-edit" title="Edit"></i>Edit
+                        <a asp-controller="Tringing" asp-action="Save" asp-route-id="@patient.Id" data-action="edit" class="btn btn-primary">
+                            <i class="fas fa-edit" title="Edit"></i> Edit
                         </a>
-                        <a asp-area="HR" asp-controller="Tringing" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
-                            <i class="fas fa-trash-alt" title="Delete"></i>Delete
+                        <a asp-area="HR" asp-controller="Tringing" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete" class="btn btn-danger">
+                            <i class="fas fa-trash-alt" title="Delete"></i> Delete
                         </a>
                     </td>
                 </tr>
@@ -48,6 +44,7 @@
         </tbody>
     </table>
 </div>
+
 <partial name="_PaginationPartial" model="Model" />
 
 <!-- JavaScript to handle search input -->

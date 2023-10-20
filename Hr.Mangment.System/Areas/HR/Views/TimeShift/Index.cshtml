@@ -14,21 +14,19 @@
 </form>
 <partial name="_AlertMessage" model="Model" />
 
-<a asp-controller="TimeShift" asp-action="Save" data-action="edit">
-    <i class="fas fa-edit" title="Edit"></i>ADDnew
+<a asp-controller="TimeShift" asp-action="Save" data-action="edit" class="btn btn-primary">
+    <i class="fas fa-edit" title="Edit"></i> ADDnew
 </a>
 <div id="search-results">
-    <table class="table">
+    <table class="table bg-primary table-hover">
         <thead>
             <tr>
-                <th>StartingTime </th>
+                <th>StartingTime</th>
                 <th>shiftStuTework</th>
-
                 <th>StartingTime</th>
                 <th>EndingTime</th>
                 <th>EmployeeName</th>
-
-                <td>Action</td>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="patientTableBody">
@@ -40,14 +38,12 @@
                     <td>@patient.StartingTime</td>
                     <td>@patient.EndingTime</td>
                     <td>@patient.EmployeeName</td>
-
                     <td>
-
-                        <a asp-controller="TimeShift" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
-                            <i class="fas fa-edit" title="Edit"></i>Edit
+                        <a asp-controller="TimeShift" asp-action="Save" asp-route-id="@patient.Id" data-action="edit" class="btn btn-primary">
+                            <i class="fas fa-edit" title="Edit"></i> Edit
                         </a>
-                        <a asp-area="HR" asp-controller="TimeShift" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
-                            <i class="fas fa-trash-alt" title="Delete"></i>Delete
+                        <a asp-area="HR" asp-controller="TimeShift" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete" class="btn btn-danger">
+                            <i class="fas fa-trash-alt" title="Delete"></i> Delete
                         </a>
                     </td>
                 </tr>
@@ -55,6 +51,7 @@
         </tbody>
     </table>
 </div>
+
 <partial name="_PaginationPartial" model="Model" />
 
 <!-- JavaScript to handle search input -->
