@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using HR.Utailites;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,25 +30,25 @@
 
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    @*   @if (User.IsInRole("superadmin"))
-                        { 
-                           *@  <li class="nav-item dropdown">
+                        @if (User.IsInRole( SystemRols.SuperAdmin))
+                        {
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" href="#" id="authDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Auth
-                        </a>
-                            <div class="dropdown-menu bg-primary" aria-labelledby="authDropdown">
-                            <a class="dropdown-item" asp-area="Auth" asp-controller="Role" asp-action="Index">Role</a>
-                            <a class="dropdown-item" asp-area="Auth" asp-controller="Roles" asp-action="Index">RoleEmployee</a>
-                            <!-- Other Auth-related menu items for "superadmin" go here -->
+                                    Auth
+                                </a>
+                                <div class="dropdown-menu bg-primary" aria-labelledby="authDropdown">
+                                    <a class="dropdown-item" asp-area="Auth" asp-controller="Role" asp-action="Index">Role</a>
+                                    <a class="dropdown-item" asp-area="Auth" asp-controller="Roles" asp-action="Index">RoleEmployee</a>
+                                    <!-- Other Auth-related menu items for "superadmin" go here -->
 
-                        </div>
-                    </li>
+                                </div>
+                            </li>
 
-                     @*    <li class="nav-item dropdown">
+                                <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white bg-primary" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 HR
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="doctorDropdown" style="background-color:white;">
+                                <div class="dropdown-menu bg-primary" aria-labelledby="doctorDropdown" style="background-color:white;">
                                 <a class="dropdown-item" asp-area="HR" asp-controller="Employee" asp-action="Index">Employee</a>
                                 <a class="dropdown-item" asp-area="HR" asp-controller="Depatment" asp-action="Index">Depatment</a>
                                 <a class="dropdown-item" asp-area="HR" asp-controller="SalaryTransaction" asp-action="Index">SalaryTransaction</a>
@@ -58,11 +59,11 @@
                                 <a class="dropdown-item" asp-area="HR" asp-controller="WorkScheduleCurentWeekDay" asp-action="Index">WorkScheduleCurentWeekDay</a>
                             </div>
                         </li>
-                    }
-  *@
-
-                      @*    @if (User.IsInRole("admin"))
-                        {  *@
+                    
+  
+                        }
+                        @if (User.IsInRole(SystemRols.Admin))
+                        { 
                       
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white bg-primary" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,15 +72,15 @@
                             <div class="dropdown-menu bg-primary" aria-labelledby="doctorDropdown" style="background-color:white;">
                                     <a class="dropdown-item" asp-area="HR" asp-controller="Employee" asp-action="Index">Employee</a>
                                     <a class  ="dropdown-item" asp-area="HR" asp-controller="Depatment" asp-action="Index">Depatment</a>
-                                    <a class="dropdown-item" asp-area="HR" asp-controller="SalaryTransaction" asp-action="Index">SalaryTransaction</a>
+                                    <a class="dropdown-item" asp-area="HR" asp-controller="Salarymangment" asp-action="Index">SalaryTransaction</a>
                                     <a class="dropdown-item" asp-area="HR" asp-controller="TimeShift" asp-action="Index">TimeShift</a>
                                     <a class="dropdown-item" asp-area="HR" asp-controller="Vaction" asp-action="Index">Vaction</a>
                                     <a class="dropdown-item" asp-area="HR" asp-controller="Tringing" asp-action="Index">Tringing</a>
                                     <a class="dropdown-item" asp-area="HR" asp-controller="Dvice" asp-action="Index">Dvice</a>
-                                    <a class="dropdown-item" asp-area="HR" asp-controller="WorkScheduleCurentWeekDay" asp-action="Index">WorkScheduleCurentWeekDay</a>
+                                    <a class="dropdown-item" asp-area="HR" asp-controller="WorkScheduleShift" asp-action="Index">WorkScheduleCurentWeekDay</a>
                                 </div>
                             </li>
-                            @* } *@
+                            }
                            </ul>
                     <partial name="_LoginPartial" />
 

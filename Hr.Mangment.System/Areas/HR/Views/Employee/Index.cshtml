@@ -390,11 +390,7 @@
     Layout = "_Layout";
     ViewData["Title"] = "All Employees";
 }
-
-<h2>@ViewData["Title"]</h2>
-<partial name="_AlertMessage" model="Model" />
-
-<div class="container">
+<div class="container mt-5" style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
     <div class="row">
         <div class="col-md-6">
             <!-- Add the search input form -->
@@ -411,9 +407,9 @@
         @foreach (var employee in Model)
         {
             <div class="col-md-6">
-                <div class="card mb-6">
+                <div class="card mb-6" style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
                     <div class="card-body">
-                        <img class="card-img-top" src="/Images/2257667a-6e20-4b6a-a2d8-a827450286fd-1696664472867.jpeg"  width="100" height="100" >
+                        <img class="card-img-top" src="/Images/2257667a-6e20-4b6a-a2d8-a827450286fd-1696664472867.jpeg" width="100" height="100">
                         <h5 class="card-title">Name: @employee.UserName</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Email: @employee.Email</h6>
                         <p class="card-text">@employee.JobTitle</p>
@@ -423,7 +419,7 @@
                             <div class="col-7">
                                 <div class="btn-group" role="group">
                                     <!-- Action buttons for each employee -->
-                                    <a asp-area="HR"  asp-controller="Employee" class="btn btn-primary" asp-action="Details" asp-route-id="@employee.Id">Details of Employee</a>
+                                    <a asp-area="HR" asp-controller="Employee" class="btn btn-primary" asp-action="Details" asp-route-id="@employee.Id">Details of Employee</a>
                                     <a asp-area="HR" asp-controller="Employee" class="btn btn-primary" asp-action="Save" asp-route-id="@employee.Id">Edit Employee</a>
                                     <a asp-area="HR" asp-controller="Employee" class="btn btn-primary" asp-action="Delete" asp-route-id="@employee.Id">Delete Employee</a>
                                 </div>
@@ -434,9 +430,9 @@
                         <div class="row">
                             <div class="col-7">
                                 <div class="btn-group" role="group">
-                                    <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="EditGetbyemployeeonetrataction" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">Edit Salary</a>
-                                    <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="Addtrantionforemplyee" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">Add Salary</a>
-                                    <a asp-area="HR" class="btn btn-danger" asp-controller="SalaryTransaction" asp-action="GEtAllemplyStranstion" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">Get Transaction</a>
+                                    <a asp-area="HR" class="btn btn-primary" asp-controller="SalaryTransaction" asp-action="EditGetbyemployeeonetrataction" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">Edit Salary</a>
+                                    <a asp-area="HR" class="btn btn-primary" asp-controller="SalaryTransaction" asp-action="Addtrantionforemplyee" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">Add Salary</a>
+                                    <a asp-area="HR" class="btn btn-primary" asp-controller="SalaryTransaction" asp-action="GEtAllemplyStranstion" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">Get Transaction</a>
                                 </div>
                             </div>
                         </div>
@@ -446,7 +442,7 @@
                             <div class="col-7">
                                 <div class="btn-group" role="group">
                                     <a asp-area="HR" class="btn btn-primary" asp-controller="Vaction" asp-action="addvaction" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">New Vacation</a>
-                                    <a asp-area="HR" class="btn btn-primary" asp-controller="Vaction" asp-action="Editebyempid" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">Edit Vacation</a>
+                                    <a asp-area="HR" class ="btn btn-primary" asp-controller="Vaction" asp-action="Editebyempid" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">Edit Vacation</a>
                                     <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-EmplyeeName="@employee.UserName" asp-route-employeeid="@employee.Id" data-action="edit">Add Shifts</a>
                                     <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Gtbyemployeeid" asp-route-employeeid="@employee.Id" data-action="edit">Show All Shifts</a>
                                 </div>
@@ -470,6 +466,7 @@
         }
     </div>
 </div>
+
 
                 <partial name="_PaginationPartial" model="Model" />
 

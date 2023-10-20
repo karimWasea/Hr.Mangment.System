@@ -1,5 +1,6 @@
 ﻿using DataAcess.layes;
 
+using HR.Utailites;
 using HR.ViewModel;
 
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +12,7 @@ using ReprestoryServess;
 namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
-    [Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = SystemRols.SuperAdmin)]
 
 
     public class WorkScheduleCurentWeekDayController : BaseController

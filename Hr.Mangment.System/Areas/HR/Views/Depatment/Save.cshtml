@@ -5,33 +5,46 @@
     Layout = "_Layout";
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<style>
 
+    .glass-form {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
 
+    .same-width {
+        width: 100%; /* Both inputs have the same width */
+        margin-bottom: 10px; /* Add margin between the inputs and form */
+    }
+
+</style>
 
 <partial name="_AlertMessage" model="Model" />
 <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1>Edit Department</h1>
+            <h1 style="font-family: 'Arial', sans-serif;">Edit Department</h1>
 
-            <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
+            <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data" class="glass-form">
                 <input type="hidden" asp-for="Id" />
 
-                <div class="form-group">
-                    <label asp-for="DepartmentName">Department Name:</label>
-                    <input asp-for="DepartmentName" class="form-control" />
-                    <span asp-validation-for="DepartmentName" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="ManagerId" class="form-label mt-4">Manager:</label>
-                    <select class="form-select" asp-for="ManagerId" asp-items="Model.Mangers"
-                            data-placeholder="Select manager">
-                        <option value=""></option>
-                    </select>
-                    <span asp-validation-for="ManagerId" class="text-danger"></span>
+                <div class="form-group row">
+                    <div class="col">
+                        <label asp-for="DepartmentName" style="font-weight: bold;">Department Name:</label>
+                        <input asp-for="DepartmentName" class="form-control same-width" style="z-index: 1;" />
+                        <span asp-validation-for="DepartmentName" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="ManagerId" class="form-label" style="font-weight: bold;">Manager:</label>
+                        <select class="form-select same-width" asp-for="ManagerId" asp-items="Model.Mangers"
+                                data-placeholder="Select manager" style="z-index: 1;">
+                            <option value=""></option>
+                        </select>
+                        <span asp-validation-for="ManagerId" class="text-danger"></span>
+                    </div>
                 </div>
 
                 <button type="submit" id="savedata" class="btn btn-primary">Update</button>
@@ -43,6 +56,8 @@
         </div>
     </div>
 </div>
+
+
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
