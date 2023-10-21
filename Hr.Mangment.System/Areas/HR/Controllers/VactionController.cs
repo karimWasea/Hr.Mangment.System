@@ -103,13 +103,13 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         {
             emp1.Employes = _lookupServess.EmployeeAll();
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _unitOfWork.Vaction.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             return View(emp1);
 
 
