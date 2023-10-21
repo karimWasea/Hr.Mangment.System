@@ -3,26 +3,23 @@
 
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "All Employee  Trining";
+    ViewData["Title"] = "All Employee Trining";
 }
 
 <h2>@ViewData["Title"]</h2>
-
 <!-- Add the search input form -->
 <form id="search-form" method="get" action="@Url.Action("Index")">
     <input type="text" name="search" value="@ViewBag.Search" placeholder="Search..." id="search-input">
 </form>
 <partial name="_AlertMessage" model="Model" />
 
-
 <div id="search-results">
-    <table class="table">
+    <table class="table bg-primary table-hover">
         <thead>
             <tr>
-                <th>number </th>
-                <th>DeviceName</th>
-
-                <td>Action</td>
+                <th>Number</th>
+                <th>Device Name</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="patientTableBody">
@@ -31,13 +28,11 @@
                 <tr class="patient">
                     <td>@patient.EmployeeName</td>
                     <td>@patient.Name</td>
-
                     <td>
-
-                        <a asp-controller="EmployeeTrining" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
+                        <a asp-controller="EmployeeTrining" asp-action="Save" asp-route-id="@patient.Id" data-action="edit" class="btn btn-primary">
                             <i class="fas fa-edit" title="Edit"></i>Edit
                         </a>
-                        <a asp-area="HR" asp-controller="EmployeeTrining" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
+                        <a asp-area="HR" asp-controller="EmployeeTrining" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete" class="btn btn-danger">
                             <i class="fas fa-trash-alt" title="Delete"></i>Delete
                         </a>
                     </td>
@@ -45,6 +40,11 @@
             }
         </tbody>
     </table>
+    <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary mt-2">
+        <i class="fas fa-chevron-circle-left"></i> Back Home
+    </a>
+</div>
+
     <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary mt-2">
         <i class="fas fa-chevron-circle-left"></i> Back Home
     </a>

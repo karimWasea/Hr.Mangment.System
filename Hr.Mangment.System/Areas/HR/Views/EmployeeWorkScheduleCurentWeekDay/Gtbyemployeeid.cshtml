@@ -5,7 +5,6 @@
     Layout = "_Layout";
     ViewData["Title"] = "All EmployeeShiftinthisweek  ";
 }
-
 <h2>@ViewData["Title"]</h2>
 
 <!-- Add the search input form -->
@@ -16,28 +15,26 @@
 
 
 <div id="search-results">
-    <table class="table">
+    <table class="table bg-primary table-hover">
         <thead>
             <tr>
                 <th>number </th>
                 <th>DeviceName</th>
-
                 <td>Action</td>
             </tr>
         </thead>
         <tbody id="patientTableBody">
             @foreach (var patient in Model)
             {
-                <tr class="patient">
+                <tr class="patient bg-primary" style="cursor: pointer;">
                     <td>@patient.EmployeeName</td>
                     <td>@patient.Name</td>
 
                     <td>
-
-                        <a asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
+                        <a asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-id="@patient.Id" data-action="edit" class="btn btn-primary">
                             <i class="fas fa-edit" title="Edit"></i>Edit
                         </a>
-                        <a asp-area="HR" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
+                        <a asp-area="HR" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete" class="btn btn-primary">
                             <i class="fas fa-trash-alt" title="Delete"></i>Delete
                         </a>
                     </td>

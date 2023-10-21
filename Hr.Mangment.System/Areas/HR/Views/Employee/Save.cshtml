@@ -8,115 +8,165 @@
 <partial name="_AlertMessage" model="Model" />
 
 
+<style>
+    /* Custom CSS styles */
+    .container {
+        text-align: center;
+    }
 
-<div class="container" style="background: rgba(255, 255, 255, 0.7); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+    h1 {
+        margin-bottom: 20px;
+    }
 
+    .btn-secondary {
+        margin-top: 10px;
+    }
+
+    /* Glass-like style for form elements */
+    .glass-container {
+        background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha channel for transparency */
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-input {
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-select {
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Style for the button group
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+        .button-group .btn {
+            margin: 0;
+        }
+
+    /* Style for form-row divisions */
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+</style>
+
+<partial name="_AlertMessage" model="Model" />
+<div class="container mt-5 glass-container">
     <h1 class="text-center">Manage Employee</h1>
 
     <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
 
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label asp-for="UserName">Username:</label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label asp-for="UserName">Username:</label>
+                    <input asp-for="UserName" class="glass-input form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label asp-for="PhoneNumber">Phone Number:</label>
+                    <input asp-for="PhoneNumber" class="glass-input form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+      
+
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label asp-for="Adress">Address:</label>
+                    <input asp-for="Adress" class="glass-input form-control" />
+                    <span asp-validation-for="Adress" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label asp-for="HirangDate">Hiring Date:</label>
+                    <input asp-for="HirangDate" class="glass-input form-control" />
+                    <span asp-validation-for="HirangDate" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="form-group col-md-6">
-                <label asp-for="PhoneNumber">Phone Number:</label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label asp-for="ImgUrl">Update Image:</label>
+                    <input asp-for="ImgUrl" class="glass-input form-control" />
+                    <span asp-validation-for="ImgUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label asp-for="ContructUrl">Contract URL:</label>
+                    <input asp-for="ContructUrl" class="glass-input form-control" />
+                    <span asp-validation-for="ContructUrl" class="text-danger"></span>
+                </div>
             </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label asp-for="Email">Email:</label>
+                    <input asp-for="Email" class="glass-input form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label asp-for="PasswordHash">Password Hash:</label>
+                    <input asp-for="PasswordHash" class="glass-input form-control" />
+                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+        </div>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label asp-for="ImgUrl">Update Image:</label>
-                <input asp-for="ImgUrl" class="form-control" />
-                <span asp-validation-for="ImgUrl" class="text-danger"></span>
-            </div>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label asp-for="BirthDate">Birth Date:</label>
+                    <input asp-for="BirthDate" class="glass-input form-control" />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
 
-            <div class="form-group col-md-6">
-                <label asp-for="ContructUrl">Contract URL:</label>
-                <input asp-for="ContructUrl" class="form-control" />
-            </div>
+                <div class="form-group col-md-5">
+                    <label asp-for="JobTitle">Job Title:</label>
+                    <input asp-for="JobTitle" class="glass-input form-control" />
+                    <span asp-validation-for="JobTitle" class="text-danger"></span>
+                </div>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label asp-for="Adress">Address:</label>
-                <input asp-for="Adress" class="form-control" />
-                <span asp-validation-for="Adress" class="text-danger"></span>
-            </div>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label asp-for="Salary">Salary:</label>
+                    <input asp-for="Salary" class="glass-input form-control" />
+                    <span asp-validation-for="Salary" class="text-danger"></span>
+                </div>
 
-            <div class="form-group col-md-6">
-                <label asp-for="HirangDate">Hiring Date:</label>
-                <input asp-for="HirangDate" class="form-control" />
-                <span asp-validation-for="HirangDate" class="text-danger"></span>
-            </div>
+                <div class="form-group col-md-5">
+                    <label asp-for="Gender">Gender:</label>
+                    <select asp-for="Gender" class="glass-select form-control" asp-items="@Model.listGender">
+                        <option value="">Select Gender</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label asp-for="Email">Email:</label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-
-            <div class="form-group col-md-6">
-                <label asp-for="PasswordHash">Password Hash:</label>
-                <input asp-for="PasswordHash" class="form-control" />
-                <span asp-validation-for="PasswordHash" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label asp-for="BirthDate">Birth Date:</label>
-                <input asp-for="BirthDate" class="form-control" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-            </div>
-
-            <div class="form-group col-md-6">
-                <label asp-for="JobTitle">Job Title:</label>
-                <input asp-for="JobTitle" class="form-control" />
-                <span asp-validation-for="JobTitle" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label asp-for="Salary">Salary:</label>
-                <input asp-for="Salary" class="form-control" />
-                <span asp-validation-for="Salary" class="text-danger"></span>
-            </div>
-
-            <div class="form-group col-md-6">
-                <label asp-for="Gender">Gender:</label>
-                <select asp-for="Gender" class="form-control" asp-items="@Model.listGender">
-                    <option value="">Select Gender</option>
-                </select>
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label asp-for="deptmentid">Department:</label>
-                <select asp-for="deptmentid" class="form-control" asp-items="@Model.alldept">
-                    <option value=""> Department</option>
-                </select>
-                <span asp-validation-for="deptmentid" class="text-danger"></span>
-            </div>
-        </div>
-         <br/>
-        <div class="row">
+        <div class="row mt-3">
             <div class="form-group col-md-6">
                 <button type="submit" id="savedata" class="btn btn-primary">Update</button>
             </div>
             <div class="form-group col-md-6 text-right">
-                <a asp-controller="HR" asp-action="Index" class="btn btn-secondary mt-2">
+                <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary">
                     <i class="fas fa-chevron-circle-left"></i> Back to Index
                 </a>
             </div>
@@ -155,20 +205,7 @@
             });
         });
     </script>
-    <style>
-        /* Custom CSS styles */
-        .container {
-            text-align: center;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        .btn-secondary {
-            margin-top: 10px;
-        }
-    </style>
+   
 }
 
 

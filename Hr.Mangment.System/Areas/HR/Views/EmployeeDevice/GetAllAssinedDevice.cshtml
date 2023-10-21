@@ -14,14 +14,12 @@
 </form>
 <partial name="_AlertMessage" model="Model" />
 
-
 <div id="search-results">
-    <table class="table">
+    <table class="table bg-primary table-hover">
         <thead>
             <tr>
-                <th>number </th>
+                <th>number</th>
                 <th>DeviceName</th>
-
                 <td>Action</td>
             </tr>
         </thead>
@@ -30,14 +28,14 @@
             {
                 <tr class="patient">
                     <td>@patient.EmployeeName</td>
-                    <td>@patient.Name</td>
-
                     <td>
-
-                        <a asp-controller="EmployeeDevice" asp-action="Save" asp-route-id="@patient.Id" data-action="edit">
+                        @patient.Name
+                    </td>
+                    <td>
+                        <a asp-controller="EmployeeDevice" asp-action="Save" asp-route-id="@patient.Id" data-action="edit" class="btn btn-primary">
                             <i class="fas fa-edit" title="Edit"></i>Edit
                         </a>
-                        <a asp-area="HR" asp-controller="EmployeeDevice" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete">
+                        <a asp-area="HR" asp-controller="EmployeeDevice" asp-action="Delete" asp-route-id="@patient.Id" data-action="delete" class="btn btn-danger">
                             <i class="fas fa-trash-alt" title="Delete"></i>Delete
                         </a>
                     </td>

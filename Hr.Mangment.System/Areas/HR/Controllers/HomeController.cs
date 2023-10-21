@@ -10,5 +10,10 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         {
             return View();   
         }
+    
+        public IActionResult Privacy()
+        {
+            return View();   
+        }
     }
 }

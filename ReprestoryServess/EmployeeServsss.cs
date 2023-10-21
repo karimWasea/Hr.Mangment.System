@@ -112,22 +112,20 @@ namespace ReprestoryServess
         public async Task<bool> Delete(string id)
         {
 
-            var user = await _user.FindByIdAsync(id);
-            if (user != null)
-                {
-                    var roles = await _user.GetRolesAsync(user);
-                    foreach (var role in roles)
-                    {
-                        await _user.RemoveFromRoleAsync(user, role);
-                    }
-                var deleeteduser = await GetById(id);
-                deleeteduser.iDeleted = IsDeleted.Deleted;
-                    Save(deleeteduser);
+            var user =   _user.Users.Where(i=>i.Id==id).Select(p=>p).FirstOrDefault();
+            //if (user != null)
+            //{
+            //    var roles = await _user.GetRolesAsync(user);
+            //    foreach (var role in roles)
+            //    {
+            //        await _user.RemoveFromRoleAsync(user, role);
+            //    }
 
+                _DBcontext.Users.Remove(user);
 
-                    //_DBcontext.SaveChanges();
-
-                }
+                _DBcontext.SaveChanges();
+            //}
+                
             return true; 
             
             

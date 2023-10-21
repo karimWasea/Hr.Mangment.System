@@ -8,46 +8,114 @@
 <partial name="_AlertMessage" model="Model" />
 <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
 
-<div class="container mt-5">
+<style>
+    /* Custom CSS styles */
+    .container {
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .btn-secondary {
+        margin-top: 10px;
+    }
+
+    /* Glass-like style for form elements */
+    .glass-container {
+        background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha channel for transparency */
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-input {
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-select {
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Style for the button group */
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+        .button-group .btn {
+            margin: 0;
+        }
+
+    /* Style for form-row divisions */
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+</style>
+
+<partial name="_AlertMessage" model="Model" />
+<div class="container mt-5 glass-container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1>mange  SHifttimeInweek</h1>
+            <h1>Edit SalaryTransaction</h1>
+
 
             <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
 
-                <div class="form-group">
-                    <label asp-for="ShiftName">ShiftName:</label>
-                    <input asp-for="ShiftName" class="form-control" />
-                    <span asp-validation-for="ShiftName" class="text-danger"></span>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="ShiftName" class="form-label">Shift Name:</label>
+                        <input asp-for="ShiftName" class="glass-input form-control" />
+                        <span asp-validation-for="ShiftName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TimeEndshifts" class="form-label">End Time of Shift:</label>
+                        <input asp-for="TimeEndshifts" class="glass-input form-control" />
+                        <span asp-validation-for="TimeEndshifts" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="TimeEndshifts">TimeEndshifts:</label>
-                    <input asp-for="TimeEndshifts" class="form-control" />
-                    <span asp-validation-for="TimeEndshifts" class="text-danger"></span>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label asp-for="TimestartShift" class="form-label">Start Time of Shift:</label>
+                        <input asp-for="TimestartShift" class="glass-input form-control" />
+                        <span asp-validation-for="TimestartShift" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="DayName" class="form-label">Day Name:</label>
+                        <select class="glass-select form-select" asp-for="DayName" asp-items="Model.DayNameslist" data-placeholder="Select day">
+                            <option value="" selected></option>
+                        </select>
+                        <span asp-validation-for="DayName" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="TimestartShift">TimestartShift:</label>
-                    <input asp-for="TimestartShift" class="form-control" />
-                    <span asp-validation-for="TimestartShift" class="text-danger"></span>
-                </div>
 
-                <div class="form-group">
-                    <label asp-for="DayName" class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="DayName" asp-items="Model.DayNameslist" data-placeholder="Select devices">
-                        <option value="" selected></option>
-                    </select>
-                    <span asp-validation-for="DayName" class="text-danger"></span>
-                </div>
+              
 
-                <button type="submit" id="savedata" class="btn btn-primary">Update</button>
+                <div class="button-group">
+                    <button type="submit" id="savedata" class="btn btn-primary">Update</button>
+                    <a asp-controller="WorkScheduleCurentWeekDay" asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-chevron-circle-left"></i> Back to Index
+                    </a>
+                </div>
             </form>
-
-            <a asp-action="Index" class="btn btn-secondary mt-2">
-                <i class="fas fa-chevron-circle-left"></i> Back to Index
-            </a>
         </div>
     </div>
 </div>
@@ -80,18 +148,5 @@
         });
     </script>
 
-    <style>
-        /* Custom CSS styles */
-        .container {
-            text-align: center;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        .btn-secondary {
-            margin-top: 10px;
-        }
-    </style>
+   
 }

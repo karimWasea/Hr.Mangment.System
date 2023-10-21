@@ -7,6 +7,80 @@
 
 @model HR.ViewModel.SalaryTransactionVM
 <partial name="_AlertMessage" model="Model" />
+@* <style>
+     /* Custom CSS styles */
+     .container {
+         text-align: center;
+     }
+
+     h1 {
+         margin-bottom: 20px;
+     }
+
+     .btn-secondary {
+         margin-top: 10px;
+     }
+
+     .form-control-glass {
+         background-color: rgba(255, 255, 255, 0.2);
+         border: none;
+         border-radius: 5px;
+         padding: 10px;
+         box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+         color: #fff;
+     }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Manage SalaryTransaction</h1>
+
+            <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="Amount">Amount:</label>
+                    <input asp-for="Amount" class="form-control form-control-glass" />
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="EmployeeId" class="form-control form-control-glass" type="hidden" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="EmployeeName">Employee Name:</label>
+                    <input asp-for="EmployeeName" class="form-control form-control-glass" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Reason">Reason:</label>
+                    <input asp-for="Reason" class="form-control form-control-glass" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TransactionDate">Transaction Date:</label>
+                    <input asp-for="TransactionDate" class="form-control form-control-glass" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="transactionTyp">Transaction Type:</label>
+                    <select class="form-control form-control-glass" asp-for="transactionTyp" asp-items="Model.ALLtransactionTyps"
+                            data-placeholder="Select transaction type">
+                        <option value=""></option>
+                    </select>
+                </div>
+
+                <button type="submit" id="savedata" class="btn btn-primary">Update</button>
+            </form>
+
+            <a asp-controller="SalaryTransaction" asp-action="Index" class="btn btn-secondary mt-2">
+                <i class="fas fa-chevron-circle-left"></i> Back to Index
+            </a>
+        </div>
+    </div>
+</div> *@
+
 <style>
     /* Custom CSS styles */
     .container {
@@ -20,62 +94,108 @@
     .btn-secondary {
         margin-top: 10px;
     }
+
+    /* Glass-like style for form elements */
+    .glass-container {
+        background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha channel for transparency */
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-input {
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-select {
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Style for the button group */
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+        .button-group .btn {
+            margin: 0;
+        }
+
+    /* Style for form-row divisions */
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
 </style>
 
-<div class="container mt-5">
+<partial name="_AlertMessage" model="Model" />
+<div class="container mt-5 glass-container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1>mange SalaryTransaction</h1>
+            <h1>Edit SalaryTransaction</h1>
 
             <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
 
-                <div class="form-group">
-                    <label asp-for="Amount">Amount:</label>
-                    <input asp-for="Amount" class="form-control" />
-                </div>
-                 <div class="form-group">
-                    <input asp-for="EmployeeId" class="form-control" type="hidden" />
-                </div>
-                 <div class="form-group">
-                    <label asp-for="Amount">Amount:</label>
-                    <input asp-for="EmployeeName" class="form-control" readonly />
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="Amount">Amount:</label>
+                        <input asp-for="Amount" class="glass-input form-control" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Reason">Reason:</label>
+                        <input asp-for="Reason" class="glass-input form-control" />
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="Reason">Reason:</label>
-                    <input asp-for="Reason" class="form-control" />
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="TransactionDate" class="form-label">Transaction Date:</label>
+                        <input asp-for="TransactionDate" class="glass-input form-control" />
+                        <span asp-validation-for="TransactionDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input asp-for="EmployeeId" class="form-control form-control-glass" type="hidden" />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="EmployeeName" class="form-label">Employee Name:</label>
+                        <input asp-for="EmployeeName" class="glass-input form-control" readonly />
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="TransactionDate">TransactionDate:</label>
-                    <input asp-for="TransactionDate" class="form-control" />
-                </div>
-
-              @*   <div class="form-group">
-                    <label asp-for="EmployeeId" class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="EmployeeId" asp-items="Model.EmployeeAll"
-                            data-placeholder="Select employee">
-                        <option value=""></option>
-                    </select>
-                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
-                </div> *@
 
                 <div class="form-group">
                     <label asp-for="transactionTyp" class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="transactionTyp" asp-items="Model.ALLtransactionTyps"
+                    <select class="glass-select form-select" asp-for="transactionTyp" asp-items="Model.ALLtransactionTyps"
                             data-placeholder="Select transaction type">
                         <option value=""></option>
                     </select>
                     <span asp-validation-for="transactionTyp" class="text-danger"></span>
                 </div>
 
-                <button type="submit" id="savedata" class="btn btn-primary">Update</button>
+                <div class="button-group">
+                    <button type="submit" id="savedata" class="btn btn-primary"> Mange</button>
+                    <a asp-controller="SalaryTransaction" asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-chevron-circle-left"></i> Back to Index
+                    </a>
+                </div>
             </form>
-
-            <a asp-controller="SalaryTransaction" asp-action="Index" class="btn btn-secondary mt-2">
-                <i class="fas fa-chevron-circle-left"></i> Back to Index
-            </a>
         </div>
     </div>
 </div>
