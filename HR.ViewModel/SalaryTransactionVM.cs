@@ -8,10 +8,15 @@ using SystemEnums;
 
 namespace HR.ViewModel
 {
-    public class SalaryTransactionVM : BaseViewModel
+    public class SalaryTransactionVM 
+        
+       // : BaseViewModel
     {
         public int Id { get; set; }
         public IsDeleted isDeleted { get; set; }
+        //public string? Name { get; set; }
+
+
         [Required(ErrorMessage = "  is required")]
 
         public string? EmployeeId { get; set; }
@@ -41,7 +46,7 @@ namespace HR.ViewModel
                   EmployeeId = entity.EmployeeId,   
                   TransactionDate = (DateTime)entity.TransactionDate, 
                   Reason = entity.Reason,   
-                      Id    =   entity.Id,
+                      Id    = entity.Id,
                       transactionTyp = entity.transactionTyp,
             
             };

@@ -35,16 +35,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             var model = _unitOfWork.SalaryTransaction.GetAll();
             int pageNumber = page ?? 1;
 
-            //if (!string.IsNullOrWhiteSpace(search))
-            //{
-            //    // Apply search filtering here based on your model properties
-            //    model = model.Where(patient =>
-            //      _unitOfWork.Employee.SearchProperty(patient.Reason, search) ||
-            //         _unitOfWork.Employee.SearchProperty(patient.MangerName, search) 
-
-            //    // Add more properties for search as needed
-            //    );
-            //}
+            
 
             var pagedPatients = _unitOfWork.Deparment.GetPagedData(model.AsQueryable(), pageNumber);
 
@@ -58,16 +49,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             var model = _unitOfWork.SalaryTransaction.GetByEmployeeIdALLtrantionforemployee(Employeeid);
             int pageNumber = page ?? 1;
 
-            //if (!string.IsNullOrWhiteSpace(search))
-            //{
-            //    // Apply search filtering here based on your model properties
-            //    model = model.Where(patient =>
-            //      _unitOfWork.Employee.SearchProperty(patient.Reason, search) ||
-            //         _unitOfWork.Employee.SearchProperty(patient.MangerName, search) 
-
-            //    // Add more properties for search as needed
-            //    );
-            //}
+        
 
             var pagedPatients = _unitOfWork.Deparment.GetPagedData(model.AsQueryable(), pageNumber);
 
@@ -102,13 +84,13 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
         }
         //Edite
-        public async Task<IActionResult> EditGetbyemployeeonetrataction(string id, string EmplyeeName)
+        public async Task<IActionResult> EditGetbyemployeeonetrataction(string EmployeeId, string EmplyeeName)
         {
 
 
-            var model = _unitOfWork.SalaryTransaction.GEtByemployeeId(id);
+            var model = _unitOfWork.SalaryTransaction.GEtByemployeeId(EmployeeId);
             model.EmployeeName = EmplyeeName;
-            model.EmployeeId = id;
+            model.EmployeeId = EmployeeId;
             model.EmployeeAll = _lookupServess.EmployeeAll();
             model.ALLtransactionTyps = _lookupServess.GetAlltransaction();
             return View(model);
@@ -116,12 +98,12 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
 
     
-        public IActionResult Addtrantionforemplyee(string id, string EmplyeeName) { 
+        public IActionResult Addtrantionforemplyee(string EmployeeId, string EmplyeeName) { 
            
                 var vewodel = new SalaryTransactionVM();
                 // Assuming vewodel is an instance of your view model
                 vewodel.EmployeeName = EmplyeeName;
-                vewodel.EmployeeId=id;
+                vewodel.EmployeeId= EmployeeId;
                 vewodel.EmployeeAll = _lookupServess.EmployeeAll();
                 vewodel.ALLtransactionTyps = _lookupServess.GetAlltransaction();
 
@@ -130,9 +112,8 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
 
 
-        // POST: EmployeeController/Edit/5
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(SalaryTransactionVM emp1)
         {
             emp1.ALLtransactionTyps = _lookupServess.GetAlltransaction();
@@ -150,13 +131,6 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
         }
 
-        // GET: EmployeeController/Delete/5
-
-
-    
-        // POST: EmployeeController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Remove(int  id)
         {
           _unitOfWork.SalaryTransaction.Delete(id);

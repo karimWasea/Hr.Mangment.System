@@ -47,7 +47,7 @@ namespace HR.ViewModel
    //EmployeeId = entity.EmployeeId,
     TimestartShift = entity.TimestartShift,
       ShiftName = entity.ShiftName,
-       TimeEndshifts    = entity.TimestartShift, Id = entity.Id,
+       TimeEndshifts    = entity.TimestartShift, Id = (int)entity.Id,
 IsDeleted= entity.isDeleted,                
             
             

@@ -8,12 +8,17 @@ using SystemEnums;
 
 namespace HR.ViewModel
 {
-    public class Devicetvm : BaseViewModel                                          
+    public class Devicetvm
+    //  : BaseViewModel
     {
-        [Required]
+        public IsDeleted isDeleted { get; set; }
+
+        public int Id { get; set; } = 0;
+
+        [Required(ErrorMessage ="is requred")]
         public string DeviceName { get; set; }
 
-        public IEnumerable<SelectListItem> Mangers { get; set; } = Enumerable.Empty<SelectListItem>();
+        public IEnumerable<SelectListItem>? Mangers { get; set; } = Enumerable.Empty<SelectListItem>();
 
         public static Device CanconvertViewmodel(Devicetvm entity)
         {
@@ -21,7 +26,7 @@ namespace HR.ViewModel
             DeviceName = entity.DeviceName,
              
 Id= entity.Id,                
-IsDeleted= entity.isDeleted,                
+//IsDeleted= entity.isDeleted,                
             
             
             

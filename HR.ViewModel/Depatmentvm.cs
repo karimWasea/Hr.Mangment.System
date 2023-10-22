@@ -10,13 +10,14 @@ namespace HR.ViewModel
 {
     public class Depatmentvm :BaseViewModel
     {
-        public int Id { get; set; }
-        [Required]
-        public string DepartmentName { get; set; } 
-        public string MangerName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The DepartmentName field is required.")]
 
-        public string? ManagerId { get; set; } = default!;
+        public string DepartmentName { get; set; } 
+        public string? MangerName { get; set; } =string.Empty;
+        [Required(ErrorMessage = "The manger field is required.")]
+
+        public string ManagerId { get; set; } = default!;
+
         public IEnumerable<SelectListItem> Mangers { get; set; } = Enumerable.Empty<SelectListItem>();
 
         public static Department CanconvertViewmodel(Depatmentvm entity)
@@ -24,7 +25,7 @@ namespace HR.ViewModel
             var dept = new Department {
              DepartmentName = entity.DepartmentName,
              ManagerId = entity.ManagerId,
-Id= entity.Id,                
+Id= (int)entity.Id,                
 IsDeleted= entity.isDeleted,                
             
             

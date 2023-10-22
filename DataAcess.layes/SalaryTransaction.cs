@@ -4,7 +4,7 @@ namespace DataAcess.layes
 {
     public class SalaryTransaction : BaseEntity
     {
-        public string EmployeeId { get; set; }
+        public string EmployeeId { get; set; } = string.Empty;
         public DateTime TransactionDate { get; set; }
         public string? Reason { get; set; }
         public double Amount { get; set; }

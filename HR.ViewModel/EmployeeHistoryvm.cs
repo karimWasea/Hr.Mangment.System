@@ -18,7 +18,7 @@ namespace HR.ViewModel
         {
             var dept = new EmployeeHistory() {
               
-Id= entity.Id,                
+Id= (int)entity.Id,                
 IsDeleted= entity.isDeleted,                
             
        EmployeeId= entity.EmployeeId,

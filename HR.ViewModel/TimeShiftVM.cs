@@ -34,7 +34,7 @@ namespace HR.ViewModel
               EndingTime = entity.EndingTime,   
                shiftStuTework   = entity.shiftStuTework,
                  StartingTime = entity.StartingTime,
-Id = entity.Id,                
+Id = (int)entity.Id,                
 IsDeleted= entity.isDeleted,                
             
             

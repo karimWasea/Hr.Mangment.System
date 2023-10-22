@@ -1,114 +1,4 @@
-﻿@* @{
-    ViewData["Title"] = "Edit Employee";
-    Layout = "_Layout";
-}
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
-@model HR.ViewModel.SalaryTransactionVM
-<partial name="_AlertMessage" model="Model" />
-<style>
-    /* Custom CSS styles */
-    .container {
-        text-align: center;
-    }
-
-    h1 {
-        margin-bottom: 20px;
-    }
-
-    .btn-secondary {
-        margin-top: 10px;
-    }
-</style>
-
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h1>Edit SalaryTransaction</h1>
-
-            <form asp-action="Save"   method="post" id="saveform" enctype="multipart/form-data">
-                <input type="hidden" asp-for="Id" />
-
-                <div class="form-group">
-                    <label asp-for="Amount">Amount:</label>
-                    <input asp-for="Amount" class="form-control" />
-                </div>
-                
-                <div class="form-group">
-                    <label asp-for="Reason">Reason:</label>
-                    <input asp-for="Reason" class="form-control" />
-                </div>   <div class="form-group">
-                    <label asp-for="TransactionDate">TransactionDate:</label>
-                    <input asp-for="TransactionDate" class="form-control" />
-                </div>
-
-
-
-                <div class="form-group">
-                    <label asp-for="EmployeeId" class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="EmployeeId" asp-items="Model.EmployeeAll"
-                            data-placeholder="Select devices">
-                        <option value=""></option>
-                    </select>
-                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="transactionTyp" class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="transactionTyp" asp-items="Model.ALLtransactionTyps"
-                            data-placeholder="Select devices">
-                        <option value=""></option>
-                    </select>
-                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
-                </div>
-
-                <button type="submit" id="savedata" class="btn btn-primary">Update</button>
-            </form>
-
-            <a asp-controller="SalaryTransaction" asp-action="Index" class="btn btn-secondary mt-2">
-                <i class="fas fa-chevron-circle-left"></i> Back to Index
-            </a>
-        </div>
-    </div>
-</div>
-
-
-   <script src="d:\hr_system\hr.mangment.system\hr.mangment.system\wwwroot\js\site.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var saveForm = document.getElementById("saveform");
-            var saveButton = document.getElementById("savedata");
-
-            saveForm.addEventListener("submit", function (event) {
-                event.preventDefault();
-
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You are about to update the employee's information.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes, update it!",
-                    cancelButtonText: "No, cancel",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // You can also add additional form validation here
-                        saveForm.submit();
-                    }
-                });
-            });
-
-</script>
-
-
-
-
-
-
-
-
-
-
- *@
+﻿
 
 @{
     ViewData["Title"] = "mange SalaryTransaction";
@@ -184,6 +74,7 @@
 
             <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
+                <span asp-validation-for="Id" class="text-danger"></span>
 
                 <div class="form-row">
                     <div class="form-group">

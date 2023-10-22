@@ -13,8 +13,8 @@
             <h1 class="text-center">Manage Device</h1>
 
             <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
-                <input type="hidden" asp-for="Id" />
-
+@*                 <input type="hidden" asp-for="Id" />
+ *@
                 <div class="form-group">
                     <label asp-for="DeviceName" class="font-weight-bold">Device Name:</label>
                     <input asp-for="DeviceName" class="form-control" />

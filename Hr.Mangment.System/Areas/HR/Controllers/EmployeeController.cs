@@ -82,6 +82,8 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Save( EmployeeVM emp1 )
         {
+            emp1.listGender = _lookupServess.GEnder();
+            emp1.alldept = _lookupServess.DepartmitAll();
             if (ModelState.IsValid)
             {
                 _unitOfWork.Employee.Save(emp1);

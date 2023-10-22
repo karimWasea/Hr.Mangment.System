@@ -23,7 +23,7 @@ namespace HR.ViewModel
         [Required(ErrorMessage = "selectShiftids is required")]
 
         public List<int> selectDeviceids { get; set; }
-        public string EmployeeName { get; set; }
+        public string? EmployeeName { get; set; }
 
 
  
@@ -42,7 +42,7 @@ namespace HR.ViewModel
             var dept = new EmployeeDevice
             {
   EmployeeId    = entity.EmployeeId,
-        Id = entity.Id,
+        Id = (int)entity.Id,
 IsDeleted= entity.isDeleted,
 
                 DeviceId =

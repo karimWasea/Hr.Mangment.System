@@ -6,9 +6,9 @@ namespace HR.ViewModel
 {
     public class BaseViewModel
     {
-        public int Id { get; set; }
+        public int  Id { get; set; }
         public IsDeleted isDeleted { get; set; }
-public string Name { get; set; }
+public string? Name { get; set; }
 
     }
 }

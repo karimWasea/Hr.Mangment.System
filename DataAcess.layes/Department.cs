@@ -1,11 +1,16 @@
-﻿using SystemEnums;
+﻿using System.ComponentModel.DataAnnotations;
+
+using SystemEnums;
 
 namespace DataAcess.layes
 {
 
     public class Department : BaseEntity
     {
+
         public string? DepartmentName { get; set; } = string.Empty;
+
+
         public string? ManagerId { get; set; }
         public  IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;
 

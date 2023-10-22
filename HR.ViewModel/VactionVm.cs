@@ -38,7 +38,7 @@ namespace HR.ViewModel
              EmployeeId = entity.EmployeeId,
               EndDate = entity.EndDate,
                StartDate = entity.StartDate,
-Id = entity.Id,                
+Id = (int)entity.Id,                
 IsDeleted= entity.isDeleted,                
             
             

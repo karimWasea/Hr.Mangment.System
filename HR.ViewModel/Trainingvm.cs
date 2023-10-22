@@ -15,7 +15,7 @@ namespace HR.ViewModel
         public static Training CanconvertViewmodel(Trainingvm entity)
         {
             var dept = new Training() {
-             Id = entity.Id,
+             Id = (int)entity.Id,
               TrainingName = entity.TrainingName,
 IsDeleted= entity.isDeleted,                
             

@@ -6,7 +6,7 @@ namespace DataAcess.layes
 
     public class Device : BaseEntity
     {
-        public string? DeviceName { get; set; }
+        public string DeviceName { get; set; }
 
         // Navigation property
         public IsDeleted IsDeleted { get; set; } = IsDeleted.NotDeleted;

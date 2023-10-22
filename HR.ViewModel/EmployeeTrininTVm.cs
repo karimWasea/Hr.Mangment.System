@@ -43,7 +43,7 @@ namespace HR.ViewModel
             var dept = new EmployeeTraining
             {
   EmployeeId    = entity.EmployeeId,
-        Id = entity.Id,
+        Id = (int)entity.Id,
 IsDeleted= entity.isDeleted,
 
                 TrainingId =

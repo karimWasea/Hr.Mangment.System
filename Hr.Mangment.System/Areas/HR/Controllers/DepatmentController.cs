@@ -72,25 +72,27 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save( Depatmentvm emp1 )
         {
+            emp1.Mangers = _lookupServess.EmployeeAll();
+
             if (ModelState.IsValid)
             {
                 _unitOfWork.Deparment.Save(emp1);
-                TempData["Message"] = $" successfully!";
+                TempData["Message"] = $" Successfully :{emp1.Name}!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
+                }
+                return View(emp1);
+
+
             }
-            return View(emp1);
+
+            // GET: EmployeeController/Delete/5
 
 
-        }
-
-        // GET: EmployeeController/Delete/5
-     
-
-        // POST: EmployeeController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        public IActionResult Delete(int   id)
+            // POST: EmployeeController/Delete/5
+            //[HttpPost]
+            //[ValidateAntiForgeryToken]
+            public IActionResult Delete(int   id)
         {
           _unitOfWork.Deparment.Delete(id);
                 return RedirectToAction(nameof(Index));

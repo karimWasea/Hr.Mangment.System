@@ -41,7 +41,7 @@ namespace HR.ViewModel
         {
             var dept = new EmployeeWorkScheduleCurentWeekDay{
   EmployeeId    = entity.EmployeeId,
-        Id = entity.Id,
+        Id = (int)entity.Id,
 IsDeleted= entity.isDeleted,
 
                 TimeShiftId =
