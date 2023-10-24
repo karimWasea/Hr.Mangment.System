@@ -1,8 +1,9 @@
 ﻿
 document.addEventListener("DOMContentLoaded", function () {
-    $('select').select2();
+        // Initialize Select2 on all select elements
+        $('select').select2();
 
-            var saveForm = document.getElementById("saveform");
+    var saveForm = document.getElementById("saveform");
     var saveButton = document.getElementById("savedata");
 
     saveForm.addEventListener("submit", function (event) {
@@ -23,3 +24,4 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             });
         });
+

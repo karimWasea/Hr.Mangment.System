@@ -14,69 +14,13 @@
 @model HR.ViewModel.EmployeeTrininTVm
 <partial name="_AlertMessage" model="Model" />
 <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
-<style>
-    /* Custom CSS styles */
-    .container {
-        text-align: center;
-    }
 
-    h1 {
-        margin-bottom: 20px;
-    }
-
-    .btn-secondary {
-        margin-top: 10px;
-    }
-
-    /* Glass-like style for form elements */
-    .glass-container {
-        background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha channel for transparency */
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .glass-input {
-        background-color: rgba(255, 255, 255, 0.2);
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-
-    .glass-select {
-        background-color: rgba(255, 255, 255, 0.2);
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Style for the button group */
-    .button-group {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-
-        .button-group .btn {
-            margin: 0;
-        }
-
-    /* Style for form-row divisions */
-    .form-row {
-        display: flex;
-        justify-content: space-between;
-        margin: 10px 0;
-    }
-</style>
-
+<link href="~/css/employeetriningsave.css" rel="stylesheet" />
 <partial name="_AlertMessage" model="Model" />
 <div class="container mt-5 glass-container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1>Edit SalaryTransaction</h1>
+            <h1>Mang TriningForEmployee</h1>
 
             <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
@@ -121,84 +65,12 @@
         </div>
     </div>
 </div>
-@* <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h1>Edit Employee</h1>
 
-            <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
-                <input type="hidden" asp-for="Id" />
-
-                <div class="form-group">
-                    <label asp-for="EmployeeName">EmployeeName:</label>
-                    <input asp-for="EmployeeName" class="form-control" readonly />
-                </div>
-                <div class="form-group">
-                    <label asp-for="EmployeeId">EmployeeName:</label>
-                    <input asp-for="EmployeeId" class="form-control" type="hidden" />
-                </div>
-
-
-                <div class="form-group">
-                    <label asp-for="selectTriningids" class="form-label mt-4"></label>
-                    <select class="form-select" asp-for="selectTriningids" asp-items="Model.DisplayTrining"
-                            data-placeholder="Select Shifts" multiple="multiple">
-
-                        @*
-                        this make Noseach
-                        data-minimum-results-for-search="Infinity">
-
-                        //  this is make it multiuble select
-
-                        multiple="multiple" >
-                        <option value=""></option>
-                    </select>
-                    <span asp-validation-for="selectTriningids" class="text-danger"></span>
-                </div>
-
-                <button type="submit" id="savedata" class="btn btn-primary">Update</button>
-            </form>
-
-            <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary mt-2">
-                <i class="fas fa-chevron-circle-left"></i> Back Home
-            </a>
-            <a asp-area="HR" class=" btn btn-primary" asp-controller="EmployeeTrining" asp-action="GetAssinedTring" data-action="delete">
-            </a>
-        </div>
-    </div>
-</div> *@
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/lib/select2/js/select2.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Initialize Select2 on all select elements
-            $('select').select2();
-
-            var saveForm = document.getElementById("saveform");
-            var saveButton = document.getElementById("savedata");
-
-            saveForm.addEventListener("submit", function (event) {
-                event.preventDefault();
-
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You are about to update the employee's information.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes, update it!",
-                    cancelButtonText: "No, cancel",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // You can also add additional form validation here
-                        saveForm.submit();
-                    }
-                });
-            });
-        });
-    </script>
-
-
+ 
+    <script src="~/js/employeetriningsave.js"></script>
    
 }
 

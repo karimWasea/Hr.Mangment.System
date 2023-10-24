@@ -65,7 +65,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
   
         public IActionResult GetAssinedTring(int? page, string search, string employeeid)
         {
-            var model = _unitOfWork.employeetrining.GetAllShiftByemployeeId(employeeid);
+            var model = _unitOfWork.employeetrining.GetAllTrainingsByemployeeId(employeeid);
             int pageNumber = page ?? 1;
 
             if (!string.IsNullOrWhiteSpace(search))
@@ -118,17 +118,19 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(EmployeeTrininTVm emp1)
         {
-            //if (ModelState.IsValid)
-            //{
+            emp1.DisplayTrining = _lookupServess.AllTrinng();
+
+            if (ModelState.IsValid)
+            {
                 _unitOfWork. employeetrining.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
-                return RedirectToAction(nameof(Index));
-            //}
-            //return View(emp1);
-
-
+                return RedirectToAction(nameof(GetAssinedTring));
         }
+        return View(emp1);
+
+
+    }
 
         // GET: EmployeeController/Delete/5
 

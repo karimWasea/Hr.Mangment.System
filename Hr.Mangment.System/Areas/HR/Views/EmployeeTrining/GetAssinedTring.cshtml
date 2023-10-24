@@ -12,13 +12,15 @@
     <input type="text" name="search" value="@ViewBag.Search" placeholder="Search..." id="search-input">
 </form>
 <partial name="_AlertMessage" model="Model" />
-
+<a asp-controller="Employee" asp-action="Index" class="btn btn-secondary mt-2">
+    <i class="fas fa-chevron-circle-left"></i> Back Home
+</a>
 <div id="search-results">
     <table class="table bg-primary table-hover">
         <thead>
             <tr>
-                <th>Number</th>
-                <th>Device Name</th>
+                <th>Employeename</th>
+                <th>Trinng Name</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -40,46 +42,14 @@
             }
         </tbody>
     </table>
-    <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary mt-2">
-        <i class="fas fa-chevron-circle-left"></i> Back Home
-    </a>
+
 </div>
 
-    <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary mt-2">
-        <i class="fas fa-chevron-circle-left"></i> Back Home
-    </a>
-</div>
+
 
 
 <partial name="_PaginationPartial" model="Model" />
 
-<!-- JavaScript to handle search input -->
-<script>
-    // Get the search input element
-    const searchInput = document.getElementById('search-input');
-
-    // Get the patient rows
-    const patientRows = document.querySelectorAll('.patient');
-
-    // Function to update the search results
-    function updateSearchResults() {
-        const searchText = searchInput.value.toLowerCase();
-
-        patientRows.forEach(patientRow => {
-            const patientText = patientRow.textContent.toLowerCase();
-            if (patientText.includes(searchText)) {
-                patientRow.style.display = 'table-row';
-            } else {
-                patientRow.style.display = 'none';
-            }
-        });
-    }
-
-    // Add an event listener to the search input to listen for input changes
-    searchInput.addEventListener('input', function () {
-        updateSearchResults();
-    });
-
-    // Initial call to populate search results
-    updateSearchResults();
-</script>
+@section Scripts {
+    <script src="~/js/trinhfogetalltoemployee.js"></script>
+}

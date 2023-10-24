@@ -7,7 +7,7 @@ namespace IREprestory
         IQueryable<SelectListItem> Selectallshiofts();
         
         IQueryable<SelectListItem> AllTrinng();
-        IQueryable<SelectListItem> AllDevicess();
+        public List<SelectListItem> AllDevices();
         IQueryable<SelectListItem> EmployeeAll();
         IQueryable<SelectListItem> DepartmitAll();
          List<SelectListItem> GEnder();

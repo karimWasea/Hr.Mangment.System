@@ -71,9 +71,10 @@
                         <div class="row">
                             <div class="col-7">
                                 <div class="btn-group" role="group">
-                                    <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeDevice" asp-action="GetAllAssinedDevice" asp-route-EmplyeeName="@employee.UserName" asp-route-employeeid="@employee.Id" data-action="edit">Show All Devices</a>
-                                    <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeDevice" asp-action="Save" asp-route-EmplyeeName="@employee.UserName" asp-route-employeeid="@employee.Id" data-action="edit">Assign Devices</a>
-                                    <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeTrining" asp-action="GetAssinedTring" asp-route-EmplyeeName="@employee.UserName" asp-route-employeeid="@employee.Id" data-action="edit">Show All Training</a>
+                                    <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeDevice" asp-action="GetAllAssinedDevice" asp-route-EmplyeeName="@employee.UserName" asp-route-Emplyeeid="@employee.Id" data-action="edit">Show All Devices</a>
+                                    <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeDevice" asp-action="Save" asp-route-EmplyeeName="@employee.UserName" asp-route-Emplyeeid="@employee.Id" data-action="edit">Assign Devices </a>
+                                    <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeTrining" asp-action="GetAssinedTring" 
+                                    asp-route-employeeid="@employee.Id" data-action="edit">Show All Training</a>
                                     <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeTrining" asp-action="Save" asp-route-EmplyeeName="@employee.UserName" asp-route-employeeid="@employee.Id" data-action="edit">Assign Training</a>
                                 </div>
                             </div>

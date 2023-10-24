@@ -90,11 +90,11 @@ namespace ReprestoryServess
 
         }
 
-        public IEnumerable<EmployeeTrininTVm> GetAllShiftByemployeeId( string id )
+        public IEnumerable<EmployeeTrininTVm> GetAllTrainingsByemployeeId( string id )
         {
-            return _Context.EmployeeTrainings.Include(p => p.Employee).Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted && p.EmployeeId==id).Select(p => new EmployeeTrininTVm
+            var model= _Context.EmployeeTrainings.Include(p => p.Employee).Where(p => p.EmployeeId==id).Select(p => new EmployeeTrininTVm
             {
-                isDeleted = p.IsDeleted,
+
                 Id = p.Id,
                 EmployeeId = p.EmployeeId,
                 EmployeeName = p.Employee.UserName,
@@ -102,7 +102,7 @@ namespace ReprestoryServess
                  Name =p.Training.TrainingName,
 
             }).ToList().OrderBy(b => b.EmployeeName);
-
+return model;
         }
 
 

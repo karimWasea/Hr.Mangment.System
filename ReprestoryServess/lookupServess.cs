@@ -102,11 +102,26 @@ namespace ReprestoryServess
         {
             IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Trainings.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.TrainingName }).OrderBy(c => c.Text).AsNoTracking();
             return applicationuser;
-        }   public IQueryable<SelectListItem> AllDevicess()
+        }
+        public List<SelectListItem> AllDevices()
         {
-            IQueryable<SelectListItem>? applicationuser = _applicationDBcontext.Devices.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DeviceName }).OrderBy(c => c.Text).AsNoTracking();
+            var applicationuser = _applicationDBcontext?.Devices
+                .Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.DeviceName != null ? x.DeviceName : "No Name"
+                })
+                .OrderBy(c => c.Text)
+                .AsNoTracking()
+                .ToList();
+
             return applicationuser;
         }
+
+
+
+
+
     }
 
 
@@ -122,5 +137,5 @@ namespace ReprestoryServess
 
 
 
-     
+
 }

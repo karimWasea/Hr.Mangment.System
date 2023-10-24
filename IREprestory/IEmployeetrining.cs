@@ -10,6 +10,6 @@ namespace IREprestory
 {
     public interface IEmployeetrining : IRepository<EmployeeTrininTVm> , IPaginationHelper<EmployeeTrininTVm>
     {
-        IEnumerable<EmployeeTrininTVm> GetAllShiftByemployeeId(string id);
+        IEnumerable<EmployeeTrininTVm> GetAllTrainingsByemployeeId(string id);
     }
 }

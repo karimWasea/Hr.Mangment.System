@@ -1,4 +1,6 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
+    $('select').select2();
+
     var saveForm = document.getElementById("saveform");
     var saveButton = document.getElementById("savedata");
 
