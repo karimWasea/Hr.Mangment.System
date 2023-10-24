@@ -83,24 +83,21 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(   TimeShiftVM emp1 )
         {
-            //if (ModelState.IsValid)
-            //{
+            emp1.Employes = _lookupServess.EmployeeAll();
+            emp1.Shifts = _lookupServess.GetallShifts();
+            if (ModelState.IsValid)
+            {
                 _unitOfWork.timeShift.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
-            //}
-            //  return View(emp1); 
+            }
+            return View(emp1);
 
-            
+
         }
 
-        // GET: EmployeeController/Delete/5
-     
-
-        // POST: EmployeeController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        
         public IActionResult Delete(int  id)
         {
           _unitOfWork.timeShift.Delete(id);

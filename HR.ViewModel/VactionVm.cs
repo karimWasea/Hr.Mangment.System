@@ -19,7 +19,7 @@ namespace HR.ViewModel
         public DateTime? EndDate { get; set; }
 
 
-        [Required(ErrorMessage = "  is required")]
+        //[Required(ErrorMessage = "  is required")]
 
 
         public string EmployeeId { get; set; }

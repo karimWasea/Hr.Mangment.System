@@ -1,0 +1,66 @@
+
+
+
+/* Custom CSS styles */
+.container {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.btn-secondary {
+    margin-top: 20px;
+}
+
+/* Style for form labels and form-select (dropdown) */
+.form-label {
+    font-weight: bold;
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.glass-input {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: #333;
+}
+
+.glass-select {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: #333;
+}
+
+/* Style for the button group */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+    .button-group .btn {
+        margin: 0;
+    }
+
+/* Style for form-row divisions */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+

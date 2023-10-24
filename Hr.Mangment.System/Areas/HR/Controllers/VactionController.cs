@@ -37,12 +37,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
             if (!string.IsNullOrWhiteSpace(search))
             {
-                // Apply search filtering here based on your model properties
-                //model = model.Where(patient =>
-                //     _unitOfWork.Vaction.SearchProperty(patient.EmployeeName, search)
-
-                //// Add more properties for search as needed
-                //);
+              
             }
 
             var pagedPatients = _unitOfWork.Vaction.GetPagedData(model.AsQueryable() ,pageNumber);
@@ -62,17 +57,16 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
             return View(model);  
         }
-        public async Task<IActionResult> Editebyempid(string id)
+        public async Task<IActionResult> Editebyempid(string EmployeeId)
         {
 
             var model =  new VactionVm();
-            model.EmployeeId = id;
-            model.EmployeeName= _userManager.Users.Where(i=>i.Id == id).Select(p=>p.UserName).FirstOrDefault(); 
+            model.EmployeeId = EmployeeId;
+            model.EmployeeName= _userManager.Users.Where(i=>i.Id == EmployeeId).Select(p=>p.UserName).FirstOrDefault(); 
             return View(model);
         }
 
 
-        // GET: EmployeeController/Edit/5
         public async Task<IActionResult> Save(int id)
         {
          
@@ -96,31 +90,27 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
            
         }
 
-        // POST: EmployeeController/Edit/5
+        // POST: EmployeeCo
+        // ntroller/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(   VactionVm emp1 )
         {
             emp1.Employes = _lookupServess.EmployeeAll();
 
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 _unitOfWork.Vaction.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
-            //}
+            }
             return View(emp1);
 
 
         }
 
-        // GET: EmployeeController/Delete/5
-     
-
-        // POST: EmployeeController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        
         public IActionResult Delete(int  id)
         {
           _unitOfWork.Vaction.Delete(id);

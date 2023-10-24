@@ -33,11 +33,9 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
             if (!string.IsNullOrWhiteSpace(search))
             {
-                // Apply search filtering here based on your model properties
                 model = model.Where(patient =>
                   _unitOfWork.Deparment.SearchProperty(patient.ShiftName, search)
 
-                 //Add more properties for search as needed
                 ) ;
             }
 
@@ -62,8 +60,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             {
                 var model = _unitOfWork.workScheduleCurentWeekDay.GetById(id);
                 model.DayNameslist = _lookupServess.GetWeekdaySelectList();
-                //var  model = _unitOfWork.workScheduleCurentWeekDay.GetById(id);
-                //model.DayNameslist = _lookupServess.GetWeekdaySelectList();
+              
                 return View(model);
             }
             else
@@ -94,12 +91,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
         }
 
-        // GET: EmployeeController/Delete/5
-     
-
-        // POST: EmployeeController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        
         public IActionResult Delete(int   id)
         {
           _unitOfWork.workScheduleCurentWeekDay.Delete(id);

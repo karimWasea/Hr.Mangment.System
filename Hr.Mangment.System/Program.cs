@@ -18,9 +18,7 @@ IServiceCollection serviceCollection =
     builder.Services.AddDbContext<ApplicationDBcontext>(options =>
     options.UseSqlServer(connectionString));
 
-//builder.Services.AddDefaultIdentity<Applicaionuser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDBcontext>();
 
-//builder.Services.AddDefaultIdentity<Applicaionuser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDBcontext>();
 
 
 

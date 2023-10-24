@@ -13,7 +13,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 {
     [Area("HR")]
     [Authorize(Roles = SystemRols.SuperAdmin)]  
-    public class DepatmentController : BaseController
+    public class DepatmentController :   BaseController
     {
         public DepatmentController(UnitOfWork unitOfWork, lookupServess lookupServess) : base(unitOfWork, lookupServess)
         {

@@ -6,49 +6,7 @@
 
 @model HR.ViewModel.Trainingvm
 <partial name="_AlertMessage" model="Model" />
-
-<<style>
-     /* Custom CSS styles */
-     .container {
-         text-align: center;
-     }
-
-     h1 {
-         margin-bottom: 20px;
-     }
-
-     .btn-secondary {
-         margin-top: 10px;
-     }
-
-     /* Glass-like style for form elements */
-     .glass-container {
-         background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha channel for transparency */
-         border: 1px solid rgba(255, 255, 255, 0.2);
-         border-radius: 10px;
-         padding: 20px;
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-     }
-
-     .glass-input {
-         background-color: rgba(255, 255, 255, 0.2);
-         border: none;
-         border-radius: 5px;
-         padding: 10px;
-         box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-     }
-
-     /* Style for the button group */
-     .button-group {
-         display: flex;
-         justify-content: space-between;
-         margin-top: 20px;
-     }
-
-         .button-group .btn {
-             margin: 0;
-         }
-</style>
+<link href="~/css/trinngsave.css" rel="stylesheet" />
 
 <div class="container mt-5 glass-container">
     <div class="row justify-content-center">
@@ -78,44 +36,8 @@
 @section Scripts {
     <script src="d:\hr_system\hr.mangment.system\hr.mangment.system\wwwroot\js\site.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var saveForm = document.getElementById("saveform");
-            var saveButton = document.getElementById("savedata");
-
-            saveForm.addEventListener("submit", function (event) {
-                event.preventDefault();
-
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You are about to update the employee's information.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes, update it!",
-                    cancelButtonText: "No, cancel",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // You can also add additional form validation here
-                        saveForm.submit();
-                    }
-                });
-            });
-        });
-    </script>
-<style>
-    /* Custom CSS styles */
-    .container {
-        text-align: center;
-    }
-
-    h1 {
-        margin-bottom: 20px;
-    }
-
-    .btn-secondary {
-        margin-top: 10px;
-    }
-</style>
+    
+    <script src="~/js/triningsave.js"></script>
 }
 
 

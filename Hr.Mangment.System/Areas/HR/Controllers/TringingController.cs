@@ -32,11 +32,9 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
             if (!string.IsNullOrWhiteSpace(search))
             {
-                // Apply search filtering here based on your model properties
                 model = model.Where(patient =>
                   _unitOfWork.Trining.SearchProperty(patient.TrainingName, search) 
 
-                // Add more properties for search as needed
                 );
             }
 
@@ -52,7 +50,6 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
       
 
 
-        // GET: EmployeeController/Edit/5
         public async Task<IActionResult> Save(int id)
         {
             
@@ -76,16 +73,16 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save( Trainingvm emp1 )
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 _unitOfWork.Trining.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
                 return RedirectToAction(nameof(Index));
-            //}
-            //  return View(emp1); 
+            }
+            return View(emp1);
 
-            
+
         }
 
         // GET: EmployeeController/Delete/5

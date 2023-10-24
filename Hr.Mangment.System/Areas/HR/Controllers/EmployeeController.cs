@@ -77,9 +77,9 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
            
         }
 
-        // POST: EmployeeController/Edit/5
+
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Save( EmployeeVM emp1 )
         {
             emp1.listGender = _lookupServess.GEnder();
@@ -96,12 +96,8 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
         }
 
-        // GET: EmployeeController/Delete/5
-     
+      
 
-        // POST: EmployeeController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)
         {
           _unitOfWork.Employee.Delete(id);

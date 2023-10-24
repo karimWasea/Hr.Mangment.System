@@ -10,72 +10,9 @@
 
 
 
-<style>
-    /* Custom CSS styles */
-    .container {
-        text-align: center;
-    }
-
-    h1 {
-        margin-bottom: 20px;
-        font-size: 24px;
-    }
-
-    .btn-secondary {
-        margin-top: 20px;
-    }
-
-    /* Style for form labels and form-select (dropdown) */
-    .form-label {
-        font-weight: bold;
-    }
-
-    .form-select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .glass-input {
-        background-color: rgba(255, 255, 255, 0.3);
-        border: none;
-        border-radius: 5px;
-        padding: 12px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        color: #333;
-    }
-
-    .glass-select {
-        background-color: rgba(255, 255, 255, 0.3);
-        border: none;
-        border-radius: 5px;
-        padding: 12px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        color: #333;
-    }
-
-    /* Style for the button group */
-    .button-group {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-
-        .button-group .btn {
-            margin: 0;
-        }
-
-    /* Style for form-row divisions */
-    .form-row {
-        display: flex;
-        justify-content: space-between;
-        margin: 10px 0;
-    }
-</style>
 
 <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
-
+<link href="~/css/vactionsaveeditepage.css" rel="stylesheet" />
 <div class="container mt-5 glass-select">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -83,6 +20,7 @@
 
             <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="EmployeeId" />
 
                 <div class="form-row">
                     <div class="form-group">
@@ -116,6 +54,21 @@
 </div>
 
 
+@section Scripts {
+        
+    <script src="~/lib/select2/js/select2.min.js"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/curentweeksaveindex save.js"></script>
+       
+       
+
+
+
+
+}
 
 
 
@@ -142,43 +95,3 @@
 
 
 
-
-<script src="~/lib/select2/js/select2.min.js"></script>
-
-
-
-<script>
-
-
-
-    $(document).ready(function () {
-        $('select').select2();
-    });
-
-</script>
-@*
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var saveForm = document.getElementById("saveform");
-
-        saveForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You are about to update the SalaryTransaction information.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes, update it!",
-                cancelButtonText: "No, cancel",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // You can also add additional form validation here
-                    saveForm.submit();
-                }
-            });
-        });
-    });
-</script>
- *@
