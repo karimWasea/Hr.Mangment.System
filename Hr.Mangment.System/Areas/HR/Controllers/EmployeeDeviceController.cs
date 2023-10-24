@@ -129,7 +129,13 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
                 _unitOfWork.employeeDevice.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
-                return RedirectToAction(nameof(GetAllAssinedDevice));
+                return RedirectToAction(nameof(GetAllAssinedDevice), new
+                {
+                    page = (int?)null,
+                    search =
+                                                 (string)null,
+                    Employeeid = emp1.EmployeeId
+                });
             }
             return View(emp1);
 

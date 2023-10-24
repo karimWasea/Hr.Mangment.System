@@ -125,8 +125,14 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
                 _unitOfWork. employeetrining.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
-                return RedirectToAction(nameof(GetAssinedTring));
-        }
+                return RedirectToAction(nameof(GetAssinedTring), new
+                {
+                    page = (int?)null,
+                    search =
+                                  (string)null,
+                    Employeeid = emp1.EmployeeId
+                });
+            }
         return View(emp1);
 
 

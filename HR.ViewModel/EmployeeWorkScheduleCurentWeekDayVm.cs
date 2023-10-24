@@ -15,13 +15,14 @@ namespace HR.ViewModel
 
 
          
-         public EmployeeWorkScheduleCurentWeekDay EmployeeWorkScheduleCurentWeekDay { get; set; }   
-
+        
 
 
         [Required(ErrorMessage = "EmployeeId is required")]
         public string EmployeeId { get; set; }
         public int  Shiftid { get; set; }
+        [Required(ErrorMessage = "EmployeeId is required")]
+
         public List<int> selectShiftids { get; set; }
         public string EmployeeName { get; set; }
 

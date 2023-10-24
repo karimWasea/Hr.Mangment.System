@@ -63,9 +63,9 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
 
 
-        public IActionResult Gtbyemployeeid(int? page, string search, string employeeid)
+        public IActionResult Gtbyemployeeid(int? page, string search, string Employeeid)
         {
-            var model = _unitOfWork.employeeWorkScheduleCurentWeek.GetAllShiftByemployeeId(employeeid);
+            var model = _unitOfWork.employeeWorkScheduleCurentWeek.GetAllShiftByemployeeId(Employeeid);
             int pageNumber = page ?? 1;
 
             if (!string.IsNullOrWhiteSpace(search))
@@ -91,7 +91,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
 
         // GET: EmployeeController/Edit/5
-        public async Task<IActionResult> Save(int id, string employeeid, string EmplyeeName)
+        public async Task<IActionResult> Save(int id, string EmplyeeName,string Employeeid)
         {
 
 
@@ -107,7 +107,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
                 vewodel.DisplayShiftlist = _lookupServess.Selectallshiofts();
 
                 vewodel.EmployeeName = EmplyeeName;
-                vewodel.EmployeeId = employeeid;
+                vewodel.EmployeeId = Employeeid;
                 return View(vewodel);
             }
 
@@ -118,14 +118,18 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(EmployeeWorkScheduleCurentWeekDayVm emp1)
         {
-            //if (ModelState.IsValid)
-            //{
+            emp1.DisplayShiftlist = _lookupServess.Selectallshiofts();
+
+            if (ModelState.IsValid)
+            {
                 _unitOfWork.employeeWorkScheduleCurentWeek.Save(emp1);
                 TempData["Message"] = $" successfully!";
                 TempData["MessageType"] = "Save";
-                return RedirectToAction(nameof(Index));
-            //}
-            //return View(emp1);
+                return RedirectToAction(nameof(Gtbyemployeeid), new { page = (int?)null, search =
+                    (string)null, Employeeid = emp1.EmployeeId });
+
+            }
+            return View(emp1);
 
 
         }
@@ -139,7 +143,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         public IActionResult Delete(int id)
         {
             _unitOfWork.employeeWorkScheduleCurentWeek.Delete(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Gtbyemployeeid));
         }
         //[HttpPost]
 
