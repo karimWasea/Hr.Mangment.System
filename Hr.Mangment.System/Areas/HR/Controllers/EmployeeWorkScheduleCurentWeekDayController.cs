@@ -3,6 +3,8 @@
 using HR.Utailites;
 using HR.ViewModel;
 
+using IREprestory;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -78,8 +80,6 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
                 );
             }
 
-
-
             var pagedPatients = _unitOfWork.workScheduleCurentWeekDay.GetPagedData(model.AsQueryable(), pageNumber);
 
             ViewBag.Search = search;
@@ -142,8 +142,19 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         //[ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            _unitOfWork.employeeWorkScheduleCurentWeek.Delete(id);
-            return RedirectToAction(nameof(Gtbyemployeeid));
+            var employeee = _unitOfWork._context.EmployeeWorkScheduleCurentWeekDay.FirstOrDefault().EmployeeId;
+
+
+  _unitOfWork.employeeWorkScheduleCurentWeek.Delete(id);
+            TempData["Message"] = $" successfully!";
+            TempData["MessageType"] = "Delete";
+            return RedirectToAction(nameof(Gtbyemployeeid), new
+            {
+                page = (int?)null,
+                search =
+                               (string)null,
+                Employeeid = employeee
+            }) ;
         }
         //[HttpPost]
 

@@ -146,8 +146,17 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         //[ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
+           var employeeid= _unitOfWork.employeeWorkScheduleCurentWeek.GetById(id);
             _unitOfWork.employeeWorkScheduleCurentWeek.Delete(id);
-            return RedirectToAction(nameof(Index));
+            TempData["Message"] = $" Deleted!";
+            TempData["MessageType"] = "Delete";
+            return RedirectToAction(nameof(GetAssinedTring), new
+            {
+                page = (int?)null,
+                search =
+                               (string)null,
+                Employeeid = employeeid
+            });
         }
         //[HttpPost]
 

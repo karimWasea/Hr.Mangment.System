@@ -3,6 +3,8 @@
 using HR.Utailites;
 using HR.ViewModel;
 
+using IREprestory;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -146,9 +148,19 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
 
         public IActionResult Delete(int id)
         {
+          var  employeeid =_unitOfWork.employeeWorkScheduleCurentWeek.GetById(id).EmployeeId;
             _unitOfWork.employeeWorkScheduleCurentWeek.Delete(id);
-            return RedirectToAction(nameof(Index));
+            TempData["Message"] = $" Deleted!";
+            TempData["MessageType"] = "Delete";
+            return RedirectToAction(nameof(GetAllAssinedDevice), new
+            {
+                page = (int?)null,
+                search =
+                               (string)null,
+                Employeeid = employeeid
+            });
         }
+    }
         //[HttpPost]
 
 
@@ -167,4 +179,4 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
         /////}
         ///
     }
-}
+

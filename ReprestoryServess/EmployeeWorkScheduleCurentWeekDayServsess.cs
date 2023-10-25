@@ -65,13 +65,12 @@ namespace ReprestoryServess
         public void Delete(int id)
         {
 
-            
-
-         var deletedmodel=   GetById(id);
-            deletedmodel.isDeleted = SystemEnums.IsDeleted.Deleted;
-            Save(deletedmodel);
 
 
+            var deletedmodel = _Context.EmployeeWorkScheduleCurentWeekDay.Find( id);
+
+            _Context.EmployeeWorkScheduleCurentWeekDay.Remove(deletedmodel);
+            _Context.SaveChanges(); 
 
         }
 

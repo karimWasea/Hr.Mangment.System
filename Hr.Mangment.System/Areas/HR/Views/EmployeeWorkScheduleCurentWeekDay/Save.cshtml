@@ -26,37 +26,37 @@
             <form asp-action="Save" method="post" id="saveform" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
                 <input asp-for="EmployeeId" class="form-control" type="hidden" />
-                <div class="form-row">
+              @*   <div class="form-row">
                     <div class="form-group col-md-5">
                         <label asp-for="EmployeeName">EmployeeName:</label>
                         <input asp-for="EmployeeName" class="form-control" readonly />
                     </div>
 
-                <div class="form-group col-md-5">
-                   
-
-
-
-                            <label asp-for="selectShiftids" class="form-label mt-4"></label>
-                            <select class="glass-select form-select" asp-for="selectShiftids" asp-items="Model.DisplayShiftlist"
-                                    data-placeholder="Select Shifts" multiple="multiple">
-
-
-
-                            @*
-                            this make Noseach
-                            data-minimum-results-for-search="Infinity">
-
-                            //  this is make it multiuble select
-
-                            *@@* multiple="multiple" *@>
+                    <div class="form-group col-md-5">
+                        <label asp-for="selectShiftids" class="form-label mt-4"></label>
+                        <select class="glass-select form-select" asp-for="selectShiftids" asp-items="Model.DisplayShiftlist"
+                                data-placeholder="Select Shifts" multiple="multiple">
                             <option value=""></option>
                         </select>
-                        <span asp-validation-for="selectShiftids
-" class="text-danger"></span>
+                        <span asp-validation-for="selectShiftids" class="text-danger"></span>
                     </div>
                 </div>
 
+                *@<div class="form-inline">
+                    <div class="form-group">
+                        <label asp-for="EmployeeName">EmployeeName:</label>
+                        <input asp-for="EmployeeName" class="form-control" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="selectShiftids" class="form-label mt-4"></label>
+                        <select class="glass-select form-select" asp-for="selectShiftids" asp-items="Model.DisplayShiftlist"
+                                data-placeholder="Select Shifts" multiple="multiple">
+                            <option value=""></option>
+                        </select>
+                        <span asp-validation-for="selectShiftids" class="text-danger"></span>
+                    </div>
+                </div>
 
 
                 <div class="button-group">
