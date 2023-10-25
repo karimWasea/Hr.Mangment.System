@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAcess.layes.Migrations
 {
     /// <inheritdoc />
-    public partial class fg : Migration
+    public partial class mjmsddhjl : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,9 +31,9 @@ namespace DataAcess.layes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IsDeleted = table.Column<int>(type: "int", nullable: false),
                     DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ManagerId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ManagerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,7 +46,7 @@ namespace DataAcess.layes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DeviceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeviceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -332,6 +332,29 @@ namespace DataAcess.layes.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RefreshToken",
+                columns: table => new
+                {
+                    ApplicaionuserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ExpiresOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RevokedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RefreshToken", x => new { x.ApplicaionuserId, x.Id });
+                    table.ForeignKey(
+                        name: "FK_RefreshToken_AspNetUsers_ApplicaionuserId",
+                        column: x => x.ApplicaionuserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SalaryTransactions",
                 columns: table => new
                 {
@@ -524,6 +547,9 @@ namespace DataAcess.layes.Migrations
 
             migrationBuilder.DropTable(
                 name: "EmployeeWorkScheduleCurentWeekDay");
+
+            migrationBuilder.DropTable(
+                name: "RefreshToken");
 
             migrationBuilder.DropTable(
                 name: "SalaryTransactions");

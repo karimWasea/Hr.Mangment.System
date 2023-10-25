@@ -19,51 +19,70 @@ namespace HR.Utailites
         {
             this.webHostEnvironment = webHostEnvironment;
         }
-        public string Uploadimg(IFormFile formFiles)
+        //public string Uploadimg(IFormFile formFiles)
+        //{
+        //    string filename = null;
+        //    if (formFiles != null)
+        //    {
+
+        //        string filledirectory = Path.Combine(webHostEnvironment.WebRootPath, "Images");
+        //        filename = Guid.NewGuid() + "-" + formFiles.FileName;
+        //        string filepath = Path.Combine(filledirectory, filename);
+        //        using (FileStream fs = new FileStream(filepath, FileMode.Create))
+        //        {
+        //            formFiles.CopyToAsync(fs);
+        //        }
+        //    }
+        //    return filename;
+
+        //}
+
+
+
+
+
+
+
+        public string SaveImage(IFormFile image)
         {
-            string filename = null;
-            if (formFiles != null)
-            {
-
-                string filledirectory = Path.Combine(webHostEnvironment.WebRootPath, "Images");
-                filename = Guid.NewGuid() + "-" + formFiles.FileName;
-                string filepath = Path.Combine(filledirectory, filename);
-                using (FileStream fs = new FileStream(filepath, FileMode.Create))
-                {
-                    formFiles.CopyToAsync(fs);
-                }
-            }
-            return filename;
-
-        }
-
-
-
-
-
-
-
-
-        public string Addrengofimges(IFormFile image)
-        {
-
             if (image != null)
             {
-
-                // Generate a unique file name using GUID to avoid name conflicts
-                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
-                var newImagePath = Path.Combine(webHostEnvironment.WebRootPath, "Images", fileName);
-
-                using (var stream = new FileStream(newImagePath, FileMode.Create))
+                if (IsImageValid(image))
                 {
-                    image.CopyTo(stream);
+                    // Generate a unique file name using a combination of timestamp and GUID
+                    var fileName = $"{DateTime.Now:yyyyMMddHHmmssfff}_{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
+                    var newImagePath = Path.Combine(webHostEnvironment.WebRootPath, "Images", fileName);
+
+                    try
+                    {
+                        using (var stream = new FileStream(newImagePath, FileMode.Create))
+                        {
+                            image.CopyTo(stream);
+                        }
+
+                        // Return the relative path to the image
+                        return $"/Images/{fileName}";
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle the exception (e.g., log it or provide user-friendly error message)
+                        // You may want to return an error code or message to the user
+                        return null;
+                    }
                 }
-
-                // Return the new file path
-                return $"/Images/{fileName}"; // Store the relative path to the image
-
             }
+
             return null;
         }
+
+        private bool IsImageValid(IFormFile image)
+        {
+            // Validate the file based on content type or extension
+            var allowedExtensions = new[] {".jpg",".jpeg",".png",".gif" }; // Define your list of allowed extensions
+            var fileExtension = Path.GetExtension(image.FileName).ToLower();
+
+            return image.ContentType.StartsWith("image/") && allowedExtensions.Contains(fileExtension);
+        }
+
     }
 }

@@ -164,8 +164,8 @@ namespace Hr.Mangment.System.Areas.Identity.Pages.Account
                 user.Salary = Input.Salary;
                 user.DepartmentId = Input.DepartmentId;
                 user.Gender = Input.Gender;
-                user.ContructUrl = _imgoperation.Uploadimg(Input.ContrutruelPath);
-                user.ImgUrl = _imgoperation.Uploadimg(Input.Impath);
+                user.ContructUrl = _imgoperation. SaveImage(Input.ContrutruelPath);
+                user.ImgUrl = _imgoperation.SaveImage(Input.Impath);
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

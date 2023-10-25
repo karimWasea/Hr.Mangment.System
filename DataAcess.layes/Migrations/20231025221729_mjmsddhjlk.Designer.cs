@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAcess.layes.Migrations
 {
     [DbContext(typeof(ApplicationDBcontext))]
-    [Migration("20230923141643_refrechtokencd")]
-    partial class refrechtokencd
+    [Migration("20231025221729_mjmsddhjlk")]
+    partial class mjmsddhjlk
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -123,6 +123,28 @@ namespace DataAcess.layes.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6e384d3b-7775-4e4c-90b7-a5db563deb9f",
+                            AccessFailedCount = 0,
+                            Adress = "",
+                            ConcurrencyStamp = "4111ba2b-055e-4bc8-a788-c154c0e9571d",
+                            Email = "SuperAdmin1995@gmail.com",
+                            EmailConfirmed = true,
+                            Gender = 0,
+                            IsDeleted = 0,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SuperAdmin1995@gmail.com",
+                            NormalizedUserName = "superAdmin",
+                            PasswordHash = "AQAAAAIAAYagAAAAEC3yXRhVl4k1pfAaAe5tI9f6pq6nznvYsqGP4QDdqxxthSD65o3K7+KS8YoFfLjd+Q==",
+                            PhoneNumberConfirmed = false,
+                            Salary = 1000.0,
+                            SecurityStamp = "99d5ccfe-af78-4d7f-a0ea-7ca971451d96",
+                            TwoFactorEnabled = false,
+                            UserName = "SuperAdmin"
+                        });
                 });
 
             modelBuilder.Entity("DataAcess.layes.Department", b =>
@@ -156,6 +178,7 @@ namespace DataAcess.layes.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DeviceName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IsDeleted")
@@ -440,6 +463,26 @@ namespace DataAcess.layes.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2f53b9e8-aa54-4e54-bee1-cdd20ff5ca0e",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "49d0cad2-1046-4d82-af98-86eea4f8a713",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        },
+                        new
+                        {
+                            Id = "80cb8b1a-64fd-45cb-98cb-846d2113371f",
+                            Name = "User",
+                            NormalizedName = "user"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -527,6 +570,13 @@ namespace DataAcess.layes.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "6e384d3b-7775-4e4c-90b7-a5db563deb9f",
+                            RoleId = "49d0cad2-1046-4d82-af98-86eea4f8a713"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

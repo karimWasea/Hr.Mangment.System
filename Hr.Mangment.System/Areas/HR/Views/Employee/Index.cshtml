@@ -27,7 +27,7 @@
             <div class="col-md-6">
                 <div class="card mb-6" style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
                     <div class="card-body">
-                        <img class="card-img-top" src="/Images/2257667a-6e20-4b6a-a2d8-a827450286fd-1696664472867.jpeg" width="100" height="100">
+                        <img class="img-fluid rounded-circle" src="@employee.imgPath" alt="Employee Image" width="180" height="180">
                         <h5 class="card-title">Name: @employee.UserName</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Email: @employee.Email</h6>
                         <p class="card-text">@employee.JobTitle</p>
@@ -61,7 +61,7 @@
                                 <div class="btn-group" role="group">
                                     <a asp-area="HR" class="btn btn-primary" asp-controller="Vaction" asp-action="addvaction" asp-route-EmplyeeName="@employee.UserName" asp-route-id="@employee.Id" data-action="edit">New Vacation</a>
                                     <a asp-area="HR" class="btn btn-primary" asp-controller="Vaction" asp-action="Editebyempid" asp-route-EmplyeeName="@employee.UserName" asp-route-EmployeeId="@employee.Id" data-action="edit">Edit Vacation</a>
-                                    <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-EmplyeeName="@employee.UserName" asp-route-Employeeid="@employee.Id" data-action="edit">ADDdayinsift</a>
+                                    <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Save" asp-route-EmplyeeName="@employee.UserName" asp-route-Employeeid="@employee.Id" data-action="edit">ADD dayin sift</a>
                                     <a asp-area="HR" class="btn btn-primary" asp-controller="EmployeeWorkScheduleCurentWeekDay" asp-action="Gtbyemployeeid" asp-route-Employeeid="@employee.Id" data-action="edit">Show All dayinsifts</a>
                                 </div>
                             </div>

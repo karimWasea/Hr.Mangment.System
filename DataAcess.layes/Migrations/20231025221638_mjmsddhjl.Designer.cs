@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAcess.layes.Migrations
 {
     [DbContext(typeof(ApplicationDBcontext))]
-    [Migration("20230920100546_sjgs")]
-    partial class sjgs
+    [Migration("20231025221638_mjmsddhjl")]
+    partial class mjmsddhjl
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -156,6 +156,7 @@ namespace DataAcess.layes.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DeviceName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IsDeleted")
@@ -554,7 +555,41 @@ namespace DataAcess.layes.Migrations
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId");
 
+                    b.OwnsMany("apistudy.Models.Entityies.RefreshToken", "RefreshToken", b1 =>
+                        {
+                            b1.Property<string>("ApplicaionuserId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
+
+                            b1.Property<DateTime>("CreatedOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("ExpiresOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime?>("RevokedOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<string>("Token")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("ApplicaionuserId", "Id");
+
+                            b1.ToTable("RefreshToken");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ApplicaionuserId");
+                        });
+
                     b.Navigation("Department");
+
+                    b.Navigation("RefreshToken");
                 });
 
             modelBuilder.Entity("DataAcess.layes.EmployeeDevice", b =>

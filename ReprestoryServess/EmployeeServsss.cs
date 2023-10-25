@@ -53,7 +53,7 @@ namespace ReprestoryServess
 
                     existingUser.Salary = entity.Salary;
                     existingUser.JobTitle = entity.Adress;
-                    existingUser.ContructUrl = _Imgoperation.Uploadimg(entity.ContructUrl);
+                    existingUser.ContructUrl = _Imgoperation.SaveImage(entity.ContructUrl);
                     existingUser.HirangDate = entity.HirangDate;
                     existingUser.Email = entity.Email;
                     existingUser.Gender = entity.Gender;
@@ -73,7 +73,7 @@ namespace ReprestoryServess
                 //else
                 //{
 
-                    existingUser.ImgUrl = _Imgoperation.Uploadimg(entity.ImgUrl);
+                    existingUser.ImgUrl = _Imgoperation.SaveImage(entity.ImgUrl);
 
 
                     var updateResult = _user.UpdateAsync(existingUser);
