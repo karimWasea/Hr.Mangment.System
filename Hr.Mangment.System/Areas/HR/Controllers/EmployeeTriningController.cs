@@ -65,7 +65,7 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
   
         public IActionResult GetAssinedTring(int? page, string search, string employeeid)
         {
-            var model = _unitOfWork.employeetrining.GetAllShiftByemployeeId(employeeid);
+            var model = _unitOfWork.employeetrining.GetAllTrainingsByemployeeId(employeeid);
             int pageNumber = page ?? 1;
 
             if (!string.IsNullOrWhiteSpace(search))
