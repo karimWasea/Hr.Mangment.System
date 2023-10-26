@@ -10,24 +10,27 @@
 }
 <div class="container mt-5" style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
     <div class="row">
-        <div class="col-md-6">
-            <!-- Add the search input form -->
-            <form id="search-form" method="get" action="@Url.Action("Index")">
-                <input type="text" name="search" value="@ViewBag.Search" placeholder="Search..." id="search-input" class="form-control">
-            </form>
-        </div>
+        <!-- Add the search input form -->
+        <form id="search-form" method="get" action="@Url.Action("Index")">
+            <input type="text" name="search" value="@ViewBag.Search" placeholder="Search..." id="search-input" class="form-control">
+        </form>
+        
         <div class="col-md-6 text-right">
             <a class="btn btn-primary" id="register" asp-area="Identity" asp-page="/Account/Register">New Employee</a>
         </div>
     </div>
+    <div id="search-results">
+        <!-- Placeholder for search results -->
 
-    <div class="row">
+
+  
+    <div class="row" ">
         @foreach (var employee in Model)
         {
             <div class="col-md-6">
                 <div class="card mb-6" style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
                     <div class="card-body">
-                        <img class="img-fluid rounded-circle" src="@employee.imgPath" alt="Employee Image" width="180" height="180">
+                        <img class="img-fluid " src="@employee.imgPath" alt="Employee Image" width="100" height="100">
                         <h5 class="card-title">Name: @employee.UserName</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Email: @employee.Email</h6>
                         <p class="card-text">@employee.JobTitle</p>
@@ -86,9 +89,40 @@
     </div>
 </div>
 
-
+ </div>
                 <partial name="_PaginationPartial" model="Model" />
+
                 @section Scripts {
-    <script src="~/js/employeeindex.js"></script>
+@*     <script src="~/js/employeeindex.js"></script>
+ *@    <script>
+        // Get the search input element
+        const searchInput = document.getElementById('search-input');
+
+        // Get the patient rows
+        const patientRows = document.querySelectorAll('.patient');
+
+        // Function to update the search results
+        function updateSearchResults() {
+            const searchText = searchInput.value.toLowerCase();
+
+            patientRows.forEach(patientRow => {
+                const patientText = patientRow.textContent.toLowerCase();
+                if (patientText.includes(searchText)) {
+                    patientRow.style.display = 'table-row';
+                } else {
+                    patientRow.style.display = 'none';
+                }
+            });
+        }
+
+        // Add an event listener to the search input to listen for input changes
+        searchInput.addEventListener('input', function () {
+            updateSearchResults();
+        });
+
+        // Initial call to populate search results
+        updateSearchResults();
+    </script>
+ 
                 }
               
