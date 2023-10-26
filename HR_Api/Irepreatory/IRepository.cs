@@ -1,4 +1,6 @@
-﻿namespace HR_Api.Irepreatory
+﻿using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
+namespace HR_Api.Irepreatory
 {
     public interface IRepository<T> : IPaginationHelper<T>
     {
@@ -6,7 +8,7 @@
         //IEnumerable<T> GetAll();
         T Save(T entity);
         bool Delete(int id);
-
-        IEnumerable<T> Search( string str = default);
+         //Update(T entity);
+                IEnumerable<T> Search( string str = default);
     }
 }

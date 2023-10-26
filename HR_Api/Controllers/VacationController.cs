@@ -50,31 +50,68 @@ namespace HR_Api.Controllers
 
             return Ok(product);
         }
-
         [HttpPost]
-        public ActionResult<VacarionDTO> CreateVaction([FromForm] VacarionDTO productCreateDto)
+        public IActionResult CreateVaction([FromForm] VacarionDTO vacationDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                // If ModelState is not valid, return a BadRequest response with the validation errors
+                return BadRequest(ModelState);
+            }
 
-
-
-
-
-
-
-
-
-            var existingProduct = _unitofwork.Vaction.Save(productCreateDto);
-            return CreatedAtAction(nameof(Getvacation), new { id = existingProduct.Id }, existingProduct);
+            try
+            {
+                // Save the vacation if it's valid and return a CreatedAtAction response
+                var existingVacation = _unitofwork.Vaction.Save(vacationDTO);
+                return CreatedAtAction(nameof(Getvacation), new { id = existingVacation.Id }, existingVacation);
+            }
+            catch (Exception ex)
+            {
+              
+                return StatusCode(500, "An error occurred while creating the vacation.");
+            }
         }
+
 
         [HttpPut]
-        public ActionResult<DevicDTO> UpdateVacation( [FromForm] VacarionDTO updatedProductDto)
+        [HttpPut("{id}")]
+        public IActionResult UpdateVacation(int id, [FromForm] VacarionDTO updatedProductDto)
         {
+            if (id != updatedProductDto.Id)
+            {
+                // Return a BadRequest response if the provided ID doesn't match the ID in the data
+                return BadRequest("ID in the URL does not match the ID in the data.");
+            }
 
+            if (!ModelState.IsValid)
+            {
+                // If ModelState is not valid, return a BadRequest response with the validation errors
+                return BadRequest(ModelState);
+            }
 
-            var existingProduct = _unitofwork.Vaction.Save(updatedProductDto);
-            return Ok(existingProduct);
+            try
+            {
+                var existingProduct = _unitofwork.Vaction.Save(updatedProductDto);
+
+                if (existingProduct == null)
+                {
+                    // Return a NotFound response if the resource with the given ID is not found
+                    return NotFound("Resource not found.");
+                }
+
+                // Return a 204 No Content response to indicate a successful update
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions, log them, and return an appropriate response
+                // For example, you can return a 500 Internal Server Error
+                // Log the exception for debugging or monitoring purposes
+                // Log.Error(ex, "Error updating vacation");
+                return StatusCode(500, "An error occurred while updating the vacation.");
+            }
         }
+
 
         [HttpDelete("{id}")]
         public IActionResult Deletevacation(int id)

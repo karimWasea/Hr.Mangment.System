@@ -5,14 +5,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HR_Api.Dtos
 {
-    public class VacarionDTO :BaseDTO
+    public class VacarionDTOADD
     {
-        [Required]
+        [Required(ErrorMessage = "isrequired")]
         public DateTime? StartDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "isrequired")]
         public DateTime? EndDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "isrequired")]
         public string EmployeeId { get; set; }
+
+
+    }
+    public class VacarionDTO : VacarionDTOADD
+    {
+        public int Id { get; set; }
+
         public static Vacation ConvertTODTOToObj(VacarionDTO departmintDTO)
         {
 
