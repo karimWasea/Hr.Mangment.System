@@ -48,7 +48,16 @@
                     <a asp-controller="TimeShift" asp-action="Index" class="btn btn-secondary">
                         <i class="fas fa-chevron-circle-left"></i> Back to Index
                     </a>
-                    <button type="submit" id="savedata" class="btn btn-primary">Mange</button>
+                    <button type="submit" id="savedata" class="btn btn-primary">
+                        @if (Model.Id > 0)
+                        {
+                            @:Update
+                        }
+                        else
+                        {
+                            @:Add New
+                        }
+                    </button>
                 </div>
             </form>
         </div>

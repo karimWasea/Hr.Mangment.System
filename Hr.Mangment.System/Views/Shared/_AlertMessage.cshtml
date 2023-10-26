@@ -38,11 +38,11 @@
     {
         string alertClass = GetAlertClass(messageType);
         return $@"
-            <div class='position-absolute top-0 end-0 m-3 alert alert-dismissible {alertClass}' style='height:60px; max-width:400px;'>
-                <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
-            {message}
-                <strong></strong> <a href='#' class='alert-link'></a>
-            </div>";
+    <div class='position-absolute top-0 end-0 m-3 alert alert-dismissible {alertClass}' style='height:80px; max-width:400px;'>
+        <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
+    {message}
+        <strong></strong> <a href='#' class='alert-link'></a>
+    </div>";
     }
 
     string GetAlertClass(string messageType)
@@ -50,7 +50,7 @@
         switch (messageType)
         {
             case "Save":
-                return "alert-success";
+                return "alert-primary";
             case "Edit":
                 return "alert-info";
             case "Delete":

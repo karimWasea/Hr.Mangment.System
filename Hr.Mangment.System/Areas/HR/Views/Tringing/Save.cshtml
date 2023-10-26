@@ -22,7 +22,16 @@
                 </div>
 
                 <div class="text-center button-group">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" id="savedata" class="btn btn-primary">
+                        @if (Model.Id > 0)
+                        {
+                            @:Update
+                        }
+                        else
+                        {
+                            @:Add New
+                        }
+                    </button>
                     <a asp-controller="Training" asp-action="Index" class="btn btn-secondary">
                         <i class="fas fa-chevron-circle-left"></i> Back to Index
                     </a>

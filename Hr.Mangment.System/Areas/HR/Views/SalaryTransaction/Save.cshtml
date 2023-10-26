@@ -60,7 +60,16 @@
                 </div>
 
                 <div class="button-group">
-                    <button type="submit" id="savedata" class="btn btn-primary">Update</button>
+                    <button type="submit" id="savedata" class="btn btn-primary">
+                        @if (Model.Id > 0)
+                        {
+                            @:Update
+                        }
+                        else
+                        {
+                            @:Add New
+                        }
+                    </button>
                     <a asp-controller="SalaryTransaction" asp-action="Index" class="btn btn-secondary">
                         <i class="fas fa-chevron-circle-left"></i> Back to Index
                     </a>

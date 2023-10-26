@@ -106,13 +106,13 @@ namespace Hr.Mangment.System.Areas.HR.Controllers
             if (id >  0)
             {
              var model = _unitOfWork.employeeDevice.GetById(id);
-                model.DisplayDeviceid = _lookupServess.AllDevices();
+                model.DisplayDeviceid = _lookupServess.AllDevicess();
                 return View(model);
             }
             else
             {
                 EmployeeDeviceVm vewodel = new EmployeeDeviceVm();  
-                vewodel.DisplayDeviceid = _lookupServess.AllDevices();
+                vewodel.DisplayDeviceid = _lookupServess.AllDevicess();
 
                 vewodel.EmployeeName = EmplyeeName;
                 vewodel.EmployeeId = Emplyeeid;
