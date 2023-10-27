@@ -4,8 +4,14 @@ namespace SystemEnums
 {
     public enum Gender
     {
+        [Description("Male  ")]
+
         Male,
+        [Description("Female  ")]
+
         Female,
+        [Description("Other  ")]
+
         Other
     }
 

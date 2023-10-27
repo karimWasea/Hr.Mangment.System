@@ -6,6 +6,7 @@ using HR_Api.IrepreatoryServess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 using PagedList;
 
@@ -67,6 +68,7 @@ namespace HR_Api.Controllers
 
             try
             {
+             
                 // Save the vacation if it's valid and return a CreatedAtAction response
                 var existingVacation = _unitofwork.WorkScheduleCurentWeekDay.Add(vacationDTO);
                 return CreatedAtAction(nameof(GetWorkScheduleCurentWeekDay), new { id = existingVacation.Id }, existingVacation);

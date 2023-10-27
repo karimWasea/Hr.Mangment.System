@@ -7,8 +7,7 @@ namespace HR_Api.Dtos
 {
     public class EmployeedeviceDTOAdd
     {
-        [Required]
-        public string Name { get; set; }
+      
 
 
         [Required]
