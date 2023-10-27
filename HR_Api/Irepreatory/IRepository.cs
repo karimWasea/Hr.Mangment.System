@@ -4,11 +4,11 @@ namespace HR_Api.Irepreatory
 {
     public interface IRepository<T> : IPaginationHelper<T>
     {
+        bool Delete(int id);
+
         T GetById(int id);
         //IEnumerable<T> GetAll();
-        T Save(T entity);
-        bool Delete(int id);
-         //Update(T entity);
-                IEnumerable<T> Search( string str = default);
+     
+    IEnumerable<T> Search( string str = default);
     }
 }

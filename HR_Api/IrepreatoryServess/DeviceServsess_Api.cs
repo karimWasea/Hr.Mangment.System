@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 using System.Runtime.InteropServices;
 
+using static HR_Api.Dtos.VacarionDTOAdd;
+
 namespace HR_Api.IrepreatoryServess
 {
     public class DeviceServsess_Api : PaginationHelper<DevicDTO>, IDevice_Api
@@ -15,40 +17,32 @@ namespace HR_Api.IrepreatoryServess
         private readonly UserManager<Applicaionuser> _user;
 
         private ApplicationDBcontext _Context;
+      
         public DeviceServsess_Api(ApplicationDBcontext db, UserManager<Applicaionuser> user)
         {
 
             _user = user;
             _Context = db;
         }
-        public DevicDTO Save(DevicDTO entity)
+        public Device Add(DevicDTOAdd entity)
         {
+            var model = DevicDTOAdd.ConvertTODTOToObj(entity);
 
+            var ADDentity = _Context.Devices.Add(model);
 
+            _Context.SaveChanges();
+            return ADDentity.Entity;
+        }
+
+        public Device Update(DevicDTO entity)
+        {
             var model = DevicDTO.ConvertTODTOToObj(entity);
 
-            if (entity.Id > 0)
-            { 
-                 
-                _Context.Devices.Update(model);
-
-                _Context.SaveChanges();
- return entity;
+            var UPdated = _Context.Devices.Update(model);
 
 
-            }
-            else
-            {
-
-
-                _Context.Devices.Add(model);
-
-                _Context.SaveChanges();
-                return entity;
-
-
-
-            }
+            _Context.SaveChanges();
+            return UPdated.Entity;
         }
 
 

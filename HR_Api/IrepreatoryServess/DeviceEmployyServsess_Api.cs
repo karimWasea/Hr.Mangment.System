@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 using System.Runtime.InteropServices;
 
+using static HR_Api.Dtos.VacarionDTOAdd;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
 namespace HR_Api.IrepreatoryServess
 {
     public class DeviceEmployyServsess_Api : PaginationHelper<EmployeedeviceDTO>, IDeviceEmpoyee_Api
@@ -15,51 +18,97 @@ namespace HR_Api.IrepreatoryServess
         private readonly UserManager<Applicaionuser> _user;
 
         private ApplicationDBcontext _Context;
+
         public DeviceEmployyServsess_Api(ApplicationDBcontext db, UserManager<Applicaionuser> user)
         {
 
             _user = user;
             _Context = db;
         }
-        public EmployeedeviceDTO Save(EmployeedeviceDTO entity)
+      
+
+        public EmployeeDevice Update(EmployeedeviceDTO entity)
         {
+            // Assuming EmployeedeviceDTO.CanconvertViewmodel(entity) converts to EmployeeDevice
+          
 
-
-
-            foreach (var selectedid in entity.devicids)
+        var modelsToUpdate = entity.devicids.Select(selectedid => new EmployeeDevice
             {
-                entity.devicid = selectedid;
-                var model = EmployeedeviceDTO.CanconvertViewmodel(entity);
+                DeviceId = selectedid,
+                EmployeeId = entity.Employeeid,
+                Id = entity.Id,
+
+            }).ToList();
+            _Context.EmployeeDevices.UpdateRange(modelsToUpdate);
+            _Context.SaveChanges();
+
+            return modelsToUpdate.LastOrDefault();
+        }
+
+
+
+        public EmployeeDevice Add(EmployeedeviceDTOAdd entity)
+        {
+            // Assuming EmployeedeviceDTO.CanconvertViewmodel(entity) converts to EmployeeDevice
+
+
+            var modelsToUpdate = entity.devicids.Select(selectedid => new EmployeeDevice
+            {
+                DeviceId = selectedid,
+                EmployeeId = entity.Employeeid,
+
+            });
+            _Context.EmployeeDevices.AddRange(modelsToUpdate);
+            _Context.SaveChanges();
+
+            return modelsToUpdate.LastOrDefault();
+        }
 
 
 
 
-                if (entity.Id > 0)
-                {
-                    _Context.EmployeeDevices.Update(model);
+
+
+
+        //public EmployeedeviceDTO Save(EmployeedeviceDTO entity)
+        //{
+
+
+
+        //    foreach (var selectedid in entity.devicids)
+        //    {
+        //        entity.devicid = selectedid;
+        //        var model = EmployeedeviceDTO.CanconvertViewmodel(entity);
+
+
+
+
+        //        if (entity.Id > 0)
+        //        {
+        //            _Context.EmployeeDevices.Update(model);
 
    
              
 
-                }
-                else
-                {
+        //        }
+        //        else
+        //        {
 
 
-                    _Context.EmployeeDevices.Add(model);
+        //            _Context.EmployeeDevices.Add(model);
 
          
              
 
 
-                }
+        //        }
 
-                _Context.SaveChanges();
+        //        _Context.SaveChanges();
 
-            }
+        //    }
 
-            return entity;
-        }
+        //    return entity;
+        //}
 
 
 

@@ -7,13 +7,15 @@ using Microsoft.EntityFrameworkCore;
 
 using PagedList;
 
+using static HR_Api.Dtos.VacarionDTOAdd;
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HR_Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class  VacationController : ControllerBase
+    public class  VacationController : ControllerBase 
     {
         private readonly Unitofwork _unitofwork;
 
@@ -51,7 +53,7 @@ namespace HR_Api.Controllers
             return Ok(product);
         }
         [HttpPost]
-        public IActionResult CreateVaction([FromForm] VacarionDTO vacationDTO)
+        public IActionResult CreateVaction([FromForm] VacarionDTOAdd vacationDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +64,7 @@ namespace HR_Api.Controllers
             try
             {
                 // Save the vacation if it's valid and return a CreatedAtAction response
-                var existingVacation = _unitofwork.Vaction.Save(vacationDTO);
+                var existingVacation = _unitofwork.Vaction.Add(vacationDTO);
                 return CreatedAtAction(nameof(Getvacation), new { id = existingVacation.Id }, existingVacation);
             }
             catch (Exception ex)
@@ -73,7 +75,7 @@ namespace HR_Api.Controllers
         }
 
 
-        [HttpPut]
+
         [HttpPut("{id}")]
         public IActionResult UpdateVacation(int id, [FromForm] VacarionDTO updatedProductDto)
         {
@@ -91,7 +93,7 @@ namespace HR_Api.Controllers
 
             try
             {
-                var existingProduct = _unitofwork.Vaction.Save(updatedProductDto);
+                var existingProduct = _unitofwork.Vaction.Update(updatedProductDto);
 
                 if (existingProduct == null)
                 {

@@ -10,10 +10,10 @@ using SystemEnums;
 
 namespace HR_Api.Dtos
 {
-    public class WorkScheduleCurentWeekDayDTO : BaseDTO
+    public class WorkScheduleCurentWeekDayDTOADD
     {
-        [JsonIgnore]
-        [Required]
+
+
 
         public DayOfWeek DayNames { get; set; }
         [Required]
@@ -32,19 +32,48 @@ namespace HR_Api.Dtos
         [Required]
 
         public DateTime TimeEndshifts { get; set; }
-        public static WorkScheduleCurentWeekDay ConvertTODTOToObj(WorkScheduleCurentWeekDayDTO departmintDTO)
+        public static WorkScheduleCurentWeekDay ConvertTODTOToObj(WorkScheduleCurentWeekDayDTOADD departmintDTO)
         {
 
-            return  new WorkScheduleCurentWeekDay
+            return new WorkScheduleCurentWeekDay
+            {
+                 TimeEndshifts = departmintDTO.TimeEndshifts,
+                  DayName   = departmintDTO.DayNames,
+                   TimestartShift = departmintDTO.TimestartShift,
+
+                ShiftName = departmintDTO.Name,
+
+                 
+
+            };
+        }
+    }
+
+    public class WorkScheduleCurentWeekDayDTO :  WorkScheduleCurentWeekDayDTOADD
+    {
+       
+
+
+        [Required]
+        public int Id { get; set; }
+        public static WorkScheduleCurentWeekDay ConvertTODTOToObjUpdate(WorkScheduleCurentWeekDayDTO departmintDTO)
+        {
+
+            return new WorkScheduleCurentWeekDay
             {
 
                 ShiftName = departmintDTO.Name,
-            
-               Id = departmintDTO.Id
+                TimeEndshifts = departmintDTO.TimeEndshifts,
+                DayName = departmintDTO.DayNames,
+                TimestartShift = departmintDTO.TimestartShift,
+
+
+                Id = departmintDTO.Id
                  ,
 
-            };   
+            };
         }
-    
+
+
     }
 }

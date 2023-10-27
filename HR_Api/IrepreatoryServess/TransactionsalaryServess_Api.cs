@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 using System.Runtime.InteropServices;
 
+using static HR_Api.Dtos.VacarionDTOAdd;
+
 namespace HR_Api.IrepreatoryServess
 {
     public class  TransactionsalaryServess_Api : PaginationHelper<SalaryTransactionTO>, ISalarytransaction_Api
@@ -23,41 +25,78 @@ namespace HR_Api.IrepreatoryServess
             _user = user;
             _Context = db;
         }
-        public SalaryTransactionTO Save(SalaryTransactionTO entity)
-        {// Determine the date range for the current month
+        public SalaryTransaction Add(SalaryTransactionTOAdd entity)
+        {
+            // Determine the date range for the current month
             DateTime today = DateTime.Today;
             DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
             DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
 
             //Example: Retrieve employees whose employment started before or on the first day of the month
             //     and ended after or on the last day of the month
+            var model = SalaryTransactionTOAdd.ConvertTODTOToObj(entity);
+            var entityadd = _Context.SalaryTransactions.Add(model);
+            _SalaryclackServesses.CalculateSalary(entityadd.Entity.EmployeeId, (decimal)entityadd.Entity.Amount, entityadd.Entity.TransactionDate);
 
 
+            _Context.SaveChanges();
+            return entityadd.Entity;
+        } 
+        
+        
+        public SalaryTransaction Update(SalaryTransactionTO entity)
+        {
+            // Determine the date range for the current month
+            DateTime today = DateTime.Today;
+            DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
+            DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
 
-
+            //Example: Retrieve employees whose employment started before or on the first day of the month
+            //     and ended after or on the last day of the month
             var model = SalaryTransactionTO.ConvertTODTOToObj(entity);
-
-            if (entity.Id > 0)
-            {
-               var entityadd = _Context.SalaryTransactions.Update(model);
-
-                _Context.SaveChanges();
-                _SalaryclackServesses.CalculateSalary(entityadd.Entity.EmployeeId, (decimal)entityadd.Entity.Amount, entityadd.Entity.TransactionDate);
+            var entityadd = _Context.SalaryTransactions.Update(model);
+            _SalaryclackServesses.CalculateSalary(entityadd.Entity.EmployeeId, (decimal)entityadd.Entity.Amount, entityadd.Entity.TransactionDate);
 
 
-            }
-            else
-            {
-
-
-               var entityadd = _Context.SalaryTransactions.Add(model);
-
-                _Context.SaveChanges();
-                _SalaryclackServesses.CalculateSalary(entityadd.Entity.EmployeeId, (decimal)entityadd.Entity.Amount, entityadd.Entity.TransactionDate);
-
-            }
-            return entity;
+            _Context.SaveChanges();
+            return entityadd.Entity;
         }
+
+        //public SalaryTransactionTO Save(SalaryTransactionTO entity)
+        //{// Determine the date range for the current month
+        //    DateTime today = DateTime.Today;
+        //    DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
+        //    DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+        //    //Example: Retrieve employees whose employment started before or on the first day of the month
+        //    //     and ended after or on the last day of the month
+
+
+
+
+        //    var model = SalaryTransactionTO.ConvertTODTOToObj(entity);
+
+        //    if (entity.Id > 0)
+        //    {
+        //       var entityadd = _Context.SalaryTransactions.Update(model);
+
+        //        _Context.SaveChanges();
+        //        _SalaryclackServesses.CalculateSalary(entityadd.Entity.EmployeeId, (decimal)entityadd.Entity.Amount, entityadd.Entity.TransactionDate);
+
+
+        //    }
+        //    else
+        //    {
+
+
+        //       var entityadd = _Context.SalaryTransactions.Add(model);
+
+        //        _Context.SaveChanges();
+        //        _SalaryclackServesses.CalculateSalary(entityadd.Entity.EmployeeId, (decimal)entityadd.Entity.Amount, entityadd.Entity.TransactionDate);
+
+        //    }
+        //    return entity;
+        //}
 
 
 
@@ -72,9 +111,10 @@ namespace HR_Api.IrepreatoryServess
 
             var deletedmodel = GetById(id);
 
-            Save(deletedmodel);
+            Update(deletedmodel);
             _SalaryclackServesses.CalculateSalary(deletedmodel.EmployeeId, (decimal)deletedmodel.Amount, (DateTime)deletedmodel.TransactionDate);
              _Context.Remove(deletedmodel);
+            _Context.SaveChanges( );
             return true;
 
 

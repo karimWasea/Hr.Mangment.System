@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 using System.Runtime.InteropServices;
 
+using static HR_Api.Dtos.VacarionDTOAdd;
+
 namespace HR_Api.IrepreatoryServess
 {
     public class DepatmentServsess_Api : PaginationHelper<DepartmintDTO>, IDeparment_Api
@@ -21,38 +23,30 @@ namespace HR_Api.IrepreatoryServess
             _user = user;
             _Context = db;
         }
-        public DepartmintDTO Save(DepartmintDTO entity)
+       
+
+
+
+        public Department Add(DepartmintDTOAdd entity)
         {
+            var model = DepartmintDTOAdd.ConvertTODTOToObj(entity);
 
+            var ADDentity = _Context.Departments.Add(model);
 
-            var model = DepartmintDTO.ConvertTODTOToObj(entity);
-
-            if (entity.Id > 0)
-            { 
-                 
-                _Context.Departments.Update(model);
-
-                _Context.SaveChanges();
- return entity;
-
-
-            }
-            else
-            {
-
-
-                _Context.Departments.Add(model);
-
-                _Context.SaveChanges();
-                return entity;
-
-
-
-            }
+            _Context.SaveChanges();
+            return ADDentity.Entity;
         }
 
+        public Department Update(DepartmintDTO entity)
+        {
+            var model = DepartmintDTO.ConvertTODTOToObj(entity);
+
+            var UPdated = _Context.Departments.Update(model);
 
 
+            _Context.SaveChanges();
+            return UPdated.Entity;
+        }
 
 
         public bool Delete(int id)
@@ -68,19 +62,7 @@ namespace HR_Api.IrepreatoryServess
 
         }
 
-        //public IEnumerable<DepartmintDTO> GetAll()
-        //{
-        //    var model = _Context.Departments.Include(p => p.Employees).Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Select(p => new DepartmintDTO
-        //    {
-        //        Id = p.Id,
-        //        Name = p.DepartmentName,
-        //        ManagerId = p.ManagerId,
-        //        mangerName = _user.Users.Where(m => m.Id == p.ManagerId).Select(p => p.UserName).FirstOrDefault(),
-
-        //    }).ToList();
-
-        //    return model;
-        //}
+     
 
         public DepartmintDTO GetById(int id)
         {
@@ -118,54 +100,7 @@ namespace HR_Api.IrepreatoryServess
         }
 
 
-        //public IEnumerable<DepartmintDTO> Search(string searchTerm)
-        //{
-        //    if (string.IsNullOrWhiteSpace(searchTerm))
-        //    {
-        //        // If searchTerm is empty, return all departments
-        //        var allDepartments = _Context.Departments
-        //            .Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Include(t => t.Employees)
-        //            .Select(p => new DepartmintDTO
-        //            {
-        //                Id = p.Id,
-        //                Name = p.DepartmentName,
-        //                ManagerId = p.ManagerId,
-        //                mangerName = _user.Users
-        //                    .Where(m => m.Id == p.ManagerId)
-        //                    .Select(m => m.UserName)
-        //                    .FirstOrDefault(),
-        //            })
-        //            .ToList();
-
-        //        return allDepartments;
-        //    }
-
-        //else
-        //{
-        //  //  If searchTerm is not empty, perform the search
-        //           var departments = _Context.Departments
-        //               .Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted &&
-        //                           (p.DepartmentName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-        //                            _user.Users.Any(u => u.Id == p.ManagerId || u.UserName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
-        //                            || string.IsNullOrWhiteSpace(searchTerm)
-
-        //                            )
-        //               .Select(p => new DepartmintDTO
-        //               {
-        //                   Id = p.Id,
-        //                   Name = p.DepartmentName,
-        //                   ManagerId = p.ManagerId,
-        //                   mangerName = _user.Users
-        //                       .Where(m => m.Id == p.ManagerId)
-        //                       .Select(m => m.UserName)
-        //                       .FirstOrDefault(),
-        //               })
-        //               .ToList();
-
-        //    return departments;
-        //    }
-        //}
-
+       
 
 
     }

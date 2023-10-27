@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 using PagedList;
 
+using static HR_Api.Dtos.VacarionDTOAdd;
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HR_Api.Controllers
@@ -21,6 +23,7 @@ namespace HR_Api.Controllers
         {
             _unitofwork = unitofwork;
         }
+     
         [HttpGet]
         public ActionResult<IPagedList<DevicDTO>> GetPaginatedDevice(int pageNumber = 1  )
         {
@@ -50,31 +53,69 @@ namespace HR_Api.Controllers
 
             return Ok(product);
         }
-
         [HttpPost]
-        public ActionResult<DevicDTO> CreateDepartment([FromForm] DevicDTO productCreateDto)
+
+        public IActionResult CreateDevic([FromForm] DevicDTOAdd vacationDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                // If ModelState is not valid, return a BadRequest response with the validation errors
+                return BadRequest(ModelState);
+            }
 
+            try
+            {
+                // Save the vacation if it's valid and return a CreatedAtAction response
+                var existingVacation = _unitofwork.Device.Add(vacationDTO);
+                return CreatedAtAction(nameof(GetDevice), new { id = existingVacation.Id }, existingVacation);
+            }
+            catch (Exception ex)
+            {
 
-
-
-
-
-
-
-
-            var existingProduct = _unitofwork.Device.Save(productCreateDto);
-            return CreatedAtAction(nameof(GetDevice), new { id = existingProduct.Id }, existingProduct);
+                return StatusCode(500, "An error occurred while creating the vacation.");
+            }
         }
+
+
 
         [HttpPut("{id}")]
-        public ActionResult<DevicDTO> UpdateProduct(int id, [FromForm] DevicDTO updatedProductDto)
+        public IActionResult UpdateDevic(int id, [FromForm] DevicDTO updatedProductDto)
         {
+            if (id != updatedProductDto.Id)
+            {
+                // Return a BadRequest response if the provided ID doesn't match the ID in the data
+                return BadRequest("ID in the URL does not match the ID in the data.");
+            }
 
+            if (!ModelState.IsValid)
+            {
+                // If ModelState is not valid, return a BadRequest response with the validation errors
+                return BadRequest(ModelState);
+            }
 
-            var existingProduct = _unitofwork.Device.Save(updatedProductDto);
-            return Ok(existingProduct);
+            try
+            {
+                var existingProduct = _unitofwork.Device.Update(updatedProductDto);
+
+                if (existingProduct == null)
+                {
+                    // Return a NotFound response if the resource with the given ID is not found
+                    return NotFound("Resource not found.");
+                }
+
+                // Return a 204 No Content response to indicate a successful update
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions, log them, and return an appropriate response
+                // For example, you can return a 500 Internal Server Error
+                // Log the exception for debugging or monitoring purposes
+                // Log.Error(ex, "Error updating vacation");
+                return StatusCode(500, "An error occurred while updating the vacation.");
+            }
         }
+
 
         [HttpDelete("{id}")]
         public IActionResult DeleteDevice(int id)

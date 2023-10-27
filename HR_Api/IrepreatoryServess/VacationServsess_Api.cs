@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using System.Runtime.InteropServices;
+using System.Security.Principal;
+
+using static HR_Api.Dtos.VacarionDTOAdd;
 
 namespace HR_Api.IrepreatoryServess
 {
@@ -21,36 +24,7 @@ namespace HR_Api.IrepreatoryServess
             _user = user;
             _Context = db;
         }
-        public VacarionDTO Save(VacarionDTO entity)
-        {
-
-
-            var model = VacarionDTO.ConvertTODTOToObj(entity);
-
-            if (entity.Id > 0)
-            { 
-                 
-                _Context.Vacations.Update(model);
-
-                _Context.SaveChanges();
- return entity;
-
-
-            }
-            else
-            {
-
-
-                _Context.Vacations.Add(model);
-
-                _Context.SaveChanges();
-                return entity;
-
-
-
-            }
-        }
-
+      
 
 
 
@@ -115,58 +89,25 @@ namespace HR_Api.IrepreatoryServess
                 .ToList();
         }
 
+        public Vacation Add(VacarionDTOAdd entity)
+        {
+            var model = VacarionDTOAdd.ConvertTODTOToObj(entity);
+
+         var ADDentity=   _Context.Vacations.Add(model);
+
+            _Context.SaveChanges();
+            return ADDentity.Entity;
+        }
+
+        public Vacation Update(VacarionDTO entity)
+        {
+            var model = VacarionDTO.ConvertTODTOToObj(entity);
+
+        var UPdated=    _Context.Vacations.Update(model);
 
 
-
-        //public IEnumerable<DepartmintDTO> Search(string searchTerm)
-        //{
-        //    if (string.IsNullOrWhiteSpace(searchTerm))
-        //    {
-        //        // If searchTerm is empty, return all departments
-        //        var allDepartments = _Context.Departments
-        //            .Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted).Include(t => t.Employees)
-        //            .Select(p => new DepartmintDTO
-        //            {
-        //                Id = p.Id,
-        //                Name = p.DepartmentName,
-        //                ManagerId = p.ManagerId,
-        //                mangerName = _user.Users
-        //                    .Where(m => m.Id == p.ManagerId)
-        //                    .Select(m => m.UserName)
-        //                    .FirstOrDefault(),
-        //            })
-        //            .ToList();
-
-        //        return allDepartments;
-        //    }
-
-        //else
-        //{
-        //  //  If searchTerm is not empty, perform the search
-        //           var departments = _Context.Departments
-        //               .Where(p => p.IsDeleted == SystemEnums.IsDeleted.NotDeleted &&
-        //                           (p.DepartmentName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-        //                            _user.Users.Any(u => u.Id == p.ManagerId || u.UserName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
-        //                            || string.IsNullOrWhiteSpace(searchTerm)
-
-        //                            )
-        //               .Select(p => new DepartmintDTO
-        //               {
-        //                   Id = p.Id,
-        //                   Name = p.DepartmentName,
-        //                   ManagerId = p.ManagerId,
-        //                   mangerName = _user.Users
-        //                       .Where(m => m.Id == p.ManagerId)
-        //                       .Select(m => m.UserName)
-        //                       .FirstOrDefault(),
-        //               })
-        //               .ToList();
-
-        //    return departments;
-        //    }
-        //}
-
-
-
+            _Context.SaveChanges();
+            return UPdated.Entity;
+        }
     }
 }

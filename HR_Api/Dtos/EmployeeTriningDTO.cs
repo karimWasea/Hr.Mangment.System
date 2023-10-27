@@ -2,32 +2,45 @@
 
 using HR_Api.Utellites;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace HR_Api.Dtos
 {
-    public class EmployeeTriningDTO : BaseDTO
+    public class EmployeeTriningDTOAdd
     {
+
+
         [Required]
         public string? EmployeeId { get; set; }
-        [Required]
 
+        [JsonIgnore]
         public int TrainingId { get; set; }
-        [Required]
-        public  List <int> TrainiIngIds { get; set; }
-        public static EmployeeTraining ConvertTODTOToObj(EmployeeTriningDTO departmintDTO)
-        {
+        [Required] public List<int> TrainiIngIds { get; set; }
 
-            return  new  EmployeeTraining
-            { 
+    }
+
+
+
+
+    public class EmployeeTriningDTO: EmployeeTriningDTOAdd
+    { 
+      [Required]
+    public int Id { get; set; }
+
+        //public static EmployeeTraining ConvertTODTOToObj(EmployeeTriningDTO departmintDTO)
+        //{
+
+        //    return  new  EmployeeTraining
+        //    { 
             
-              EmployeeId = departmintDTO.EmployeeId,
-              TrainingId = departmintDTO.TrainingId,
+        //      EmployeeId = departmintDTO.EmployeeId,
+        //      TrainingId = departmintDTO.TrainingId,
              
-               Id = departmintDTO.Id
-                 ,
+        //       Id = departmintDTO.Id
+        //         ,
 
-            };   
-        }
+        //    };   
+        //}
     
     }
 }

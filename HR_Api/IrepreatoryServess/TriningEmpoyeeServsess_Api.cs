@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 using System.Runtime.InteropServices;
 
+using static HR_Api.Dtos.VacarionDTOAdd;
+
 namespace HR_Api.IrepreatoryServess
 {
     public class TriningEmpoyeeServsess_Api : PaginationHelper<EmployeeTriningDTO>, ITriningEmpoyee_Api
@@ -15,51 +17,91 @@ namespace HR_Api.IrepreatoryServess
         private readonly UserManager<Applicaionuser> _user;
 
         private ApplicationDBcontext _Context;
+      
         public TriningEmpoyeeServsess_Api(ApplicationDBcontext db, UserManager<Applicaionuser> user)
         {
 
             _user = user;
             _Context = db;
         }
-        public EmployeeTriningDTO Save(EmployeeTriningDTO entity)
+        public EmployeeTraining Update(EmployeeTriningDTO entity)
         {
+            // Assuming EmployeedeviceDTO.CanconvertViewmodel(entity) converts to EmployeeDevice
 
 
-
-            foreach (var selectedid in entity.TrainiIngIds)
+            var modelsToUpdate = entity.TrainiIngIds.Select(selectedid => new EmployeeTraining
             {
-                entity.TrainingId = selectedid;
-                var model = EmployeeTriningDTO.ConvertTODTOToObj(entity);
+                TrainingId = selectedid,
+                EmployeeId = entity.EmployeeId,
+                Id = entity.Id,
 
+            }).ToList();
+            _Context.EmployeeTrainings.UpdateRange(modelsToUpdate);
+            _Context.SaveChanges();
 
-
-
-                if (entity.Id > 0)
-                {
-                    _Context.EmployeeTrainings.Update(model);
-
-   
-             
-
-                }
-                else
-                {
-
-
-                    _Context.EmployeeTrainings.Add(model);
-
-         
-             
-
-
-                }
-
-                _Context.SaveChanges();
-
-            }
-
-            return entity;
+            return modelsToUpdate.LastOrDefault();
         }
+     public EmployeeTraining Add(EmployeeTriningDTOAdd entity)
+        {
+            // Assuming EmployeedeviceDTO.CanconvertViewmodel(entity) converts to EmployeeDevice
+
+
+            var modelsToUpdate = entity.TrainiIngIds.Select(selectedid => new EmployeeTraining
+            {
+                TrainingId = selectedid,
+                EmployeeId = entity.EmployeeId,
+
+
+            });
+            _Context.EmployeeTrainings.AddRange(modelsToUpdate);
+            _Context.SaveChanges();
+
+            return modelsToUpdate.LastOrDefault();
+        }
+
+
+
+      
+
+        //public EmployeeTriningDTO Save(EmployeeTriningDTO entity)
+        //{
+
+
+
+        //    foreach (var selectedid in entity.TrainiIngIds)
+        //    {
+        //        entity.TrainingId = selectedid;
+        //        var model = EmployeeTriningDTO.ConvertTODTOToObj(entity);
+
+
+
+
+        //        if (entity.Id > 0)
+        //        {
+        //            _Context.EmployeeTrainings.Update(model);
+
+
+
+
+        //        }
+        //        else
+        //        {
+
+
+        //            _Context.EmployeeTrainings.Add(model);
+
+
+
+
+
+        //        }
+
+        //        _Context.SaveChanges();
+
+        //    }
+
+        //    return entity;
+        //}
 
 
 

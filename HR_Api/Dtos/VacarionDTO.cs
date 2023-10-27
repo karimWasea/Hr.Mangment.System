@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HR_Api.Dtos
 {
-    public class VacarionDTOADD
+    public class VacarionDTOAdd
     {
         [Required(ErrorMessage = "isrequired")]
         public DateTime? StartDate { get; set; }
@@ -14,29 +14,47 @@ namespace HR_Api.Dtos
         [Required(ErrorMessage = "isrequired")]
         public string EmployeeId { get; set; }
 
-
-    }
-    public class VacarionDTO : VacarionDTOADD
-    {
-        public int Id { get; set; }
-
-        public static Vacation ConvertTODTOToObj(VacarionDTO departmintDTO)
+        public static Vacation ConvertTODTOToObj(VacarionDTOAdd departmintDTO)
         {
 
-            return  new Vacation
-            { 
-            
-             StartDate = departmintDTO.StartDate,
-               Id = departmintDTO.Id
-                 ,
-                
-                
+            return new Vacation
+            {
+
+                StartDate = departmintDTO.StartDate,
+
+
+
                 EndDate = departmintDTO.EndDate,
-               EmployeeId = departmintDTO.EmployeeId
+                EmployeeId = departmintDTO.EmployeeId
                  ,
 
-            };   
+            };
         }
-    
+        public class VacarionDTO : VacarionDTOAdd
+        {
+            [Required(ErrorMessage = "isrequired")]
+
+            public int Id { get; set; }
+
+            public static Vacation ConvertTODTOToObj(VacarionDTO departmintDTO)
+            {
+
+                return new Vacation
+                {
+
+                    StartDate = departmintDTO.StartDate,
+                    Id = departmintDTO.Id
+                     ,
+
+
+                    EndDate = departmintDTO.EndDate,
+                    EmployeeId = departmintDTO.EmployeeId
+                     ,
+
+                };
+            }
+
+        }
     }
 }
+

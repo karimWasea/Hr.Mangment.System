@@ -9,10 +9,13 @@ using Microsoft.EntityFrameworkCore;
 
 using System.Runtime.InteropServices;
 
+using static HR_Api.Dtos.VacarionDTOAdd;
+
 namespace HR_Api.IrepreatoryServess
 {
     public class WorkScheduleCurentWeekServsess_Api: PaginationHelper<WorkScheduleCurentWeekDayDTO> , IWorkScheduleCurentWeekDay_Api
     {
+       
         private readonly UserManager<Applicaionuser> _user;
 
         private ApplicationDBcontext _Context;
@@ -21,6 +24,28 @@ namespace HR_Api.IrepreatoryServess
 
             _user = user;
             _Context = db;
+        }
+        public WorkScheduleCurentWeekDay Add(WorkScheduleCurentWeekDayDTOADD entity)
+        {
+            var model = WorkScheduleCurentWeekDayDTOADD.ConvertTODTOToObj(entity);
+
+            var ADDentity = _Context.workScheduleCurentWeeks.Add(model);
+
+            _Context.SaveChanges();
+            return ADDentity.Entity;
+        }
+
+
+
+        public WorkScheduleCurentWeekDay Update(WorkScheduleCurentWeekDayDTO entity)
+        {
+            var model = WorkScheduleCurentWeekDayDTO.ConvertTODTOToObjUpdate(entity);
+
+            var UPdated = _Context.workScheduleCurentWeeks.Update(model);
+
+
+            _Context.SaveChanges();
+            return UPdated.Entity;
         }
         public WorkScheduleCurentWeekDayDTO Save(WorkScheduleCurentWeekDayDTO entity)
         {

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 using PagedList;
 
-using static HR_Api.Dtos.VacarionDTOAdd;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,33 +15,21 @@ namespace HR_Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DeviceEMPLoyeeController : ControllerBase
+    public class TriningController : ControllerBase
     {
         private readonly Unitofwork _unitofwork;
 
-        public DeviceEMPLoyeeController(Unitofwork unitofwork)
+        public TriningController(Unitofwork unitofwork)
         {
             _unitofwork = unitofwork;
         }
-       
-        [HttpGet]
-        public ActionResult<IPagedList<EmployeedeviceDTO>> GetPaginatedemployeeDevice(int pageNumber = 1  )
-        {
-
-            // Assuming you have an IQueryable source of products (e.g., _unitOfWork.Product.GetAllAsQueryable())
-           var  products = _unitofwork.deviceEmpoyee.GetAll();
-
-            // Use the PaginationHelper to get paginated data
-            var pagedProducts = _unitofwork.deviceEmpoyee.GetPagedData(products, pageNumber);
-
-            return Ok(pagedProducts);
-        }
+  
 
         [HttpGet("{id}")]
-        public ActionResult<EmployeedeviceDTO> GetDeviceEmployee(int id)
+        public ActionResult<TrainingDTOAdd> Gettrining(int id)
         {
 
-            var product = _unitofwork.deviceEmpoyee.GetById(id);
+            var product = _unitofwork.trining.GetById(id);
 
 
             if (product == null)
@@ -53,9 +41,9 @@ namespace HR_Api.Controllers
 
             return Ok(product);
         }
-        [HttpPost]
 
-        public IActionResult CreateEmployeedevice([FromForm] EmployeedeviceDTOAdd vacationDTO)
+        [HttpPost]
+        public IActionResult CreatetTrining([FromForm] TrainingDTOAdd vacationDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -66,8 +54,8 @@ namespace HR_Api.Controllers
             try
             {
                 // Save the vacation if it's valid and return a CreatedAtAction response
-                var existingVacation = _unitofwork.deviceEmpoyee.Add(vacationDTO);
-                return CreatedAtAction(nameof(GetDeviceEmployee), new { id = existingVacation.Id }, existingVacation);
+                var existingVacation = _unitofwork.trining.Add(vacationDTO);
+                return CreatedAtAction(nameof(Gettrining), new { id = existingVacation.Id }, existingVacation);
             }
             catch (Exception ex)
             {
@@ -79,7 +67,7 @@ namespace HR_Api.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult UpdateEmployeedevice(int id, [FromForm] EmployeedeviceDTO updatedProductDto)
+        public IActionResult UpdatTrining(int id, [FromForm] TrainingDTOUppdate updatedProductDto)
         {
             if (id != updatedProductDto.Id)
             {
@@ -95,7 +83,7 @@ namespace HR_Api.Controllers
 
             try
             {
-                var existingProduct = _unitofwork.deviceEmpoyee.Update(updatedProductDto);
+                var existingProduct = _unitofwork.trining.Update(updatedProductDto);
 
                 if (existingProduct == null)
                 {
@@ -116,45 +104,34 @@ namespace HR_Api.Controllers
             }
         }
 
-        //[HttpPost]
-        //public ActionResult<EmployeedeviceDTO> CreateDeviceEmployee([FromForm] EmployeedeviceDTO productCreateDto)
-        //{
-
-
-
-
-
-
-
-
-
-        //    var existingProduct = _unitofwork.deviceEmpoyee.Save(productCreateDto);
-        //    return CreatedAtAction(nameof(GetDeviceEmployee), new { id = existingProduct.Id }, existingProduct);
-        //}
-
-        //[HttpPut("{id}")]
-        //public ActionResult<EmployeedeviceDTO> UpdateDeviceEmployee(int id, [FromForm] EmployeedeviceDTO updatedProductDto)
-        //{
-
-
-        //    var existingProduct = _unitofwork.deviceEmpoyee.Save(updatedProductDto);
-        //    return Ok(existingProduct);
-        //}
-
-        [HttpDelete("{id}")]
-        public IActionResult DeleteDeviceEmployee(int id)
+        [HttpGet]
+        public ActionResult<IPagedList<TrainingDTOAdd>> GetPaginatedTrining(int pageNumber = 1)
         {
 
-            _unitofwork.deviceEmpoyee.Delete(id);
+            // Assuming you have an IQueryable source of products (e.g., _unitOfWork.Product.GetAllAsQueryable())
+            var products = _unitofwork.trining.Search();
+
+            // Use the PaginationHelper to get paginated data
+            var pagedProducts = _unitofwork.trining.GetPagedData(products, pageNumber);
+
+            return Ok(pagedProducts);
+        }
+       
+
+        [HttpDelete("{id}")]
+        public IActionResult Deletetrining(int id)
+        {
+
+            _unitofwork.trining.Delete(id);
             return NoContent();
         }
 
 
-        [HttpGet("GEtallforthiemployee")]
-        public IActionResult GEtallforthiemployee([FromQuery] string employeeid)
+        [HttpGet("search")]
+        public IActionResult Search([FromQuery] string searchTerm)
         {
           
-         var departments=  _unitofwork.deviceEmpoyee.Employeedevicess(employeeid);
+         var departments=  _unitofwork.trining.Search(searchTerm);
 
             return Ok(departments);
         }
